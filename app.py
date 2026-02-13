@@ -16,25 +16,26 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# --- 2. AUDIO URL (Update with your username if needed) ---
-AUDIO_URL = "https://raw.githubusercontent.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/main/assets/audio/podcast_trends.mp3"
+# --- 2. UPDATED AUDIO URL (Pointing to Root) ---
+# Since your file is in the root, we removed '/assets/audio/' from the link
+AUDIO_URL = "https://raw.githubusercontent.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/main/podcast_trends.mp3"
 
-# --- 3. FINAL TIMESTAMPS ---
+# --- 3. TIMESTAMPS (Verified from your analysis) ---
 PODCAST_SCRIPT = {
     "1. Intro: The 'Recession Glam' Concept": {
-        "start_time": 160,
+        [cite_start]"start_time": 160, # [cite: 5]
         "filter_type": "None",
-        "description": "Fragrance as 'affordable luxury' in the 2026 economic landscape."
+        [cite_start]"description": "Fragrance as 'affordable luxury' in the 2026 economic landscape. [cite: 23]"
     },
     "2. Scent Trend: Gourmand 2.0 (Vanilla)": {
-        "start_time": 571,
+        [cite_start]"start_time": 571, # [cite: 8]
         "filter_type": "Notes_Gourmand",
-        "description": "Beyond sweet: The shift from 'Sugar era' to balanced, high-end edible notes."
+        [cite_start]"description": "Beyond sweet: The shift to balanced, high-end edible notes. [cite: 116]"
     },
     "3. Market Focus: Russia & The 'Duhi' Shift": {
-        "start_time": 1433,
+        [cite_start]"start_time": 1433, # [cite: 12]
         "filter_type": "Market_Russia",
-        "description": "Strategic insights into the Russian market and local 'Duhi' production."
+        [cite_start]"description": "Strategic insights into the Russian market and local 'Duhi' production. [cite: 272]"
     }
 }
 
@@ -52,7 +53,6 @@ with col_audio:
     selected = st.radio("Select Chapter:", list(PODCAST_SCRIPT.keys()))
     data = PODCAST_SCRIPT[selected]
     st.audio(AUDIO_URL, start_time=data["start_time"])
-    st.caption("Pro Tip: Navigation syncs with the audio player.")
 
 with col_info:
     st.markdown(f"### 💡 Key Insight: {selected}")
@@ -60,50 +60,31 @@ with col_info:
     
     # Filter Logic
     df_view = df.copy()
-    if data['filter_type'] == "Market_Russia":
-        if 'segment' in df_view.columns:
-            df_view = df_view[df_view['segment'].isin(['Mass-Market', 'Local'])]
-    elif data['filter_type'] == "Notes_Gourmand":
-        if 'top_notes' in df_view.columns:
-            df_view = df_view[df_view['top_notes'].str.contains('Vanilla|Sugar|Caramel', case=False, na=False)]
+    if not df_view.empty:
+        if data['filter_type'] == "Market_Russia":
+            if 'segment' in df_view.columns:
+                df_view = df_view[df_view['segment'].isin(['Mass-Market', 'Local'])]
+        elif data['filter_type'] == "Notes_Gourmand":
+            if 'top_notes' in df_view.columns:
+                df_view = df_view[df_view['top_notes'].str.contains('Vanilla|Sugar|Caramel', case=False, na=False)]
 
-# --- 4. LUXURY TRANSCRIPT SECTION ---
+# --- 4. EXECUTIVE SUMMARY ---
 st.divider()
-with st.expander("📄 View Executive Summary & Transcription"):
+with st.expander("📄 View Executive Summary"):
     st.markdown("""
-    #### 🎙️ Podcast Executive Summary (Deep Dive 2026)
-    
-    **Phase 1: Recession Glam**
-    * Global beauty market: **$593 billion**. 
-    * Shift from 'Lipstick Effect' to 'Fragrance Effect' (23% growth driver).
-    
-    **Phase 2: Gourmand 2.0**
-    * Focus on **Balanced Indulgence**. Key notes: Pistachio, Macadamia, and Salted Vanilla.
-    * Scent as an "emotional weighted blanket".
-    
-    **Phase 3: Givaudan & Neuroscience**
-    * **Cereboost Technology:** Ginseng-based scents for cognitive focus.
-    * **AI MYRSI:** Translating chemical scent formulas into digital color palettes.
-    
-    **Phase 4: Russia Market Isolation**
-    * Impact of 35% import duties. Dominance of **Faberlic** & **Novaya Zarya** (68% share).
-    * Shift toward high-concentration "Duhi" as a status symbol.
+    #### 🎙️ Podcast Insights (Deep Dive 2026)
+    * [cite_start]**Recession Glam:** Market reached **$593 billion** in 2024[cite: 18].
+    * [cite_start]**Fragrance Effect:** Category driving **23%** of all beauty growth[cite: 30].
+    * [cite_start]**Givaudan:** Using AI to digitize smell and improve focus[cite: 37, 182].
+    * [cite_start]**Russia:** Local brands like **Faberlic** hold **68%** market share[cite: 270, 274].
     """)
 
 # --- 5. DATA VISUALIZATION ---
 st.divider()
 st.subheader("📊 Market Sentiment vs. Community Scoring")
 if not df_view.empty:
-    fig = px.scatter(
-        df_view, 
-        x="year_clean", 
-        y="community_score", 
-        size="community_votes", 
-        color="segment", 
-        hover_name="name",
-        template="plotly_dark",
-        color_discrete_sequence=px.colors.qualitative.Antique
-    )
+    fig = px.scatter(df_view, x="year_clean", y="community_score", size="community_votes", 
+                     color="segment", hover_name="name", template="plotly_dark")
     st.plotly_chart(fig, use_container_width=True)
 else:
-    st.warning("No data found for this specific segment.")
+    st.warning("Please ensure fragrance_data.csv is uploaded to the root folder.")
