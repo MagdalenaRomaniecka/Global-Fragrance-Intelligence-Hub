@@ -1,7 +1,26 @@
 import streamlit as st
 import plotly.express as px
 import pandas as pd
+import os
 from data_loader import load_and_merge_data
+
+# -----------------------------------------------------------------------------
+# 0. NUCLEAR OPTION: AUTO-GENERATE DARK THEME CONFIG
+# (To eliminuje białe błyski systemowo)
+# -----------------------------------------------------------------------------
+if not os.path.exists('.streamlit'):
+    os.makedirs('.streamlit')
+
+with open('.streamlit/config.toml', 'w') as f:
+    f.write("""
+[theme]
+base="dark"
+primaryColor="#D4AF37"
+backgroundColor="#000000"
+secondaryBackgroundColor="#111111"
+textColor="#E0E0E0"
+font="sans serif"
+""")
 
 # -----------------------------------------------------------------------------
 # 1. UI CONFIGURATION & LUXURY ATELIER CSS
@@ -11,18 +30,16 @@ st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨
 # FORCE DARK THEME & CUSTOM FONTS
 st.markdown("""
     <style>
-    /* IMPORT FONTS: Playfair Display (Luxury Serif) & Montserrat (Clean Sans) */
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500&display=swap');
 
-    /* --- GLOBAL APP STYLING --- */
+    /* GLOBAL APP STYLING */
     .stApp {
         background-color: #000000;
         background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #000000 100%);
-        color: #E0E0E0 !important;
         font-family: 'Montserrat', sans-serif !important;
     }
 
-    /* --- LUXURY HEADERS (GRADIENT GOLD & FRAMES) --- */
+    /* LUXURY HEADERS */
     h1 {
         font-family: 'Playfair Display', serif !important;
         background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
@@ -64,67 +81,62 @@ st.markdown("""
         margin-right: auto;
     }
 
-    /* --- CRITICAL FIX: DROPDOWN MENUS (POPOVERS) --- */
-    /* This targets the "floating" white box */
-    div[data-baseweb="popover"] > div {
-        background-color: #0e0e0e !important;
+    /* --- DROPDOWN MENUS FIX (AGRESSIVE) --- */
+    /* Target the container of the dropdown list */
+    div[data-baseweb="popover"], div[data-baseweb="popover"] > div {
+        background-color: #000000 !important;
         border: 1px solid #D4AF37 !important;
     }
     
-    /* The list inside the dropdown */
+    /* Target the list items */
     ul[data-baseweb="menu"] {
-        background-color: #0e0e0e !important;
+        background-color: #000000 !important;
     }
     
-    /* The options text */
     li[data-baseweb="option"] {
         color: #cccccc !important;
+        background-color: #000000 !important;
     }
     
-    /* Hover state for options - GOLD */
+    /* Hover state */
     li[data-baseweb="option"]:hover, li[aria-selected="true"] {
         background-color: #D4AF37 !important;
         color: #000000 !important;
-        font-weight: bold;
     }
-
-    /* --- CRITICAL FIX: SELECTBOX MAIN INPUT --- */
+    
+    /* The box you click on */
     .stSelectbox div[data-baseweb="select"] > div {
         background-color: #0e0e0e !important;
         border: 1px solid #333 !important;
         color: #D4AF37 !important;
     }
-    .stSelectbox svg { fill: #D4AF37 !important; }
 
-    /* --- CRITICAL FIX: DATAFRAME & TABLE HEADERS --- */
-    /* Forces the table container to be dark */
-    [data-testid="stDataFrame"] {
-        background-color: #0e0e0e !important;
-        border: 1px solid #333;
-    }
-    /* Headers inside the table */
-    th {
-        background-color: #1a1a1a !important;
-        color: #D4AF37 !important;
-        font-family: 'Playfair Display', serif !important;
-        border-bottom: 1px solid #D4AF37 !important;
-    }
-    /* Cells */
-    td {
-        color: #e0e0e0 !important;
-        font-family: 'Montserrat', sans-serif !important;
-    }
-
-    /* --- EXPANDERS --- */
-    .st-emotion-cache-1h9usn1, .st-emotion-cache-12w0qpk, details {
-        background-color: rgba(15, 15, 15, 0.8) !important;
-        border: 1px solid rgba(212, 175, 55, 0.2) !important;
-    }
-    /* Expander Header Text */
-    .st-emotion-cache-1h9usn1 p, details p {
-        color: #D4AF37 !important;
+    /* --- CUSTOM TABLE STYLING (HTML) --- */
+    .luxury-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #0e0e0e;
+        color: #cccccc;
         font-family: 'Montserrat', sans-serif;
-        font-weight: 600;
+        font-size: 0.85rem;
+    }
+    .luxury-table th {
+        background-color: #1a1a1a;
+        color: #D4AF37;
+        font-family: 'Playfair Display', serif;
+        font-weight: normal;
+        text-align: left;
+        padding: 12px;
+        border-bottom: 1px solid #D4AF37;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .luxury-table td {
+        padding: 10px;
+        border-bottom: 1px solid #333;
+    }
+    .luxury-table tr:hover {
+        background-color: rgba(212, 175, 55, 0.05);
     }
 
     /* --- LINKS STYLING --- */
@@ -155,7 +167,6 @@ st.markdown("""
         color: #888; font-family: 'Montserrat', sans-serif; font-size: 0.7rem; 
         text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;
     }
-    /* PLAYFAIR DISPLAY FOR NUMBERS */
     .metric-value { 
         font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #F0E68C; 
         background: linear-gradient(to bottom, #FCF6BA, #AA771C);
@@ -170,7 +181,6 @@ st.markdown("""
         margin-bottom: 20px;
     }
 
-    /* --- FOOTER --- */
     .footer {
         position: fixed; left: 0; bottom: 0; width: 100%;
         background-color: #000; color: #555; text-align: center;
@@ -179,7 +189,6 @@ st.markdown("""
         text-transform: uppercase;
     }
     
-    /* REPO BUTTONS */
     .repo-btn {
         display: block; width: 100%; padding: 15px;
         background: #0a0a0a; border: 1px solid #222;
@@ -293,23 +302,15 @@ with tab2:
         )
         st.plotly_chart(fig, use_container_width=True)
         
-        # TABLE FIX: USING PANDAS STYLER
+        # TABLE REPLACEMENT: HTML TABLE (This guarantees 0% white background)
         with st.expander("🔎 INSPECT RAW DATA (TOP 50 ROWS)"):
             cols_to_show = ['name', 'segment', 'community_score']
             if 'top_notes' in df_plot.columns: cols_to_show.append('top_notes')
             
-            # STYLING THE DATAFRAME TO FORCE DARK MODE
-            df_display = df_plot[cols_to_show].head(50)
-            
-            # Custom CSS for the table specifically
-            st.dataframe(
-                df_display.style.set_properties(**{
-                    'background-color': '#0e0e0e',
-                    'color': '#cccccc',
-                    'border-color': '#333333'
-                }).map(lambda x: 'color: #D4AF37; font-weight:bold' if isinstance(x, float) else ''),
-                use_container_width=True, height=300
-            )
+            # Convert DF to Custom HTML Table
+            html_table = df_plot[cols_to_show].head(50).to_html(classes='luxury-table', index=False, border=0)
+            st.markdown(html_table, unsafe_allow_html=True)
+
     else:
         st.error("Data could not be loaded.")
 
