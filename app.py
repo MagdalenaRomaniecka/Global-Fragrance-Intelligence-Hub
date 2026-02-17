@@ -6,7 +6,7 @@ from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
 # 0. NUCLEAR OPTION: AUTO-GENERATE DARK THEME CONFIG
-# (To eliminuje białe błyski systemowo)
+# (To eliminuje białe błyski systemowo i wymusza Dark Mode)
 # -----------------------------------------------------------------------------
 if not os.path.exists('.streamlit'):
     os.makedirs('.streamlit')
@@ -17,7 +17,7 @@ with open('.streamlit/config.toml', 'w') as f:
 base="dark"
 primaryColor="#D4AF37"
 backgroundColor="#000000"
-secondaryBackgroundColor="#111111"
+secondaryBackgroundColor="#0e0e0e"
 textColor="#E0E0E0"
 font="sans serif"
 """)
