@@ -11,7 +11,7 @@ An interactive BI dashboard merging Aromo market data with Fragrantica community
 ---
 
 ## 🏛️ Project Vision
-The **Global Fragrance Intelligence Hub** is a luxury-grade analytical platform designed for the 2026 landscape.  It synthesizes advanced **audio-driven market insights** with interactive data, transforming spoken intelligence into actionable strategic forecasts.Moving beyond basic retail metrics, this hub explores the **"Fragrance Effect"**—a shift where scent has become the primary driver of the $600B beauty industry.
+The **Global Fragrance Intelligence Hub** is a luxury-grade analytical platform designed for the 2026 landscape.  It synthesizes advanced **audio-driven market insights** with interactive data, transforming spoken intelligence into actionable strategic forecasts.Moving beyond basic retail metrics, this hub explores the **"Fragrance Effect"**—a shift where scent has become the key driver in a **multi-billion dollar global market** (covering EU, RU, and US sectors).
 ## 🎙️ Intelligence Briefing (Podcast Sync)
 The core of the experience is an AI-generated strategic briefing. Using **Whisper AI** for precise timestamp synchronization, the application allows users to navigate through critical market shifts:
 
