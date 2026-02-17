@@ -6,7 +6,6 @@ from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
 # 0. NUCLEAR OPTION: AUTO-GENERATE DARK THEME CONFIG
-# (To eliminuje białe błyski systemowo i wymusza Dark Mode)
 # -----------------------------------------------------------------------------
 if not os.path.exists('.streamlit'):
     os.makedirs('.streamlit')
@@ -27,7 +26,6 @@ font="sans serif"
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 
-# FORCE DARK THEME & CUSTOM FONTS
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500&display=swap');
@@ -81,124 +79,72 @@ st.markdown("""
         margin-right: auto;
     }
 
-    /* --- DROPDOWN MENUS FIX (AGRESSIVE) --- */
-    /* Target the container of the dropdown list */
+    /* --- DROPDOWN MENUS FIX --- */
     div[data-baseweb="popover"], div[data-baseweb="popover"] > div {
         background-color: #000000 !important;
         border: 1px solid #D4AF37 !important;
     }
-    
-    /* Target the list items */
-    ul[data-baseweb="menu"] {
-        background-color: #000000 !important;
-    }
-    
-    li[data-baseweb="option"] {
-        color: #cccccc !important;
-        background-color: #000000 !important;
-    }
-    
-    /* Hover state */
+    ul[data-baseweb="menu"] { background-color: #000000 !important; }
+    li[data-baseweb="option"] { color: #cccccc !important; background-color: #000000 !important; }
     li[data-baseweb="option"]:hover, li[aria-selected="true"] {
-        background-color: #D4AF37 !important;
-        color: #000000 !important;
+        background-color: #D4AF37 !important; color: #000000 !important;
     }
-    
-    /* The box you click on */
     .stSelectbox div[data-baseweb="select"] > div {
-        background-color: #0e0e0e !important;
-        border: 1px solid #333 !important;
-        color: #D4AF37 !important;
+        background-color: #0e0e0e !important; border: 1px solid #333 !important; color: #D4AF37 !important;
     }
 
     /* --- CUSTOM TABLE STYLING (HTML) --- */
     .luxury-table {
-        width: 100%;
-        border-collapse: collapse;
-        background-color: #0e0e0e;
-        color: #cccccc;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 0.85rem;
+        width: 100%; border-collapse: collapse; background-color: #0e0e0e; color: #cccccc; font-family: 'Montserrat', sans-serif; font-size: 0.85rem;
     }
     .luxury-table th {
-        background-color: #1a1a1a;
-        color: #D4AF37;
-        font-family: 'Playfair Display', serif;
-        font-weight: normal;
-        text-align: left;
-        padding: 12px;
-        border-bottom: 1px solid #D4AF37;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        background-color: #1a1a1a; color: #D4AF37; font-family: 'Playfair Display', serif; font-weight: normal; text-align: left; padding: 12px; border-bottom: 1px solid #D4AF37; text-transform: uppercase; letter-spacing: 1px;
     }
-    .luxury-table td {
-        padding: 10px;
-        border-bottom: 1px solid #333;
-    }
-    .luxury-table tr:hover {
-        background-color: rgba(212, 175, 55, 0.05);
-    }
+    .luxury-table td { padding: 10px; border-bottom: 1px solid #333; }
+    .luxury-table tr:hover { background-color: rgba(212, 175, 55, 0.05); }
 
-    /* --- LINKS STYLING --- */
+    /* --- LINKS & BUTTONS STYLING --- */
     a { color: #D4AF37 !important; text-decoration: none !important; transition: 0.3s; }
     a:hover { color: #FFF !important; text-shadow: 0 0 8px #D4AF37; }
 
-    /* --- METRICS (AROMO STYLE) --- */
+    /* PROJECT CARDS (ECOSYSTEM) */
+    .project-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+    .project-card {
+        background: #0e0e0e; border: 1px solid #333; padding: 20px; border-radius: 4px; transition: 0.3s;
+    }
+    .project-card:hover { border-color: #D4AF37; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1); }
+    .project-title { color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 5px; }
+    .project-desc { color: #888; font-size: 0.8rem; margin-bottom: 20px; min-height: 40px; }
+    .btn-row { display: flex; gap: 10px; }
+    
+    .btn-launch {
+        flex: 1; background-color: #D4AF37; color: #000 !important; padding: 10px; text-align: center; font-weight: bold; text-transform: uppercase; font-size: 0.75rem; border-radius: 2px; transition: 0.3s; border: 1px solid #D4AF37;
+    }
+    .btn-launch:hover { background-color: #F0E68C; border-color: #F0E68C; box-shadow: 0 0 10px #D4AF37; }
+    
+    .btn-code {
+        flex: 1; background-color: transparent; color: #888 !important; border: 1px solid #444; padding: 10px; text-align: center; text-transform: uppercase; font-size: 0.75rem; border-radius: 2px; transition: 0.3s;
+    }
+    .btn-code:hover { border-color: #D4AF37; color: #D4AF37 !important; }
+
+    /* --- METRICS & CARDS --- */
     .gold-metric {
-        background-color: rgba(5, 5, 5, 0.5);
-        border: 1px solid #222;
-        padding: 25px;
-        text-align: center;
-        transition: all 0.3s ease;
-        position: relative;
+        background-color: rgba(5, 5, 5, 0.5); border: 1px solid #222; padding: 25px; text-align: center; transition: all 0.3s ease; position: relative;
     }
     .gold-metric::before {
-        content: "";
-        position: absolute;
-        top: 0; left: 0; right: 0; height: 1px;
-        background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+        content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, #D4AF37, transparent);
     }
-    .gold-metric:hover {
-        background-color: rgba(212, 175, 55, 0.05);
-        border-color: #444;
-    }
-    
-    .metric-label { 
-        color: #888; font-family: 'Montserrat', sans-serif; font-size: 0.7rem; 
-        text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;
-    }
-    .metric-value { 
-        font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #F0E68C; 
-        background: linear-gradient(to bottom, #FCF6BA, #AA771C);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+    .gold-metric:hover { background-color: rgba(212, 175, 55, 0.05); border-color: #444; }
+    .metric-label { color: #888; font-family: 'Montserrat', sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+    .metric-value { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #F0E68C; background: linear-gradient(to bottom, #FCF6BA, #AA771C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     
     .insight-card {
-        border-left: 2px solid #D4AF37;
-        background: linear-gradient(90deg, rgba(20,20,20,0.9) 0%, rgba(10,10,10,0.0) 100%);
-        padding: 25px;
-        margin-bottom: 20px;
+        border-left: 2px solid #D4AF37; background: linear-gradient(90deg, rgba(20,20,20,0.9) 0%, rgba(10,10,10,0.0) 100%); padding: 25px; margin-bottom: 20px;
     }
 
     .footer {
-        position: fixed; left: 0; bottom: 0; width: 100%;
-        background-color: #000; color: #555; text-align: center;
-        padding: 12px; font-size: 0.65rem; border-top: 1px solid #111;
-        letter-spacing: 2px; z-index: 999; font-family: 'Montserrat', sans-serif;
-        text-transform: uppercase;
+        position: fixed; left: 0; bottom: 0; width: 100%; background-color: #000; color: #555; text-align: center; padding: 12px; font-size: 0.65rem; border-top: 1px solid #111; letter-spacing: 2px; z-index: 999; font-family: 'Montserrat', sans-serif; text-transform: uppercase;
     }
-    
-    .repo-btn {
-        display: block; width: 100%; padding: 15px;
-        background: #0a0a0a; border: 1px solid #222;
-        color: #ccc !important; text-align: left;
-        margin-bottom: 15px; transition: 0.3s; font-family: 'Montserrat', sans-serif;
-    }
-    .repo-btn:hover {
-        border-color: #D4AF37; color: #D4AF37 !important; transform: translateX(5px);
-    }
-    .repo-btn b { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #fff; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -210,15 +156,15 @@ AUDIO_URL = "https://raw.githubusercontent.com/MagdalenaRomaniecka/Global-Fragra
 PODCAST_SCRIPT = {
     "I. INTRODUCTION: RECESSION GLAM": {
         "start_time": 0, "filter": "None",
-        "desc": "Analysis of fragrance as 'affordable luxury' in the 2026 economic landscape."
+        "desc": "Analysis of fragrance as 'affordable luxury' in the 2026 economic landscape. Substitution effect in full force."
     },
     "II. SCENT TREND: GOURMAND 2.0": {
         "start_time": 571, "filter": "Notes_Gourmand",
-        "desc": "The evolution from sugar-sweet scents to balanced, sophisticated edible notes."
+        "desc": "The evolution from sugar-sweet scents to balanced, sophisticated edible notes (Pistachio, Salted Caramel)."
     },
     "III. MARKET FOCUS: RUSSIA & DUHI": {
         "start_time": 1433, "filter": "Market_Russia",
-        "desc": "Strategic insights into local production and high-concentration status symbols."
+        "desc": "Strategic insights into local production and high-concentration status symbols in the RU market."
     }
 }
 
@@ -244,39 +190,63 @@ st.write("")
 # -----------------------------------------------------------------------------
 tab1, tab2, tab3 = st.tabs(["🎙️ STRATEGIC BRIEFING", "📊 DEEP DIVE ANALYTICS", "🔗 METHODOLOGY & ECOSYSTEM"])
 
-# --- TAB 1: BRIEFING ---
+# --- TAB 1: STORY MODE (AUDIO + AUTO CHART) ---
 with tab1:
-    col_audio, col_desc = st.columns([1, 1], gap="large")
+    col_audio, col_viz = st.columns([1, 1.5], gap="large") # Podział na Audio i Wykres
+    
+    # 1. LEWA KOLUMNA - AUDIO I STEROWANIE
     with col_audio:
         st.markdown("### 🎧 AI-Synthesized Market Report")
         selected_chapter = st.radio("Select Chapter to Navigate Audio:", list(PODCAST_SCRIPT.keys()))
         chapter_data = PODCAST_SCRIPT[selected_chapter]
+        
         st.audio(AUDIO_URL, start_time=chapter_data["start_time"])
-    
-    with col_desc:
-        st.markdown("### 📝 Chapter Insight")
+        
         st.markdown(f"""
             <div class="insight-card">
                 <p style="color:#D4AF37; font-size:0.75rem; letter-spacing:2px; font-weight:bold; text-transform:uppercase;">Key Narrative</p>
                 <p style="font-style:italic; color:#e0e0e0; font-size:1.1rem; line-height:1.6; font-family:'Playfair Display', serif;">"{chapter_data['desc']}"</p>
             </div>
         """, unsafe_allow_html=True)
-        
-        if chapter_data["filter"] != "None" and not df.empty:
-            count = 0
-            if 'top_notes' in df.columns and chapter_data["filter"] == "Notes_Gourmand":
-                count = df[df['top_notes'].str.contains('Vanilla|Caramel|Pistachio', case=False, na=False)].shape[0]
-                label = "Gourmand SKUs"
-            elif 'country' in df.columns and chapter_data["filter"] == "Market_Russia":
-                count = df[df['country'] == 'Russia'].shape[0]
-                label = "Local Market SKUs"
-            else:
-                label = "Data Points"
-            st.markdown(f"**{label}:** <span style='color:#D4AF37; font-size:1.5rem; font-family:Playfair Display;'>{count}</span>", unsafe_allow_html=True)
 
-# --- TAB 2: ANALYTICS ---
+    # 2. PRAWA KOLUMNA - AUTOMATYCZNY WYKRES (STORY MODE)
+    with col_viz:
+        st.markdown(f"### 📉 Data Visualization: {selected_chapter.split(':')[1]}")
+        
+        if not df.empty:
+            # AUTOMATYCZNE FILTROWANIE NA PODSTAWIE ROZDZIAŁU
+            df_story = df.copy()
+            
+            if chapter_data["filter"] == "Notes_Gourmand" and 'top_notes' in df_story.columns:
+                df_story = df_story[df_story['top_notes'].str.contains('Vanilla|Caramel|Pistachio|Sugar', case=False, na=False)]
+                chart_title = "Trending Gourmand 2.0 Clusters"
+            elif chapter_data["filter"] == "Market_Russia" and 'country' in df_story.columns:
+                df_story = df_story[df_story['country'] == 'Russia']
+                chart_title = "Russian Market Landscape (High Concentration)"
+            else:
+                chart_title = "Global Market Overview (All Data)"
+            
+            # WYKRES
+            fig = px.scatter(
+                df_story, x="year_clean", y="community_score", size="community_votes",
+                color="segment", hover_name="name", template="plotly_dark",
+                color_discrete_sequence=['#D4AF37', '#F0E68C', '#666'],
+                title=chart_title
+            )
+            fig.update_layout(
+                paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+                font_family="Montserrat", height=450,
+                xaxis=dict(title="Launch Year", gridcolor="#222"),
+                yaxis=dict(title="Sentiment Score", gridcolor="#222")
+            )
+            st.plotly_chart(fig, use_container_width=True)
+            
+        else:
+            st.error("Data loading error.")
+
+# --- TAB 2: ANALYST MODE (MANUAL EXPLORATION) ---
 with tab2:
-    st.markdown("### 📈 Market Sentiment & Clustering")
+    st.markdown("### 📈 Deep Dive Analytics (Manual Exploration)")
     
     if not df.empty:
         # Styled Filter Box
@@ -302,48 +272,72 @@ with tab2:
         )
         st.plotly_chart(fig, use_container_width=True)
         
-        # TABLE REPLACEMENT: HTML TABLE (This guarantees 0% white background)
+        # TABLE REPLACEMENT: HTML TABLE
         with st.expander("🔎 INSPECT RAW DATA (TOP 50 ROWS)"):
             cols_to_show = ['name', 'segment', 'community_score']
             if 'top_notes' in df_plot.columns: cols_to_show.append('top_notes')
-            
-            # Convert DF to Custom HTML Table
             html_table = df_plot[cols_to_show].head(50).to_html(classes='luxury-table', index=False, border=0)
             st.markdown(html_table, unsafe_allow_html=True)
 
     else:
         st.error("Data could not be loaded.")
 
-# --- TAB 3: ECOSYSTEM ---
+# --- TAB 3: ECOSYSTEM (ZMODYFIKOWANA) ---
 with tab3:
-    col_eco, col_source = st.columns(2)
-    with col_eco:
-        st.markdown("### 🧩 The Fragrance Data Ecosystem")
-        st.markdown("""
-        <a href="https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence" class="repo-btn" target="_blank">
-        <b>🌍 Aromo Market Intelligence</b><br>Global market scraping & trend forecasting engine
-        </a>
-        <a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" class="repo-btn" target="_blank">
-        <b>🧪 ScentSational LFS</b><br>Large File Storage & Data Engineering pipeline
-        </a>
-        <a href="https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit" class="repo-btn" target="_blank">
-        <b>🔍 Perfume Finder App</b><br>Consumer-facing recommendation system
-        </a>
-        <a href="https://github.com/MagdalenaRomaniecka/Olfactory-Insights" class="repo-btn" target="_blank">
-        <b>📊 Olfactory Insights</b><br>Deep learning analysis of scent structures
-        </a>
-        """, unsafe_allow_html=True)
+    st.markdown("### 🧩 The Fragrance Data Ecosystem")
+    st.markdown("This hub serves as the central command for my deployed machine learning applications. Launch a tool below:")
+    
+    st.markdown("""
+    <div class="project-container">
+        
+        <div class="project-card">
+            <div class="project-title">🌍 Aromo Intelligence</div>
+            <div class="project-desc">Global market scraping engine & trend forecasting dashboard covering 50k+ products.</div>
+            <div class="btn-row">
+                <a href="#" target="_blank" class="btn-launch">🚀 Launch App</a>
+                <a href="https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence" target="_blank" class="btn-code">💻 View Code</a>
+            </div>
+        </div>
 
+        <div class="project-card">
+            <div class="project-title">🔍 Perfume Finder</div>
+            <div class="project-desc">Consumer-facing recommendation system using similarity algorithms for retail.</div>
+            <div class="btn-row">
+                <a href="#" target="_blank" class="btn-launch">🚀 Launch App</a>
+                <a href="https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit" target="_blank" class="btn-code">💻 View Code</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-title">📊 Olfactory Insights</div>
+            <div class="project-desc">Deep learning analysis of scent structures and chemical composition mapping.</div>
+            <div class="btn-row">
+                <a href="https://github.com/MagdalenaRomaniecka/Olfactory-Insights" target="_blank" class="btn-code" style="flex:2">💻 View Code</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-title">🧪 ScentSational LFS</div>
+            <div class="project-desc">Backend engineering pipeline & Large File Storage documentation.</div>
+            <div class="btn-row">
+                <a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" target="_blank" class="btn-code" style="flex:2">💻 View Code</a>
+            </div>
+        </div>
+
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.write("")
+    
+    col_source, col_blank = st.columns([1,1])
     with col_source:
-        st.markdown("### 📚 Primary Intelligence Sources")
-        st.markdown("""
-        * **[1] Euromonitor International:** *Beauty and Personal Care 2025 Edition*
-        * **[2] Givaudan:** *2024 Half Year Results & Integrated Report*
-        * **[3] Journal of Retailing / eBay Study:** *"Unravelling Men's Fragrance Preferences"*
-        * **[4] Sol de Janeiro:** *Brand Investor Presentation*
-        """)
-        st.markdown("---")
-        st.markdown(f'<a href="https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/blob/main/Research_Whisper_AI.ipynb" class="repo-btn" style="border-color:#D4AF37; color:#D4AF37; text-align:center;"><b>📄 View Research Notebook (Colab)</b></a>', unsafe_allow_html=True)
+         st.markdown("### 📚 Primary Intelligence Sources")
+         st.markdown("""
+         * **[1] Euromonitor International:** *Beauty and Personal Care 2025 Edition*
+         * **[2] Givaudan:** *2024 Half Year Results & Integrated Report*
+         * **[3] Journal of Retailing:** *Pricing vs. Sales correlation analysis*
+         """)
+         st.markdown(f'<a href="https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/blob/main/Research_Whisper_AI.ipynb" class="repo-btn" style="border-color:#D4AF37; color:#D4AF37; text-align:center;"><b>📄 View Research Notebook (Colab)</b></a>', unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
 # 5. FOOTER & TRANSCRIPT
