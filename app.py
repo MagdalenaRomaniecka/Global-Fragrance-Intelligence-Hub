@@ -11,15 +11,15 @@ st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨
 # FORCE DARK THEME & CUSTOM FONTS
 st.markdown("""
     <style>
-    /* IMPORT FONTS: Playfair Display (Luxury Serif) & Lato (Clean Sans) */
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap');
+    /* IMPORT FONTS: Playfair Display (Luxury Serif) & Montserrat (Clean Sans) */
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500&display=swap');
 
     /* --- GLOBAL APP STYLING --- */
     .stApp {
         background-color: #000000;
         background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #000000 100%);
         color: #E0E0E0 !important;
-        font-family: 'Lato', sans-serif !important;
+        font-family: 'Montserrat', sans-serif !important;
     }
 
     /* --- LUXURY HEADERS (GRADIENT GOLD & FRAMES) --- */
@@ -50,7 +50,7 @@ st.markdown("""
 
     .sub-header {
         color: #888;
-        font-family: 'Lato', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 0.8rem !important;
         letter-spacing: 4px;
         text-transform: uppercase;
@@ -64,50 +64,74 @@ st.markdown("""
         margin-right: auto;
     }
 
-    /* --- WIDGET OVERRIDES (THE "WHITE FLASH" FIX) --- */
+    /* --- CRITICAL FIX: DROPDOWN MENUS (POPOVERS) --- */
+    /* This targets the "floating" white box */
+    div[data-baseweb="popover"] > div {
+        background-color: #0e0e0e !important;
+        border: 1px solid #D4AF37 !important;
+    }
     
-    /* 1. Selectbox & Input Fields - Dark Background */
+    /* The list inside the dropdown */
+    ul[data-baseweb="menu"] {
+        background-color: #0e0e0e !important;
+    }
+    
+    /* The options text */
+    li[data-baseweb="option"] {
+        color: #cccccc !important;
+    }
+    
+    /* Hover state for options - GOLD */
+    li[data-baseweb="option"]:hover, li[aria-selected="true"] {
+        background-color: #D4AF37 !important;
+        color: #000000 !important;
+        font-weight: bold;
+    }
+
+    /* --- CRITICAL FIX: SELECTBOX MAIN INPUT --- */
     .stSelectbox div[data-baseweb="select"] > div {
         background-color: #0e0e0e !important;
         border: 1px solid #333 !important;
         color: #D4AF37 !important;
     }
-    
-    /* 2. DROPDOWN MENU FIX (Killer Feature) */
-    ul[data-baseweb="menu"] {
-        background-color: #080808 !important;
-        border: 1px solid #D4AF37 !important;
+    .stSelectbox svg { fill: #D4AF37 !important; }
+
+    /* --- CRITICAL FIX: DATAFRAME & TABLE HEADERS --- */
+    /* Forces the table container to be dark */
+    [data-testid="stDataFrame"] {
+        background-color: #0e0e0e !important;
+        border: 1px solid #333;
     }
-    
-    /* 3. Dropdown Options */
-    li[data-baseweb="option"] {
-        color: #bbb !important;
+    /* Headers inside the table */
+    th {
+        background-color: #1a1a1a !important;
+        color: #D4AF37 !important;
+        font-family: 'Playfair Display', serif !important;
+        border-bottom: 1px solid #D4AF37 !important;
     }
-    /* Hover state for options */
-    li[data-baseweb="option"]:hover, li[aria-selected="true"] {
-        background-color: #D4AF37 !important;
-        color: #000 !important;
+    /* Cells */
+    td {
+        color: #e0e0e0 !important;
+        font-family: 'Montserrat', sans-serif !important;
     }
 
-    /* Expanders */
+    /* --- EXPANDERS --- */
     .st-emotion-cache-1h9usn1, .st-emotion-cache-12w0qpk, details {
         background-color: rgba(15, 15, 15, 0.8) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(212, 175, 55, 0.2) !important;
+    }
+    /* Expander Header Text */
+    .st-emotion-cache-1h9usn1 p, details p {
+        color: #D4AF37 !important;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
     }
 
     /* --- LINKS STYLING --- */
     a { color: #D4AF37 !important; text-decoration: none !important; transition: 0.3s; }
     a:hover { color: #FFF !important; text-shadow: 0 0 8px #D4AF37; }
 
-    /* --- COMPONENT CLASSES --- */
-    .insight-card {
-        border: 1px solid rgba(212, 175, 55, 0.3);
-        background: linear-gradient(135deg, rgba(20,20,20,0.95) 0%, rgba(10,10,10,0.8) 100%);
-        padding: 25px;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    }
-
+    /* --- METRICS (AROMO STYLE) --- */
     .gold-metric {
         background-color: rgba(5, 5, 5, 0.5);
         border: 1px solid #222;
@@ -128,14 +152,22 @@ st.markdown("""
     }
     
     .metric-label { 
-        color: #888; font-family: 'Lato', sans-serif; font-size: 0.7rem; 
+        color: #888; font-family: 'Montserrat', sans-serif; font-size: 0.7rem; 
         text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;
     }
+    /* PLAYFAIR DISPLAY FOR NUMBERS */
     .metric-value { 
         font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #F0E68C; 
         background: linear-gradient(to bottom, #FCF6BA, #AA771C);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+    }
+    
+    .insight-card {
+        border-left: 2px solid #D4AF37;
+        background: linear-gradient(90deg, rgba(20,20,20,0.9) 0%, rgba(10,10,10,0.0) 100%);
+        padding: 25px;
+        margin-bottom: 20px;
     }
 
     /* --- FOOTER --- */
@@ -143,18 +175,16 @@ st.markdown("""
         position: fixed; left: 0; bottom: 0; width: 100%;
         background-color: #000; color: #555; text-align: center;
         padding: 12px; font-size: 0.65rem; border-top: 1px solid #111;
-        letter-spacing: 2px; z-index: 999; font-family: 'Lato', sans-serif;
+        letter-spacing: 2px; z-index: 999; font-family: 'Montserrat', sans-serif;
         text-transform: uppercase;
     }
-    .footer a { color: #888 !important; font-weight: bold; }
-    .footer a:hover { color: #D4AF37 !important; }
     
     /* REPO BUTTONS */
     .repo-btn {
         display: block; width: 100%; padding: 15px;
         background: #0a0a0a; border: 1px solid #222;
         color: #ccc !important; text-align: left;
-        margin-bottom: 15px; transition: 0.3s; font-family: 'Lato', sans-serif;
+        margin-bottom: 15px; transition: 0.3s; font-family: 'Montserrat', sans-serif;
     }
     .repo-btn:hover {
         border-color: #D4AF37; color: #D4AF37 !important; transform: translateX(5px);
@@ -257,25 +287,27 @@ with tab2:
         )
         fig.update_layout(
             paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
-            font_family="Lato", height=500,
+            font_family="Montserrat", height=500,
             xaxis=dict(title="Launch Year", gridcolor="#222"),
             yaxis=dict(title="Sentiment Score", gridcolor="#222")
         )
         st.plotly_chart(fig, use_container_width=True)
         
-        # TABLE FIX: USING PANDAS STYLER TO FIX WHITE BACKGROUND
+        # TABLE FIX: USING PANDAS STYLER
         with st.expander("🔎 INSPECT RAW DATA (TOP 50 ROWS)"):
             cols_to_show = ['name', 'segment', 'community_score']
             if 'top_notes' in df_plot.columns: cols_to_show.append('top_notes')
             
-            # Prepare styled dataframe for dark mode
+            # STYLING THE DATAFRAME TO FORCE DARK MODE
             df_display = df_plot[cols_to_show].head(50)
+            
+            # Custom CSS for the table specifically
             st.dataframe(
                 df_display.style.set_properties(**{
                     'background-color': '#0e0e0e',
                     'color': '#cccccc',
                     'border-color': '#333333'
-                }).map(lambda x: 'color: #D4AF37' if isinstance(x, str) or isinstance(x, float) else ''),
+                }).map(lambda x: 'color: #D4AF37; font-weight:bold' if isinstance(x, float) else ''),
                 use_container_width=True, height=300
             )
     else:
