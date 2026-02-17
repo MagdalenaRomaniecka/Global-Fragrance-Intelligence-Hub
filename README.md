@@ -1,10 +1,6 @@
-# Global-Fragrance-Intelligence-Hub
-An interactive BI dashboard merging Aromo market data with Fragrantica community sentiment. Features a synchronized AI-driven audio briefing (NotebookLM) and fuzzy logic data fusion for 2025 trend forecasting.
-<div align="center">
-
 # ✨ Global Fragrance Intelligence Hub
 ### Strategic Market Briefing • 2026 Predictive Analysis • AI-Driven Insights
-
+An interactive BI dashboard merging Aromo market data with Fragrantica community sentiment. Features a synchronized AI-driven audio briefing (NotebookLM) and fuzzy logic data fusion for 2025 trend forecasting.
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge.svg)](https://global-fragrance-intelligence-hub.streamlit.app/)
 ![Python](https://img.shields.io/badge/Python-3.9+-D4AF37.svg?style=flat-square&logo=python&logoColor=white)
 ![Whisper AI](https://img.shields.io/badge/AI-Whisper_Transcription-F0E68C.svg?style=flat-square)
