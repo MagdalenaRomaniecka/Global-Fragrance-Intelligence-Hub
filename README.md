@@ -16,9 +16,9 @@ The **Global Fragrance Intelligence Hub** is a luxury-grade analytical platform 
 The core of the experience is an AI-generated strategic briefing. * **Precision Chapter Navigation:** Leveraging **Whisper AI** to perfectly align audio playback with specific strategic topics.
 
 * **I. Recession Glam:** Why fragrance is the new "Weighted Olfactory Blanket" in a tightening economy.
-* **II. Gourmand 2.0:** The evolution from sugar-sweet scents to sophisticated, high-end "edible" molecules (Pistachio, Salted Vanilla).
+* **II. Gourmand 2.0:** The evolution from **linear, saccharine profiles** to complex, multi-dimensional "edible" molecules such as Roasted Pistachio and Salted Vanilla.
 * **III. Givaudan & Neural Edge:** How the industry leader uses AI and neuroscience (Cereboost) to digitize emotions.
-* **IV. Geopolitical Shift:** Deep dive into the isolationist growth of the Russian "Duhi" market.
+* **IV. Regional Intelligence:** A deep dive into the **resilience and strategic adaptation** of the Russian "Duhi" market, exploring local heritage and economic autonomy.
 
 ## 📊 Strategic Pillars
 | Pillar | Focus Area | Data Driven Insight |
