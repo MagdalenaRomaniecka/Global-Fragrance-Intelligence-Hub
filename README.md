@@ -48,6 +48,8 @@ pip install -r requirements.txt
 # Launch the hub
 streamlit run app.py
 
+```
+
 <div align="center">
 
 **Developed by Magdalena Romaniecka** *Strategic Insights for the 2026 Fragrance Landscape*
