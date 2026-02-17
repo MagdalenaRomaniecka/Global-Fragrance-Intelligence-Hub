@@ -16,28 +16,38 @@ st.markdown("""
 
     /* --- GLOBAL APP STYLING --- */
     .stApp {
-        background-color: #050505;
-        background-image: radial-gradient(circle at 50% 0%, #111 0%, #000 100%);
+        background-color: #000000;
+        background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #000000 100%);
         color: #E0E0E0 !important;
         font-family: 'Lato', sans-serif !important;
     }
 
-    /* --- TYPOGRAPHY (MATCHING AROMO INTELLIGENCE) --- */
-    h1, h2, h3 {
-        font-family: 'Playfair Display', serif !important;
-        letter-spacing: 1px;
-        font-weight: 400;
-    }
-    
+    /* --- LUXURY HEADERS (GRADIENT GOLD & FRAMES) --- */
     h1 {
-        color: #D4AF37;
+        font-family: 'Playfair Display', serif !important;
+        background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         text-align: center;
-        font-size: 4rem !important;
+        font-size: 3.8rem !important;
         text-transform: uppercase;
-        margin-bottom: 0px;
-        text-shadow: 0px 4px 10px rgba(0,0,0,0.8);
+        margin-top: 0px;
+        letter-spacing: 2px;
+        padding-bottom: 10px;
+        text-shadow: 0px 4px 12px rgba(0,0,0,0.5);
     }
-    
+
+    h3 {
+        font-family: 'Playfair Display', serif !important;
+        color: #D4AF37 !important;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        padding-bottom: 5px;
+        margin-top: 20px;
+        display: inline-block;
+    }
+
     .sub-header {
         color: #888;
         font-family: 'Lato', sans-serif;
@@ -46,29 +56,34 @@ st.markdown("""
         text-transform: uppercase;
         text-align: center;
         margin-bottom: 50px;
+        border-top: 1px solid rgba(212, 175, 55, 0.2);
         border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        padding-bottom: 25px;
+        padding: 15px 0;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    /* --- WIDGET OVERRIDES (FIXING WHITE BACKGROUNDS) --- */
+    /* --- WIDGET OVERRIDES (THE "WHITE FLASH" FIX) --- */
     
-    /* 1. Selectbox Main Box */
-    div[data-baseweb="select"] > div {
-        background-color: #111 !important;
+    /* 1. Selectbox & Input Fields - Dark Background */
+    .stSelectbox div[data-baseweb="select"] > div {
+        background-color: #0e0e0e !important;
         border: 1px solid #333 !important;
         color: #D4AF37 !important;
     }
     
-    /* 2. The Dropdown Menu (The white list fix) */
-    div[data-baseweb="popover"], div[data-baseweb="menu"], ul[data-baseweb="menu"] {
-        background-color: #0e0e0e !important;
-        border: 1px solid #333 !important;
+    /* 2. DROPDOWN MENU FIX (Killer Feature) */
+    ul[data-baseweb="menu"] {
+        background-color: #080808 !important;
+        border: 1px solid #D4AF37 !important;
     }
     
-    /* 3. Options inside the dropdown */
+    /* 3. Dropdown Options */
     li[data-baseweb="option"] {
-        color: #ccc !important;
+        color: #bbb !important;
     }
+    /* Hover state for options */
     li[data-baseweb="option"]:hover, li[aria-selected="true"] {
         background-color: #D4AF37 !important;
         color: #000 !important;
@@ -76,72 +91,59 @@ st.markdown("""
 
     /* Expanders */
     .st-emotion-cache-1h9usn1, .st-emotion-cache-12w0qpk, details {
-        background-color: rgba(20, 20, 20, 0.6) !important;
+        background-color: rgba(15, 15, 15, 0.8) !important;
         border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        color: #E0E0E0 !important;
     }
 
-    /* --- LINKS STYLING (REMOVING BLUE) --- */
-    a {
-        color: #D4AF37 !important;
-        text-decoration: none !important;
-        transition: 0.3s;
-    }
-    a:hover {
-        color: #FFF !important;
-        text-shadow: 0 0 5px #D4AF37;
-    }
+    /* --- LINKS STYLING --- */
+    a { color: #D4AF37 !important; text-decoration: none !important; transition: 0.3s; }
+    a:hover { color: #FFF !important; text-shadow: 0 0 8px #D4AF37; }
 
     /* --- COMPONENT CLASSES --- */
     .insight-card {
-        border-left: 2px solid #D4AF37;
-        background: linear-gradient(90deg, rgba(20,20,20,0.9) 0%, rgba(10,10,10,0.0) 100%);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        background: linear-gradient(135deg, rgba(20,20,20,0.95) 0%, rgba(10,10,10,0.8) 100%);
         padding: 25px;
         margin-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
 
     .gold-metric {
-        background-color: transparent;
+        background-color: rgba(5, 5, 5, 0.5);
         border: 1px solid #222;
-        padding: 30px 10px;
+        padding: 25px;
         text-align: center;
         transition: all 0.3s ease;
+        position: relative;
+    }
+    .gold-metric::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; height: 1px;
+        background: linear-gradient(90deg, transparent, #D4AF37, transparent);
     }
     .gold-metric:hover {
+        background-color: rgba(212, 175, 55, 0.05);
         border-color: #444;
-        background-color: rgba(255,255,255,0.02);
     }
+    
     .metric-label { 
-        color: #666; 
-        font-family: 'Lato', sans-serif;
-        font-size: 0.75rem; 
-        text-transform: uppercase; 
-        letter-spacing: 3px; 
-        margin-bottom: 10px;
+        color: #888; font-family: 'Lato', sans-serif; font-size: 0.7rem; 
+        text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;
     }
-    /* THIS IS THE FONT FROM YOUR SCREENSHOT (Aromo Intelligence) */
     .metric-value { 
-        font-family: 'Playfair Display', serif; 
-        font-weight: 400;
-        font-size: 3.2rem; 
-        color: #F0E68C; 
+        font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #F0E68C; 
+        background: linear-gradient(to bottom, #FCF6BA, #AA771C);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 
     /* --- FOOTER --- */
     .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color: #000;
-        color: #444;
-        text-align: center;
-        padding: 12px;
-        font-size: 0.65rem;
-        border-top: 1px solid #111;
-        letter-spacing: 2px;
-        z-index: 999;
-        font-family: 'Lato', sans-serif;
+        position: fixed; left: 0; bottom: 0; width: 100%;
+        background-color: #000; color: #555; text-align: center;
+        padding: 12px; font-size: 0.65rem; border-top: 1px solid #111;
+        letter-spacing: 2px; z-index: 999; font-family: 'Lato', sans-serif;
         text-transform: uppercase;
     }
     .footer a { color: #888 !important; font-weight: bold; }
@@ -149,28 +151,15 @@ st.markdown("""
     
     /* REPO BUTTONS */
     .repo-btn {
-        display: block;
-        width: 100%;
-        padding: 15px;
-        background: #0a0a0a;
-        border: 1px solid #222;
-        color: #ccc !important;
-        text-align: left;
-        text-decoration: none;
-        margin-bottom: 15px;
-        transition: 0.3s;
-        font-family: 'Lato', sans-serif;
+        display: block; width: 100%; padding: 15px;
+        background: #0a0a0a; border: 1px solid #222;
+        color: #ccc !important; text-align: left;
+        margin-bottom: 15px; transition: 0.3s; font-family: 'Lato', sans-serif;
     }
     .repo-btn:hover {
-        border-color: #D4AF37;
-        color: #D4AF37 !important;
-        transform: translateX(5px);
+        border-color: #D4AF37; color: #D4AF37 !important; transform: translateX(5px);
     }
-    .repo-btn b {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.1rem;
-        color: #fff;
-    }
+    .repo-btn b { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #fff; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -216,10 +205,9 @@ st.write("")
 # -----------------------------------------------------------------------------
 tab1, tab2, tab3 = st.tabs(["🎙️ STRATEGIC BRIEFING", "📊 DEEP DIVE ANALYTICS", "🔗 METHODOLOGY & ECOSYSTEM"])
 
-# --- TAB 1: BRIEFING (AUDIO FOCUSED) ---
+# --- TAB 1: BRIEFING ---
 with tab1:
     col_audio, col_desc = st.columns([1, 1], gap="large")
-    
     with col_audio:
         st.markdown("### 🎧 AI-Synthesized Market Report")
         selected_chapter = st.radio("Select Chapter to Navigate Audio:", list(PODCAST_SCRIPT.keys()))
@@ -235,92 +223,79 @@ with tab1:
             </div>
         """, unsafe_allow_html=True)
         
-        # Mini-preview metric
         if chapter_data["filter"] != "None" and not df.empty:
             count = 0
             if 'top_notes' in df.columns and chapter_data["filter"] == "Notes_Gourmand":
                 count = df[df['top_notes'].str.contains('Vanilla|Caramel|Pistachio', case=False, na=False)].shape[0]
-                label = "Gourmand SKUs Tracked"
+                label = "Gourmand SKUs"
             elif 'country' in df.columns and chapter_data["filter"] == "Market_Russia":
                 count = df[df['country'] == 'Russia'].shape[0]
                 label = "Local Market SKUs"
             else:
                 label = "Data Points"
-            
-            st.markdown(f"**{label}:** <span style='color:#D4AF37; font-size:1.2rem; font-family:Playfair Display;'>{count}</span>", unsafe_allow_html=True)
+            st.markdown(f"**{label}:** <span style='color:#D4AF37; font-size:1.5rem; font-family:Playfair Display;'>{count}</span>", unsafe_allow_html=True)
 
-
-# --- TAB 2: ANALYTICS (CHARTS FOCUSED) ---
+# --- TAB 2: ANALYTICS ---
 with tab2:
     st.markdown("### 📈 Market Sentiment & Clustering")
     
     if not df.empty:
-        # Filter controls
+        # Styled Filter Box
         filter_option = st.selectbox("Filter Data View:", ["Show All Global Data", "Focus: Gourmand 2.0 Notes", "Focus: Russian Market"])
         
         df_plot = df.copy()
-        
-        # Safe filtering
         if filter_option == "Focus: Gourmand 2.0 Notes" and 'top_notes' in df_plot.columns:
             df_plot = df_plot[df_plot['top_notes'].str.contains('Vanilla|Caramel|Pistachio|Sugar', case=False, na=False)]
         elif filter_option == "Focus: Russian Market" and 'country' in df_plot.columns:
             df_plot = df_plot[df_plot['country'] == 'Russia']
 
-        # BIG CHART
+        # Chart
         fig = px.scatter(
-            df_plot, 
-            x="year_clean", 
-            y="community_score", 
-            size="community_votes",
-            color="segment", 
-            hover_name="name", 
-            template="plotly_dark",
-            color_discrete_sequence=['#D4AF37', '#F0E68C', '#666'],
-            title=""
+            df_plot, x="year_clean", y="community_score", size="community_votes",
+            color="segment", hover_name="name", template="plotly_dark",
+            color_discrete_sequence=['#D4AF37', '#F0E68C', '#666']
         )
         fig.update_layout(
-            paper_bgcolor='rgba(0,0,0,0)', 
-            plot_bgcolor='rgba(0,0,0,0)',
-            font_family="Lato", 
-            height=500,
-            xaxis=dict(title="Launch Year", gridcolor="#222", zeroline=False),
-            yaxis=dict(title="Sentiment Score (5.0 Scale)", gridcolor="#222", zeroline=False),
-            legend=dict(orientation="h", y=1.1)
+            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+            font_family="Lato", height=500,
+            xaxis=dict(title="Launch Year", gridcolor="#222"),
+            yaxis=dict(title="Sentiment Score", gridcolor="#222")
         )
         st.plotly_chart(fig, use_container_width=True)
         
-        # DATA TABLE
+        # TABLE FIX: USING PANDAS STYLER TO FIX WHITE BACKGROUND
         with st.expander("🔎 INSPECT RAW DATA (TOP 50 ROWS)"):
             cols_to_show = ['name', 'segment', 'community_score']
-            if 'top_notes' in df_plot.columns:
-                cols_to_show.append('top_notes')
+            if 'top_notes' in df_plot.columns: cols_to_show.append('top_notes')
             
-            st.dataframe(df_plot[cols_to_show].head(50), use_container_width=True, height=300)
+            # Prepare styled dataframe for dark mode
+            df_display = df_plot[cols_to_show].head(50)
+            st.dataframe(
+                df_display.style.set_properties(**{
+                    'background-color': '#0e0e0e',
+                    'color': '#cccccc',
+                    'border-color': '#333333'
+                }).map(lambda x: 'color: #D4AF37' if isinstance(x, str) or isinstance(x, float) else ''),
+                use_container_width=True, height=300
+            )
     else:
         st.error("Data could not be loaded.")
 
-
-# --- TAB 3: ECOSYSTEM & SOURCES ---
+# --- TAB 3: ECOSYSTEM ---
 with tab3:
     col_eco, col_source = st.columns(2)
-    
     with col_eco:
         st.markdown("### 🧩 The Fragrance Data Ecosystem")
-        st.markdown("This project is part of a larger interconnected portfolio of olfactory data tools:")
-        
         st.markdown("""
         <a href="https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence" class="repo-btn" target="_blank">
         <b>🌍 Aromo Market Intelligence</b><br>Global market scraping & trend forecasting engine
         </a>
-        
         <a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" class="repo-btn" target="_blank">
         <b>🧪 ScentSational LFS</b><br>Large File Storage & Data Engineering pipeline
         </a>
-
         <a href="https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit" class="repo-btn" target="_blank">
         <b>🔍 Perfume Finder App</b><br>Consumer-facing recommendation system
         </a>
-        
         <a href="https://github.com/MagdalenaRomaniecka/Olfactory-Insights" class="repo-btn" target="_blank">
         <b>📊 Olfactory Insights</b><br>Deep learning analysis of scent structures
         </a>
@@ -329,17 +304,13 @@ with tab3:
     with col_source:
         st.markdown("### 📚 Primary Intelligence Sources")
         st.markdown("""
-        The insights in the briefing are synthesized from the following key documents (via NotebookLM):
-        
-        * **[1] Euromonitor International:** *Beauty and Personal Care 2025 Edition* (Global Market Sizes).
-        * **[2] Givaudan:** *2024 Half Year Results & Integrated Report* (Functional Fragrance Technologies).
-        * **[3] Journal of Retailing / eBay Study:** *"Unravelling Men's Fragrance Preferences"* (Pricing vs. Sales correlation analysis).
-        * **[4] Sol de Janeiro:** *Brand Investor Presentation* (Scent Stacking methodology).
+        * **[1] Euromonitor International:** *Beauty and Personal Care 2025 Edition*
+        * **[2] Givaudan:** *2024 Half Year Results & Integrated Report*
+        * **[3] Journal of Retailing / eBay Study:** *"Unravelling Men's Fragrance Preferences"*
+        * **[4] Sol de Janeiro:** *Brand Investor Presentation*
         """)
-        
         st.markdown("---")
         st.markdown(f'<a href="https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/blob/main/Research_Whisper_AI.ipynb" class="repo-btn" style="border-color:#D4AF37; color:#D4AF37; text-align:center;"><b>📄 View Research Notebook (Colab)</b></a>', unsafe_allow_html=True)
-
 
 # -----------------------------------------------------------------------------
 # 5. FOOTER & TRANSCRIPT
@@ -348,7 +319,6 @@ st.write("")
 st.write("")
 st.write("")
 
-# EXPANDER FOR TRANSCRIPT
 with st.expander("📄 READ FULL STRATEGIC TRANSCRIPT"):
     try:
         with open('podcast_transcript.md', 'r', encoding='utf-8') as f:
@@ -356,7 +326,6 @@ with st.expander("📄 READ FULL STRATEGIC TRANSCRIPT"):
     except:
         st.info("Transcript file currently unavailable.")
 
-# FIXED FOOTER
 st.markdown("""
     <div class="footer">
         DATA SOURCE: FRAGRANTICA (KAGGLE) & NOTEBOOKLM INSIGHTS <br>
