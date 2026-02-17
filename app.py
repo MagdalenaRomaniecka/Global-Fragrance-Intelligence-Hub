@@ -11,115 +11,121 @@ st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨
 # FORCE DARK THEME & CUSTOM FONTS
 st.markdown("""
     <style>
-    /* IMPORT FONTS */
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;500&display=swap');
+    /* IMPORT FONTS: Playfair Display (Luxury Serif) & Lato (Clean Sans) */
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap');
 
     /* --- GLOBAL APP STYLING --- */
     .stApp {
         background-color: #050505;
-        background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #000000 100%);
+        background-image: radial-gradient(circle at 50% 0%, #111 0%, #000 100%);
         color: #E0E0E0 !important;
-        font-family: 'Montserrat', sans-serif !important;
+        font-family: 'Lato', sans-serif !important;
     }
 
-    /* --- TYPOGRAPHY --- */
+    /* --- TYPOGRAPHY (MATCHING AROMO INTELLIGENCE) --- */
     h1, h2, h3 {
-        font-family: 'Cinzel', serif !important; /* More aesthetic/luxury than Garamond */
-        letter-spacing: 2px;
+        font-family: 'Playfair Display', serif !important;
+        letter-spacing: 1px;
+        font-weight: 400;
     }
     
     h1 {
-        background: linear-gradient(to right, #D4AF37 20%, #F0E68C 50%, #D4AF37 80%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: #D4AF37;
         text-align: center;
-        font-size: 3.5rem !important;
+        font-size: 4rem !important;
         text-transform: uppercase;
         margin-bottom: 0px;
-        text-shadow: 0px 0px 15px rgba(212, 175, 55, 0.3);
+        text-shadow: 0px 4px 10px rgba(0,0,0,0.8);
     }
     
     .sub-header {
         color: #888;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 0.85rem !important;
+        font-family: 'Lato', sans-serif;
+        font-size: 0.8rem !important;
         letter-spacing: 4px;
         text-transform: uppercase;
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: 50px;
         border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        padding-bottom: 20px;
+        padding-bottom: 25px;
     }
 
-    /* --- WIDGET OVERRIDES (Fixing White Backgrounds) --- */
+    /* --- WIDGET OVERRIDES (FIXING WHITE BACKGROUNDS) --- */
     
-    /* Selectbox & Inputs */
-    div[data-baseweb="select"] > div, div[data-baseweb="base-input"] {
-        background-color: rgba(25, 25, 25, 0.8) !important;
-        border: 1px solid rgba(212, 175, 55, 0.3) !important;
-        color: white !important;
-    }
-    div[data-baseweb="popover"] {
-        background-color: #1a1a1a !important;
+    /* 1. Selectbox Main Box */
+    div[data-baseweb="select"] > div {
+        background-color: #111 !important;
+        border: 1px solid #333 !important;
+        color: #D4AF37 !important;
     }
     
-    /* Expanders (Fixing White Box) */
+    /* 2. The Dropdown Menu (The white list fix) */
+    div[data-baseweb="popover"], div[data-baseweb="menu"], ul[data-baseweb="menu"] {
+        background-color: #0e0e0e !important;
+        border: 1px solid #333 !important;
+    }
+    
+    /* 3. Options inside the dropdown */
+    li[data-baseweb="option"] {
+        color: #ccc !important;
+    }
+    li[data-baseweb="option"]:hover, li[aria-selected="true"] {
+        background-color: #D4AF37 !important;
+        color: #000 !important;
+    }
+
+    /* Expanders */
     .st-emotion-cache-1h9usn1, .st-emotion-cache-12w0qpk, details {
-        background-color: rgba(20, 20, 20, 0.5) !important;
-        border: 1px solid rgba(212, 175, 55, 0.1) !important;
-        border-radius: 5px;
+        background-color: rgba(20, 20, 20, 0.6) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
         color: #E0E0E0 !important;
     }
 
-    /* Dataframe Styling */
-    [data-testid="stDataFrame"] {
-        border: 1px solid #333;
-        background-color: #0e0e0e;
-    }
-
-    /* Tabs Styling */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 20px;
-        justify-content: center;
-        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    }
-    .stTabs [data-baseweb="tab"] {
-        height: 50px;
-        background-color: transparent;
-        border: none;
-        color: #888;
-        font-family: 'Cinzel', serif;
-        font-weight: 700;
-        font-size: 1rem;
-    }
-    .stTabs [aria-selected="true"] {
+    /* --- LINKS STYLING (REMOVING BLUE) --- */
+    a {
         color: #D4AF37 !important;
-        border-bottom: 2px solid #D4AF37 !important;
+        text-decoration: none !important;
+        transition: 0.3s;
+    }
+    a:hover {
+        color: #FFF !important;
+        text-shadow: 0 0 5px #D4AF37;
     }
 
     /* --- COMPONENT CLASSES --- */
     .insight-card {
-        border-left: 3px solid #D4AF37;
-        background: linear-gradient(90deg, rgba(20,20,20,0.8) 0%, rgba(30,30,30,0.4) 100%);
-        padding: 20px;
+        border-left: 2px solid #D4AF37;
+        background: linear-gradient(90deg, rgba(20,20,20,0.9) 0%, rgba(10,10,10,0.0) 100%);
+        padding: 25px;
         margin-bottom: 20px;
-        border-radius: 0px 5px 5px 0px;
     }
 
     .gold-metric {
-        background-color: rgba(10, 10, 10, 0.6);
-        border: 1px solid #333;
-        padding: 20px;
+        background-color: transparent;
+        border: 1px solid #222;
+        padding: 30px 10px;
         text-align: center;
-        border-radius: 2px;
         transition: all 0.3s ease;
     }
     .gold-metric:hover {
-        border-color: #D4AF37;
-        box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+        border-color: #444;
+        background-color: rgba(255,255,255,0.02);
     }
-    .metric-label { color: #888; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px;}
-    .metric-value { font-family: 'Cinzel', serif; font-size: 2rem; color: #F0E68C; }
+    .metric-label { 
+        color: #666; 
+        font-family: 'Lato', sans-serif;
+        font-size: 0.75rem; 
+        text-transform: uppercase; 
+        letter-spacing: 3px; 
+        margin-bottom: 10px;
+    }
+    /* THIS IS THE FONT FROM YOUR SCREENSHOT (Aromo Intelligence) */
+    .metric-value { 
+        font-family: 'Playfair Display', serif; 
+        font-weight: 400;
+        font-size: 3.2rem; 
+        color: #F0E68C; 
+    }
 
     /* --- FOOTER --- */
     .footer {
@@ -127,36 +133,43 @@ st.markdown("""
         left: 0;
         bottom: 0;
         width: 100%;
-        background-color: #000000;
-        color: #666;
+        background-color: #000;
+        color: #444;
         text-align: center;
-        padding: 10px;
-        font-size: 0.7rem;
-        border-top: 1px solid #222;
-        letter-spacing: 1px;
-        z-index: 100;
+        padding: 12px;
+        font-size: 0.65rem;
+        border-top: 1px solid #111;
+        letter-spacing: 2px;
+        z-index: 999;
+        font-family: 'Lato', sans-serif;
+        text-transform: uppercase;
     }
-    .footer a { color: #D4AF37; text-decoration: none; }
+    .footer a { color: #888 !important; font-weight: bold; }
+    .footer a:hover { color: #D4AF37 !important; }
     
-    /* Repo Link Button */
+    /* REPO BUTTONS */
     .repo-btn {
         display: block;
         width: 100%;
-        padding: 10px;
-        background: transparent;
-        border: 1px solid #444;
-        color: #bbb;
-        text-align: center;
+        padding: 15px;
+        background: #0a0a0a;
+        border: 1px solid #222;
+        color: #ccc !important;
+        text-align: left;
         text-decoration: none;
-        border-radius: 4px;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         transition: 0.3s;
-        font-size: 0.8rem;
+        font-family: 'Lato', sans-serif;
     }
     .repo-btn:hover {
         border-color: #D4AF37;
-        color: #D4AF37;
-        background: rgba(212, 175, 55, 0.05);
+        color: #D4AF37 !important;
+        transform: translateX(5px);
+    }
+    .repo-btn b {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.1rem;
+        color: #fff;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -217,8 +230,8 @@ with tab1:
         st.markdown("### 📝 Chapter Insight")
         st.markdown(f"""
             <div class="insight-card">
-                <p style="color:#D4AF37; font-size:0.85rem; letter-spacing:2px; font-weight:bold; text-transform:uppercase;">Key Narrative</p>
-                <p style="font-style:italic; color:#e0e0e0; font-size:1.05rem; line-height:1.6;">{chapter_data['desc']}</p>
+                <p style="color:#D4AF37; font-size:0.75rem; letter-spacing:2px; font-weight:bold; text-transform:uppercase;">Key Narrative</p>
+                <p style="font-style:italic; color:#e0e0e0; font-size:1.1rem; line-height:1.6; font-family:'Playfair Display', serif;">"{chapter_data['desc']}"</p>
             </div>
         """, unsafe_allow_html=True)
         
@@ -234,7 +247,7 @@ with tab1:
             else:
                 label = "Data Points"
             
-            st.markdown(f"**{label}:** <span style='color:#D4AF37; font-size:1.2rem;'>{count}</span>", unsafe_allow_html=True)
+            st.markdown(f"**{label}:** <span style='color:#D4AF37; font-size:1.2rem; font-family:Playfair Display;'>{count}</span>", unsafe_allow_html=True)
 
 
 # --- TAB 2: ANALYTICS (CHARTS FOCUSED) ---
@@ -268,7 +281,7 @@ with tab2:
         fig.update_layout(
             paper_bgcolor='rgba(0,0,0,0)', 
             plot_bgcolor='rgba(0,0,0,0)',
-            font_family="Montserrat", 
+            font_family="Lato", 
             height=500,
             xaxis=dict(title="Launch Year", gridcolor="#222", zeroline=False),
             yaxis=dict(title="Sentiment Score (5.0 Scale)", gridcolor="#222", zeroline=False),
@@ -282,7 +295,6 @@ with tab2:
             if 'top_notes' in df_plot.columns:
                 cols_to_show.append('top_notes')
             
-            # Using specific config to try and darken the table (Streamlit theme dependent)
             st.dataframe(df_plot[cols_to_show].head(50), use_container_width=True, height=300)
     else:
         st.error("Data could not be loaded.")
@@ -297,16 +309,20 @@ with tab3:
         st.markdown("This project is part of a larger interconnected portfolio of olfactory data tools:")
         
         st.markdown("""
-        <a href="https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence" class="repo-btn">
-        🌍 <b>Aromo Market Intelligence</b><br>Global market scraping & trend forecasting engine
+        <a href="https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence" class="repo-btn" target="_blank">
+        <b>🌍 Aromo Market Intelligence</b><br>Global market scraping & trend forecasting engine
         </a>
         
-        <a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" class="repo-btn">
-        🧪 <b>ScentSational LFS</b><br>Large File Storage & Data Engineering pipeline
+        <a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" class="repo-btn" target="_blank">
+        <b>🧪 ScentSational LFS</b><br>Large File Storage & Data Engineering pipeline
         </a>
 
-        <a href="https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit" class="repo-btn">
-        🔍 <b>Perfume Finder App</b><br>Consumer-facing recommendation system
+        <a href="https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit" class="repo-btn" target="_blank">
+        <b>🔍 Perfume Finder App</b><br>Consumer-facing recommendation system
+        </a>
+        
+        <a href="https://github.com/MagdalenaRomaniecka/Olfactory-Insights" class="repo-btn" target="_blank">
+        <b>📊 Olfactory Insights</b><br>Deep learning analysis of scent structures
         </a>
         """, unsafe_allow_html=True)
 
@@ -322,7 +338,7 @@ with tab3:
         """)
         
         st.markdown("---")
-        st.markdown(f'<a href="https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/blob/main/Research_Whisper_AI.ipynb" class="repo-btn" style="border-color:#D4AF37; color:#D4AF37;">📄 View Research Notebook (Colab)</a>', unsafe_allow_html=True)
+        st.markdown(f'<a href="https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/blob/main/Research_Whisper_AI.ipynb" class="repo-btn" style="border-color:#D4AF37; color:#D4AF37; text-align:center;"><b>📄 View Research Notebook (Colab)</b></a>', unsafe_allow_html=True)
 
 
 # -----------------------------------------------------------------------------
