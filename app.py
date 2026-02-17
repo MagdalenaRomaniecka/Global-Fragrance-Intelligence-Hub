@@ -107,26 +107,6 @@ st.markdown("""
     a { color: #D4AF37 !important; text-decoration: none !important; transition: 0.3s; }
     a:hover { color: #FFF !important; text-shadow: 0 0 8px #D4AF37; }
 
-    /* PROJECT CARDS (ECOSYSTEM) */
-    .project-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-    .project-card {
-        background: #0e0e0e; border: 1px solid #333; padding: 20px; border-radius: 4px; transition: 0.3s;
-    }
-    .project-card:hover { border-color: #D4AF37; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1); }
-    .project-title { color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 5px; }
-    .project-desc { color: #888; font-size: 0.8rem; margin-bottom: 20px; min-height: 40px; }
-    .btn-row { display: flex; gap: 10px; }
-    
-    .btn-launch {
-        flex: 1; background-color: #D4AF37; color: #000 !important; padding: 10px; text-align: center; font-weight: bold; text-transform: uppercase; font-size: 0.75rem; border-radius: 2px; transition: 0.3s; border: 1px solid #D4AF37;
-    }
-    .btn-launch:hover { background-color: #F0E68C; border-color: #F0E68C; box-shadow: 0 0 10px #D4AF37; }
-    
-    .btn-code {
-        flex: 1; background-color: transparent; color: #888 !important; border: 1px solid #444; padding: 10px; text-align: center; text-transform: uppercase; font-size: 0.75rem; border-radius: 2px; transition: 0.3s;
-    }
-    .btn-code:hover { border-color: #D4AF37; color: #D4AF37 !important; }
-
     /* --- METRICS & CARDS --- */
     .gold-metric {
         background-color: rgba(5, 5, 5, 0.5); border: 1px solid #222; padding: 25px; text-align: center; transition: all 0.3s ease; position: relative;
@@ -192,9 +172,9 @@ tab1, tab2, tab3 = st.tabs(["🎙️ STRATEGIC BRIEFING", "📊 DEEP DIVE ANALYT
 
 # --- TAB 1: STORY MODE (AUDIO + AUTO CHART) ---
 with tab1:
-    col_audio, col_viz = st.columns([1, 1.5], gap="large") # Podział na Audio i Wykres
+    col_audio, col_viz = st.columns([1, 1.5], gap="large") 
     
-    # 1. LEWA KOLUMNA - AUDIO I STEROWANIE
+    # 1. LEFT COLUMN - AUDIO & CONTROLS
     with col_audio:
         st.markdown("### 🎧 AI-Synthesized Market Report")
         selected_chapter = st.radio("Select Chapter to Navigate Audio:", list(PODCAST_SCRIPT.keys()))
@@ -209,12 +189,12 @@ with tab1:
             </div>
         """, unsafe_allow_html=True)
 
-    # 2. PRAWA KOLUMNA - AUTOMATYCZNY WYKRES (STORY MODE)
+    # 2. RIGHT COLUMN - AUTO CHART (STORY MODE)
     with col_viz:
         st.markdown(f"### 📉 Data Visualization: {selected_chapter.split(':')[1]}")
         
         if not df.empty:
-            # AUTOMATYCZNE FILTROWANIE NA PODSTAWIE ROZDZIAŁU
+            # AUTOMATIC FILTERING BASED ON CHAPTER
             df_story = df.copy()
             
             if chapter_data["filter"] == "Notes_Gourmand" and 'top_notes' in df_story.columns:
@@ -226,7 +206,7 @@ with tab1:
             else:
                 chart_title = "Global Market Overview (All Data)"
             
-            # WYKRES
+            # CHART
             fig = px.scatter(
                 df_story, x="year_clean", y="community_score", size="community_votes",
                 color="segment", hover_name="name", template="plotly_dark",
@@ -272,7 +252,7 @@ with tab2:
         )
         st.plotly_chart(fig, use_container_width=True)
         
-        # TABLE REPLACEMENT: HTML TABLE
+        # HTML TABLE (Guarantees black background)
         with st.expander("🔎 INSPECT RAW DATA (TOP 50 ROWS)"):
             cols_to_show = ['name', 'segment', 'community_score']
             if 'top_notes' in df_plot.columns: cols_to_show.append('top_notes')
@@ -282,12 +262,94 @@ with tab2:
     else:
         st.error("Data could not be loaded.")
 
-# --- TAB 3: ECOSYSTEM (ZMODYFIKOWANA) ---
+# --- TAB 3: ECOSYSTEM (FIXED) ---
 with tab3:
     st.markdown("### 🧩 The Fragrance Data Ecosystem")
     st.markdown("This hub serves as the central command for my deployed machine learning applications. Launch a tool below:")
     
+    # CSS + HTML Combined Block for Safety
     st.markdown("""
+    <style>
+    .project-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 20px;
+    }
+    .project-card {
+        background-color: #0e0e0e;
+        border: 1px solid #333;
+        padding: 20px;
+        border-radius: 4px;
+        transition: 0.3s;
+    }
+    .project-card:hover {
+        border-color: #D4AF37;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1);
+    }
+    .project-title {
+        color: #D4AF37;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+    .project-desc {
+        color: #888;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.8rem;
+        margin-bottom: 20px;
+        min-height: 40px;
+    }
+    .btn-row {
+        display: flex;
+        gap: 10px;
+    }
+    
+    /* BUTTON STYLES */
+    a.btn-launch {
+        display: block;
+        flex: 1;
+        background-color: #D4AF37;
+        color: #000000 !important;
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        border-radius: 2px;
+        transition: 0.3s;
+        border: 1px solid #D4AF37;
+        text-decoration: none;
+        font-family: 'Montserrat', sans-serif;
+    }
+    a.btn-launch:hover {
+        background-color: #F0E68C;
+        border-color: #F0E68C;
+        box-shadow: 0 0 10px #D4AF37;
+        color: #000 !important;
+    }
+    
+    a.btn-code {
+        display: block;
+        flex: 1;
+        background-color: transparent;
+        color: #888888 !important;
+        border: 1px solid #444;
+        padding: 10px;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        border-radius: 2px;
+        transition: 0.3s;
+        text-decoration: none;
+        font-family: 'Montserrat', sans-serif;
+    }
+    a.btn-code:hover {
+        border-color: #D4AF37;
+        color: #D4AF37 !important;
+    }
+    </style>
+    
     <div class="project-container">
         
         <div class="project-card">
@@ -312,7 +374,7 @@ with tab3:
             <div class="project-title">📊 Olfactory Insights</div>
             <div class="project-desc">Deep learning analysis of scent structures and chemical composition mapping.</div>
             <div class="btn-row">
-                <a href="https://github.com/MagdalenaRomaniecka/Olfactory-Insights" target="_blank" class="btn-code" style="flex:2">💻 View Code</a>
+                <a href="https://github.com/MagdalenaRomaniecka/Olfactory-Insights" target="_blank" class="btn-code" style="width:100%">💻 View Code</a>
             </div>
         </div>
 
@@ -320,7 +382,7 @@ with tab3:
             <div class="project-title">🧪 ScentSational LFS</div>
             <div class="project-desc">Backend engineering pipeline & Large File Storage documentation.</div>
             <div class="btn-row">
-                <a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" target="_blank" class="btn-code" style="flex:2">💻 View Code</a>
+                <a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" target="_blank" class="btn-code" style="width:100%">💻 View Code</a>
             </div>
         </div>
 
