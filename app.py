@@ -65,6 +65,11 @@ st.markdown("""
     /* UI ELEMENTS */
     .stAudio { background-color: transparent !important; margin-top: 20px; }
     .stExpander { border: 1px solid rgba(212, 175, 55, 0.2) !important; background: rgba(10,10,10,0.8) !important; }
+    
+    /* MARKDOWN TEXT STYLING */
+    .stMarkdown p { font-size: 1.05rem; line-height: 1.6; color: #CCCCCC; }
+    .stMarkdown h3 { color: #D4AF37 !important; font-family: 'Cormorant Garamond', serif; margin-top: 30px; }
+    .stMarkdown strong { color: #F0E68C; font-weight: 600; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -75,7 +80,7 @@ AUDIO_URL = "https://raw.githubusercontent.com/MagdalenaRomaniecka/Global-Fragra
 
 PODCAST_SCRIPT = {
     "I. INTRODUCTION: RECESSION GLAM": {
-        "start_time": 160, "filter": "None",
+        "start_time": 0, "filter": "None",
         "desc": "Analysis of fragrance as 'affordable luxury' in the 2026 economic landscape."
     },
     "II. SCENT TREND: GOURMAND 2.0": {
@@ -89,7 +94,7 @@ PODCAST_SCRIPT = {
 }
 
 # -----------------------------------------------------------------------------
-# 3. LUXURY INTERFACE
+# 3. LUXURY INTERFACE STRUCTURE
 # -----------------------------------------------------------------------------
 st.markdown("<h1>Fragrance Intelligence</h1>", unsafe_allow_html=True)
 st.markdown("<div class='sub-header'>Global Trends • Market Sentiment • Strategic Forecast 2026</div>", unsafe_allow_html=True)
@@ -97,24 +102,28 @@ st.markdown("<div class='sub-header'>Global Trends • Market Sentiment • Stra
 df = load_and_merge_data()
 
 # TOP METRICS ROW
-if not df.empty:
-    m1, m2, m3 = st.columns(3)
-    m1.markdown('<div class="gold-metric"><div class="metric-label">Market Valuation</div><div class="metric-value">$593.2B</div></div>', unsafe_allow_html=True)
-    m2.markdown('<div class="gold-metric"><div class="metric-label">Growth Driver</div><div class="metric-value">23% Scent</div></div>', unsafe_allow_html=True)
-    m3.markdown('<div class="gold-metric"><div class="metric-label">Regional Share (RU)</div><div class="metric-value">68% Local</div></div>', unsafe_allow_html=True)
+col1, col2, col3 = st.columns(3)
+col1.markdown('<div class="gold-metric"><div class="metric-label">Market Valuation</div><div class="metric-value">$593.2B</div></div>', unsafe_allow_html=True)
+col2.markdown('<div class="gold-metric"><div class="metric-label">Growth Driver</div><div class="metric-value">23% Scent</div></div>', unsafe_allow_html=True)
+col3.markdown('<div class="gold-metric"><div class="metric-label">Regional Share (RU)</div><div class="metric-value">68% Local</div></div>', unsafe_allow_html=True)
 
 st.write("")
+st.write("")
 
-# MAIN ANALYTICS HUB
+# MAIN CONTENT: AUDIO & VISUALS
 col_audio, col_viz = st.columns([1, 2], gap="large")
 
 with col_audio:
     st.markdown("<p style='color:#D4AF37; letter-spacing:3px; font-size:0.9rem; font-weight:bold;'>STRATEGIC BRIEFING</p>", unsafe_allow_html=True)
-    selected_chapter = st.radio("Chapter Selection", list(PODCAST_SCRIPT.keys()), label_visibility="collapsed")
     
+    # Chapter Selection
+    selected_chapter = st.radio("Select Chapter", list(PODCAST_SCRIPT.keys()), label_visibility="collapsed")
     chapter_data = PODCAST_SCRIPT[selected_chapter]
+    
+    # Audio Player
     st.audio(AUDIO_URL, start_time=chapter_data["start_time"])
     
+    # Insight Card
     st.markdown(f"""
         <div class="insight-card">
             <p style="color:#D4AF37; font-size:0.75rem; letter-spacing:2px; font-weight:bold; text-transform:uppercase;">Key Narrative</p>
@@ -125,48 +134,74 @@ with col_audio:
 with col_viz:
     st.markdown("<p style='color:#D4AF37; letter-spacing:3px; font-size:0.9rem; font-weight:bold;'>MARKET SENTIMENT ANALYTICS</p>", unsafe_allow_html=True)
     
-    # Filter Logic based on selected chapter
-    df_filtered = df.copy()
-    if not df_filtered.empty:
+    if not df.empty:
+        # Dynamic Filtering
+        df_plot = df.copy()
         if chapter_data["filter"] == "Notes_Gourmand":
-            df_filtered = df_filtered[df_filtered['top_notes'].str.contains('Vanilla|Caramel|Pistachio', case=False, na=False)]
+            df_plot = df_plot[df_plot['top_notes'].str.contains('Vanilla|Caramel|Pistachio|Sugar', case=False, na=False)]
         elif chapter_data["filter"] == "Market_Russia":
-            df_filtered = df_filtered[df_filtered['segment'] == 'Local']
-
-        # Styled Plotly Chart
+            df_plot = df_plot[df_plot['country'] == 'Russia']
+        
+        # Interactive Bubble Chart
         fig = px.scatter(
-            df_filtered, x="year_clean", y="community_score", size="community_votes",
-            color="segment", hover_name="name", template="plotly_dark",
-            color_discrete_sequence=['#D4AF37', '#F0E68C', '#777']
+            df_plot, 
+            x="year_clean", 
+            y="community_score", 
+            size="community_votes",
+            color="segment", 
+            hover_name="name", 
+            template="plotly_dark",
+            color_discrete_sequence=['#D4AF37', '#F0E68C', '#A9A9A9']
         )
+        
         fig.update_layout(
-            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+            paper_bgcolor='rgba(0,0,0,0)', 
+            plot_bgcolor='rgba(0,0,0,0)',
             font_family="Montserrat", 
-            margin=dict(l=0, r=0, t=10, b=0),
-            xaxis=dict(title="Launch Year", gridcolor="#222"),
-            yaxis=dict(title="Sentiment Score", gridcolor="#222")
+            margin=dict(l=0, r=0, t=20, b=0),
+            xaxis=dict(title="Launch Year", gridcolor="#333"),
+            yaxis=dict(title="Sentiment Score (5.0 Scale)", gridcolor="#333"),
+            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
         )
+        
         st.plotly_chart(fig, use_container_width=True)
+    else:
+        st.error("Data not loaded. Please check data_loader.py")
 
-# EXECUTIVE TRANSCRIPT
+# -----------------------------------------------------------------------------
+# 4. TRANSCRIPT & EXECUTIVE SUMMARY SECTION
+# -----------------------------------------------------------------------------
 st.write("")
-with st.expander("📄 VIEW EXECUTIVE SUMMARY & TRANSCRIPT"):
-    st.markdown("""
-    ### 🎙️ Strategic Intelligence Report: Fragrance 2026
-    
-    **I. Recession Glam & The Fragrance Effect**
-    * Substitution of high-ticket assets with high-end scents.
-    * Category driving **23%** of all beauty growth worldwide.
-    
-    **II. Gourmand 2.0 Evolution**
-    * Shift from simple 'sugar' profiles to **Sophisticated Indulgence**.
-    * Key molecules: Toasted Pistachio, Sea-Salt Caramel, and Smoked Vanilla.
-    
-    **III. Givaudan's Neural Edge**
-    * Implementation of **Cereboost** technology for cognitive performance via scent.
-    * **MYRSI System:** Mapping chemical structures to visual color palettes for digital retail.
-    
-    **IV. Geopolitics & The Russian Market**
-    * Closed-loop economic growth due to 35% import duties.
-    * Local champions like **Faberlic** and **Novaya Zarya** dominating with 68% share.
-    """)
+st.markdown("---")
+
+with st.expander("📄 VIEW FULL STRATEGIC TRANSCRIPT", expanded=False):
+    try:
+        # Tries to load the Markdown file first (Preferred)
+        with open('podcast_transcript.md', 'r', encoding='utf-8') as f:
+            transcript_text = f.read()
+        st.markdown(transcript_text)
+        
+    except FileNotFoundError:
+        # Fallback if MD file is missing
+        st.error("⚠️ Transcript file 'podcast_transcript.md' not found. Please upload it to the repository.")
+        st.info("Displaying Executive Summary instead:")
+        
+        st.markdown("""
+        ### 🎙️ Strategic Intelligence Report: Fragrance 2026
+        
+        **I. Recession Glam & The Fragrance Effect**
+        * Substitution of high-ticket assets with high-end scents.
+        * Category driving **23%** of all beauty growth worldwide.
+        
+        **II. Gourmand 2.0 Evolution**
+        * Shift from simple 'sugar' profiles to **Sophisticated Indulgence**.
+        * Key molecules: Toasted Pistachio, Sea-Salt Caramel, and Smoked Vanilla.
+        
+        **III. Givaudan's Neural Edge**
+        * Implementation of **Cereboost** technology for cognitive performance via scent.
+        * **MYRSI System:** Mapping chemical structures to visual color palettes for digital retail.
+        
+        **IV. Geopolitics & The Russian Market**
+        * Closed-loop economic growth due to 35% import duties.
+        * Local champions like **Faberlic** and **Novaya Zarya** dominating with 68% share.
+        """)
