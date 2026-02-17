@@ -174,12 +174,15 @@ with tab1:
         # Mini-preview of data related to chapter
         if chapter_data["filter"] != "None" and not df.empty:
             count = 0
-            if chapter_data["filter"] == "Notes_Gourmand":
+            # Safety check if columns exist before filtering
+            if 'top_notes' in df.columns and chapter_data["filter"] == "Notes_Gourmand":
                 count = df[df['top_notes'].str.contains('Vanilla|Caramel|Pistachio', case=False, na=False)].shape[0]
                 label = "Gourmand Fragrances Analyzed"
-            elif chapter_data["filter"] == "Market_Russia":
+            elif 'country' in df.columns and chapter_data["filter"] == "Market_Russia":
                 count = df[df['country'] == 'Russia'].shape[0]
                 label = "Local Market SKUs Tracked"
+            else:
+                label = "Data Points"
             
             st.metric(label=label, value=count)
 
@@ -193,9 +196,11 @@ with tab2:
         filter_option = st.selectbox("Filter Data View:", ["Show All Global Data", "Focus: Gourmand 2.0 Notes", "Focus: Russian Market"])
         
         df_plot = df.copy()
-        if filter_option == "Focus: Gourmand 2.0 Notes":
+        
+        # Safe filtering
+        if filter_option == "Focus: Gourmand 2.0 Notes" and 'top_notes' in df_plot.columns:
             df_plot = df_plot[df_plot['top_notes'].str.contains('Vanilla|Caramel|Pistachio|Sugar', case=False, na=False)]
-        elif filter_option == "Focus: Russian Market":
+        elif filter_option == "Focus: Russian Market" and 'country' in df_plot.columns:
             df_plot = df_plot[df_plot['country'] == 'Russia']
 
         # BIG CHART
@@ -220,9 +225,14 @@ with tab2:
         )
         st.plotly_chart(fig, use_container_width=True)
         
-        # DATA TABLE
+        # DATA TABLE (Fixed: Removed 'brand', kept only safe columns)
         with st.expander("🔎 Inspect Raw Data (Top 50 Rows)"):
-            st.dataframe(df_plot[['name', 'brand', 'segment', 'community_score', 'top_notes']].head(50), use_container_width=True)
+            # Select only columns that likely exist
+            cols_to_show = ['name', 'segment', 'community_score']
+            if 'top_notes' in df_plot.columns:
+                cols_to_show.append('top_notes')
+            
+            st.dataframe(df_plot[cols_to_show].head(50), use_container_width=True)
     else:
         st.error("Data could not be loaded.")
 
@@ -243,7 +253,7 @@ with tab3:
         * **Whisper AI (OpenAI):** Used for high-fidelity transcription of the strategic briefing.
         * **Givaudan 'Neuro-Scent':** Analysis based on proprietary industry reports on *Cereboost* and *Myrissi* technologies.
         """)
-        # Link to the Notebook (assuming it's in the repo)
+        # Link to the Notebook
         st.markdown(f'<a href="https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/blob/main/Research_Whisper_AI.ipynb" class="repo-link" target="_blank">📄 View Research Notebook (Colab)</a>', unsafe_allow_html=True)
 
     with c_tech2:
