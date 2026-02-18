@@ -22,14 +22,14 @@ font="serif"
 """)
 
 # -----------------------------------------------------------------------------
-# 1. UI & LUXURY ATELIER CSS
+# 1. UI & LUXURY ATELIER CSS (MOBILE OPTIMIZED)
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 
 st.markdown("""
     <style>
-    /* IMPORT FONTS: Playfair Display (Italic support) & Montserrat */
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap');
+    /* IMPORT FONTS: Playfair Display (Regular & SemiBold) & Montserrat */
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400;500&display=swap');
 
     /* GLOBAL APP STYLING */
     .stApp {
@@ -38,128 +38,132 @@ st.markdown("""
         font-family: 'Montserrat', sans-serif !important;
     }
 
-    /* --- 1. FRAMED H1 (PERFUME FINDER STYLE) --- */
+    /* --- 1. FRAMED HEADER (RESPONSIVE) --- */
     .main-header-container {
         display: flex;
         justify-content: center;
-        margin-top: 20px;
-        margin-bottom: 10px;
+        margin-top: 10px;
+        margin-bottom: 30px;
     }
     .main-header-box {
-        border: 1px solid #D4AF37; /* Złota ramka zewnętrzna */
-        padding: 5px; /* Odstęp dla podwójnej ramki */
+        border: 1px solid #D4AF37; /* Outer Gold Frame */
+        padding: 4px;
         display: inline-block;
+        max-width: 95%;
     }
     .main-header-inner {
-        border: 1px solid #D4AF37; /* Złota ramka wewnętrzna */
-        padding: 20px 60px;
+        border: 1px solid #D4AF37; /* Inner Gold Frame */
+        padding: 20px 50px;
         text-align: center;
         background-color: #050505;
     }
     .main-header-text {
         font-family: 'Playfair Display', serif;
         color: #D4AF37;
-        font-size: 2.5rem; /* Mniejsza czcionka zgodnie z prośbą */
+        font-size: 2.2rem; /* Smaller, elegant size */
         text-transform: uppercase;
-        letter-spacing: 5px;
+        letter-spacing: 3px;
         margin: 0;
-        font-weight: 400;
+        font-weight: 400; /* Regular weight (No Bold, No Italic) */
     }
     .sub-header-text {
         font-family: 'Montserrat', sans-serif;
         color: #888;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         text-transform: uppercase;
-        letter-spacing: 3px;
-        margin-top: 10px;
+        letter-spacing: 2px;
+        margin-top: 8px;
     }
 
-    /* --- 2. CENTERED & FRAMED TABS --- */
-    /* Container for tabs */
-    div[data-baseweb="tab-list"] {
-        justify-content: center !important; /* Wyśrodkowanie */
-        gap: 20px;
-        margin-top: 30px;
-        margin-bottom: 30px;
-        border-bottom: none !important; /* Usunięcie domyślnej linii */
+    /* --- MOBILE OPTIMIZATION (MEDIA QUERY) --- */
+    @media only screen and (max-width: 600px) {
+        .main-header-inner { padding: 15px 10px; }
+        .main-header-text { font-size: 1.4rem; letter-spacing: 1px; }
+        .sub-header-text { font-size: 0.55rem; letter-spacing: 1px; }
+        .gold-metric { padding: 10px; margin-bottom: 5px; }
+        .metric-value { font-size: 1.5rem !important; }
+        .metric-label { font-size: 0.55rem; }
     }
-    
-    /* Individual Tab Button */
+
+    /* --- 2. TABS (CLEAN & CENTERED) --- */
+    div[data-baseweb="tab-list"] {
+        justify-content: center !important;
+        gap: 10px;
+        margin-bottom: 20px;
+        border-bottom: none !important;
+    }
     button[data-baseweb="tab"] {
         background-color: transparent !important;
         border: 1px solid #333 !important;
         color: #888 !important;
-        border-radius: 0px !important; /* Kwadratowe rogi */
-        padding: 10px 30px !important;
+        border-radius: 2px !important;
+        padding: 8px 20px !important;
         font-family: 'Montserrat', sans-serif !important;
         text-transform: uppercase !important;
-        letter-spacing: 2px !important;
-        font-size: 0.75rem !important;
+        letter-spacing: 1px !important;
+        font-size: 0.7rem !important;
         transition: 0.3s;
     }
-    
-    /* Active/Hover Tab */
     button[data-baseweb="tab"]:hover {
         border-color: #D4AF37 !important;
         color: #D4AF37 !important;
     }
     button[data-baseweb="tab"][aria-selected="true"] {
-        background-color: #D4AF37 !important;
+        background-color: rgba(212, 175, 55, 0.1) !important;
         border: 1px solid #D4AF37 !important;
-        color: #000000 !important; /* Czarny tekst na złotym tle */
+        color: #D4AF37 !important;
         font-weight: 600 !important;
     }
 
-    /* --- 3. SECTION HEADERS (FRAMED) --- */
+    /* --- 3. SECTION HEADERS (MINIMALIST) --- */
     .section-header {
-        border: 1px solid rgba(212, 175, 55, 0.3);
-        border-left: 3px solid #D4AF37;
-        padding: 10px 20px;
+        border-left: 2px solid #D4AF37;
+        padding-left: 15px;
         margin-bottom: 20px;
-        background: linear-gradient(90deg, rgba(20,20,20,0.8) 0%, rgba(0,0,0,0) 100%);
         color: #D4AF37;
         font-family: 'Playfair Display', serif;
-        font-style: italic;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         letter-spacing: 1px;
+        font-weight: 400;
     }
 
     /* --- METRICS --- */
     .gold-metric {
-        background-color: rgba(10, 10, 10, 0.6);
+        background-color: rgba(20, 20, 20, 0.4);
         border: 1px solid #222;
-        padding: 25px;
+        padding: 20px;
         text-align: center;
         transition: 0.3s;
     }
-    .gold-metric:hover { border-color: #D4AF37; background-color: rgba(212, 175, 55, 0.05); }
-    .metric-label { color: #999; font-family: 'Montserrat', sans-serif; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
+    .gold-metric:hover { border-color: #444; background-color: rgba(212, 175, 55, 0.02); }
+    .metric-label { color: #888; font-family: 'Montserrat', sans-serif; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
     .metric-value { 
-        font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.5rem; 
-        color: #F0E68C; background: linear-gradient(to bottom, #FCF6BA, #AA771C); 
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+        font-family: 'Playfair Display', serif; 
+        font-size: 2.2rem; 
+        color: #E0E0E0; 
+        font-weight: 400; /* Standard font weight */
     }
 
     /* --- OTHERS --- */
     .transcript-box {
-        font-family: 'Playfair Display', serif; font-size: 1.1rem; line-height: 1.8; color: #d0d0d0;
-        text-align: justify; max-width: 800px; margin: 0 auto; padding: 40px;
-        background-color: #050505; border: 1px solid #222;
+        font-family: 'Montserrat', sans-serif; font-size: 0.9rem; line-height: 1.7; color: #ccc;
+        text-align: justify; max-width: 800px; margin: 0 auto; padding: 20px;
+        background-color: #080808; border: 1px solid #222;
     }
-    /* Dropdowns & Tables */
-    div[data-baseweb="popover"], div[data-baseweb="popover"] > div { background-color: #000 !important; border: 1px solid #D4AF37 !important; }
+    
+    /* Tables & Dropdowns */
+    div[data-baseweb="popover"], div[data-baseweb="popover"] > div { background-color: #000 !important; border: 1px solid #444 !important; }
     ul[data-baseweb="menu"] { background-color: #000 !important; }
     li[data-baseweb="option"] { color: #ccc !important; }
     li[data-baseweb="option"]:hover, li[aria-selected="true"] { background-color: #D4AF37 !important; color: #000 !important; }
-    .luxury-table { width: 100%; border-collapse: collapse; background-color: #0e0e0e; color: #ccc; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; }
-    .luxury-table th { background-color: #1a1a1a; color: #D4AF37; font-family: 'Playfair Display', serif; font-style: italic; padding: 15px; border-bottom: 1px solid #D4AF37; }
-    .luxury-table td { padding: 12px; border-bottom: 1px solid #333; }
-    .luxury-table tr:hover { background-color: rgba(212, 175, 55, 0.05); }
     
-    /* Footer & Links */
-    .footer { position: fixed; left: 0; bottom: 0; width: 100%; background-color: #000; color: #555; text-align: center; padding: 12px; font-size: 0.65rem; border-top: 1px solid #111; letter-spacing: 2px; z-index: 999; text-transform: uppercase; }
+    .luxury-table { width: 100%; border-collapse: collapse; background-color: #0e0e0e; color: #ccc; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; }
+    .luxury-table th { background-color: #151515; color: #D4AF37; font-family: 'Playfair Display', serif; padding: 12px; border-bottom: 1px solid #444; font-weight: 400; letter-spacing: 1px;}
+    .luxury-table td { padding: 10px; border-bottom: 1px solid #222; }
+    
+    .footer { position: fixed; left: 0; bottom: 0; width: 100%; background-color: #000; color: #444; text-align: center; padding: 10px; font-size: 0.6rem; border-top: 1px solid #111; letter-spacing: 1px; z-index: 999; text-transform: uppercase; }
     a { color: #D4AF37 !important; text-decoration: none !important; transition: 0.3s; }
-    a:hover { color: #FFF !important; text-shadow: 0 0 10px #D4AF37; }
+    a:hover { color: #FFF !important; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -186,9 +190,8 @@ PODCAST_SCRIPT = {
 df = load_and_merge_data()
 
 # -----------------------------------------------------------------------------
-# 3. HEADER (PERFUME FINDER STYLE BOX)
+# 3. HEADER (RESPONSIVE BOX)
 # -----------------------------------------------------------------------------
-# To jest ta ramka w ramce, o którą prosiłaś
 st.markdown("""
     <div class="main-header-container">
         <div class="main-header-box">
@@ -200,8 +203,6 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-st.write("")
-
 # METRICS
 c1, c2, c3 = st.columns(3)
 c1.markdown('<div class="gold-metric"><div class="metric-label">Global Beauty Market</div><div class="metric-value">$593.2B</div></div>', unsafe_allow_html=True)
@@ -211,7 +212,7 @@ c3.markdown('<div class="gold-metric"><div class="metric-label">RU Local Product
 st.write("")
 
 # -----------------------------------------------------------------------------
-# 4. TABS (CENTERED & FRAMED)
+# 4. TABS
 # -----------------------------------------------------------------------------
 tab1, tab2, tab3 = st.tabs(["STRATEGIC BRIEFING", "DEEP DIVE ANALYTICS", "ECOSYSTEM"])
 
@@ -219,7 +220,6 @@ tab1, tab2, tab3 = st.tabs(["STRATEGIC BRIEFING", "DEEP DIVE ANALYTICS", "ECOSYS
 with tab1:
     col_audio, col_viz = st.columns([1, 1.5], gap="large")
     with col_audio:
-        # Zamiast st.markdown("### ...") używamy własnej klasy .section-header
         st.markdown('<div class="section-header">🎧 AI-Synthesized Market Report</div>', unsafe_allow_html=True)
         
         selected_chapter = st.radio("Select Chapter to Navigate Audio:", list(PODCAST_SCRIPT.keys()))
@@ -227,9 +227,9 @@ with tab1:
         st.audio(AUDIO_URL, start_time=chapter_data["start_time"])
         
         st.markdown(f"""
-            <div style="border: 1px solid #333; padding: 20px; background: #0e0e0e; margin-top: 20px;">
-                <p style="color:#D4AF37; font-size:0.65rem; letter-spacing:2px; font-weight:bold; text-transform:uppercase;">Key Narrative</p>
-                <p style="font-style:italic; color:#ccc; font-size:1rem; line-height:1.6; font-family:'Playfair Display', serif;">"{chapter_data['desc']}"</p>
+            <div style="border: 1px solid #222; padding: 15px; background: #0a0a0a; margin-top: 15px; border-left: 2px solid #D4AF37;">
+                <p style="color:#D4AF37; font-size:0.6rem; letter-spacing:2px; font-weight:bold; text-transform:uppercase; margin-bottom:5px;">Key Narrative</p>
+                <p style="color:#ccc; font-size:0.9rem; line-height:1.5; font-family:'Montserrat', sans-serif;">{chapter_data['desc']}</p>
             </div>
         """, unsafe_allow_html=True)
 
@@ -247,7 +247,7 @@ with tab1:
                 color="segment", hover_name="name", template="plotly_dark",
                 color_discrete_sequence=['#D4AF37', '#F0E68C', '#666']
             )
-            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Montserrat", height=450)
+            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Montserrat", height=400)
             st.plotly_chart(fig, use_container_width=True)
 
 # --- TAB 2: ANALYST MODE ---
@@ -266,7 +266,7 @@ with tab2:
             color="segment", hover_name="name", template="plotly_dark",
             color_discrete_sequence=['#D4AF37', '#F0E68C', '#666']
         )
-        fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Montserrat", height=500)
+        fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Montserrat", height=450)
         st.plotly_chart(fig2, use_container_width=True)
         
         with st.expander("🔎 INSPECT RAW DATA (TOP 50 ROWS)"):
@@ -282,15 +282,16 @@ with tab3:
     
     ecosystem_html = """
     <style>
-    .project-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-    .project-card { background-color: #0e0e0e !important; border: 1px solid #333 !important; padding: 20px; border-radius: 4px; transition: 0.3s; }
-    .project-card:hover { border-color: #D4AF37 !important; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1); }
-    .project-title { color: #D4AF37 !important; font-family: 'Playfair Display', serif; font-style:italic; font-size: 1.3rem; margin-bottom: 5px; font-weight: 400; }
-    .project-desc { color: #888 !important; font-size: 0.8rem; margin-bottom: 20px; min-height: 40px; font-family: 'Montserrat', sans-serif; }
+    .project-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px; }
+    .project-card { background-color: #0e0e0e !important; border: 1px solid #222 !important; padding: 20px; border-radius: 2px; transition: 0.3s; }
+    .project-card:hover { border-color: #D4AF37 !important; }
+    .project-title { color: #D4AF37 !important; font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 5px; font-weight: 400; }
+    .project-desc { color: #888 !important; font-size: 0.75rem; margin-bottom: 20px; min-height: 40px; font-family: 'Montserrat', sans-serif; line-height: 1.4; }
     .btn-row { display: flex; gap: 10px; }
-    .btn-launch { flex: 1; background-color: #D4AF37 !important; color: #000 !important; padding: 10px; text-align: center; font-weight: bold; text-transform: uppercase; font-size: 0.75rem; border-radius: 2px; text-decoration: none !important; font-family: 'Montserrat', sans-serif; }
+    .btn-launch { flex: 1; background-color: #D4AF37 !important; color: #000 !important; padding: 8px; text-align: center; font-weight: 600; text-transform: uppercase; font-size: 0.7rem; border-radius: 2px; text-decoration: none !important; font-family: 'Montserrat', sans-serif; }
     .btn-launch:hover { background-color: #F0E68C !important; }
-    .btn-code { flex: 1; background-color: transparent !important; color: #D4AF37 !important; border: 1px solid #444 !important; padding: 10px; text-align: center; text-transform: uppercase; font-size: 0.75rem; border-radius: 2px; text-decoration: none !important; font-family: 'Montserrat', sans-serif;}
+    .btn-code { flex: 1; background-color: transparent !important; color: #888 !important; border: 1px solid #444 !important; padding: 8px; text-align: center; text-transform: uppercase; font-size: 0.7rem; border-radius: 2px; text-decoration: none !important; font-family: 'Montserrat', sans-serif;}
+    .btn-code:hover { border-color: #D4AF37 !important; color: #D4AF37 !important; }
     </style>
     
     <div class="project-container">
@@ -337,7 +338,7 @@ with tab3:
          * **[4] Russia Perfume Market Report:** *Size, Share & Forecast 2025-2035* (Local Production Share: 68%).
          * **[5] Sol de Janeiro:** *Best Selling Body Mists Analysis* (Gourmand 2.0 Trends).
          """)
-         st.markdown(f'<a href="https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/blob/main/Research_Whisper_AI.ipynb" class="repo-btn" style="border: 1px solid #D4AF37; padding: 10px; display: block; text-align: center;"><b>📄 View Research Notebook (Colab)</b></a>', unsafe_allow_html=True)
+         st.markdown(f'<a href="https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/blob/main/Research_Whisper_AI.ipynb" class="repo-btn" style="border: 1px solid #444; color: #888; padding: 10px; display: block; text-align: center; font-size: 0.8rem;">📄 View Research Notebook (Colab)</a>', unsafe_allow_html=True)
 
 # --- FOOTER & TRANSCRIPT ---
 st.write("")
