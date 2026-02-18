@@ -2,6 +2,7 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 import os
+import re  # IMPORT REQUIRED FOR TEXT FORMATTING
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
@@ -38,7 +39,7 @@ st.markdown("""
         font-family: 'Lato', sans-serif !important;
     }
 
-    /* --- 1. DOUBLE-FRAMED HEADER (STRUCTURED) --- */
+    /* --- 1. DOUBLE-FRAMED HEADER --- */
     .header-wrapper {
         display: flex;
         justify-content: center;
@@ -144,14 +145,54 @@ st.markdown("""
         text-transform: uppercase;
         letter-spacing: 1px;
     }
-    
-    /* --- 5. TRANSCRIPT STYLING (EDITORIAL) --- */
+
+    /* --- 5. SCROLLABLE DATA TABLE --- */
+    .table-container {
+        height: 500px !important; /* FIXED HEIGHT FORCES SCROLL */
+        overflow-y: auto !important;
+        display: block;
+        border: 1px solid #333;
+        background-color: #0e0e0e;
+        margin-top: 10px;
+        padding: 0;
+    }
+
+    /* Custom Scrollbar Styling (Gold) */
+    .table-container::-webkit-scrollbar { width: 10px; background: #111; }
+    .table-container::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 2px; }
+    .table-container::-webkit-scrollbar-thumb:hover { background: #F0E68C; }
+
+    .luxury-table {
+        width: 100%;
+        border-collapse: collapse;
+        color: #ccc;
+        font-family: 'Lato', sans-serif;
+        font-size: 0.8rem;
+    }
+    .luxury-table th {
+        position: sticky;
+        top: 0;
+        background-color: #151515;
+        color: #D4AF37;
+        font-family: 'Tenor Sans', sans-serif;
+        padding: 15px;
+        border-bottom: 1px solid #D4AF37;
+        text-align: left;
+        z-index: 5;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+    .luxury-table td {
+        padding: 12px;
+        border-bottom: 1px solid #222;
+    }
+
+    /* --- 6. TRANSCRIPT STYLING (EDITORIAL) --- */
     .transcript-container {
         max-width: 800px;
         margin: 0 auto;
-        padding: 40px;
+        padding: 50px;
         background-color: #080808;
-        border: 1px solid #333;
+        border: 1px solid #222;
         color: #cccccc;
         font-family: 'Lato', sans-serif;
         line-height: 1.8;
@@ -171,7 +212,14 @@ st.markdown("""
     }
     .transcript-container p {
         margin-bottom: 20px;
-        text-indent: 30px;
+    }
+    /* Gold styling for bold text (Host names) */
+    .transcript-container b {
+        color: #D4AF37;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
     }
 
     /* --- MOBILE OPTIMIZATION --- */
@@ -205,7 +253,7 @@ AUDIO_URL = "https://raw.githubusercontent.com/MagdalenaRomaniecka/Global-Fragra
 PODCAST_SCRIPT = {
     "I. INTRODUCTION: RECESSION GLAM": {
         "start_time": 0, "filter": "None",
-        "desc": "Global market resilience ($593B). Analysis of 'The Lipstick Effect' evolving into 'The Fragrance Effect' as consumers seek affordable luxury."
+        "desc": "Global market resilience ($593.2B). Analysis of 'The Lipstick Effect' evolving into 'The Fragrance Effect' as consumers seek affordable luxury."
     },
     "II. SCENT TREND: GOURMAND 2.0": {
         "start_time": 571, "filter": "Notes_Gourmand",
@@ -303,18 +351,14 @@ with tab2:
         fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450)
         st.plotly_chart(fig2, use_container_width=True)
         
-        # --- NATIVE DATAFRAME (The only reliable way for 50 rows) ---
+        # TABLE (HTML with Gold Scrollbar)
         st.markdown('<div class="section-header" style="margin-top:30px;">Raw Data Inspection (50 Rows)</div>', unsafe_allow_html=True)
         
         cols_to_show = ['name', 'segment', 'community_score']
         if 'top_notes' in df_plot.columns: cols_to_show.append('top_notes')
         
-        st.dataframe(
-            df_plot[cols_to_show].head(50), 
-            height=400, 
-            use_container_width=True,
-            hide_index=True
-        )
+        html_table = df_plot[cols_to_show].head(50).to_html(classes='luxury-table', index=False, border=0)
+        st.markdown(f'<div class="table-container">{html_table}</div>', unsafe_allow_html=True)
 
 # --- TAB 3: ECOSYSTEM ---
 with tab3:
@@ -382,9 +426,13 @@ st.markdown('<div class="section-header" style="text-align:center; border:none; 
 
 try:
     with open('podcast_transcript.md', 'r', encoding='utf-8') as f:
-        # Editorial Logic: Split by newlines and wrap in clean HTML for readability
+        # Editorial Logic: Replace **text** with <b>text</b> for HTML rendering
         raw_text = f.read()
-        paragraphs = raw_text.split('\n\n')
+        
+        # FIX: Regex to replace markdown bolding with HTML bolding
+        clean_text = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', raw_text)
+        
+        paragraphs = clean_text.split('\n\n')
         html_content = ""
         for p in paragraphs:
             if p.strip():
