@@ -58,22 +58,20 @@ st.markdown("""
     /* --- HEADERS --- */
     .section-header { color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.3rem; border-left: 3px solid #D4AF37; padding-left: 15px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* --- TRANSCRIPT --- */
+    /* --- TRANSCRIPT STYLE (INSIDE EXPANDER) --- */
     .transcript-box {
-        max-width: 800px; margin: 0 auto; padding: 40px;
-        background-color: #080808; border: 1px solid #222;
-        color: #cccccc; font-family: 'Lato', sans-serif; font-size: 1rem; line-height: 1.8;
-        text-align: justify; /* Justified text */
+        font-family: 'Lato', sans-serif; font-size: 1rem; line-height: 1.8;
+        text-align: justify; color: #cccccc;
     }
-    .transcript-box h3 { color: #D4AF37; font-family: 'Tenor Sans', sans-serif; text-align: center; margin-top: 30px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-    .transcript-box b { color: #F0E68C; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+    .transcript-box h3 { color: #D4AF37; font-family: 'Tenor Sans', sans-serif; text-align: center; margin-top: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; font-weight: normal; }
+    .transcript-box b { color: #F0E68C; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; font-weight: 700; }
     .transcript-box p { margin-bottom: 15px; }
 
     /* --- MOBILE --- */
     @media only screen and (max-width: 600px) {
         .header-inner { padding: 20px; min-width: auto; }
         .main-title { font-size: 1.5rem; letter-spacing: 2px; }
-        .transcript-box { padding: 15px; text-align: left; }
+        .transcript-box { text-align: left; }
     }
 
     /* --- FOOTER & CARDS --- */
@@ -188,19 +186,20 @@ with tab2:
         fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450)
         st.plotly_chart(fig2, use_container_width=True)
         
-        # --- FIX: USING GLOBAL 'df' TO ENSURE 50 ROWS APPEAR ---
-        st.markdown('<div class="section-header" style="margin-top:30px;">Raw Data Inspection (50 Rows)</div>', unsafe_allow_html=True)
-        st.markdown("<p style='color:#666; font-size:0.8rem;'>Displaying top 50 global records to demonstrate data structure.</p>", unsafe_allow_html=True)
-        
-        cols_to_show = ['name', 'segment', 'community_score']
-        if 'top_notes' in df.columns: cols_to_show.append('top_notes')
-        
-        st.dataframe(
-            df[cols_to_show].head(50), 
-            height=400, 
-            use_container_width=True,
-            hide_index=True
-        )
+        # --- RESTORED EXPANDER FOR TABLE ---
+        st.write("")
+        st.write("")
+        with st.expander("🔎 INSPECT RAW DATA (TOP 50 GLOBAL RECORDS)"):
+            st.markdown("<p style='color:#888; font-size:0.8rem; margin-bottom:10px;'>Displaying global dataset samples to ensure full visibility.</p>", unsafe_allow_html=True)
+            cols_to_show = ['name', 'segment', 'community_score']
+            if 'top_notes' in df.columns: cols_to_show.append('top_notes')
+            
+            st.dataframe(
+                df[cols_to_show].head(50), 
+                height=400, 
+                use_container_width=True,
+                hide_index=True
+            )
 
 # --- TAB 3: ECOSYSTEM ---
 with tab3:
@@ -252,29 +251,30 @@ with tab3:
          """)
          st.markdown(f'<a href="https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/blob/main/Research_Whisper_AI.ipynb" class="btn-code" style="max-width:200px; margin-top:20px;">📄 Source Notebook</a>', unsafe_allow_html=True)
 
-# --- FOOTER ---
+# --- FOOTER & TRANSCRIPT ---
 st.write("")
 st.write("")
-st.markdown('<div class="section-header" style="text-align:center; border:none; margin-top:50px;">Strategic Transcript</div>', unsafe_allow_html=True)
 
-try:
-    with open('podcast_transcript.md', 'r', encoding='utf-8') as f:
-        # FIX: Clean bold markers from Markdown to HTML bold tags
-        raw_text = f.read()
-        clean_text = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', raw_text)
-        
-        # Split by empty lines to create paragraphs
-        paragraphs = clean_text.split('\n\n')
-        html_content = ""
-        for p in paragraphs:
-            if p.strip():
-                if p.strip().startswith('#'):
-                     html_content += f"<h3>{p.replace('#', '').strip()}</h3>"
-                else:
-                     html_content += f"<p>{p.strip()}</p>"
-        
-        st.markdown(f'<div class="transcript-box">{html_content}</div>', unsafe_allow_html=True)
-except:
-    st.info("Transcript unavailable.")
+# --- RESTORED EXPANDER FOR TRANSCRIPT ---
+with st.expander("📄 READ FULL STRATEGIC TRANSCRIPT"):
+    try:
+        with open('podcast_transcript.md', 'r', encoding='utf-8') as f:
+            raw_text = f.read()
+            # Clean Bold Text (Markdown to HTML)
+            clean_text = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', raw_text)
+            
+            # Format Paragraphs
+            paragraphs = clean_text.split('\n\n')
+            html_content = ""
+            for p in paragraphs:
+                if p.strip():
+                    if p.strip().startswith('#'):
+                         html_content += f"<h3>{p.replace('#', '').strip()}</h3>"
+                    else:
+                         html_content += f"<p>{p.strip()}</p>"
+            
+            st.markdown(f'<div class="transcript-box">{html_content}</div>', unsafe_allow_html=True)
+    except:
+        st.info("Transcript unavailable.")
 
 st.markdown('<div class="footer">FRAGRANCE INTELLIGENCE HUB • DEVELOPED BY MAGDALENA ROMANIECKA</div>', unsafe_allow_html=True)
