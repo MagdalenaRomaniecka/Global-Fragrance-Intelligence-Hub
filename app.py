@@ -145,14 +145,31 @@ st.markdown("""
         letter-spacing: 1px;
     }
 
-    /* --- 5. SCROLLABLE DATA TABLE --- */
+    /* --- 5. SCROLLABLE DATA TABLE (FIXED) --- */
+    /* KEY FIX: Fixed height forces the scrollbar to appear */
     .table-container {
-        max-height: 400px;
-        overflow-y: auto;
+        height: 400px !important; 
+        overflow-y: auto !important;
+        display: block;
         border: 1px solid #333;
         background-color: #0e0e0e;
         margin-top: 10px;
+        padding: 0;
     }
+
+    /* Custom Scrollbar Styling (Gold) */
+    .table-container::-webkit-scrollbar {
+        width: 10px;
+        background: #111;
+    }
+    .table-container::-webkit-scrollbar-thumb {
+        background: #D4AF37;
+        border-radius: 2px;
+    }
+    .table-container::-webkit-scrollbar-thumb:hover {
+        background: #F0E68C;
+    }
+
     .luxury-table {
         width: 100%;
         border-collapse: collapse;
@@ -169,7 +186,8 @@ st.markdown("""
         padding: 15px;
         border-bottom: 1px solid #D4AF37;
         text-align: left;
-        z-index: 2;
+        z-index: 5;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.5);
     }
     .luxury-table td {
         padding: 12px;
@@ -304,12 +322,13 @@ with tab2:
         fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450)
         st.plotly_chart(fig2, use_container_width=True)
         
-        # SCROLLABLE TABLE
+        # SCROLLABLE TABLE FIX
         st.markdown('<div class="section-header" style="margin-top:30px;">Raw Data Inspection (50 Rows)</div>', unsafe_allow_html=True)
         
         cols_to_show = ['name', 'segment', 'community_score']
         if 'top_notes' in df_plot.columns: cols_to_show.append('top_notes')
         
+        # Force 50 rows and wrap in fixed-height container
         html_table = df_plot[cols_to_show].head(50).to_html(classes='luxury-table', index=False, border=0)
         st.markdown(f'<div class="table-container">{html_table}</div>', unsafe_allow_html=True)
 
