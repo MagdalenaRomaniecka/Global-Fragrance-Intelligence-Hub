@@ -144,62 +144,43 @@ st.markdown("""
         text-transform: uppercase;
         letter-spacing: 1px;
     }
-
-    /* --- 5. SCROLLABLE DATA TABLE (FIXED) --- */
-    /* KEY FIX: Fixed height forces the scrollbar to appear */
-    .table-container {
-        height: 400px !important; 
-        overflow-y: auto !important;
-        display: block;
+    
+    /* --- 5. TRANSCRIPT STYLING (EDITORIAL) --- */
+    .transcript-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: #080808;
         border: 1px solid #333;
-        background-color: #0e0e0e;
-        margin-top: 10px;
-        padding: 0;
-    }
-
-    /* Custom Scrollbar Styling (Gold) */
-    .table-container::-webkit-scrollbar {
-        width: 10px;
-        background: #111;
-    }
-    .table-container::-webkit-scrollbar-thumb {
-        background: #D4AF37;
-        border-radius: 2px;
-    }
-    .table-container::-webkit-scrollbar-thumb:hover {
-        background: #F0E68C;
-    }
-
-    .luxury-table {
-        width: 100%;
-        border-collapse: collapse;
-        color: #ccc;
+        color: #cccccc;
         font-family: 'Lato', sans-serif;
-        font-size: 0.8rem;
+        line-height: 1.8;
+        font-size: 1rem;
+        text-align: justify;
     }
-    .luxury-table th {
-        position: sticky;
-        top: 0;
-        background-color: #151515;
+    .transcript-container h3 {
         color: #D4AF37;
         font-family: 'Tenor Sans', sans-serif;
-        padding: 15px;
-        border-bottom: 1px solid #D4AF37;
-        text-align: left;
-        z-index: 5;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        font-weight: normal;
+        border-bottom: 1px solid #333;
+        padding-bottom: 10px;
     }
-    .luxury-table td {
-        padding: 12px;
-        border-bottom: 1px solid #222;
+    .transcript-container p {
+        margin-bottom: 20px;
+        text-indent: 30px;
     }
-    
+
     /* --- MOBILE OPTIMIZATION --- */
     @media only screen and (max-width: 600px) {
         .header-inner { padding: 20px; min-width: auto; }
         .main-title { font-size: 1.5rem; letter-spacing: 2px; }
         .metric-value { font-size: 1.8rem; }
         .metric-box { padding: 15px; margin-bottom: 10px; }
+        .transcript-container { padding: 20px; text-align: left; }
     }
 
     /* --- FOOTER & LINKS --- */
@@ -322,15 +303,18 @@ with tab2:
         fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450)
         st.plotly_chart(fig2, use_container_width=True)
         
-        # SCROLLABLE TABLE FIX
+        # --- NATIVE DATAFRAME (The only reliable way for 50 rows) ---
         st.markdown('<div class="section-header" style="margin-top:30px;">Raw Data Inspection (50 Rows)</div>', unsafe_allow_html=True)
         
         cols_to_show = ['name', 'segment', 'community_score']
         if 'top_notes' in df_plot.columns: cols_to_show.append('top_notes')
         
-        # Force 50 rows and wrap in fixed-height container
-        html_table = df_plot[cols_to_show].head(50).to_html(classes='luxury-table', index=False, border=0)
-        st.markdown(f'<div class="table-container">{html_table}</div>', unsafe_allow_html=True)
+        st.dataframe(
+            df_plot[cols_to_show].head(50), 
+            height=400, 
+            use_container_width=True,
+            hide_index=True
+        )
 
 # --- TAB 3: ECOSYSTEM ---
 with tab3:
@@ -392,11 +376,27 @@ with tab3:
 # --- FOOTER ---
 st.write("")
 st.write("")
-with st.expander("📄 READ FULL TRANSCRIPT"):
-    try:
-        with open('podcast_transcript.md', 'r', encoding='utf-8') as f:
-            st.markdown(f'<div style="font-family:Lato; color:#ccc; font-size:0.9rem; text-align:justify; padding:20px; border:1px solid #333;">{f.read()}</div>', unsafe_allow_html=True)
-    except:
-        st.info("Transcript unavailable.")
+
+# EDITORIAL TRANSCRIPT SECTION
+st.markdown('<div class="section-header" style="text-align:center; border:none; margin-top:50px;">Strategic Transcript</div>', unsafe_allow_html=True)
+
+try:
+    with open('podcast_transcript.md', 'r', encoding='utf-8') as f:
+        # Editorial Logic: Split by newlines and wrap in clean HTML for readability
+        raw_text = f.read()
+        paragraphs = raw_text.split('\n\n')
+        html_content = ""
+        for p in paragraphs:
+            if p.strip():
+                if p.strip().startswith('#'):
+                     # Convert markdown headers to elegant HTML headers
+                     html_content += f"<h3>{p.replace('#', '').strip()}</h3>"
+                else:
+                     # Wrap standard text in paragraphs
+                     html_content += f"<p>{p.strip()}</p>"
+        
+        st.markdown(f'<div class="transcript-container">{html_content}</div>', unsafe_allow_html=True)
+except:
+    st.info("Transcript unavailable.")
 
 st.markdown('<div class="footer">FRAGRANCE INTELLIGENCE HUB • DEVELOPED BY MAGDALENA ROMANIECKA</div>', unsafe_allow_html=True)
