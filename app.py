@@ -2,7 +2,6 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 import os
-import re
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
@@ -61,18 +60,43 @@ st.markdown("""
     /* --- SECTION HEADERS --- */
     .section-header { color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.3rem; border-left: 3px solid #D4AF37; padding-left: 15px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* --- TRANSCRIPT STYLING (EDITORIAL) --- */
-    .transcript-box { font-family: 'Lato', sans-serif; font-size: 0.95rem; line-height: 1.8; text-align: justify; color: #cccccc; }
-    .transcript-box h3 { color: #D4AF37; font-family: 'Tenor Sans', sans-serif; text-align: center; margin-top: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; font-weight: normal; }
-    .transcript-box h2 { color: #F0E68C; font-family: 'Tenor Sans', sans-serif; text-align: center; margin-top: 20px; border-bottom: 1px solid #D4AF37; padding-bottom: 10px; font-weight: normal; }
-    .transcript-box b { color: #F0E68C; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; font-weight: 700; }
-    .transcript-box p { margin-bottom: 15px; }
+    /* --- TRANSCRIPT & REPORT STYLING (FIXED) --- */
+    .transcript-box { 
+        font-family: 'Lato', sans-serif; 
+        font-size: 0.95rem; 
+        line-height: 1.6; 
+        color: #cccccc; 
+        background: #080808;
+        padding: 30px;
+        border: 1px solid #222;
+    }
+    .transcript-box h1, .transcript-box h2, .transcript-box h3 { 
+        color: #D4AF37; 
+        font-family: 'Tenor Sans', sans-serif; 
+        font-weight: normal; 
+        margin-top: 25px; 
+        margin-bottom: 15px; 
+    }
+    .transcript-box h1 { font-size: 1.5rem; text-align: center; border-bottom: 1px solid #D4AF37; padding-bottom: 15px; margin-bottom: 25px; }
+    .transcript-box h2 { font-size: 1.25rem; color: #F0E68C; border-bottom: 1px solid #333; padding-bottom: 10px; }
+    .transcript-box h3 { font-size: 1.1rem; }
+    .transcript-box p { margin-bottom: 15px; text-align: justify; }
+    /* Automatically styles any **bold** text in markdown as gold/uppercase */
+    .transcript-box strong { 
+        color: #F0E68C; 
+        text-transform: uppercase; 
+        font-size: 0.85rem; 
+        letter-spacing: 1px; 
+        font-weight: 700; 
+    }
+    .transcript-box ul { padding-left: 20px; margin-bottom: 15px; }
+    .transcript-box li { margin-bottom: 8px; }
 
     /* --- MOBILE OPTIMIZATION --- */
     @media only screen and (max-width: 600px) {
         .header-inner { padding: 20px; min-width: auto; }
         .main-title { font-size: 1.5rem; letter-spacing: 2px; }
-        .transcript-box { text-align: left; }
+        .transcript-box { padding: 15px; text-align: left; }
     }
 
     /* --- FOOTER & CARDS --- */
@@ -184,7 +208,6 @@ with tab2:
     st.markdown('<div class="section-header">Market Clustering</div>', unsafe_allow_html=True)
     
     if not df.empty:
-        # Analytics Filters including 2026 Trends
         filter_option = st.selectbox("Filter Data View:", [
             "Show All Global Data", 
             "Focus: Gourmand 2.0 Notes", 
@@ -307,7 +330,7 @@ with tab4:
          """)
          st.markdown(f'<a href="https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/blob/main/Research_Whisper_AI.ipynb" class="btn-code" style="max-width:200px; margin-top:20px;">📄 Source Notebook</a>', unsafe_allow_html=True)
 
-# --- FOOTER, TRANSCRIPT & MACRO REPORT (DUAL EXPANDERS) ---
+# --- FOOTER, TRANSCRIPT & MACRO REPORT (DUAL EXPANDERS - NATIVE MARKDOWN FIX) ---
 st.write("")
 st.write("")
 
@@ -318,17 +341,8 @@ with col_doc1:
         try:
             with open('podcast_transcript.md', 'r', encoding='utf-8') as f:
                 raw_text = f.read()
-                clean_text = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', raw_text)
-                paragraphs = clean_text.split('\n\n')
-                html_content = ""
-                for p in paragraphs:
-                    if p.strip():
-                        if p.strip().startswith('#'):
-                             html_content += f"<h3>{p.replace('#', '').strip()}</h3>"
-                        else:
-                             html_content += f"<p>{p.strip()}</p>"
-                
-                st.markdown(f'<div class="transcript-box">{html_content}</div>', unsafe_allow_html=True)
+                # Use Streamlit's native markdown engine wrapped in our CSS class
+                st.markdown(f'<div class="transcript-box">\n\n{raw_text}\n\n</div>', unsafe_allow_html=True)
         except:
             st.info("Transcript unavailable. Please ensure 'podcast_transcript.md' is in the directory.")
 
@@ -337,19 +351,8 @@ with col_doc2:
         try:
             with open('macro_report_2026.md', 'r', encoding='utf-8') as f:
                 raw_macro = f.read()
-                clean_macro = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', raw_macro)
-                paragraphs_macro = clean_macro.split('\n\n')
-                html_macro = ""
-                for p in paragraphs_macro:
-                    if p.strip():
-                        if p.strip().startswith('## '):
-                             html_macro += f"<h3 style='color:#D4AF37; margin-top:20px; border-bottom:1px solid #333; padding-bottom:10px;'>{p.replace('##', '').strip()}</h3>"
-                        elif p.strip().startswith('# '):
-                             html_macro += f"<h2 style='color:#F0E68C; text-align:center;'>{p.replace('#', '').strip()}</h2>"
-                        else:
-                             html_macro += f"<p style='margin-bottom:10px;'>{p.strip()}</p>"
-                
-                st.markdown(f'<div class="transcript-box">{html_macro}</div>', unsafe_allow_html=True)
+                # Use Streamlit's native markdown engine wrapped in our CSS class
+                st.markdown(f'<div class="transcript-box">\n\n{raw_macro}\n\n</div>', unsafe_allow_html=True)
         except:
             st.info("Macro report unavailable. Please ensure 'macro_report_2026.md' is in the directory.")
 
