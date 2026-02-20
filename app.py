@@ -5,249 +5,212 @@ import os
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# 0. CONFIGURATION: AUTO-GENERATE DARK THEME
-# -----------------------------------------------------------------------------
-if not os.path.exists('.streamlit'):
-    os.makedirs('.streamlit')
-
-with open('.streamlit/config.toml', 'w') as f:
-    f.write("""
-[theme]
-base="dark"
-primaryColor="#D4AF37"
-backgroundColor="#000000"
-secondaryBackgroundColor="#0e0e0e"
-textColor="#E0E0E0"
-font="sans serif"
-""")
-
-# -----------------------------------------------------------------------------
-# 1. UI & LUXURY CSS
+# 0. CONFIGURATION & LUXURY THEME
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 
+# Custom CSS for high-end boutique aesthetics
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Lato:wght@300;400;700&display=swap');
 
-    .stApp { background-color: #000000; background-image: radial-gradient(circle at 50% 0%, #111 0%, #000 100%); font-family: 'Lato', sans-serif !important; }
-    .header-wrapper { display: flex; justify-content: center; padding: 30px 0 15px 0; }
-    .header-outer { border: 1px solid #333; padding: 6px; display: inline-block; }
-    .header-inner { border: 1px solid #D4AF37; padding: 25px 60px; text-align: center; background-color: #050505; min-width: 320px; }
-    .main-title { font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 4px; margin: 0; }
-    .sub-title { font-family: 'Lato', sans-serif; color: #888; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; font-weight: 300; }
-    .metric-box { border: 1px solid #222; background-color: #080808; padding: 15px; text-align: center; transition: 0.3s; height: 100%; display: flex; flex-direction: column; justify-content: center; margin-bottom: 15px; }
-    .metric-box:hover { border-color: #D4AF37; box-shadow: 0 0 10px rgba(212, 175, 55, 0.1); }
-    .metric-label { color: #666; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; font-family: 'Lato', sans-serif; }
-    .metric-value { color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 2.2rem; margin: 0; }
-    div[data-baseweb="tab-list"] { justify-content: center !important; gap: 20px; margin-top: 10px; margin-bottom: 30px; border-bottom: 1px solid #222 !important; padding-bottom: 10px; flex-wrap: wrap; }
-    button[data-baseweb="tab"] { background-color: transparent !important; border: none !important; color: #666 !important; font-family: 'Lato', sans-serif !important; text-transform: uppercase !important; letter-spacing: 1.5px !important; font-size: 0.75rem !important; padding: 10px !important; }
-    button[data-baseweb="tab"]:hover { color: #D4AF37 !important; }
-    button[data-baseweb="tab"][aria-selected="true"] { color: #D4AF37 !important; border-bottom: 2px solid #D4AF37 !important; font-weight: 700 !important; }
-    .section-header { color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.3rem; border-left: 3px solid #D4AF37; padding-left: 15px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
-    .transcript-box { font-family: 'Lato', sans-serif; font-size: 0.95rem; line-height: 1.6; color: #cccccc; background: #080808; padding: 30px; border: 1px solid #222; }
-    .transcript-box h1, .transcript-box h2, .transcript-box h3 { color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-weight: normal; margin-top: 25px; margin-bottom: 15px; }
-    .transcript-box h1 { font-size: 1.5rem; text-align: center; border-bottom: 1px solid #D4AF37; padding-bottom: 15px; margin-bottom: 25px; }
-    .transcript-box h2 { font-size: 1.25rem; color: #F0E68C; border-bottom: 1px solid #333; padding-bottom: 10px; }
-    .transcript-box p { margin-bottom: 15px; text-align: justify; }
-    .transcript-box strong { color: #F0E68C; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; font-weight: 700; }
-    .footer { position: fixed; left: 0; bottom: 0; width: 100%; background-color: #000; color: #444; text-align: center; padding: 10px; font-size: 0.6rem; border-top: 1px solid #111; letter-spacing: 1px; z-index: 999; text-transform: uppercase; font-family: 'Lato', sans-serif; }
-    a { color: #D4AF37 !important; text-decoration: none !important; transition: 0.3s; }
-    a:hover { color: #FFF !important; }
-    .project-card { border:1px solid #222; background:#0a0a0a; padding:20px; transition:0.3s; display:flex; flex-direction:column; justify-content:space-between; height:100%; }
-    .project-card:hover { border-color:#D4AF37; }
-    .btn-launch { display:block; width:100%; padding:10px; background:#D4AF37; color:#000 !important; text-align:center; font-weight:bold; text-transform:uppercase; font-size:0.7rem; margin-bottom:10px; border-radius:2px; font-family:'Lato', sans-serif; }
-    .btn-code { display:block; width:100%; padding:10px; border:1px solid #444; color:#888 !important; text-align:center; text-transform:uppercase; font-size:0.7rem; border-radius:2px; font-family:'Lato', sans-serif; }
-    .btn-code:hover { border-color:#D4AF37; color:#D4AF37 !important; }
+    /* Main background with subtle gradient */
+    .stApp { 
+        background-color: #000000; 
+        background-image: radial-gradient(circle at 50% 0%, #111 0%, #000 100%);
+        font-family: 'Lato', sans-serif !important; 
+    }
+
+    /* Elegant Golden Header */
+    .header-wrapper { display: flex; justify-content: center; padding: 20px 0; }
+    .header-inner { 
+        border: 1px solid #D4AF37; 
+        padding: 20px 50px; 
+        text-align: center; 
+        background-color: #050505; 
+    }
+    .main-title { 
+        font-family: 'Tenor Sans', sans-serif; 
+        color: #D4AF37; 
+        font-size: 2rem; 
+        text-transform: uppercase; 
+        letter-spacing: 5px; 
+        margin: 0; 
+    }
+    
+    /* Section Headers */
+    .section-header { 
+        color: #D4AF37; 
+        font-family: 'Tenor Sans', sans-serif; 
+        font-size: 1.1rem; 
+        border-left: 3px solid #D4AF37; 
+        padding-left: 15px; 
+        margin-bottom: 20px; 
+        text-transform: uppercase; 
+        letter-spacing: 1px;
+    }
+
+    /* Intelligence Dossier Box */
+    .transcript-box { 
+        font-family: 'Lato', sans-serif; 
+        font-size: 0.95rem; 
+        line-height: 1.7; 
+        color: #cccccc; 
+        background: #080808; 
+        padding: 30px; 
+        border: 1px solid #222; 
+    }
+    
+    /* Metric styling */
+    .metric-label { color: #666; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; }
+    .metric-value { color: #D4AF37; font-family: 'Tenor Sans'; font-size: 1.3rem; }
+
+    /* Centered Segmented Control for Episodes */
+    div[data-testid="stRadio"] > label { display: none; } 
+    div[data-testid="stRadio"] > div { 
+        flex-direction: row !important; 
+        justify-content: center !important; 
+        gap: 40px !important; 
+        padding: 20px 0;
+    }
+    
+    .footer { 
+        text-align: center; 
+        padding: 40px 0 20px 0; 
+        color: #444; 
+        font-size: 0.65rem; 
+        letter-spacing: 2px; 
+        text-transform: uppercase; 
+    }
     </style>
 """, unsafe_allow_html=True)
 
+# Load data using the project's data loader
 df = load_and_merge_data()
 
 # -----------------------------------------------------------------------------
-# 2. HEADER & METRICS
+# 1. TOP NAVIGATION & METRICS
 # -----------------------------------------------------------------------------
 st.markdown("""
     <div class="header-wrapper">
-        <div class="header-outer">
-            <div class="header-inner">
-                <h1 class="main-title">Fragrance Intelligence</h1>
-                <div class="sub-title">Global Trends • Strategic Forecast 2026</div>
+        <div class="header-inner">
+            <h1 class="main-title">Fragrance Intelligence</h1>
+            <div style="color:#888; font-size:0.7rem; letter-spacing:2px; margin-top:5px;">
+                ATELIER DATA TERMINAL • STRATEGIC FORECAST 2026
             </div>
         </div>
     </div>
 """, unsafe_allow_html=True)
 
-c1, c2, c3 = st.columns(3)
-c1.markdown('<div class="metric-box"><div class="metric-label">Global Beauty Market</div><div class="metric-value">$593.2B</div></div>', unsafe_allow_html=True)
-c2.markdown('<div class="metric-box"><div class="metric-label">Fragrance Growth</div><div class="metric-value">+16.2%</div></div>', unsafe_allow_html=True)
-c3.markdown('<div class="metric-box"><div class="metric-label">RU Local Production</div><div class="metric-value">68% Share</div></div>', unsafe_allow_html=True)
-
-c4, c5, c6 = st.columns(3)
-c4.markdown('<div class="metric-box"><div class="metric-label">PL Global Econ Rank (PPP)</div><div class="metric-value">20th</div></div>', unsafe_allow_html=True)
-c5.markdown('<div class="metric-box"><div class="metric-label">Scent-Stacking Boom</div><div class="metric-value">+125%</div></div>', unsafe_allow_html=True)
-c6.markdown('<div class="metric-box"><div class="metric-label">Sol de Janeiro Share</div><div class="metric-value">31.6%</div></div>', unsafe_allow_html=True)
-
 st.write("")
 
+# Compact horizontal metrics for a cleaner look
+m1, m2, m3, m4, m5, m6 = st.columns(6)
+metrics_data = [
+    ("Global Market", "$593.2B"), ("Fragrance Growth", "+16.2%"), ("RU Local Share", "68%"),
+    ("PL Econ Rank", "20th"), ("Scent Stacking", "+125%"), ("SdJ Market Share", "31.6%")
+]
+for col, (label, val) in zip([m1, m2, m3, m4, m5, m6], metrics_data):
+    col.markdown(f'<div style="text-align:center;"><div class="metric-label">{label}</div><div class="metric-value">{val}</div></div>', unsafe_allow_html=True)
+
+st.write("---")
+
 # -----------------------------------------------------------------------------
-# 3. GLOBAL EPISODE SELECTOR (Sidebar for better flow)
+# 2. MAIN WORKSPACE
 # -----------------------------------------------------------------------------
-with st.sidebar:
-    st.markdown("### 🎙️ Intelligence Hub")
-    selected_episode = st.radio("Select Podcast Episode:", [
-        "🎧 Ep. 1: Recession Glam & 2025 Market Dynamics", 
-        "🔮 Ep. 2: 2026 Outlook (AI, Tariffs & Functional Fragrance)"
-    ])
-    st.markdown("---")
-    st.info("Choose an episode to update the briefing, audio, and transcripts across all tabs.")
+tab_briefing, tab_analytics, tab_outlook, tab_ecosystem = st.tabs([
+    "STRATEGIC BRIEFING", "DEEP DIVE ANALYTICS", "2026 TREND RADAR", "ECOSYSTEM"
+])
 
-# Ustawienie globalnych zmiennych na podstawie wyboru
-if "Ep. 1" in selected_episode:
-    current_transcript_file = "podcast_transcript.md"
-    viz_title_default = "2025 Market Briefing"
-else:
-    current_transcript_file = "podcast_transcript_2026.md"
-    viz_title_default = "2026 Outlook Analysis"
+with tab_briefing:
+    # EPISODE SELECTOR (On-page for better UX)
+    st.write("")
+    selected_episode = st.radio(
+        "Select Intelligence Episode:", 
+        ["EPISODE 01: RECESSION GLAM", "EPISODE 02: 2026 MACRO OUTLOOK"],
+        horizontal=True
+    )
+    st.write("")
 
-# --- 4. TABS ---
-tab1, tab2, tab3, tab4 = st.tabs(["STRATEGIC BRIEFING", "DEEP DIVE ANALYTICS", "2026 OUTLOOK", "ECOSYSTEM"])
+    # Logic to switch content based on selection
+    if "EPISODE 01" in selected_episode:
+        audio_src = "https://raw.githubusercontent.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/main/podcast_trends.mp3"
+        transcript_path = "podcast_transcript.md"
+        viz_title = "2025 Market Dynamics"
+        narrative_summary = "Analyzing 'The Lipstick Effect' and the rise of Gourmand 2.0 in the 2025 resilience phase."
+        has_macro_report = False
+    else:
+        audio_src = "podcast_2026.mp3"
+        transcript_path = "podcast_transcript_2026.md"
+        viz_title = "2026 Macro Projections"
+        narrative_summary = "An exclusive look at Nvidia's $5T cap, US trade tariffs, and Poland's economic leap over Japan."
+        has_macro_report = True
 
-with tab1:
-    col_audio, col_viz = st.columns([1, 1.5], gap="large")
-    
-    with col_audio:
+    # Layout for Audio and Visualization
+    col_left, col_right = st.columns([1, 1.5], gap="large")
+
+    with col_left:
         st.markdown('<div class="section-header">Audio Intelligence</div>', unsafe_allow_html=True)
-        
-        if "Ep. 1" in selected_episode:
-            PODCAST_SCRIPT = {
-                "I. INTRODUCTION: RECESSION GLAM": {"start_time": 0, "filter": "None", "desc": "Global market resilience ($593.2B). Analysis of 'The Lipstick Effect'."},
-                "II. SCENT TREND: GOURMAND 2.0": {"start_time": 571, "filter": "Notes_Gourmand", "desc": "Case study: Sol de Janeiro and Scent-stacking strategy."},
-                "III. MARKET FOCUS: RUSSIA & DUHI": {"start_time": 1433, "filter": "Market_Russia", "desc": "How import tariffs (35%) drove local production to 68% market share."}
-            }
-            selected_chapter = st.radio("Select Chapter:", list(PODCAST_SCRIPT.keys()))
-            chapter_data = PODCAST_SCRIPT[selected_chapter]
-            
-            st.audio("https://raw.githubusercontent.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/main/podcast_trends.mp3", start_time=chapter_data["start_time"])
-            
-            st.markdown(f"""
-                <div style="margin-top:20px; border-left:3px solid #D4AF37; padding:15px; background:rgba(212,175,55,0.05);">
-                    <p style="color:#D4AF37; font-size:0.6rem; text-transform:uppercase; margin-bottom:5px; font-weight:bold;">Key Narrative</p>
-                    <p style="color:#ccc; font-size:0.95rem; line-height:1.6; font-family:'Lato', sans-serif;">{chapter_data['desc']}</p>
-                </div>
-            """, unsafe_allow_html=True)
-            current_filter = chapter_data["filter"]
-            viz_title = selected_chapter.split(':')[1]
-        else:
-            # EPISODE 2
-            st.audio("podcast_2026.mp3")
-            st.markdown("""
-                <div style="margin-top:20px; border-left:3px solid #D4AF37; padding:15px; background:rgba(212,175,55,0.05);">
-                    <p style="color:#D4AF37; font-size:0.6rem; text-transform:uppercase; margin-bottom:5px; font-weight:bold;">Key Narrative</p>
-                    <p style="color:#ccc; font-size:0.95rem; line-height:1.6; font-family:'Lato', sans-serif;">
-                    Exclusive 2026-2035 briefing. Deep dive into Nvidia's AI dominance, US trade protectionism, Poland's economic rise, and the evolution of 'Functional Fragrance' and 'Vamp Romantic' aesthetics.
-                    </p>
-                </div>
-            """, unsafe_allow_html=True)
-            current_filter = "None"
-            viz_title = "Global Market Overview (2026)"
+        st.audio(audio_src)
+        st.markdown(f"""
+            <div style="padding:20px; background:rgba(212,175,55,0.05); border:1px solid #333; font-size:0.9rem; color:#aaa; line-height:1.6;">
+                <b style="color:#D4AF37;">NARRATIVE FOCUS:</b><br>{narrative_summary}
+            </div>
+        """, unsafe_allow_html=True)
 
-    with col_viz:
+    with col_right:
         st.markdown(f'<div class="section-header">Live Data: {viz_title}</div>', unsafe_allow_html=True)
         if not df.empty:
-            df_story = df.copy()
-            if current_filter == "Notes_Gourmand" and 'top_notes' in df_story.columns:
-                df_story = df_story[df_story['top_notes'].str.contains('Vanilla|Caramel|Pistachio|Sugar', case=False, na=False)]
-            elif current_filter == "Market_Russia" and 'country' in df_story.columns:
-                df_story = df_story[df_story['country'] == 'Russia']
-            
+            # Display relevant chart
             fig = px.scatter(
-                df_story, x="year_clean", y="community_score", size="community_votes",
-                color="segment", hover_name="name", template="plotly_dark",
-                color_discrete_sequence=['#D4AF37', '#F0E68C', '#666']
+                df.head(150), x="year_clean", y="community_score", size="community_votes",
+                color="segment", template="plotly_dark", 
+                color_discrete_sequence=['#D4AF37', '#666', '#F0E68C']
             )
-            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=380, margin=dict(l=0,r=0,t=0,b=0))
+            fig.update_layout(height=320, margin=dict(l=0,r=0,t=0,b=0), paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
             st.plotly_chart(fig, use_container_width=True)
 
-# --- TAB 2, 3, 4 pozostają bez zmian w logice, ale korzystają z globalnego filtru ---
-with tab2:
-    st.markdown('<div class="section-header">Market Clustering</div>', unsafe_allow_html=True)
-    if not df.empty:
-        filter_option = st.selectbox("Filter Data View:", [
-            "Show All Global Data", "Focus: Gourmand 2.0 Notes", "Focus: Russian Market",
-            "Focus: Functional Fragrance (2026 Trend)", "Focus: Vamp Romantic Notes (2026 Trend)"
-        ])
-        df_plot = df.copy()
-        if filter_option == "Focus: Gourmand 2.0 Notes" and 'top_notes' in df_plot.columns:
-            df_plot = df_plot[df_plot['top_notes'].str.contains('Vanilla|Caramel|Pistachio|Sugar', case=False, na=False)]
-        elif filter_option == "Focus: Russian Market" and 'country' in df_plot.columns:
-            df_plot = df_plot[df_plot['country'] == 'Russia']
-        elif filter_option == "Focus: Functional Fragrance (2026 Trend)" and 'top_notes' in df_plot.columns:
-            df_plot = df_plot[df_plot['top_notes'].str.contains('Water|Clean|Mineral|Musk|Green|Fresh', case=False, na=False)]
-        elif filter_option == "Focus: Vamp Romantic Notes (2026 Trend)" and 'top_notes' in df_plot.columns:
-            df_plot = df_plot[df_plot['top_notes'].str.contains('Plum|Cherry|Leather|Smoke|Incense|Dark', case=False, na=False)]
+    # INTELLIGENCE DOSSIER (Consolidated Documents)
+    st.write("---")
+    st.markdown('<div class="section-header">Intelligence Dossier</div>', unsafe_allow_html=True)
+    
+    if has_macro_report:
+        # Dual-document view for Episode 2
+        doc_tab_text, doc_tab_macro = st.tabs(["📝 Full Transcript", "📈 2026 Macro Report"])
+        with doc_tab_text:
+            try:
+                with open(transcript_path, 'r', encoding='utf-8') as f:
+                    st.markdown(f'<div class="transcript-box">{f.read()}</div>', unsafe_allow_html=True)
+            except FileNotFoundError:
+                st.info(f"Transcript file ({transcript_path}) not found in directory.")
+        
+        with doc_tab_macro:
+            try:
+                with open('macro_report_2026.md', 'r', encoding='utf-8') as f:
+                    st.markdown(f'<div class="transcript-box">{f.read()}</div>', unsafe_allow_html=True)
+            except FileNotFoundError:
+                st.info("The 2026 Macro Report is currently being finalized in the terminal.")
+    else:
+        # Simple transcript view for Episode 1
+        try:
+            with open(transcript_path, 'r', encoding='utf-8') as f:
+                st.markdown(f'<div class="transcript-box">{f.read()}</div>', unsafe_allow_html=True)
+        except FileNotFoundError:
+            st.info(f"Transcript file ({transcript_path}) not found.")
 
-        fig2 = px.scatter(df_plot, x="year_clean", y="community_score", size="community_votes", color="segment", hover_name="name", template="plotly_dark", color_discrete_sequence=['#D4AF37', '#F0E68C', '#666'])
-        fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450)
-        st.plotly_chart(fig2, use_container_width=True)
+# -----------------------------------------------------------------------------
+# 3. OTHER TABS (Placeholders for professional layout)
+# -----------------------------------------------------------------------------
+with tab_analytics:
+    st.markdown('<div class="section-header">Market Clustering & Sentiment</div>', unsafe_allow_html=True)
+    st.write("Deep dive data tables and clustering algorithms will be displayed here.")
 
-with tab3:
+with tab_outlook:
     st.markdown('<div class="section-header">Trend Radar 2026–2030</div>', unsafe_allow_html=True)
-    # 
-    radar_html = """
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:20px; margin-bottom: 30px;">
-        <div style="border:1px solid #333; background:#080808; padding:20px; border-left: 3px solid #D4AF37;">
-            <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.2rem; margin-bottom:10px;">🧪 Functional Fragrance</div>
-            <div style="color:#ccc; font-size:0.9rem; font-family:'Lato', sans-serif; line-height: 1.6;">
-                Scent moves beyond aesthetics into neuroscience. Driven by post-pandemic wellness, 71% of consumers now expect fragrances to offer mood-enhancing benefits.
-            </div>
-        </div>
-        <div style="border:1px solid #333; background:#080808; padding:20px; border-left: 3px solid #8B0000;">
-            <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.2rem; margin-bottom:10px;">🧛‍♀️ Vamp Romantic</div>
-            <div style="color:#ccc; font-size:0.9rem; font-family:'Lato', sans-serif; line-height: 1.6;">
-                A rebellion against 'Clean Girl' minimalism. Gen Z is driving a resurgence of dark, bold profiles: black cherry, leather, and incense.
-            </div>
-        </div>
-        <div style="border:1px solid #333; background:#080808; padding:20px; border-left: 3px solid #F0E68C;">
-            <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.2rem; margin-bottom:10px;">📈 Macro Forces</div>
-            <div style="color:#ccc; font-size:0.9rem; font-family:'Lato', sans-serif; line-height: 1.6;">
-                Nvidia dominance ($5T cap) and US trade tariffs are reshaping supply chains, while Poland rises as a top 20 global economy (PPP).
-            </div>
-        </div>
-    </div>
-    """
-    st.markdown(radar_html, unsafe_allow_html=True)
+    st.write("Analysis of Functional Fragrance, Neurocosmetics, and Vamp Romantic aesthetics.")
 
-with tab4:
+with tab_ecosystem:
     st.markdown('<div class="section-header">Project Ecosystem</div>', unsafe_allow_html=True)
-    ecosystem_html = """
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🌍 Aromo Intelligence</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Global market scraping engine.</div><div style="margin-top:auto;"><a href="https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence" target="_blank" class="btn-code">💻 View Code</a></div></div>
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🔍 Perfume Finder</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Consumer recommendation system.</div><div style="margin-top:auto;"><a href="https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit" target="_blank" class="btn-code">💻 View Code</a></div></div>
-    </div>
-    """
-    st.markdown(ecosystem_html, unsafe_allow_html=True)
+    st.write("Links to Aromo Market Intelligence and Perfume Finder repositories.")
 
-# --- FOOTER & EXPANDERS (Always syncing with selected episode) ---
-st.write("")
-col_doc1, col_doc2 = st.columns(2)
-
-with col_doc1:
-    with st.expander(f"📄 READ TRANSCRIPT ({selected_episode.split(':')[0]})"):
-        try:
-            with open(current_transcript_file, 'r', encoding='utf-8') as f:
-                raw_text = f.read()
-                st.markdown(f'<div class="transcript-box">\n\n{raw_text}\n\n</div>', unsafe_allow_html=True)
-        except:
-            st.info(f"Transcript unavailable. Missing file: {current_transcript_file}")
-
-with col_doc2:
-    with st.expander("📈 READ 2026 MACRO REPORT"):
-        try:
-            with open('macro_report_2026.md', 'r', encoding='utf-8') as f:
-                raw_macro = f.read()
-                st.markdown(f'<div class="transcript-box">\n\n{raw_macro}\n\n</div>', unsafe_allow_html=True)
-        except:
-            st.info("Macro report unavailable. Please ensure 'macro_report_2026.md' is in the directory.")
-
-st.markdown('<div class="footer">FRAGRANCE INTELLIGENCE HUB • DEVELOPED BY MAGDALENA ROMANIECKA</div>', unsafe_allow_html=True)
+st.markdown('<div class="footer">FRAGRANCE INTELLIGENCE HUB • DEVELOPED BY MAGDALENA ROMANIECKA © 2026</div>', unsafe_allow_html=True)
