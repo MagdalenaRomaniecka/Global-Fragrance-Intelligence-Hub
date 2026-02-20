@@ -2,7 +2,6 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 import os
-import re
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
@@ -92,12 +91,27 @@ c6.markdown('<div class="metric-box"><div class="metric-label">Sol de Janeiro Sh
 st.write("")
 
 # -----------------------------------------------------------------------------
-# 3. TABS & PODCAST LOGIC
+# 3. GLOBAL EPISODE SELECTOR (Sidebar for better flow)
 # -----------------------------------------------------------------------------
-tab1, tab2, tab3, tab4 = st.tabs(["STRATEGIC BRIEFING", "DEEP DIVE ANALYTICS", "2026 OUTLOOK", "ECOSYSTEM"])
+with st.sidebar:
+    st.markdown("### 🎙️ Intelligence Hub")
+    selected_episode = st.radio("Select Podcast Episode:", [
+        "🎧 Ep. 1: Recession Glam & 2025 Market Dynamics", 
+        "🔮 Ep. 2: 2026 Outlook (AI, Tariffs & Functional Fragrance)"
+    ])
+    st.markdown("---")
+    st.info("Choose an episode to update the briefing, audio, and transcripts across all tabs.")
 
-# Zmienna przechowująca wybraną transkrypcję (domyślnie Ep 1)
-current_transcript_file = "podcast_transcript.md"
+# Ustawienie globalnych zmiennych na podstawie wyboru
+if "Ep. 1" in selected_episode:
+    current_transcript_file = "podcast_transcript.md"
+    viz_title_default = "2025 Market Briefing"
+else:
+    current_transcript_file = "podcast_transcript_2026.md"
+    viz_title_default = "2026 Outlook Analysis"
+
+# --- 4. TABS ---
+tab1, tab2, tab3, tab4 = st.tabs(["STRATEGIC BRIEFING", "DEEP DIVE ANALYTICS", "2026 OUTLOOK", "ECOSYSTEM"])
 
 with tab1:
     col_audio, col_viz = st.columns([1, 1.5], gap="large")
@@ -105,14 +119,7 @@ with tab1:
     with col_audio:
         st.markdown('<div class="section-header">Audio Intelligence</div>', unsafe_allow_html=True)
         
-        # EPISODE SWITCHER
-        selected_episode = st.radio("Select Episode:", [
-            "🎧 Ep. 1: Recession Glam & 2025 Market Dynamics", 
-            "🔮 Ep. 2: 2026 Outlook (AI, Tariffs & Functional Fragrance)"
-        ])
-        
         if "Ep. 1" in selected_episode:
-            current_transcript_file = "podcast_transcript.md"
             PODCAST_SCRIPT = {
                 "I. INTRODUCTION: RECESSION GLAM": {"start_time": 0, "filter": "None", "desc": "Global market resilience ($593.2B). Analysis of 'The Lipstick Effect'."},
                 "II. SCENT TREND: GOURMAND 2.0": {"start_time": 571, "filter": "Notes_Gourmand", "desc": "Case study: Sol de Janeiro and Scent-stacking strategy."},
@@ -121,7 +128,6 @@ with tab1:
             selected_chapter = st.radio("Select Chapter:", list(PODCAST_SCRIPT.keys()))
             chapter_data = PODCAST_SCRIPT[selected_chapter]
             
-            # Odtwarzanie pierwszego odcinka z GitHuba
             st.audio("https://raw.githubusercontent.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/main/podcast_trends.mp3", start_time=chapter_data["start_time"])
             
             st.markdown(f"""
@@ -132,14 +138,9 @@ with tab1:
             """, unsafe_allow_html=True)
             current_filter = chapter_data["filter"]
             viz_title = selected_chapter.split(':')[1]
-
         else:
-            # EPISODE 2 LOGIC
-            current_transcript_file = "podcast_transcript_2026.md"
-            
-            # Odtwarzanie nowego odcinka (lokalnie/z repozytorium)
+            # EPISODE 2
             st.audio("podcast_2026.mp3")
-            
             st.markdown("""
                 <div style="margin-top:20px; border-left:3px solid #D4AF37; padding:15px; background:rgba(212,175,55,0.05);">
                     <p style="color:#D4AF37; font-size:0.6rem; text-transform:uppercase; margin-bottom:5px; font-weight:bold;">Key Narrative</p>
@@ -149,7 +150,7 @@ with tab1:
                 </div>
             """, unsafe_allow_html=True)
             current_filter = "None"
-            viz_title = "Global Market Overview"
+            viz_title = "Global Market Overview (2026)"
 
     with col_viz:
         st.markdown(f'<div class="section-header">Live Data: {viz_title}</div>', unsafe_allow_html=True)
@@ -168,7 +169,7 @@ with tab1:
             fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=380, margin=dict(l=0,r=0,t=0,b=0))
             st.plotly_chart(fig, use_container_width=True)
 
-# --- TAB 2: ANALYTICS ---
+# --- TAB 2, 3, 4 pozostają bez zmian w logice, ale korzystają z globalnego filtru ---
 with tab2:
     st.markdown('<div class="section-header">Market Clustering</div>', unsafe_allow_html=True)
     if not df.empty:
@@ -189,57 +190,50 @@ with tab2:
         fig2 = px.scatter(df_plot, x="year_clean", y="community_score", size="community_votes", color="segment", hover_name="name", template="plotly_dark", color_discrete_sequence=['#D4AF37', '#F0E68C', '#666'])
         fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450)
         st.plotly_chart(fig2, use_container_width=True)
-        
-        with st.expander("🔎 INSPECT RAW DATA"):
-            st.dataframe(df.head(50), height=400, use_container_width=True, hide_index=True)
 
-# --- TAB 3: 2026 OUTLOOK ---
 with tab3:
     st.markdown('<div class="section-header">Trend Radar 2026–2030</div>', unsafe_allow_html=True)
+    # 
     radar_html = """
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:20px; margin-bottom: 30px;">
         <div style="border:1px solid #333; background:#080808; padding:20px; border-left: 3px solid #D4AF37;">
             <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.2rem; margin-bottom:10px;">🧪 Functional Fragrance</div>
             <div style="color:#ccc; font-size:0.9rem; font-family:'Lato', sans-serif; line-height: 1.6;">
-                Scent moves beyond aesthetics into neuroscience. Driven by post-pandemic wellness, 71% of consumers now expect fragrances to offer mood-enhancing benefits. Ingredients like <b>Givaudan's Cereboost</b> bridge the gap between perfumery and mental wellbeing.
+                Scent moves beyond aesthetics into neuroscience. Driven by post-pandemic wellness, 71% of consumers now expect fragrances to offer mood-enhancing benefits.
             </div>
         </div>
         <div style="border:1px solid #333; background:#080808; padding:20px; border-left: 3px solid #8B0000;">
             <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.2rem; margin-bottom:10px;">🧛‍♀️ Vamp Romantic</div>
             <div style="color:#ccc; font-size:0.9rem; font-family:'Lato', sans-serif; line-height: 1.6;">
-                A rebellion against 'Clean Girl' minimalism. Gen Z is driving a resurgence of dark, bold profiles. Key notes include <b>black cherry, smoked plum, incense, and leather</b>. This aesthetic blends gothic opulence with modern sensuality.
+                A rebellion against 'Clean Girl' minimalism. Gen Z is driving a resurgence of dark, bold profiles: black cherry, leather, and incense.
             </div>
         </div>
         <div style="border:1px solid #333; background:#080808; padding:20px; border-left: 3px solid #F0E68C;">
-            <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.2rem; margin-bottom:10px;">📈 Macro Forces: Protectionism</div>
+            <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.2rem; margin-bottom:10px;">📈 Macro Forces</div>
             <div style="color:#ccc; font-size:0.9rem; font-family:'Lato', sans-serif; line-height: 1.6;">
-                Supply chains are adapting to aggressive US trade policies (tariffs). Capital is heavily concentrated in AI (Nvidia dominating S&P 500). Meanwhile, <b>Poland has advanced to the 20th largest global economy (PPP)</b>, creating a robust new market for luxury beauty.
+                Nvidia dominance ($5T cap) and US trade tariffs are reshaping supply chains, while Poland rises as a top 20 global economy (PPP).
             </div>
         </div>
     </div>
     """
     st.markdown(radar_html, unsafe_allow_html=True)
 
-# --- TAB 4: ECOSYSTEM ---
 with tab4:
     st.markdown('<div class="section-header">Project Ecosystem</div>', unsafe_allow_html=True)
     ecosystem_html = """
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🌍 Aromo Intelligence</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Global market scraping engine & dashboard.</div><div style="margin-top:auto;"><a href="#" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence" target="_blank" class="btn-code">💻 View Code</a></div></div>
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🔍 Perfume Finder</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Consumer recommendation system.</div><div style="margin-top:auto;"><a href="#" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit" target="_blank" class="btn-code">💻 View Code</a></div></div>
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">📊 Olfactory Insights</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Deep learning analysis of scent structures.</div><div style="margin-top:auto;"><a href="https://github.com/MagdalenaRomaniecka/Olfactory-Insights" target="_blank" class="btn-code">💻 View Code</a></div></div>
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🧪 ScentSational LFS</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Backend engineering documentation.</div><div style="margin-top:auto;"><a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" target="_blank" class="btn-code">💻 View Code</a></div></div>
+        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🌍 Aromo Intelligence</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Global market scraping engine.</div><div style="margin-top:auto;"><a href="https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence" target="_blank" class="btn-code">💻 View Code</a></div></div>
+        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🔍 Perfume Finder</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Consumer recommendation system.</div><div style="margin-top:auto;"><a href="https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit" target="_blank" class="btn-code">💻 View Code</a></div></div>
     </div>
     """
     st.markdown(ecosystem_html, unsafe_allow_html=True)
 
-# --- FOOTER & EXPANDERS ---
-st.write("")
+# --- FOOTER & EXPANDERS (Always syncing with selected episode) ---
 st.write("")
 col_doc1, col_doc2 = st.columns(2)
 
 with col_doc1:
-    with st.expander("📄 READ PODCAST TRANSCRIPT"):
+    with st.expander(f"📄 READ TRANSCRIPT ({selected_episode.split(':')[0]})"):
         try:
             with open(current_transcript_file, 'r', encoding='utf-8') as f:
                 raw_text = f.read()
