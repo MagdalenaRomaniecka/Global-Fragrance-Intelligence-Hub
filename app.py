@@ -23,7 +23,7 @@ font="sans serif"
 """)
 
 # -----------------------------------------------------------------------------
-# 1. UI & LUXURY CSS
+# 1. UI & LUXURY CSS (WITH MOBILE RESPONSIVENESS)
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 
@@ -33,8 +33,8 @@ st.markdown("""
 
     .stApp { background-color: #000000; background-image: radial-gradient(circle at 50% 0%, #111 0%, #000 100%); font-family: 'Lato', sans-serif !important; }
     .header-wrapper { display: flex; justify-content: center; padding: 30px 0 15px 0; }
-    .header-outer { border: 1px solid #333; padding: 6px; display: inline-block; }
-    .header-inner { border: 1px solid #D4AF37; padding: 25px 60px; text-align: center; background-color: #050505; min-width: 320px; }
+    .header-outer { border: 1px solid #333; padding: 6px; display: inline-block; width: 100%; max-width: 600px; box-sizing: border-box; }
+    .header-inner { border: 1px solid #D4AF37; padding: 25px 60px; text-align: center; background-color: #050505; }
     .main-title { font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 4px; margin: 0; }
     .sub-title { font-family: 'Lato', sans-serif; color: #888; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; font-weight: 300; }
     .metric-box { border: 1px solid #222; background-color: #080808; padding: 15px; text-align: center; transition: 0.3s; height: 100%; display: flex; flex-direction: column; justify-content: center; margin-bottom: 15px; }
@@ -46,7 +46,7 @@ st.markdown("""
     button[data-baseweb="tab"]:hover { color: #D4AF37 !important; }
     button[data-baseweb="tab"][aria-selected="true"] { color: #D4AF37 !important; border-bottom: 2px solid #D4AF37 !important; font-weight: 700 !important; }
     .section-header { color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.3rem; border-left: 3px solid #D4AF37; padding-left: 15px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
-    .transcript-box { font-family: 'Lato', sans-serif; font-size: 0.95rem; line-height: 1.6; color: #cccccc; background: #080808; padding: 30px; border: 1px solid #222; }
+    .transcript-box { font-family: 'Lato', sans-serif; font-size: 0.95rem; line-height: 1.6; color: #cccccc; background: #080808; padding: 30px; border: 1px solid #222; overflow-x: hidden; }
     .transcript-box h1, .transcript-box h2, .transcript-box h3 { color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-weight: normal; margin-top: 25px; margin-bottom: 15px; }
     .transcript-box h1 { font-size: 1.5rem; text-align: center; border-bottom: 1px solid #D4AF37; padding-bottom: 15px; margin-bottom: 25px; }
     .transcript-box h2 { font-size: 1.25rem; color: #F0E68C; border-bottom: 1px solid #333; padding-bottom: 10px; }
@@ -60,6 +60,20 @@ st.markdown("""
     .btn-launch { display:block; width:100%; padding:10px; background:#D4AF37; color:#000 !important; text-align:center; font-weight:bold; text-transform:uppercase; font-size:0.7rem; margin-bottom:10px; border-radius:2px; font-family:'Lato', sans-serif; }
     .btn-code { display:block; width:100%; padding:10px; border:1px solid #444; color:#888 !important; text-align:center; text-transform:uppercase; font-size:0.7rem; border-radius:2px; font-family:'Lato', sans-serif; }
     .btn-code:hover { border-color:#D4AF37; color:#D4AF37 !important; }
+
+    /* --- MOBILE RESPONSIVENESS --- */
+    @media (max-width: 768px) {
+        .header-outer { padding: 4px; }
+        .header-inner { padding: 15px 10px; }
+        .main-title { font-size: 1.4rem; letter-spacing: 2px; }
+        .sub-title { font-size: 0.6rem; letter-spacing: 1px; }
+        .metric-value { font-size: 1.6rem; }
+        .transcript-box { padding: 15px; font-size: 0.85rem; }
+        .transcript-box h1 { font-size: 1.2rem; }
+        div[data-baseweb="tab-list"] { gap: 5px; }
+        button[data-baseweb="tab"] { font-size: 0.65rem !important; padding: 8px 5px !important; letter-spacing: 0.5px !important; }
+        .section-header { font-size: 1.1rem; }
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -197,7 +211,7 @@ with tab2:
 with tab3:
     st.markdown('<div class="section-header">Trend Radar 2026–2030</div>', unsafe_allow_html=True)
     radar_html = """
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:20px; margin-bottom: 30px;">
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px; margin-bottom: 30px;">
         <div style="border:1px solid #333; background:#080808; padding:20px; border-left: 3px solid #D4AF37;">
             <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.2rem; margin-bottom:10px;">🧪 Functional Fragrance</div>
             <div style="color:#ccc; font-size:0.9rem; font-family:'Lato', sans-serif; line-height: 1.6;">
@@ -224,7 +238,7 @@ with tab3:
 with tab4:
     st.markdown('<div class="section-header">Project Ecosystem</div>', unsafe_allow_html=True)
     ecosystem_html = """
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px;">
         <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🌍 Aromo Intelligence</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Global market scraping engine & dashboard.</div><div style="margin-top:auto;"><a href="#" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence" target="_blank" class="btn-code">💻 View Code</a></div></div>
         <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🔍 Perfume Finder</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Consumer recommendation system.</div><div style="margin-top:auto;"><a href="#" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit" target="_blank" class="btn-code">💻 View Code</a></div></div>
         <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">📊 Olfactory Insights</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Deep learning analysis of scent structures.</div><div style="margin-top:auto;"><a href="https://github.com/MagdalenaRomaniecka/Olfactory-Insights" target="_blank" class="btn-code">💻 View Code</a></div></div>
@@ -274,4 +288,6 @@ else:
             except:
                 st.info("Macro report unavailable. Please ensure 'macro_report_2026.md' is in the directory.")
 
+# Extra spacing so the footer doesn't overlap text on mobile devices
+st.markdown('<div style="height: 60px;"></div>', unsafe_allow_html=True)
 st.markdown('<div class="footer">FRAGRANCE INTELLIGENCE HUB • DEVELOPED BY MAGDALENA ROMANIECKA</div>', unsafe_allow_html=True)
