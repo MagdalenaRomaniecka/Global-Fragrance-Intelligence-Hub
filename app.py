@@ -249,8 +249,13 @@ if "Ep. 1" in selected_episode:
             except:
                 st.info(f"Transcript unavailable. Missing file: {current_transcript_file}")
     with col_doc2:
-        # Empty space for the report - Ep 1 doesn't have one, keeping it clean
-        st.empty() 
+        with st.expander("📈 READ 2025 TREND REPORT"):
+            try:
+                with open('trend_report_2025.md', 'r', encoding='utf-8') as f:
+                    raw_report = f.read()
+                    st.markdown(f'<div class="transcript-box">\n\n{raw_report}\n\n</div>', unsafe_allow_html=True)
+            except:
+                st.info("Trend report unavailable. Please ensure 'trend_report_2025.md' is in the directory.")
 else:
     with col_doc1:
         with st.expander("📄 READ PODCAST TRANSCRIPT (EPISODE 2)"):
