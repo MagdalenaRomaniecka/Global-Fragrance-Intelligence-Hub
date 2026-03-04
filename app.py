@@ -6,23 +6,6 @@ import re
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# 0. CONFIGURATION: AUTO-GENERATE DARK THEME
-# -----------------------------------------------------------------------------
-if not os.path.exists('.streamlit'):
-    os.makedirs('.streamlit')
-
-with open('.streamlit/config.toml', 'w') as f:
-    f.write("""
-[theme]
-base="dark"
-primaryColor="#D4AF37"
-backgroundColor="#000000"
-secondaryBackgroundColor="#0e0e0e"
-textColor="#E0E0E0"
-font="sans serif"
-""")
-
-# -----------------------------------------------------------------------------
 # 1. UI & LUXURY CSS (WITH MOBILE RESPONSIVENESS)
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
