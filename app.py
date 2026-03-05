@@ -208,7 +208,6 @@ with tab2:
         )
         st.plotly_chart(fig2, use_container_width=True)
         
-        # --- STRATEGIC INSIGHT PANEL ---
         insight_html = """
         <div style="border: 1px solid #D4AF37; background: #080808; padding: 25px; margin-top: 30px; margin-bottom: 20px; border-radius: 2px;">
             <div style="color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 10px;">
@@ -266,16 +265,38 @@ with tab4:
     """
     st.markdown(ecosystem_html, unsafe_allow_html=True)
 
-# --- TAB 5: FRAGRANCE VAULT (SEARCH ENGINE) ---
+# --- TAB 5: FRAGRANCE VAULT (WITH FILTERS & EXPLANATION) ---
 with tab5:
     st.markdown('<div class="section-header">The Fragrance Vault</div>', unsafe_allow_html=True)
     
+    # NEW: Explainer Text
+    st.markdown("""
+        <div style="color: #aaa; font-family: 'Lato', sans-serif; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.6; border-left: 2px solid #333; padding-left: 15px;">
+            This curated vault contains strategic <strong>market case studies</strong> rather than a generic catalogue. 
+            Each fragrance here has been specifically selected to demonstrate key industry shifts discussed in our reports—from 
+            AI-formulated <em>Neuro-Perfumery</em> to the commercialization of the <em>Trickle-Down Effect</em>.
+        </div>
+    """, unsafe_allow_html=True)
+    
     if not df.empty:
-        fragrance_list = sorted(df['name'].dropna().unique().tolist())
-        selected_fragrance = st.selectbox("Search the global database:", ["-- Select a Fragrance --"] + fragrance_list)
+        # NEW: Two-column layout for Filtering and Searching
+        col_filt1, col_filt2 = st.columns(2)
+        
+        with col_filt1:
+            segments = ["All Segments"] + sorted(df['segment'].dropna().unique().tolist())
+            selected_segment = st.selectbox("Filter by Market Segment:", segments)
+            
+        # Apply filter based on segment choice
+        df_vault = df.copy()
+        if selected_segment != "All Segments":
+            df_vault = df_vault[df_vault['segment'] == selected_segment]
+            
+        with col_filt2:
+            fragrance_list = sorted(df_vault['name'].dropna().unique().tolist())
+            selected_fragrance = st.selectbox("Select a Case Study:", ["-- Select a Fragrance --"] + fragrance_list)
         
         if selected_fragrance != "-- Select a Fragrance --":
-            frag_data = df[df['name'] == selected_fragrance].iloc[0]
+            frag_data = df_vault[df_vault['name'] == selected_fragrance].iloc[0]
             
             f_name = frag_data.get('name', 'Unknown')
             f_segment = frag_data.get('segment', 'Global')
@@ -286,7 +307,7 @@ with tab5:
             if isinstance(f_score, (int, float)):
                 f_score = f"{f_score:.2f}"
             
-            # FLATTENED HTML to prevent Streamlit code block rendering
+            # FLATTENED HTML
             card_html = f"""<div style="border: 1px solid #D4AF37; background: #050505; padding: 40px 20px; margin-top: 20px; text-align: center; border-radius: 2px;">
 <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.2rem; letter-spacing: 2px; margin-bottom: 5px; text-transform: uppercase;">{f_name}</div>
 <div style="font-family: 'Lato', sans-serif; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 30px;">Market Segment: {f_segment}</div>
@@ -301,7 +322,7 @@ with tab5:
 </div>"""
             st.markdown(card_html, unsafe_allow_html=True)
         else:
-            st.info("Select or type a fragrance name in the search bar above to view its detailed profile.")
+            st.info(f"Select a case study from the '{selected_segment}' segment to view its profile.")
 
 # --- FOOTER & EXPANDERS ---
 st.write("")
