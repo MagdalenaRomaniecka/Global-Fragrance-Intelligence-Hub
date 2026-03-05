@@ -161,11 +161,14 @@ with tab1:
                 df_top, x="community_votes", y="name", orientation='h',
                 color="segment", hover_name="name", template="plotly_dark",
                 color_discrete_sequence=['#D4AF37', '#F0E68C', '#666'],
-                title="Top 10 Most Voted Fragrances in this Segment"
+                title="Top 10 Most Voted Fragrances in this Segment",
+                text="community_votes" # Added data labels
             )
+            # Formatting the text labels
+            fig.update_traces(textposition='outside', textfont_size=12, textfont_color='#E0E0E0')
             fig.update_layout(
                 paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
-                font_family="Lato", height=380, margin=dict(l=0,r=0,t=40,b=0),
+                font_family="Lato", height=380, margin=dict(l=0,r=50,t=40,b=0), # Increased r margin for text
                 yaxis_title=None, xaxis_title="Community Votes", showlegend=False
             )
             st.plotly_chart(fig, use_container_width=True)
@@ -195,11 +198,14 @@ with tab2:
             df_plot_top, x="community_score", y="name", orientation='h', 
             color="segment", hover_name="name", template="plotly_dark", 
             color_discrete_sequence=['#D4AF37', '#F0E68C', '#666'],
-            title="Top 15 Fragrances by Community Score"
+            title="Top 15 Fragrances by Community Score",
+            text="community_score" # Added data labels
         )
+        # Formatting the text labels (2 decimal places)
+        fig2.update_traces(texttemplate='%{text:.2f}', textposition='outside', textfont_size=12, textfont_color='#E0E0E0')
         fig2.update_layout(
             paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
-            font_family="Lato", height=500, margin=dict(l=0,r=0,t=40,b=0),
+            font_family="Lato", height=500, margin=dict(l=0,r=50,t=40,b=0), # Increased r margin for text
             yaxis_title=None, xaxis_title="Score (out of 5.0)"
         )
         st.plotly_chart(fig2, use_container_width=True)
