@@ -164,7 +164,7 @@ with tab1:
                 text="community_votes"
             )
             fig.update_traces(textposition='outside', textfont_size=12, textfont_color='#E0E0E0', cliponaxis=False)
-            fig.update_xaxes(range=[0, df_top['community_votes'].max() * 1.25]) # ZWIĘKSZONY MARGINES NA LICZBY
+            fig.update_xaxes(range=[0, df_top['community_votes'].max() * 1.25]) 
             
             fig.update_layout(
                 paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
@@ -173,7 +173,7 @@ with tab1:
             )
             st.plotly_chart(fig, use_container_width=True)
 
-# --- TAB 2: ANALYTICS ---
+# --- TAB 2: ANALYTICS (Z DODANYM INSIGHTEM STRATEGICZNYM) ---
 with tab2:
     st.markdown('<div class="section-header">Market Clustering (Top Ranked)</div>', unsafe_allow_html=True)
     if not df.empty:
@@ -201,7 +201,7 @@ with tab2:
             text="community_score"
         )
         fig2.update_traces(texttemplate='%{text:.2f}', textposition='outside', textfont_size=12, textfont_color='#E0E0E0', cliponaxis=False)
-        fig2.update_xaxes(range=[0, df_plot_top['community_score'].max() * 1.25]) # ZWIĘKSZONY MARGINES NA LICZBY
+        fig2.update_xaxes(range=[0, df_plot_top['community_score'].max() * 1.25]) 
 
         fig2.update_layout(
             paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
@@ -209,6 +209,21 @@ with tab2:
             yaxis_title=None, xaxis_title="Score (out of 5.0)"
         )
         st.plotly_chart(fig2, use_container_width=True)
+        
+        # --- NEW STRATEGIC INSIGHT PANEL ---
+        insight_html = """
+        <div style="border: 1px solid #D4AF37; background: #080808; padding: 25px; margin-top: 30px; margin-bottom: 20px; border-radius: 2px;">
+            <div style="color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 10px;">
+                Strategic Insight: The Trickle-Down Effect
+            </div>
+            <div style="color: #ccc; font-family: 'Lato', sans-serif; font-size: 0.95rem; line-height: 1.6;">
+                <p>Market data reveals a clear <strong>Trickle-Down Effect</strong> in olfactory trends, visibly tracked by the color-coded segments in the charts above. Radical innovations typically originate within the <strong>Niche / Concept</strong> segment (e.g., Givaudan's functional mineral profiles), prioritizing artistry over cost.</p>
+                <p>Within 1-2 years, these profiles are smoothed and commercialized by <strong>Prestige / Designer</strong> houses, gaining global traction through high-budget campaigns.</p>
+                <p>Finally, in the maturity phase (years 3-4), the trend is fully absorbed by the <strong>Mass-Market</strong>. This is when we observe an explosion in community votes and market volume, driven by drugstore and catalog brands (such as Faberlic or Zara) capitalizing on established consumer demand.</p>
+            </div>
+        </div>
+        """
+        st.markdown(insight_html, unsafe_allow_html=True)
         
         with st.expander("🔎 INSPECT RAW DATA"):
             st.dataframe(df.head(50), height=400, use_container_width=True, hide_index=True)
@@ -273,7 +288,6 @@ with tab5:
             if isinstance(f_score, (int, float)):
                 f_score = f"{f_score:.2f}"
             
-            # SPŁASZCZONY KOD HTML (bez wcięć i pustych linii) aby Streamlit nie traktował tego jako block kodu
             card_html = f"""<div style="border: 1px solid #D4AF37; background: #050505; padding: 40px 20px; margin-top: 20px; text-align: center; border-radius: 2px;">
 <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.2rem; letter-spacing: 2px; margin-bottom: 5px; text-transform: uppercase;">{f_name}</div>
 <div style="font-family: 'Lato', sans-serif; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 30px;">Market Segment: {f_segment}</div>
