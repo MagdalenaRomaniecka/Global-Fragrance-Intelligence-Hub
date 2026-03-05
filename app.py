@@ -1,4 +1,3 @@
-
 import streamlit as st
 import plotly.express as px
 import pandas as pd
@@ -171,6 +170,45 @@ with tab1:
             )
             st.plotly_chart(fig, use_container_width=True)
 
+    # --- DOCUMENTS ---
+    st.write("---")
+    col_doc1, col_doc2 = st.columns(2)
+    
+    if "Ep. 1" in selected_episode:
+        with col_doc1:
+            with st.expander("📄 READ PODCAST TRANSCRIPT (EPISODE 1)"):
+                try:
+                    with open(current_transcript_file, 'r', encoding='utf-8') as f:
+                        raw_text = f.read()
+                        st.markdown(f'<div class="transcript-box">\n\n{raw_text}\n\n</div>', unsafe_allow_html=True)
+                except:
+                    st.markdown('<div class="transcript-box">Transcript unavailable. Missing file.</div>', unsafe_allow_html=True)
+        with col_doc2:
+            with st.expander("📈 READ 2025 TREND REPORT"):
+                try:
+                    with open('trend_report_2025.md', 'r', encoding='utf-8') as f:
+                        raw_report = f.read()
+                        st.markdown(f'<div class="transcript-box">\n\n{raw_report}\n\n</div>', unsafe_allow_html=True)
+                except:
+                    st.markdown('<div class="transcript-box">Trend report unavailable. Please ensure file is in the directory.</div>', unsafe_allow_html=True)
+    else:
+        with col_doc1:
+            with st.expander("📄 READ PODCAST TRANSCRIPT (EPISODE 2)"):
+                try:
+                    with open(current_transcript_file, 'r', encoding='utf-8') as f:
+                        raw_text = f.read()
+                        st.markdown(f'<div class="transcript-box">\n\n{raw_text}\n\n</div>', unsafe_allow_html=True)
+                except:
+                    st.markdown('<div class="transcript-box">Transcript unavailable. Missing file.</div>', unsafe_allow_html=True)
+        with col_doc2:
+            with st.expander("📈 READ 2026 MACRO REPORT"):
+                try:
+                    with open('macro_report_2026.md', 'r', encoding='utf-8') as f:
+                        raw_macro = f.read()
+                        st.markdown(f'<div class="transcript-box">\n\n{raw_macro}\n\n</div>', unsafe_allow_html=True)
+                except:
+                    st.markdown('<div class="transcript-box">Macro report unavailable. Please ensure file is in the directory.</div>', unsafe_allow_html=True)
+
 
 # --- TAB 2: DEEP DIVE ANALYTICS ---
 with tab2:
@@ -315,58 +353,22 @@ with tab4:
     """
     st.markdown(radar_html, unsafe_allow_html=True)
 
-# --- TAB 5: ECOSYSTEM ---
+# --- TAB 5: ECOSYSTEM (NOW WITH WORKING LINKS!) ---
 with tab5:
     st.markdown('<div class="section-header">Project Ecosystem</div>', unsafe_allow_html=True)
     ecosystem_html = """
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px;">
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🌍 Aromo Intelligence</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Global market scraping engine & dashboard.</div><div style="margin-top:auto;"><a href="#" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence" target="_blank" class="btn-code">💻 View Code</a></div></div>
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🔍 Perfume Finder</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Consumer recommendation system.</div><div style="margin-top:auto;"><a href="#" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit" target="_blank" class="btn-code">💻 View Code</a></div></div>
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">📊 Olfactory Insights</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Deep learning analysis of scent structures.</div><div style="margin-top:auto;"><a href="https://github.com/MagdalenaRomaniecka/Olfactory-Insights" target="_blank" class="btn-code">💻 View Code</a></div></div>
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🧪 ScentSational LFS</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Backend engineering documentation.</div><div style="margin-top:auto;"><a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" target="_blank" class="btn-code">💻 View Code</a></div></div>
+        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🌍 Aromo Intelligence</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Global market scraping engine & dashboard.</div><div style="margin-top:auto;"><a href="https://huggingface.co/spaces/Baphomert/Aromo-Market-Intelligence" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence" target="_blank" class="btn-code">💻 View Code</a></div></div>
+        
+        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🔍 Perfume Finder</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Consumer recommendation system.</div><div style="margin-top:auto;"><a href="https://perfume-finder-app-btskyvq7eytc5ujrgzr2dk.streamlit.app/" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit" target="_blank" class="btn-code">💻 View Code</a></div></div>
+        
+        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">📊 ScentSational Analytics</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Fragrantica data & olfactory insights.</div><div style="margin-top:auto;"><a href="https://scentsational-zbznjhgc4xv7faddappdc2b.streamlit.app/" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Olfactory-Insights" target="_blank" class="btn-code">💻 View Code</a></div></div>
+        
+        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🧪 ScentSational LFS Hub</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Backend engineering & heavy datasets.</div><div style="margin-top:auto;"><a href="https://baphomert-scentsational-fragrantica-lfs2.hf.space/" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" target="_blank" class="btn-code">💻 View Code</a></div></div>
     </div>
     """
     st.markdown(ecosystem_html, unsafe_allow_html=True)
 
-# --- FOOTER & EXPANDERS ---
-st.write("")
-st.write("")
-col_doc1, col_doc2 = st.columns(2)
-
-if "Ep. 1" in selected_episode:
-    with col_doc1:
-        with st.expander("📄 READ PODCAST TRANSCRIPT (EPISODE 1)"):
-            try:
-                with open(current_transcript_file, 'r', encoding='utf-8') as f:
-                    raw_text = f.read()
-                    st.markdown(f'<div class="transcript-box">\n\n{raw_text}\n\n</div>', unsafe_allow_html=True)
-            except:
-                st.markdown('<div class="transcript-box">Transcript unavailable. Missing file.</div>', unsafe_allow_html=True)
-    with col_doc2:
-        with st.expander("📈 READ 2025 TREND REPORT"):
-            try:
-                with open('trend_report_2025.md', 'r', encoding='utf-8') as f:
-                    raw_report = f.read()
-                    st.markdown(f'<div class="transcript-box">\n\n{raw_report}\n\n</div>', unsafe_allow_html=True)
-            except:
-                st.markdown('<div class="transcript-box">Trend report unavailable. Please ensure file is in the directory.</div>', unsafe_allow_html=True)
-else:
-    with col_doc1:
-        with st.expander("📄 READ PODCAST TRANSCRIPT (EPISODE 2)"):
-            try:
-                with open(current_transcript_file, 'r', encoding='utf-8') as f:
-                    raw_text = f.read()
-                    st.markdown(f'<div class="transcript-box">\n\n{raw_text}\n\n</div>', unsafe_allow_html=True)
-            except:
-                st.markdown('<div class="transcript-box">Transcript unavailable. Missing file.</div>', unsafe_allow_html=True)
-    with col_doc2:
-        with st.expander("📈 READ 2026 MACRO REPORT"):
-            try:
-                with open('macro_report_2026.md', 'r', encoding='utf-8') as f:
-                    raw_macro = f.read()
-                    st.markdown(f'<div class="transcript-box">\n\n{raw_macro}\n\n</div>', unsafe_allow_html=True)
-            except:
-                st.markdown('<div class="transcript-box">Macro report unavailable. Please ensure file is in the directory.</div>', unsafe_allow_html=True)
-
+# --- GLOBAL FOOTER ---
 st.markdown('<div style="height: 60px;"></div>', unsafe_allow_html=True)
 st.markdown('<div class="footer">FRAGRANCE INTELLIGENCE HUB • DEVELOPED BY MAGDALENA ROMANIECKA</div>', unsafe_allow_html=True)
