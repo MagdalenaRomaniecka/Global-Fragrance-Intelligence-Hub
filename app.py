@@ -6,11 +6,6 @@ import re
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# Note: Dynamic .streamlit/config.toml generation is removed to prevent white flash.
-# Ensure .streamlit/config.toml exists in the root repo.
-# -----------------------------------------------------------------------------
-
-# -----------------------------------------------------------------------------
 # 1. UI & LUXURY CSS (WITH MOBILE RESPONSIVENESS)
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
@@ -151,7 +146,6 @@ with tab1:
         st.markdown(f'<div class="section-header">Live Data: {viz_title}</div>', unsafe_allow_html=True)
         if not df.empty:
             df_story = df.copy()
-            # Filtering logic aligned with data_loader.py updates
             if current_filter == "Notes_Gourmand" and 'top_notes' in df_story.columns:
                 df_story = df_story[df_story['top_notes'].str.contains('Vanilla|Caramel|Pistachio|Sugar|Praline', case=False, na=False)]
             elif current_filter == "Market_Russia" and 'country' in df_story.columns:
@@ -186,7 +180,6 @@ with tab2:
         ])
         
         df_plot = df.copy()
-        # Expanded filters to match real-world data points
         if filter_option == "Focus: Gourmand 2.0 Notes" and 'top_notes' in df_plot.columns:
             df_plot = df_plot[df_plot['top_notes'].str.contains('Vanilla|Caramel|Pistachio|Sugar|Praline', case=False, na=False)]
         elif filter_option == "Focus: Russian Market" and 'country' in df_plot.columns:
