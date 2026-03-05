@@ -95,7 +95,6 @@ st.write("")
 # -----------------------------------------------------------------------------
 # 3. TABS & PODCAST LOGIC
 # -----------------------------------------------------------------------------
-# DODAŁEM 5 ZAKŁADKĘ: "FRAGRANCE VAULT"
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["STRATEGIC BRIEFING", "DEEP DIVE ANALYTICS", "2026 OUTLOOK", "ECOSYSTEM", "FRAGRANCE VAULT"])
 
 current_transcript_file = "podcast_transcript.md"
@@ -165,7 +164,7 @@ with tab1:
                 text="community_votes"
             )
             fig.update_traces(textposition='outside', textfont_size=12, textfont_color='#E0E0E0', cliponaxis=False)
-            fig.update_xaxes(range=[0, df_top['community_votes'].max() * 1.15]) 
+            fig.update_xaxes(range=[0, df_top['community_votes'].max() * 1.25]) # ZWIĘKSZONY MARGINES NA LICZBY
             
             fig.update_layout(
                 paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
@@ -202,7 +201,7 @@ with tab2:
             text="community_score"
         )
         fig2.update_traces(texttemplate='%{text:.2f}', textposition='outside', textfont_size=12, textfont_color='#E0E0E0', cliponaxis=False)
-        fig2.update_xaxes(range=[0, df_plot_top['community_score'].max() * 1.15]) 
+        fig2.update_xaxes(range=[0, df_plot_top['community_score'].max() * 1.25]) # ZWIĘKSZONY MARGINES NA LICZBY
 
         fig2.update_layout(
             paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
@@ -259,52 +258,34 @@ with tab5:
     st.markdown('<div class="section-header">The Fragrance Vault</div>', unsafe_allow_html=True)
     
     if not df.empty:
-        # Pobieramy unikalne nazwy zapachów i sortujemy alfabetycznie
         fragrance_list = sorted(df['name'].dropna().unique().tolist())
-        
-        # Tworzymy wyszukiwarkę
         selected_fragrance = st.selectbox("Search the global database:", ["-- Select a Fragrance --"] + fragrance_list)
         
         if selected_fragrance != "-- Select a Fragrance --":
-            # Filtrujemy dane dla wybranego zapachu
             frag_data = df[df['name'] == selected_fragrance].iloc[0]
             
-            # Bezpieczne pobieranie wartości z bazy
             f_name = frag_data.get('name', 'Unknown')
             f_segment = frag_data.get('segment', 'Global')
             f_score = frag_data.get('community_score', 'N/A')
             f_votes = frag_data.get('community_votes', 'N/A')
             f_notes = frag_data.get('top_notes', 'Not specified')
             
-            # Jeśli ocena to liczba, formatujemy do 2 miejsc po przecinku
             if isinstance(f_score, (int, float)):
                 f_score = f"{f_score:.2f}"
             
-            # Luksusowa karta w HTML/CSS
-            card_html = f"""
-            <div style="border: 1px solid #D4AF37; background: #050505; padding: 40px 20px; margin-top: 20px; text-align: center; border-radius: 2px;">
-                <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.2rem; letter-spacing: 2px; margin-bottom: 5px; text-transform: uppercase;">{f_name}</div>
-                <div style="font-family: 'Lato', sans-serif; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 30px;">Market Segment: {f_segment}</div>
-                
-                <div style="display: flex; justify-content: center; gap: 60px; margin-bottom: 30px; flex-wrap: wrap;">
-                    <div>
-                        <div style="color: #666; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; font-family: 'Lato', sans-serif;">Community Score</div>
-                        <div style="color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 1.8rem;">{f_score} <span style="font-size: 1rem; color: #666;">/ 5.0</span></div>
-                    </div>
-                    <div>
-                        <div style="color: #666; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; font-family: 'Lato', sans-serif;">Global Votes</div>
-                        <div style="color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 1.8rem;">{f_votes}</div>
-                    </div>
-                </div>
-                
-                <div style="border-top: 1px solid #222; padding-top: 25px; max-width: 600px; margin: 0 auto;">
-                    <div style="color: #D4AF37; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; font-weight: bold; font-family: 'Lato', sans-serif;">Key Notes / Profile</div>
-                    <div style="color: #ccc; font-family: 'Lato', sans-serif; font-size: 1rem; line-height: 1.8; padding: 0 20px;">
-                        {f_notes}
-                    </div>
-                </div>
-            </div>
-            """
+            # SPŁASZCZONY KOD HTML (bez wcięć i pustych linii) aby Streamlit nie traktował tego jako block kodu
+            card_html = f"""<div style="border: 1px solid #D4AF37; background: #050505; padding: 40px 20px; margin-top: 20px; text-align: center; border-radius: 2px;">
+<div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.2rem; letter-spacing: 2px; margin-bottom: 5px; text-transform: uppercase;">{f_name}</div>
+<div style="font-family: 'Lato', sans-serif; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 30px;">Market Segment: {f_segment}</div>
+<div style="display: flex; justify-content: center; gap: 60px; margin-bottom: 30px; flex-wrap: wrap;">
+<div><div style="color: #666; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; font-family: 'Lato', sans-serif;">Community Score</div><div style="color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 1.8rem;">{f_score} <span style="font-size: 1rem; color: #666;">/ 5.0</span></div></div>
+<div><div style="color: #666; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; font-family: 'Lato', sans-serif;">Global Votes</div><div style="color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 1.8rem;">{f_votes}</div></div>
+</div>
+<div style="border-top: 1px solid #222; padding-top: 25px; max-width: 600px; margin: 0 auto;">
+<div style="color: #D4AF37; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; font-weight: bold; font-family: 'Lato', sans-serif;">Key Notes / Profile</div>
+<div style="color: #ccc; font-family: 'Lato', sans-serif; font-size: 1rem; line-height: 1.8; padding: 0 20px;">{f_notes}</div>
+</div>
+</div>"""
             st.markdown(card_html, unsafe_allow_html=True)
         else:
             st.info("Select or type a fragrance name in the search bar above to view its detailed profile.")
