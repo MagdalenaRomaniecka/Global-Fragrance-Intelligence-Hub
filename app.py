@@ -1,3 +1,4 @@
+
 import streamlit as st
 import plotly.express as px
 import pandas as pd
@@ -89,10 +90,9 @@ c6.markdown('<div class="metric-box"><div class="metric-label">Sol de Janeiro Sh
 st.write("")
 
 # -----------------------------------------------------------------------------
-# 3. NEW TAB ORDER & LOGIC
+# 3. LOGICAL TAB ORDER (Storytelling Flow)
 # -----------------------------------------------------------------------------
-# TABS REORDERED FOR BETTER UX FLOW
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["STRATEGIC BRIEFING", "FRAGRANCE VAULT", "DEEP DIVE ANALYTICS", "2026 OUTLOOK", "ECOSYSTEM"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["STRATEGIC BRIEFING", "DEEP DIVE ANALYTICS", "FRAGRANCE VAULT", "2026 OUTLOOK", "ECOSYSTEM"])
 
 current_transcript_file = "podcast_transcript.md"
 
@@ -171,8 +171,65 @@ with tab1:
             )
             st.plotly_chart(fig, use_container_width=True)
 
-# --- TAB 2: FRAGRANCE VAULT (MOVED TO 2ND POSITION) ---
+
+# --- TAB 2: DEEP DIVE ANALYTICS ---
 with tab2:
+    st.markdown('<div class="section-header">Market Clustering (Top Ranked)</div>', unsafe_allow_html=True)
+    if not df.empty:
+        filter_option = st.selectbox("Filter Data View:", [
+            "Show All Global Data", "Focus: Gourmand 2.0 Notes", "Focus: Russian Market",
+            "Focus: Functional Fragrance (2026 Trend)", "Focus: Vamp Romantic Notes (2026 Trend)"
+        ])
+        
+        df_plot = df.copy()
+        if filter_option == "Focus: Gourmand 2.0 Notes" and 'top_notes' in df_plot.columns:
+            df_plot = df_plot[df_plot['top_notes'].str.contains('Vanilla|Caramel|Pistachio|Sugar|Praline', case=False, na=False)]
+        elif filter_option == "Focus: Russian Market" and 'country' in df_plot.columns:
+            df_plot = df_plot[df_plot['country'] == 'Russia']
+        elif filter_option == "Focus: Functional Fragrance (2026 Trend)" and 'top_notes' in df_plot.columns:
+            df_plot = df_plot[df_plot['top_notes'].str.contains('Functional|Neuro|Clean|Mineral|Musk|Green|Fresh|Lavender', case=False, na=False)]
+        elif filter_option == "Focus: Vamp Romantic Notes (2026 Trend)" and 'top_notes' in df_plot.columns:
+            df_plot = df_plot[df_plot['top_notes'].str.contains('Cherry|Plum|Leather|Smoke|Incense|Dark|Vamp', case=False, na=False)]
+
+        df_plot_top = df_plot.nlargest(15, 'community_score').sort_values('community_score', ascending=True)
+
+        fig2 = px.bar(
+            df_plot_top, x="community_score", y="name", orientation='h', 
+            color="segment", hover_name="name", template="plotly_dark", 
+            color_discrete_sequence=['#D4AF37', '#F0E68C', '#666'],
+            title="Top 15 Fragrances by Community Score",
+            text="community_score"
+        )
+        fig2.update_traces(texttemplate='%{text:.2f}', textposition='outside', textfont_size=12, textfont_color='#E0E0E0', cliponaxis=False)
+        fig2.update_xaxes(range=[0, df_plot_top['community_score'].max() * 1.25]) 
+
+        fig2.update_layout(
+            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
+            font_family="Lato", height=500, margin=dict(l=0,r=50,t=40,b=0),
+            yaxis_title=None, xaxis_title="Score (out of 5.0)"
+        )
+        st.plotly_chart(fig2, use_container_width=True)
+        
+        insight_html = """
+        <div style="border: 1px solid #D4AF37; background: #080808; padding: 30px; margin-top: 30px; margin-bottom: 20px; border-radius: 2px;">
+            <div style="color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 15px; line-height: 1.4;">
+                Strategic Insight: The Trickle-Down Effect
+            </div>
+            <div style="color: #ccc; font-family: 'Lato', sans-serif; font-size: 0.95rem; line-height: 1.7;">
+                <p>Market data reveals a clear <strong>Trickle-Down Effect</strong> in olfactory trends, visibly tracked by the color-coded segments in the charts above. Radical innovations typically originate within the <strong>Niche / Concept</strong> segment (e.g., The Nue Co. or Room 1015), prioritizing artistry over cost.</p>
+                <p>Within 1-2 years, these profiles are smoothed and commercialized by <strong>Prestige / Designer</strong> houses (e.g., Paco Rabanne Phantom or Tom Ford Lost Cherry), gaining global traction through high-budget campaigns.</p>
+                <p>Finally, in the maturity phase (years 3-4), the trend is fully absorbed by the <strong>Mass-Market</strong>. This is when we observe an explosion in community votes and market volume, driven by drugstore and fast-fashion brands (such as Zara) capitalizing on established consumer demand.</p>
+            </div>
+        </div>
+        """
+        st.markdown(insight_html, unsafe_allow_html=True)
+        
+        with st.expander("🔎 INSPECT RAW DATA"):
+            st.dataframe(df.head(50), height=400, use_container_width=True, hide_index=True)
+
+
+# --- TAB 3: FRAGRANCE VAULT ---
+with tab3:
     st.markdown('<div class="section-header">The Fragrance Vault</div>', unsafe_allow_html=True)
     
     st.markdown("""
@@ -224,68 +281,12 @@ with tab2:
 </div>"""
             st.markdown(card_html, unsafe_allow_html=True)
         else:
-            # LUXURY REPLACEMENT FOR BLUE st.info BOX
             st.markdown(f"""
             <div style="border: 1px solid #222; background: #080808; color: #888; padding: 20px; text-align: center; font-family: 'Lato', sans-serif; letter-spacing: 1px; font-size: 0.85rem; border-radius: 2px; margin-top: 20px;">
                 Select a case study from the '{selected_segment}' segment to view its profile.
             </div>
             """, unsafe_allow_html=True)
 
-# --- TAB 3: DEEP DIVE ANALYTICS ---
-with tab3:
-    st.markdown('<div class="section-header">Market Clustering (Top Ranked)</div>', unsafe_allow_html=True)
-    if not df.empty:
-        filter_option = st.selectbox("Filter Data View:", [
-            "Show All Global Data", "Focus: Gourmand 2.0 Notes", "Focus: Russian Market",
-            "Focus: Functional Fragrance (2026 Trend)", "Focus: Vamp Romantic Notes (2026 Trend)"
-        ])
-        
-        df_plot = df.copy()
-        if filter_option == "Focus: Gourmand 2.0 Notes" and 'top_notes' in df_plot.columns:
-            df_plot = df_plot[df_plot['top_notes'].str.contains('Vanilla|Caramel|Pistachio|Sugar|Praline', case=False, na=False)]
-        elif filter_option == "Focus: Russian Market" and 'country' in df_plot.columns:
-            df_plot = df_plot[df_plot['country'] == 'Russia']
-        elif filter_option == "Focus: Functional Fragrance (2026 Trend)" and 'top_notes' in df_plot.columns:
-            df_plot = df_plot[df_plot['top_notes'].str.contains('Functional|Neuro|Clean|Mineral|Musk|Green|Fresh|Lavender', case=False, na=False)]
-        elif filter_option == "Focus: Vamp Romantic Notes (2026 Trend)" and 'top_notes' in df_plot.columns:
-            df_plot = df_plot[df_plot['top_notes'].str.contains('Cherry|Plum|Leather|Smoke|Incense|Dark|Vamp', case=False, na=False)]
-
-        df_plot_top = df_plot.nlargest(15, 'community_score').sort_values('community_score', ascending=True)
-
-        fig2 = px.bar(
-            df_plot_top, x="community_score", y="name", orientation='h', 
-            color="segment", hover_name="name", template="plotly_dark", 
-            color_discrete_sequence=['#D4AF37', '#F0E68C', '#666'],
-            title="Top 15 Fragrances by Community Score",
-            text="community_score"
-        )
-        fig2.update_traces(texttemplate='%{text:.2f}', textposition='outside', textfont_size=12, textfont_color='#E0E0E0', cliponaxis=False)
-        fig2.update_xaxes(range=[0, df_plot_top['community_score'].max() * 1.25]) 
-
-        fig2.update_layout(
-            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
-            font_family="Lato", height=500, margin=dict(l=0,r=50,t=40,b=0),
-            yaxis_title=None, xaxis_title="Score (out of 5.0)"
-        )
-        st.plotly_chart(fig2, use_container_width=True)
-        
-        # FIXED STRATEGIC INSIGHT PANEL (Line-height & Padding)
-        insight_html = """
-        <div style="border: 1px solid #D4AF37; background: #080808; padding: 30px; margin-top: 30px; margin-bottom: 20px; border-radius: 2px;">
-            <div style="color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 15px; line-height: 1.4;">
-                Strategic Insight: The Trickle-Down Effect
-            </div>
-            <div style="color: #ccc; font-family: 'Lato', sans-serif; font-size: 0.95rem; line-height: 1.7;">
-                <p>Market data reveals a clear <strong>Trickle-Down Effect</strong> in olfactory trends, visibly tracked by the color-coded segments in the charts above. Radical innovations typically originate within the <strong>Niche / Concept</strong> segment (e.g., The Nue Co. or Room 1015), prioritizing artistry over cost.</p>
-                <p>Within 1-2 years, these profiles are smoothed and commercialized by <strong>Prestige / Designer</strong> houses (e.g., Paco Rabanne Phantom or Tom Ford Lost Cherry), gaining global traction through high-budget campaigns.</p>
-                <p>Finally, in the maturity phase (years 3-4), the trend is fully absorbed by the <strong>Mass-Market</strong>. This is when we observe an explosion in community votes and market volume, driven by drugstore and fast-fashion brands (such as Zara) capitalizing on established consumer demand.</p>
-            </div>
-        </div>
-        """
-        st.markdown(insight_html, unsafe_allow_html=True)
-        
-        with st.expander("🔎 INSPECT RAW DATA"):
-            st.dataframe(df.head(50), height=400, use_container_width=True, hide_index=True)
 
 # --- TAB 4: 2026 OUTLOOK ---
 with tab4:
