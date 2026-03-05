@@ -5,6 +5,10 @@ import os
 import re
 from data_loader import load_and_merge_data
 
+# Note: The dynamic generation of .streamlit/config.toml has been removed.
+# Please ensure the .streamlit folder and config.toml file exist in the root directory
+# to prevent the white flash on load.
+
 # -----------------------------------------------------------------------------
 # 1. UI & LUXURY CSS (WITH MOBILE RESPONSIVENESS)
 # -----------------------------------------------------------------------------
@@ -93,7 +97,6 @@ st.write("")
 # -----------------------------------------------------------------------------
 tab1, tab2, tab3, tab4 = st.tabs(["STRATEGIC BRIEFING", "DEEP DIVE ANALYTICS", "2026 OUTLOOK", "ECOSYSTEM"])
 
-# Variable storing the selected transcript file
 current_transcript_file = "podcast_transcript.md"
 
 with tab1:
@@ -102,7 +105,6 @@ with tab1:
     with col_audio:
         st.markdown('<div class="section-header">Audio Intelligence</div>', unsafe_allow_html=True)
         
-        # EPISODE SWITCHER
         selected_episode = st.radio("Select Episode:", [
             "🎧 Ep. 1: Recession Glam & 2025 Market Dynamics", 
             "🔮 Ep. 2: 2026 Outlook (AI, Tariffs & Functional Fragrance)"
@@ -118,7 +120,6 @@ with tab1:
             selected_chapter = st.radio("Select Chapter:", list(PODCAST_SCRIPT.keys()))
             chapter_data = PODCAST_SCRIPT[selected_chapter]
             
-            # Play the first episode from GitHub
             st.audio("https://raw.githubusercontent.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/main/podcast_trends.mp3", start_time=chapter_data["start_time"])
             
             st.markdown(f"""
@@ -131,12 +132,8 @@ with tab1:
             viz_title = selected_chapter.split(':')[1]
 
         else:
-            # EPISODE 2 LOGIC
             current_transcript_file = "podcast_transcript_2026.md"
-            
-            # Play the new episode
             st.audio("podcast_2026.mp3")
-            
             st.markdown("""
                 <div style="margin-top:20px; border-left:3px solid #D4AF37; padding:15px; background:rgba(212,175,55,0.05);">
                     <p style="color:#D4AF37; font-size:0.6rem; text-transform:uppercase; margin-bottom:5px; font-weight:bold;">Key Narrative</p>
@@ -157,17 +154,25 @@ with tab1:
             elif current_filter == "Market_Russia" and 'country' in df_story.columns:
                 df_story = df_story[df_story['country'] == 'Russia']
             
-            fig = px.scatter(
-                df_story, x="year_clean", y="community_score", size="community_votes",
+            # --- LUXURY HORIZONTAL BAR CHART (TAB 1) ---
+            df_top = df_story.nlargest(10, 'community_votes').sort_values('community_votes', ascending=True)
+            
+            fig = px.bar(
+                df_top, x="community_votes", y="name", orientation='h',
                 color="segment", hover_name="name", template="plotly_dark",
-                color_discrete_sequence=['#D4AF37', '#F0E68C', '#666']
+                color_discrete_sequence=['#D4AF37', '#F0E68C', '#666'],
+                title="Top 10 Most Voted Fragrances in this Segment"
             )
-            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=380, margin=dict(l=0,r=0,t=0,b=0))
+            fig.update_layout(
+                paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
+                font_family="Lato", height=380, margin=dict(l=0,r=0,t=40,b=0),
+                yaxis_title=None, xaxis_title="Community Votes", showlegend=False
+            )
             st.plotly_chart(fig, use_container_width=True)
 
 # --- TAB 2: ANALYTICS ---
 with tab2:
-    st.markdown('<div class="section-header">Market Clustering</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-header">Market Clustering (Top Ranked)</div>', unsafe_allow_html=True)
     if not df.empty:
         filter_option = st.selectbox("Filter Data View:", [
             "Show All Global Data", "Focus: Gourmand 2.0 Notes", "Focus: Russian Market",
@@ -183,8 +188,20 @@ with tab2:
         elif filter_option == "Focus: Vamp Romantic Notes (2026 Trend)" and 'top_notes' in df_plot.columns:
             df_plot = df_plot[df_plot['top_notes'].str.contains('Plum|Cherry|Leather|Smoke|Incense|Dark', case=False, na=False)]
 
-        fig2 = px.scatter(df_plot, x="year_clean", y="community_score", size="community_votes", color="segment", hover_name="name", template="plotly_dark", color_discrete_sequence=['#D4AF37', '#F0E68C', '#666'])
-        fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450)
+        # --- LUXURY HORIZONTAL BAR CHART (TAB 2) ---
+        df_plot_top = df_plot.nlargest(15, 'community_score').sort_values('community_score', ascending=True)
+
+        fig2 = px.bar(
+            df_plot_top, x="community_score", y="name", orientation='h', 
+            color="segment", hover_name="name", template="plotly_dark", 
+            color_discrete_sequence=['#D4AF37', '#F0E68C', '#666'],
+            title="Top 15 Fragrances by Community Score"
+        )
+        fig2.update_layout(
+            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
+            font_family="Lato", height=500, margin=dict(l=0,r=0,t=40,b=0),
+            yaxis_title=None, xaxis_title="Score (out of 5.0)"
+        )
         st.plotly_chart(fig2, use_container_width=True)
         
         with st.expander("🔎 INSPECT RAW DATA"):
@@ -235,7 +252,6 @@ st.write("")
 st.write("")
 col_doc1, col_doc2 = st.columns(2)
 
-# Display logic for documents based on episode selection
 if "Ep. 1" in selected_episode:
     with col_doc1:
         with st.expander("📄 READ PODCAST TRANSCRIPT (EPISODE 1)"):
@@ -271,6 +287,5 @@ else:
             except:
                 st.info("Macro report unavailable. Please ensure 'macro_report_2026.md' is in the directory.")
 
-# Extra spacing so the footer doesn't overlap text on mobile devices
 st.markdown('<div style="height: 60px;"></div>', unsafe_allow_html=True)
 st.markdown('<div class="footer">FRAGRANCE INTELLIGENCE HUB • DEVELOPED BY MAGDALENA ROMANIECKA</div>', unsafe_allow_html=True)
