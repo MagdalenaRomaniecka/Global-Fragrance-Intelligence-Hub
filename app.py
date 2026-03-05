@@ -352,15 +352,52 @@ with tab4:
     """
     st.markdown(radar_html, unsafe_allow_html=True)
 
-# --- TAB 5: ECOSYSTEM (SPŁASZCZONY HTML) ---
+# --- TAB 5: ECOSYSTEM (WITH DATA SOURCE TAGS & EXPLAINER) ---
 with tab5:
     st.markdown('<div class="section-header">Project Ecosystem</div>', unsafe_allow_html=True)
+    
+    st.markdown("""
+        <div style="color: #aaa; font-family: 'Lato', sans-serif; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.6; border-left: 2px solid #333; padding-left: 15px;">
+            This Project Ecosystem represents a comprehensive suite of interconnected analytical tools. 
+            Each application is engineered to extract, process, and visualize fragrance data from distinct global sources 
+            (such as Fragrantica or Aromo.ru), providing a 360-degree view of the market.
+        </div>
+    """, unsafe_allow_html=True)
+    
     ecosystem_html = """
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px;">
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🌍 Aromo Intelligence</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Global market scraping engine & dashboard.</div><div style="margin-top:auto;"><a href="https://huggingface.co/spaces/Baphomert/Aromo-Market-Intelligence" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence" target="_blank" class="btn-code">💻 View Code</a></div></div>
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🔍 Perfume Finder</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Consumer recommendation system.</div><div style="margin-top:auto;"><a href="https://perfume-finder-app-btskyvq7eytc5ujrgzr2dk.streamlit.app/" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit" target="_blank" class="btn-code">💻 View Code</a></div></div>
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">📊 ScentSational Analytics</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Fragrantica data & olfactory insights.</div><div style="margin-top:auto;"><a href="https://scentsational-zbznjhgc4xv7faddappdc2b.streamlit.app/" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Olfactory-Insights" target="_blank" class="btn-code">💻 View Code</a></div></div>
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🧪 ScentSational LFS Hub</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Backend engineering & heavy datasets.</div><div style="margin-top:auto;"><a href="https://baphomert-scentsational-fragrantica-lfs2.hf.space/" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" target="_blank" class="btn-code">💻 View Code</a></div></div>
+        <div class="project-card">
+            <div>
+                <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:5px;">🌍 Aromo Intelligence</div>
+                <div style="color:#F0E68C; font-size:0.6rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; font-weight:bold;">Data Source: Aromo.ru Scraper</div>
+                <div style="color:#888; font-size:0.8rem; margin-bottom:20px; line-height:1.4;">Global market scraping engine & dashboard focusing on the Russian market structure.</div>
+            </div>
+            <div style="margin-top:auto;"><a href="https://huggingface.co/spaces/Baphomert/Aromo-Market-Intelligence" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence" target="_blank" class="btn-code">💻 View Code</a></div>
+        </div>
+        <div class="project-card">
+            <div>
+                <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:5px;">🔍 Perfume Finder</div>
+                <div style="color:#F0E68C; font-size:0.6rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; font-weight:bold;">Data Source: Preference Matrix</div>
+                <div style="color:#888; font-size:0.8rem; margin-bottom:20px; line-height:1.4;">Consumer recommendation system based on complex algorithmic matching.</div>
+            </div>
+            <div style="margin-top:auto;"><a href="https://perfume-finder-app-btskyvq7eytc5ujrgzr2dk.streamlit.app/" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit" target="_blank" class="btn-code">💻 View Code</a></div>
+        </div>
+        <div class="project-card">
+            <div>
+                <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:5px;">📊 ScentSational Analytics</div>
+                <div style="color:#F0E68C; font-size:0.6rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; font-weight:bold;">Data Source: Fragrantica Data</div>
+                <div style="color:#888; font-size:0.8rem; margin-bottom:20px; line-height:1.4;">Deep learning analysis and visualization of global community olfactory insights.</div>
+            </div>
+            <div style="margin-top:auto;"><a href="https://scentsational-zbznjhgc4xv7faddappdc2b.streamlit.app/" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Olfactory-Insights" target="_blank" class="btn-code">💻 View Code</a></div>
+        </div>
+        <div class="project-card">
+            <div>
+                <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:5px;">🧪 ScentSational LFS Hub</div>
+                <div style="color:#F0E68C; font-size:0.6rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; font-weight:bold;">Data Source: Git LFS Storage</div>
+                <div style="color:#888; font-size:0.8rem; margin-bottom:20px; line-height:1.4;">Backend engineering hub designed to handle massive, heavy fragrance datasets.</div>
+            </div>
+            <div style="margin-top:auto;"><a href="https://baphomert-scentsational-fragrantica-lfs2.hf.space/" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" target="_blank" class="btn-code">💻 View Code</a></div>
+        </div>
     </div>
     """
     st.markdown(ecosystem_html, unsafe_allow_html=True)
