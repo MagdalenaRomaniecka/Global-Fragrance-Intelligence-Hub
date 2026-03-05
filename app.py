@@ -5,9 +5,10 @@ import os
 import re
 from data_loader import load_and_merge_data
 
-# Note: The dynamic generation of .streamlit/config.toml has been removed.
-# Please ensure the .streamlit folder and config.toml file exist in the root directory
-# to prevent the white flash on load.
+# -----------------------------------------------------------------------------
+# Note: Dynamic .streamlit/config.toml generation is removed to prevent white flash.
+# Ensure .streamlit/config.toml exists in the root repo.
+# -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
 # 1. UI & LUXURY CSS (WITH MOBILE RESPONSIVENESS)
@@ -93,12 +94,13 @@ c6.markdown('<div class="metric-box"><div class="metric-label">Sol de Janeiro Sh
 st.write("")
 
 # -----------------------------------------------------------------------------
-# 3. TABS & PODCAST LOGIC
+# 3. TABS & MAIN LOGIC
 # -----------------------------------------------------------------------------
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["STRATEGIC BRIEFING", "DEEP DIVE ANALYTICS", "2026 OUTLOOK", "ECOSYSTEM", "FRAGRANCE VAULT"])
 
 current_transcript_file = "podcast_transcript.md"
 
+# --- TAB 1: STRATEGIC BRIEFING ---
 with tab1:
     col_audio, col_viz = st.columns([1, 1.5], gap="large")
     
@@ -149,8 +151,9 @@ with tab1:
         st.markdown(f'<div class="section-header">Live Data: {viz_title}</div>', unsafe_allow_html=True)
         if not df.empty:
             df_story = df.copy()
+            # Filtering logic aligned with data_loader.py updates
             if current_filter == "Notes_Gourmand" and 'top_notes' in df_story.columns:
-                df_story = df_story[df_story['top_notes'].str.contains('Vanilla|Caramel|Pistachio|Sugar', case=False, na=False)]
+                df_story = df_story[df_story['top_notes'].str.contains('Vanilla|Caramel|Pistachio|Sugar|Praline', case=False, na=False)]
             elif current_filter == "Market_Russia" and 'country' in df_story.columns:
                 df_story = df_story[df_story['country'] == 'Russia']
             
@@ -173,7 +176,7 @@ with tab1:
             )
             st.plotly_chart(fig, use_container_width=True)
 
-# --- TAB 2: ANALYTICS (Z DODANYM INSIGHTEM STRATEGICZNYM) ---
+# --- TAB 2: DEEP DIVE ANALYTICS ---
 with tab2:
     st.markdown('<div class="section-header">Market Clustering (Top Ranked)</div>', unsafe_allow_html=True)
     if not df.empty:
@@ -181,15 +184,17 @@ with tab2:
             "Show All Global Data", "Focus: Gourmand 2.0 Notes", "Focus: Russian Market",
             "Focus: Functional Fragrance (2026 Trend)", "Focus: Vamp Romantic Notes (2026 Trend)"
         ])
+        
         df_plot = df.copy()
+        # Expanded filters to match real-world data points
         if filter_option == "Focus: Gourmand 2.0 Notes" and 'top_notes' in df_plot.columns:
-            df_plot = df_plot[df_plot['top_notes'].str.contains('Vanilla|Caramel|Pistachio|Sugar', case=False, na=False)]
+            df_plot = df_plot[df_plot['top_notes'].str.contains('Vanilla|Caramel|Pistachio|Sugar|Praline', case=False, na=False)]
         elif filter_option == "Focus: Russian Market" and 'country' in df_plot.columns:
             df_plot = df_plot[df_plot['country'] == 'Russia']
         elif filter_option == "Focus: Functional Fragrance (2026 Trend)" and 'top_notes' in df_plot.columns:
-            df_plot = df_plot[df_plot['top_notes'].str.contains('Water|Clean|Mineral|Musk|Green|Fresh', case=False, na=False)]
+            df_plot = df_plot[df_plot['top_notes'].str.contains('Functional|Neuro|Clean|Mineral|Musk|Green|Fresh|Lavender', case=False, na=False)]
         elif filter_option == "Focus: Vamp Romantic Notes (2026 Trend)" and 'top_notes' in df_plot.columns:
-            df_plot = df_plot[df_plot['top_notes'].str.contains('Plum|Cherry|Leather|Smoke|Incense|Dark', case=False, na=False)]
+            df_plot = df_plot[df_plot['top_notes'].str.contains('Cherry|Plum|Leather|Smoke|Incense|Dark|Vamp', case=False, na=False)]
 
         df_plot_top = df_plot.nlargest(15, 'community_score').sort_values('community_score', ascending=True)
 
@@ -210,16 +215,16 @@ with tab2:
         )
         st.plotly_chart(fig2, use_container_width=True)
         
-        # --- NEW STRATEGIC INSIGHT PANEL ---
+        # --- STRATEGIC INSIGHT PANEL ---
         insight_html = """
         <div style="border: 1px solid #D4AF37; background: #080808; padding: 25px; margin-top: 30px; margin-bottom: 20px; border-radius: 2px;">
             <div style="color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 10px;">
                 Strategic Insight: The Trickle-Down Effect
             </div>
             <div style="color: #ccc; font-family: 'Lato', sans-serif; font-size: 0.95rem; line-height: 1.6;">
-                <p>Market data reveals a clear <strong>Trickle-Down Effect</strong> in olfactory trends, visibly tracked by the color-coded segments in the charts above. Radical innovations typically originate within the <strong>Niche / Concept</strong> segment (e.g., Givaudan's functional mineral profiles), prioritizing artistry over cost.</p>
-                <p>Within 1-2 years, these profiles are smoothed and commercialized by <strong>Prestige / Designer</strong> houses, gaining global traction through high-budget campaigns.</p>
-                <p>Finally, in the maturity phase (years 3-4), the trend is fully absorbed by the <strong>Mass-Market</strong>. This is when we observe an explosion in community votes and market volume, driven by drugstore and catalog brands (such as Faberlic or Zara) capitalizing on established consumer demand.</p>
+                <p>Market data reveals a clear <strong>Trickle-Down Effect</strong> in olfactory trends, visibly tracked by the color-coded segments in the charts above. Radical innovations typically originate within the <strong>Niche / Concept</strong> segment (e.g., The Nue Co. or Givaudan's functional mineral profiles), prioritizing artistry over cost.</p>
+                <p>Within 1-2 years, these profiles are smoothed and commercialized by <strong>Prestige / Designer</strong> houses (e.g., Paco Rabanne Phantom or Tom Ford Lost Cherry), gaining global traction through high-budget campaigns.</p>
+                <p>Finally, in the maturity phase (years 3-4), the trend is fully absorbed by the <strong>Mass-Market</strong>. This is when we observe an explosion in community votes and market volume, driven by drugstore and fast-fashion brands (such as Zara) capitalizing on established consumer demand.</p>
             </div>
         </div>
         """
@@ -236,7 +241,7 @@ with tab3:
         <div style="border:1px solid #333; background:#080808; padding:20px; border-left: 3px solid #D4AF37;">
             <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.2rem; margin-bottom:10px;">🧪 Functional Fragrance</div>
             <div style="color:#ccc; font-size:0.9rem; font-family:'Lato', sans-serif; line-height: 1.6;">
-                Scent moves beyond aesthetics into neuroscience. Driven by post-pandemic wellness, 71% of consumers now expect fragrances to offer mood-enhancing benefits. Ingredients like <b>Givaudan's Cereboost</b> bridge the gap between perfumery and mental wellbeing.
+                Scent moves beyond aesthetics into neuroscience. Driven by post-pandemic wellness, 71% of consumers now expect fragrances to offer mood-enhancing benefits. AI-assisted formulas, like the 45 million brain scans utilized for <b>Paco Rabanne Phantom</b>, bridge the gap between perfumery and mental wellbeing.
             </div>
         </div>
         <div style="border:1px solid #333; background:#080808; padding:20px; border-left: 3px solid #8B0000;">
@@ -268,7 +273,7 @@ with tab4:
     """
     st.markdown(ecosystem_html, unsafe_allow_html=True)
 
-# --- TAB 5: FRAGRANCE VAULT (NOWA WYSZUKIWARKA) ---
+# --- TAB 5: FRAGRANCE VAULT (SEARCH ENGINE) ---
 with tab5:
     st.markdown('<div class="section-header">The Fragrance Vault</div>', unsafe_allow_html=True)
     
@@ -288,6 +293,7 @@ with tab5:
             if isinstance(f_score, (int, float)):
                 f_score = f"{f_score:.2f}"
             
+            # FLATTENED HTML to prevent Streamlit code block rendering
             card_html = f"""<div style="border: 1px solid #D4AF37; background: #050505; padding: 40px 20px; margin-top: 20px; text-align: center; border-radius: 2px;">
 <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.2rem; letter-spacing: 2px; margin-bottom: 5px; text-transform: uppercase;">{f_name}</div>
 <div style="font-family: 'Lato', sans-serif; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 30px;">Market Segment: {f_segment}</div>
@@ -304,7 +310,7 @@ with tab5:
         else:
             st.info("Select or type a fragrance name in the search bar above to view its detailed profile.")
 
-# --- FOOTER & EXPANDERS (ORGANIZED) ---
+# --- FOOTER & EXPANDERS ---
 st.write("")
 st.write("")
 col_doc1, col_doc2 = st.columns(2)
