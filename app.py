@@ -89,7 +89,7 @@ c6.markdown('<div class="metric-box"><div class="metric-label">Sol de Janeiro Sh
 st.write("")
 
 # -----------------------------------------------------------------------------
-# 3. LOGICAL TAB ORDER (Storytelling Flow)
+# 3. TABS & MAIN LOGIC
 # -----------------------------------------------------------------------------
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["STRATEGIC BRIEFING", "DEEP DIVE ANALYTICS", "FRAGRANCE VAULT", "2026 OUTLOOK", "ECOSYSTEM"])
 
@@ -170,7 +170,6 @@ with tab1:
             )
             st.plotly_chart(fig, use_container_width=True)
 
-    # --- DOCUMENTS ---
     st.write("---")
     col_doc1, col_doc2 = st.columns(2)
     
@@ -353,17 +352,14 @@ with tab4:
     """
     st.markdown(radar_html, unsafe_allow_html=True)
 
-# --- TAB 5: ECOSYSTEM (NOW WITH WORKING LINKS!) ---
+# --- TAB 5: ECOSYSTEM (SPŁASZCZONY HTML) ---
 with tab5:
     st.markdown('<div class="section-header">Project Ecosystem</div>', unsafe_allow_html=True)
     ecosystem_html = """
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px;">
         <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🌍 Aromo Intelligence</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Global market scraping engine & dashboard.</div><div style="margin-top:auto;"><a href="https://huggingface.co/spaces/Baphomert/Aromo-Market-Intelligence" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence" target="_blank" class="btn-code">💻 View Code</a></div></div>
-        
         <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🔍 Perfume Finder</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Consumer recommendation system.</div><div style="margin-top:auto;"><a href="https://perfume-finder-app-btskyvq7eytc5ujrgzr2dk.streamlit.app/" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit" target="_blank" class="btn-code">💻 View Code</a></div></div>
-        
         <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">📊 ScentSational Analytics</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Fragrantica data & olfactory insights.</div><div style="margin-top:auto;"><a href="https://scentsational-zbznjhgc4xv7faddappdc2b.streamlit.app/" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Olfactory-Insights" target="_blank" class="btn-code">💻 View Code</a></div></div>
-        
         <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🧪 ScentSational LFS Hub</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Backend engineering & heavy datasets.</div><div style="margin-top:auto;"><a href="https://baphomert-scentsational-fragrantica-lfs2.hf.space/" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" target="_blank" class="btn-code">💻 View Code</a></div></div>
     </div>
     """
