@@ -269,24 +269,21 @@ with tab4:
 with tab5:
     st.markdown('<div class="section-header">The Fragrance Vault</div>', unsafe_allow_html=True)
     
-    # NEW: Explainer Text
     st.markdown("""
         <div style="color: #aaa; font-family: 'Lato', sans-serif; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.6; border-left: 2px solid #333; padding-left: 15px;">
             This curated vault contains strategic <strong>market case studies</strong> rather than a generic catalogue. 
-            Each fragrance here has been specifically selected to demonstrate key industry shifts discussed in our reports—from 
-            AI-formulated <em>Neuro-Perfumery</em> to the commercialization of the <em>Trickle-Down Effect</em>.
+            Each fragrance here has been specifically selected to demonstrate key industry shifts discussed in our reports, 
+            from AI-formulated <em>Neuro-Perfumery</em> to the commercialization of the <em>Trickle-Down Effect</em>.
         </div>
     """, unsafe_allow_html=True)
     
     if not df.empty:
-        # NEW: Two-column layout for Filtering and Searching
         col_filt1, col_filt2 = st.columns(2)
         
         with col_filt1:
             segments = ["All Segments"] + sorted(df['segment'].dropna().unique().tolist())
             selected_segment = st.selectbox("Filter by Market Segment:", segments)
             
-        # Apply filter based on segment choice
         df_vault = df.copy()
         if selected_segment != "All Segments":
             df_vault = df_vault[df_vault['segment'] == selected_segment]
@@ -307,7 +304,6 @@ with tab5:
             if isinstance(f_score, (int, float)):
                 f_score = f"{f_score:.2f}"
             
-            # FLATTENED HTML
             card_html = f"""<div style="border: 1px solid #D4AF37; background: #050505; padding: 40px 20px; margin-top: 20px; text-align: center; border-radius: 2px;">
 <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.2rem; letter-spacing: 2px; margin-bottom: 5px; text-transform: uppercase;">{f_name}</div>
 <div style="font-family: 'Lato', sans-serif; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 30px;">Market Segment: {f_segment}</div>
