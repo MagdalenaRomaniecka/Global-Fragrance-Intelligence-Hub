@@ -89,9 +89,10 @@ c6.markdown('<div class="metric-box"><div class="metric-label">Sol de Janeiro Sh
 st.write("")
 
 # -----------------------------------------------------------------------------
-# 3. TABS & MAIN LOGIC
+# 3. NEW TAB ORDER & LOGIC
 # -----------------------------------------------------------------------------
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["STRATEGIC BRIEFING", "DEEP DIVE ANALYTICS", "2026 OUTLOOK", "ECOSYSTEM", "FRAGRANCE VAULT"])
+# TABS REORDERED FOR BETTER UX FLOW
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["STRATEGIC BRIEFING", "FRAGRANCE VAULT", "DEEP DIVE ANALYTICS", "2026 OUTLOOK", "ECOSYSTEM"])
 
 current_transcript_file = "podcast_transcript.md"
 
@@ -170,103 +171,8 @@ with tab1:
             )
             st.plotly_chart(fig, use_container_width=True)
 
-# --- TAB 2: DEEP DIVE ANALYTICS ---
+# --- TAB 2: FRAGRANCE VAULT (MOVED TO 2ND POSITION) ---
 with tab2:
-    st.markdown('<div class="section-header">Market Clustering (Top Ranked)</div>', unsafe_allow_html=True)
-    if not df.empty:
-        filter_option = st.selectbox("Filter Data View:", [
-            "Show All Global Data", "Focus: Gourmand 2.0 Notes", "Focus: Russian Market",
-            "Focus: Functional Fragrance (2026 Trend)", "Focus: Vamp Romantic Notes (2026 Trend)"
-        ])
-        
-        df_plot = df.copy()
-        if filter_option == "Focus: Gourmand 2.0 Notes" and 'top_notes' in df_plot.columns:
-            df_plot = df_plot[df_plot['top_notes'].str.contains('Vanilla|Caramel|Pistachio|Sugar|Praline', case=False, na=False)]
-        elif filter_option == "Focus: Russian Market" and 'country' in df_plot.columns:
-            df_plot = df_plot[df_plot['country'] == 'Russia']
-        elif filter_option == "Focus: Functional Fragrance (2026 Trend)" and 'top_notes' in df_plot.columns:
-            df_plot = df_plot[df_plot['top_notes'].str.contains('Functional|Neuro|Clean|Mineral|Musk|Green|Fresh|Lavender', case=False, na=False)]
-        elif filter_option == "Focus: Vamp Romantic Notes (2026 Trend)" and 'top_notes' in df_plot.columns:
-            df_plot = df_plot[df_plot['top_notes'].str.contains('Cherry|Plum|Leather|Smoke|Incense|Dark|Vamp', case=False, na=False)]
-
-        df_plot_top = df_plot.nlargest(15, 'community_score').sort_values('community_score', ascending=True)
-
-        fig2 = px.bar(
-            df_plot_top, x="community_score", y="name", orientation='h', 
-            color="segment", hover_name="name", template="plotly_dark", 
-            color_discrete_sequence=['#D4AF37', '#F0E68C', '#666'],
-            title="Top 15 Fragrances by Community Score",
-            text="community_score"
-        )
-        fig2.update_traces(texttemplate='%{text:.2f}', textposition='outside', textfont_size=12, textfont_color='#E0E0E0', cliponaxis=False)
-        fig2.update_xaxes(range=[0, df_plot_top['community_score'].max() * 1.25]) 
-
-        fig2.update_layout(
-            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
-            font_family="Lato", height=500, margin=dict(l=0,r=50,t=40,b=0),
-            yaxis_title=None, xaxis_title="Score (out of 5.0)"
-        )
-        st.plotly_chart(fig2, use_container_width=True)
-        
-        insight_html = """
-        <div style="border: 1px solid #D4AF37; background: #080808; padding: 25px; margin-top: 30px; margin-bottom: 20px; border-radius: 2px;">
-            <div style="color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 10px;">
-                Strategic Insight: The Trickle-Down Effect
-            </div>
-            <div style="color: #ccc; font-family: 'Lato', sans-serif; font-size: 0.95rem; line-height: 1.6;">
-                <p>Market data reveals a clear <strong>Trickle-Down Effect</strong> in olfactory trends, visibly tracked by the color-coded segments in the charts above. Radical innovations typically originate within the <strong>Niche / Concept</strong> segment (e.g., The Nue Co. or Givaudan's functional mineral profiles), prioritizing artistry over cost.</p>
-                <p>Within 1-2 years, these profiles are smoothed and commercialized by <strong>Prestige / Designer</strong> houses (e.g., Paco Rabanne Phantom or Tom Ford Lost Cherry), gaining global traction through high-budget campaigns.</p>
-                <p>Finally, in the maturity phase (years 3-4), the trend is fully absorbed by the <strong>Mass-Market</strong>. This is when we observe an explosion in community votes and market volume, driven by drugstore and fast-fashion brands (such as Zara) capitalizing on established consumer demand.</p>
-            </div>
-        </div>
-        """
-        st.markdown(insight_html, unsafe_allow_html=True)
-        
-        with st.expander("🔎 INSPECT RAW DATA"):
-            st.dataframe(df.head(50), height=400, use_container_width=True, hide_index=True)
-
-# --- TAB 3: 2026 OUTLOOK ---
-with tab3:
-    st.markdown('<div class="section-header">Trend Radar 2026–2030</div>', unsafe_allow_html=True)
-    radar_html = """
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px; margin-bottom: 30px;">
-        <div style="border:1px solid #333; background:#080808; padding:20px; border-left: 3px solid #D4AF37;">
-            <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.2rem; margin-bottom:10px;">🧪 Functional Fragrance</div>
-            <div style="color:#ccc; font-size:0.9rem; font-family:'Lato', sans-serif; line-height: 1.6;">
-                Scent moves beyond aesthetics into neuroscience. Driven by post-pandemic wellness, 71% of consumers now expect fragrances to offer mood-enhancing benefits. AI-assisted formulas, like the 45 million brain scans utilized for <b>Paco Rabanne Phantom</b>, bridge the gap between perfumery and mental wellbeing.
-            </div>
-        </div>
-        <div style="border:1px solid #333; background:#080808; padding:20px; border-left: 3px solid #8B0000;">
-            <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.2rem; margin-bottom:10px;">🧛‍♀️ Vamp Romantic</div>
-            <div style="color:#ccc; font-size:0.9rem; font-family:'Lato', sans-serif; line-height: 1.6;">
-                A rebellion against 'Clean Girl' minimalism. Gen Z is driving a resurgence of dark, bold profiles. Key notes include <b>black cherry, smoked plum, incense, and leather</b>. This aesthetic blends gothic opulence with modern sensuality.
-            </div>
-        </div>
-        <div style="border:1px solid #333; background:#080808; padding:20px; border-left: 3px solid #F0E68C;">
-            <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.2rem; margin-bottom:10px;">📈 Macro Forces: Protectionism</div>
-            <div style="color:#ccc; font-size:0.9rem; font-family:'Lato', sans-serif; line-height: 1.6;">
-                Supply chains are adapting to aggressive US trade policies (tariffs). Capital is heavily concentrated in AI (Nvidia dominating S&P 500). Meanwhile, <b>Poland has advanced to the 20th largest global economy (PPP)</b>, creating a robust new market for luxury beauty.
-            </div>
-        </div>
-    </div>
-    """
-    st.markdown(radar_html, unsafe_allow_html=True)
-
-# --- TAB 4: ECOSYSTEM ---
-with tab4:
-    st.markdown('<div class="section-header">Project Ecosystem</div>', unsafe_allow_html=True)
-    ecosystem_html = """
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px;">
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🌍 Aromo Intelligence</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Global market scraping engine & dashboard.</div><div style="margin-top:auto;"><a href="#" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence" target="_blank" class="btn-code">💻 View Code</a></div></div>
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🔍 Perfume Finder</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Consumer recommendation system.</div><div style="margin-top:auto;"><a href="#" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit" target="_blank" class="btn-code">💻 View Code</a></div></div>
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">📊 Olfactory Insights</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Deep learning analysis of scent structures.</div><div style="margin-top:auto;"><a href="https://github.com/MagdalenaRomaniecka/Olfactory-Insights" target="_blank" class="btn-code">💻 View Code</a></div></div>
-        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🧪 ScentSational LFS</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Backend engineering documentation.</div><div style="margin-top:auto;"><a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" target="_blank" class="btn-code">💻 View Code</a></div></div>
-    </div>
-    """
-    st.markdown(ecosystem_html, unsafe_allow_html=True)
-
-# --- TAB 5: FRAGRANCE VAULT (WITH FILTERS & EXPLANATION) ---
-with tab5:
     st.markdown('<div class="section-header">The Fragrance Vault</div>', unsafe_allow_html=True)
     
     st.markdown("""
@@ -318,7 +224,108 @@ with tab5:
 </div>"""
             st.markdown(card_html, unsafe_allow_html=True)
         else:
-            st.info(f"Select a case study from the '{selected_segment}' segment to view its profile.")
+            # LUXURY REPLACEMENT FOR BLUE st.info BOX
+            st.markdown(f"""
+            <div style="border: 1px solid #222; background: #080808; color: #888; padding: 20px; text-align: center; font-family: 'Lato', sans-serif; letter-spacing: 1px; font-size: 0.85rem; border-radius: 2px; margin-top: 20px;">
+                Select a case study from the '{selected_segment}' segment to view its profile.
+            </div>
+            """, unsafe_allow_html=True)
+
+# --- TAB 3: DEEP DIVE ANALYTICS ---
+with tab3:
+    st.markdown('<div class="section-header">Market Clustering (Top Ranked)</div>', unsafe_allow_html=True)
+    if not df.empty:
+        filter_option = st.selectbox("Filter Data View:", [
+            "Show All Global Data", "Focus: Gourmand 2.0 Notes", "Focus: Russian Market",
+            "Focus: Functional Fragrance (2026 Trend)", "Focus: Vamp Romantic Notes (2026 Trend)"
+        ])
+        
+        df_plot = df.copy()
+        if filter_option == "Focus: Gourmand 2.0 Notes" and 'top_notes' in df_plot.columns:
+            df_plot = df_plot[df_plot['top_notes'].str.contains('Vanilla|Caramel|Pistachio|Sugar|Praline', case=False, na=False)]
+        elif filter_option == "Focus: Russian Market" and 'country' in df_plot.columns:
+            df_plot = df_plot[df_plot['country'] == 'Russia']
+        elif filter_option == "Focus: Functional Fragrance (2026 Trend)" and 'top_notes' in df_plot.columns:
+            df_plot = df_plot[df_plot['top_notes'].str.contains('Functional|Neuro|Clean|Mineral|Musk|Green|Fresh|Lavender', case=False, na=False)]
+        elif filter_option == "Focus: Vamp Romantic Notes (2026 Trend)" and 'top_notes' in df_plot.columns:
+            df_plot = df_plot[df_plot['top_notes'].str.contains('Cherry|Plum|Leather|Smoke|Incense|Dark|Vamp', case=False, na=False)]
+
+        df_plot_top = df_plot.nlargest(15, 'community_score').sort_values('community_score', ascending=True)
+
+        fig2 = px.bar(
+            df_plot_top, x="community_score", y="name", orientation='h', 
+            color="segment", hover_name="name", template="plotly_dark", 
+            color_discrete_sequence=['#D4AF37', '#F0E68C', '#666'],
+            title="Top 15 Fragrances by Community Score",
+            text="community_score"
+        )
+        fig2.update_traces(texttemplate='%{text:.2f}', textposition='outside', textfont_size=12, textfont_color='#E0E0E0', cliponaxis=False)
+        fig2.update_xaxes(range=[0, df_plot_top['community_score'].max() * 1.25]) 
+
+        fig2.update_layout(
+            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
+            font_family="Lato", height=500, margin=dict(l=0,r=50,t=40,b=0),
+            yaxis_title=None, xaxis_title="Score (out of 5.0)"
+        )
+        st.plotly_chart(fig2, use_container_width=True)
+        
+        # FIXED STRATEGIC INSIGHT PANEL (Line-height & Padding)
+        insight_html = """
+        <div style="border: 1px solid #D4AF37; background: #080808; padding: 30px; margin-top: 30px; margin-bottom: 20px; border-radius: 2px;">
+            <div style="color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 15px; line-height: 1.4;">
+                Strategic Insight: The Trickle-Down Effect
+            </div>
+            <div style="color: #ccc; font-family: 'Lato', sans-serif; font-size: 0.95rem; line-height: 1.7;">
+                <p>Market data reveals a clear <strong>Trickle-Down Effect</strong> in olfactory trends, visibly tracked by the color-coded segments in the charts above. Radical innovations typically originate within the <strong>Niche / Concept</strong> segment (e.g., The Nue Co. or Room 1015), prioritizing artistry over cost.</p>
+                <p>Within 1-2 years, these profiles are smoothed and commercialized by <strong>Prestige / Designer</strong> houses (e.g., Paco Rabanne Phantom or Tom Ford Lost Cherry), gaining global traction through high-budget campaigns.</p>
+                <p>Finally, in the maturity phase (years 3-4), the trend is fully absorbed by the <strong>Mass-Market</strong>. This is when we observe an explosion in community votes and market volume, driven by drugstore and fast-fashion brands (such as Zara) capitalizing on established consumer demand.</p>
+            </div>
+        </div>
+        """
+        st.markdown(insight_html, unsafe_allow_html=True)
+        
+        with st.expander("🔎 INSPECT RAW DATA"):
+            st.dataframe(df.head(50), height=400, use_container_width=True, hide_index=True)
+
+# --- TAB 4: 2026 OUTLOOK ---
+with tab4:
+    st.markdown('<div class="section-header">Trend Radar 2026–2030</div>', unsafe_allow_html=True)
+    radar_html = """
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px; margin-bottom: 30px;">
+        <div style="border:1px solid #333; background:#080808; padding:20px; border-left: 3px solid #D4AF37;">
+            <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.2rem; margin-bottom:10px;">🧪 Functional Fragrance</div>
+            <div style="color:#ccc; font-size:0.9rem; font-family:'Lato', sans-serif; line-height: 1.6;">
+                Scent moves beyond aesthetics into neuroscience. Driven by post-pandemic wellness, 71% of consumers now expect fragrances to offer mood-enhancing benefits. AI-assisted formulas, like the 45 million brain scans utilized for <b>Paco Rabanne Phantom</b>, bridge the gap between perfumery and mental wellbeing.
+            </div>
+        </div>
+        <div style="border:1px solid #333; background:#080808; padding:20px; border-left: 3px solid #8B0000;">
+            <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.2rem; margin-bottom:10px;">🧛‍♀️ Vamp Romantic</div>
+            <div style="color:#ccc; font-size:0.9rem; font-family:'Lato', sans-serif; line-height: 1.6;">
+                A rebellion against 'Clean Girl' minimalism. Gen Z is driving a resurgence of dark, bold profiles. Key notes include <b>black cherry, smoked plum, incense, and leather</b>. This aesthetic blends gothic opulence with modern sensuality.
+            </div>
+        </div>
+        <div style="border:1px solid #333; background:#080808; padding:20px; border-left: 3px solid #F0E68C;">
+            <div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.2rem; margin-bottom:10px;">📈 Macro Forces: Protectionism</div>
+            <div style="color:#ccc; font-size:0.9rem; font-family:'Lato', sans-serif; line-height: 1.6;">
+                Supply chains are adapting to aggressive US trade policies (tariffs). Capital is heavily concentrated in AI (Nvidia dominating S&P 500). Meanwhile, <b>Poland has advanced to the 20th largest global economy (PPP)</b>, creating a robust new market for luxury beauty.
+            </div>
+        </div>
+    </div>
+    """
+    st.markdown(radar_html, unsafe_allow_html=True)
+
+# --- TAB 5: ECOSYSTEM ---
+with tab5:
+    st.markdown('<div class="section-header">Project Ecosystem</div>', unsafe_allow_html=True)
+    ecosystem_html = """
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px;">
+        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🌍 Aromo Intelligence</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Global market scraping engine & dashboard.</div><div style="margin-top:auto;"><a href="#" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence" target="_blank" class="btn-code">💻 View Code</a></div></div>
+        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🔍 Perfume Finder</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Consumer recommendation system.</div><div style="margin-top:auto;"><a href="#" target="_blank" class="btn-launch">🚀 Launch App</a><a href="https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit" target="_blank" class="btn-code">💻 View Code</a></div></div>
+        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">📊 Olfactory Insights</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Deep learning analysis of scent structures.</div><div style="margin-top:auto;"><a href="https://github.com/MagdalenaRomaniecka/Olfactory-Insights" target="_blank" class="btn-code">💻 View Code</a></div></div>
+        <div class="project-card"><div style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">🧪 ScentSational LFS</div><div style="color:#888; font-size:0.8rem; margin-bottom:20px;">Backend engineering documentation.</div><div style="margin-top:auto;"><a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" target="_blank" class="btn-code">💻 View Code</a></div></div>
+    </div>
+    """
+    st.markdown(ecosystem_html, unsafe_allow_html=True)
 
 # --- FOOTER & EXPANDERS ---
 st.write("")
@@ -333,7 +340,7 @@ if "Ep. 1" in selected_episode:
                     raw_text = f.read()
                     st.markdown(f'<div class="transcript-box">\n\n{raw_text}\n\n</div>', unsafe_allow_html=True)
             except:
-                st.info(f"Transcript unavailable. Missing file: {current_transcript_file}")
+                st.markdown('<div class="transcript-box">Transcript unavailable. Missing file.</div>', unsafe_allow_html=True)
     with col_doc2:
         with st.expander("📈 READ 2025 TREND REPORT"):
             try:
@@ -341,7 +348,7 @@ if "Ep. 1" in selected_episode:
                     raw_report = f.read()
                     st.markdown(f'<div class="transcript-box">\n\n{raw_report}\n\n</div>', unsafe_allow_html=True)
             except:
-                st.info("Trend report unavailable. Please ensure 'trend_report_2025.md' is in the directory.")
+                st.markdown('<div class="transcript-box">Trend report unavailable. Please ensure file is in the directory.</div>', unsafe_allow_html=True)
 else:
     with col_doc1:
         with st.expander("📄 READ PODCAST TRANSCRIPT (EPISODE 2)"):
@@ -350,7 +357,7 @@ else:
                     raw_text = f.read()
                     st.markdown(f'<div class="transcript-box">\n\n{raw_text}\n\n</div>', unsafe_allow_html=True)
             except:
-                st.info(f"Transcript unavailable. Missing file: {current_transcript_file}")
+                st.markdown('<div class="transcript-box">Transcript unavailable. Missing file.</div>', unsafe_allow_html=True)
     with col_doc2:
         with st.expander("📈 READ 2026 MACRO REPORT"):
             try:
@@ -358,7 +365,7 @@ else:
                     raw_macro = f.read()
                     st.markdown(f'<div class="transcript-box">\n\n{raw_macro}\n\n</div>', unsafe_allow_html=True)
             except:
-                st.info("Macro report unavailable. Please ensure 'macro_report_2026.md' is in the directory.")
+                st.markdown('<div class="transcript-box">Macro report unavailable. Please ensure file is in the directory.</div>', unsafe_allow_html=True)
 
 st.markdown('<div style="height: 60px;"></div>', unsafe_allow_html=True)
 st.markdown('<div class="footer">FRAGRANCE INTELLIGENCE HUB • DEVELOPED BY MAGDALENA ROMANIECKA</div>', unsafe_allow_html=True)
