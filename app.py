@@ -89,7 +89,7 @@ c6.markdown('<div class="metric-box"><div class="metric-label">Sol de Janeiro Sh
 st.write("")
 
 # -----------------------------------------------------------------------------
-# 3. TABS & MAIN LOGIC
+# 3. LOGICAL TAB ORDER (Storytelling Flow)
 # -----------------------------------------------------------------------------
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["STRATEGIC BRIEFING", "DEEP DIVE ANALYTICS", "FRAGRANCE VAULT", "2026 OUTLOOK", "ECOSYSTEM"])
 
@@ -170,18 +170,19 @@ with tab1:
             )
             st.plotly_chart(fig, use_container_width=True)
 
+    # --- DOCUMENTS ---
     st.write("---")
     col_doc1, col_doc2 = st.columns(2)
     
     if "Ep. 1" in selected_episode:
         with col_doc1:
-            with st.expander("📄 READ PODCAST TRANSCRIPT (EPISODE 1)"):
+            with st.expander("📄 READ EXECUTIVE SUMMARY (EPISODE 1)"):
                 try:
                     with open(current_transcript_file, 'r', encoding='utf-8') as f:
                         raw_text = f.read()
                         st.markdown(f'<div class="transcript-box">\n\n{raw_text}\n\n</div>', unsafe_allow_html=True)
                 except:
-                    st.markdown('<div class="transcript-box">Transcript unavailable. Missing file.</div>', unsafe_allow_html=True)
+                    st.markdown('<div class="transcript-box">Summary unavailable. Missing file.</div>', unsafe_allow_html=True)
         with col_doc2:
             with st.expander("📈 READ 2025 TREND REPORT"):
                 try:
@@ -192,13 +193,13 @@ with tab1:
                     st.markdown('<div class="transcript-box">Trend report unavailable. Please ensure file is in the directory.</div>', unsafe_allow_html=True)
     else:
         with col_doc1:
-            with st.expander("📄 READ PODCAST TRANSCRIPT (EPISODE 2)"):
+            with st.expander("📄 READ EXECUTIVE SUMMARY (EPISODE 2)"):
                 try:
                     with open(current_transcript_file, 'r', encoding='utf-8') as f:
                         raw_text = f.read()
                         st.markdown(f'<div class="transcript-box">\n\n{raw_text}\n\n</div>', unsafe_allow_html=True)
                 except:
-                    st.markdown('<div class="transcript-box">Transcript unavailable. Missing file.</div>', unsafe_allow_html=True)
+                    st.markdown('<div class="transcript-box">Summary unavailable. Missing file.</div>', unsafe_allow_html=True)
         with col_doc2:
             with st.expander("📈 READ 2026 MACRO REPORT"):
                 try:
@@ -352,7 +353,7 @@ with tab4:
     """
     st.markdown(radar_html, unsafe_allow_html=True)
 
-# --- TAB 5: ECOSYSTEM (WITH DATA SOURCE TAGS & EXPLAINER) ---
+# --- TAB 5: ECOSYSTEM ---
 with tab5:
     st.markdown('<div class="section-header">Project Ecosystem</div>', unsafe_allow_html=True)
     
