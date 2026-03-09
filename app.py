@@ -210,11 +210,20 @@ with tab1:
                     st.markdown('<div class="transcript-box">Macro report unavailable. Please ensure file is in the directory.</div>', unsafe_allow_html=True)
 
 
-# --- TAB 2: DEEP DIVE ANALYTICS ---
+# --- TAB 2: DEEP DIVE ANALYTICS (NOW WITH BUBBLE CHART) ---
 with tab2:
-    st.markdown('<div class="section-header">Market Clustering (Top Ranked)</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-header">Market Positioning Map</div>', unsafe_allow_html=True)
+    
+    st.markdown("""
+        <div style="color: #aaa; font-family: 'Lato', sans-serif; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.6; border-left: 2px solid #333; padding-left: 15px;">
+            This scatter plot acts as a strategic quadrant matrix. It plots the <strong>Community Score (Quality)</strong> against 
+            <strong>Total Votes (Popularity)</strong>. Bubble size indicates estimated retail price (USD). 
+            Use the filters below to isolate specific market trends.
+        </div>
+    """, unsafe_allow_html=True)
+
     if not df.empty:
-        filter_option = st.selectbox("Filter Data View:", [
+        filter_option = st.selectbox("Filter Strategic View:", [
             "Show All Global Data", "Focus: Gourmand 2.0 Notes", "Focus: Russian Market",
             "Focus: Functional Fragrance (2026 Trend)", "Focus: Vamp Romantic Notes (2026 Trend)"
         ])
@@ -229,23 +238,51 @@ with tab2:
         elif filter_option == "Focus: Vamp Romantic Notes (2026 Trend)" and 'top_notes' in df_plot.columns:
             df_plot = df_plot[df_plot['top_notes'].str.contains('Cherry|Plum|Leather|Smoke|Incense|Dark|Vamp', case=False, na=False)]
 
-        df_plot_top = df_plot.nlargest(15, 'community_score').sort_values('community_score', ascending=True)
-
-        fig2 = px.bar(
-            df_plot_top, x="community_score", y="name", orientation='h', 
-            color="segment", hover_name="name", template="plotly_dark", 
+        # --- BUBBLE CHART (SCATTER PLOT) LOGIC ---
+        fig2 = px.scatter(
+            df_plot, 
+            x="community_votes", 
+            y="community_score", 
+            size="price_usd", 
+            color="segment", 
+            hover_name="name",
+            text="name", # Adds text labels next to bubbles
             color_discrete_sequence=['#D4AF37', '#F0E68C', '#666'],
-            title="Top 15 Fragrances by Community Score",
-            text="community_score"
+            template="plotly_dark",
+            size_max=40
         )
-        fig2.update_traces(texttemplate='%{text:.2f}', textposition='outside', textfont_size=12, textfont_color='#E0E0E0', cliponaxis=False)
-        fig2.update_xaxes(range=[0, df_plot_top['community_score'].max() * 1.25]) 
+        
+        # Style the text labels and markers
+        fig2.update_traces(
+            textposition='top center', 
+            textfont_size=10, 
+            textfont_color='#E0E0E0',
+            marker=dict(line=dict(width=1, color='#111'), opacity=0.85)
+        )
+        
+        # Add Quadrant median lines for analytical depth
+        if not df_plot.empty and len(df_plot) > 1:
+            median_votes = df_plot['community_votes'].median()
+            median_score = df_plot['community_score'].median()
+            fig2.add_vline(x=median_votes, line_width=1, line_dash="dash", line_color="#555")
+            fig2.add_hline(y=median_score, line_width=1, line_dash="dash", line_color="#555")
 
         fig2.update_layout(
-            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
-            font_family="Lato", height=500, margin=dict(l=0,r=50,t=40,b=0),
-            yaxis_title=None, xaxis_title="Score (out of 5.0)"
+            paper_bgcolor='rgba(0,0,0,0)', 
+            plot_bgcolor='rgba(0,0,0,0)', 
+            font_family="Lato", 
+            height=550, 
+            margin=dict(l=0,r=50,t=40,b=0),
+            xaxis_title="Popularity (Community Votes)",
+            yaxis_title="Quality (Community Score out of 5.0)",
+            legend_title_text="Market Segment",
+            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
         )
+        
+        # Expand x and y axes slightly so bubbles/text aren't cut off
+        fig2.update_xaxes(range=[0, df_plot['community_votes'].max() * 1.2])
+        fig2.update_yaxes(range=[df_plot['community_score'].min() * 0.95, 5.2])
+
         st.plotly_chart(fig2, use_container_width=True)
         
         insight_html = """
