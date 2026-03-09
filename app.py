@@ -210,7 +210,7 @@ with tab1:
                     st.markdown('<div class="transcript-box">Macro report unavailable. Please ensure file is in the directory.</div>', unsafe_allow_html=True)
 
 
-# --- TAB 2: DEEP DIVE ANALYTICS (NOW WITH BUBBLE CHART) ---
+# --- TAB 2: DEEP DIVE ANALYTICS (BUBBLE CHART) ---
 with tab2:
     st.markdown('<div class="section-header">Market Positioning Map</div>', unsafe_allow_html=True)
     
@@ -238,7 +238,6 @@ with tab2:
         elif filter_option == "Focus: Vamp Romantic Notes (2026 Trend)" and 'top_notes' in df_plot.columns:
             df_plot = df_plot[df_plot['top_notes'].str.contains('Cherry|Plum|Leather|Smoke|Incense|Dark|Vamp', case=False, na=False)]
 
-        # --- BUBBLE CHART (SCATTER PLOT) LOGIC ---
         fig2 = px.scatter(
             df_plot, 
             x="community_votes", 
@@ -246,13 +245,12 @@ with tab2:
             size="price_usd", 
             color="segment", 
             hover_name="name",
-            text="name", # Adds text labels next to bubbles
+            text="name",
             color_discrete_sequence=['#D4AF37', '#F0E68C', '#666'],
             template="plotly_dark",
             size_max=40
         )
         
-        # Style the text labels and markers
         fig2.update_traces(
             textposition='top center', 
             textfont_size=10, 
@@ -260,7 +258,6 @@ with tab2:
             marker=dict(line=dict(width=1, color='#111'), opacity=0.85)
         )
         
-        # Add Quadrant median lines for analytical depth
         if not df_plot.empty and len(df_plot) > 1:
             median_votes = df_plot['community_votes'].median()
             median_score = df_plot['community_score'].median()
@@ -279,7 +276,6 @@ with tab2:
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
         )
         
-        # Expand x and y axes slightly so bubbles/text aren't cut off
         fig2.update_xaxes(range=[0, df_plot['community_votes'].max() * 1.2])
         fig2.update_yaxes(range=[df_plot['community_score'].min() * 0.95, 5.2])
 
