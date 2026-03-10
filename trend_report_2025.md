@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Analytical Report: Fragrance Market, Global Economy 2025, and Givaudan Strategy
 
 ## 1. Analysis of the Fragrance Market and Consumer Trends
@@ -170,5 +169,4 @@ The company's strategy focuses on the digitization of olfactory experiences and 
     * **Myrissi:** AI technology translating scents into colors, revolutionizing sales in the e-commerce channel.
     * **Customer Foresight:** A platform utilizing Big Data to predict consumer expectations.
     * **Cereboost:** A ginseng extract supporting cognitive functions (wellness trend).
->>>>>>> de2d3bd5406cae30861ce2842cad57362a5896c7
 * **ESG and Climate:** Givaudan aims to be "Climate Positive" before 2050. Currently, 90% of the electricity used by the group comes from renewable sources.
