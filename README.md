@@ -51,13 +51,12 @@ pip install -r requirements.txt
 # Launch the hub
 streamlit run app.py
 
+# Launch the hub
+streamlit run app.py
+
 ---
 
 **Developed by Magdalena Romaniecka**
 
 *Strategic Insights for the 2026 Fragrance Landscape*
 **Developed by Magdalena Romaniecka** *Strategic Insights for the 2026 Fragrance Landscape*
-
-
-# Launch the hub
-streamlit run app.py
