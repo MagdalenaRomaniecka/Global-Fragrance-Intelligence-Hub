@@ -31,6 +31,18 @@ The core of the experience is an **AI-Synthesized Strategic Briefing**. By lever
 | **Neuro-Scent** | Givaudan Tech | Implementation of **MYRSI AI** for chemical-to-color mapping. |
 | **Regional Intelligence** | Russia / local champions | Local brands (Faberlic, Novaya Zarya) holding **68%** market share. |
 
+## 🌌 The Project Ecosystem
+The **Global Fragrance Intelligence Hub** is the central "master dashboard" that synthesizes data and logic from three foundational sub-projects. Each repository below served as a specific research or engineering stepping stone:
+
+* 🌍 [**Aromo Market Intelligence**](https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence)
+  * *Role:* Data scraping engine & initial dashboard focusing specifically on the Russian market structure and isolationist trends.
+
+* 🧪 [**ScentSational Fragrantica LFS**](https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS)
+  * *Role:* Backend engineering hub designed to handle massive, heavy fragrance datasets using Git Large File Storage (LFS).
+
+* 🔍 [**Perfume Finder Streamlit**](https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit)
+  * *Role:* Algorithm Proof of Concept (PoC). Developed the complex matching logic and fuzzy data fusion used to recommend fragrance profiles.
+
 ## 🛠️ Technical Atelier
 This hub is built using a "Luxury-Code" approach, ensuring the UI reflects the premium nature of the products analyzed:
 
