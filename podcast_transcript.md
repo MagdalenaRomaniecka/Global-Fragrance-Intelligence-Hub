@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🎙️ Intelligence Briefing: The 2026 Fragrance Landscape
 **Strategic Deep Dive • Audio Transcript**
 
@@ -274,5 +273,4 @@
 
 **Host:** On that note, I'm going to spray on some *Eau d'Anxiety Relief*.
 
->>>>>>> de2d3bd5406cae30861ce2842cad57362a5896c7
 **Co-Host:** I might join you. Remember to stop and smell the data.
