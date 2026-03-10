@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 streamlit
 pandas
 plotly
 requests
 fuzzywuzzy
+=======
+streamlit
+pandas
+plotly
+requests
+fuzzywuzzy
+>>>>>>> de2d3bd5406cae30861ce2842cad57362a5896c7
 python-Levenshtein
