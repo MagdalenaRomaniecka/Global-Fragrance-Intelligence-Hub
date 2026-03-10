@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Global Consumer Goods Market and Macroeconomic Dynamics: Verification of 2025 Forecasts and Strategic Perspectives for 2026–2035
 
 An analysis of global financial and consumer markets at the turn of 2025 and 2026 provides clear evidence of a profound structural transformation that has redefined the concept of luxury, technological efficiency, and the balance of economic power. The year 2025, described in forecasts as a time of supply shocks and the artificial intelligence revolution, fully realized the assumed scenarios, and in many aspects—such as the capitalization of the technology sector or Poland's economic advancement—significantly exceeded them.
@@ -66,5 +65,4 @@ Poland not only maintained its status as the fastest-growing large economy in th
 * **Functional Fragrance:** Driven by neuroscience, 71% of consumers expect fragrances to offer mood-enhancing benefits. Givaudan is investing in ingredients like Cereboost (ginseng extract).
 * **Blue Beauty & Biotech:** A shift towards lab-produced plant molecules via fermentation to protect biodiversity.
 * **Vamp Romantic & Glitchy Glam:** Gen Z preferences are driving dark, bold aesthetics (black cherry, leather, smoke) and asymmetrical, avant-garde concepts.
->>>>>>> de2d3bd5406cae30861ce2842cad57362a5896c7
 * **The Russian Market:** Driven by forced autarky and 35% import tariffs, the domestic market is forecast to grow from $672.5 million in 2024 to nearly $1.1 billion in 2035 (CAGR 4.54%). Local producers now control 68% of the market.
