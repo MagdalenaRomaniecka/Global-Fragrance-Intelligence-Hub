@@ -3,7 +3,7 @@
 # ✨ Global Fragrance Intelligence Hub
 ### Strategic Market Briefing • 2026 Predictive Analysis • AI-Driven Insights
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://global-fragrance-intelligence-app-cfdjsojf9bzuxtlxuft4ga.streamlit.app/)
+[![Streamlit App](https://global-fragrance-intelligence-app-fqjkvd9syohbhfpczxgnph.streamlit.app/)
 ![Python](https://img.shields.io/badge/Python-3.9+-D4AF37.svg?style=flat-square&logo=python&logoColor=white)
 ![AI Model](https://img.shields.io/badge/AI-Whisper_Transcription-D4AF37.svg?style=flat-square)
 ![Plotly](https://img.shields.io/badge/Visualization-Plotly_Atelier-888.svg?style=flat-square)
