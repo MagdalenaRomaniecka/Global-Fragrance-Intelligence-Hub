@@ -83,8 +83,6 @@ git clone [https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-
 
 # Install dependencies
 pip install -r requirements.txt
-# Launch the hub
-streamlit run app.py
 
 # Launch the hub
 streamlit run app.py
