@@ -6,85 +6,64 @@
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://global-fragrance-intelligence-app-fqjkvd9syohbhfpczxgnph.streamlit.app/)
 ![Python](https://img.shields.io/badge/Python-3.9+-D4AF37.svg?style=flat-square&logo=python&logoColor=white)
 ![AI Model](https://img.shields.io/badge/AI-Whisper_Transcription-D4AF37.svg?style=flat-square)
-![Plotly](https://img.shields.io/badge/Visualization-Plotly_Atelier-888.svg?style=flat-square)
 
 </div>
 
+---
+
 ## 🏛️ Project Vision
-The **Global Fragrance Intelligence Hub** is a luxury-grade analytical platform designed for the 2026 landscape. It synthesizes advanced **audio-driven market insights** with interactive data, transforming spoken intelligence into actionable strategic forecasts. Moving beyond basic metrics, this hub explores the **"Fragrance Effect"**—a shift where scent has become the key driver in a multi-billion dollar global market (covering EU, RU, and US sectors).
-## 🧠 AI Methodology & Data Provenance
-The platform's credibility relies on a rigorous, innovative data extraction and synthesis pipeline (AI Orchestration):
+> A luxury-grade analytical platform designed for the 2026 landscape. It transforms spoken intelligence into actionable strategic forecasts, exploring the **"Fragrance Effect"** as a key driver in the global multi-billion dollar market.
 
-* **Data extraction (raw insight)**: the foundational datasets powering the satellite repositories were algorithmically scraped from platforms such as **Fragrantica**, **Aromo.ru**, and **eBay** using custom Python scripts.
-* **Macroeconomic synthesis (google deep research)**: complex economic trends—including US protectionism, AI infrastructure scaling, and demographic shifts in Europe—were synthesized using **Google Deep Research**.
-* **Strategic audio transformation (google notebooklm)**: the dense, analytical findings were transformed into an immersive, dual-host strategic briefing using **Google NotebookLM**.
+---
+
+## 🧠 AI Methodology
+* **data extraction**: custom Python scripts for high-fidelity scraping of **Fragrantica**, **Aromo.ru**, and **eBay**.
+* **macroeconomic synthesis**: deep research into US protectionism and AI scaling via **Google Deep Research**.
+* **audio transformation**: immersive strategic briefings generated through **Google NotebookLM**.
+
+
+
+---
+
 ## 🎙️ Intelligence Briefing (Podcast Sync)
-The core of the experience is an **AI-Synthesized Strategic Briefing**. By leveraging **OpenAI Whisper**, the platform transforms a standard audio report into an interactive data narrative, allowing for precision navigation across key strategic topics:
+*Powered by OpenAI Whisper for precision navigation across strategic topics:*
 
-* **I. Recession Glam:** Why fragrance is the new "Weighted Olfactory Blanket" in a tightening economy.
-* **II. Gourmand 2.0:** The evolution from **linear, saccharine profiles** to complex, multi-dimensional "edible" molecules such as Roasted Pistachio and Salted Vanilla.
-* **III. Givaudan & Neural Edge:** How the industry leader uses AI and neuroscience (Cereboost) to digitize emotions.
-* **IV. Regional Intelligence:** A deep dive into the **resilience and strategic adaptation** of the Russian "Duhi" market, exploring local heritage and economic autonomy.
+* **I. Recession Glam:** fragrance as the new "weighted olfactory blanket".
+* **II. Gourmand 2.0:** the shift from saccharine to complex **roasted pistachio** and **salted vanilla** notes.
+* **III. Givaudan & Neural Edge:** industry-leading AI and neuroscience (**Cereboost**) to digitize emotions.
+* **IV. Regional Intelligence:** a deep dive into the resilient Russian **"Duhi"** market and economic autonomy.
 
-### Strategic Intelligence Stack
-The 2026 analytical framework was synthesized from a curated collection of over 50+ high-authority sources and specialized formats:
+---
 
-* **Strategic audio briefings**: immersive, dual-host podcasts generated via **NotebookLM**, based on raw financial transcripts and market trend reports.
-* **Tier 1 market research**: [pinterest predicts 2026 report](https://www.gcimagazine.com/consumers-markets/news/22957242/scent-stacking-to-glitchy-glam-pinterest-predicts-cosmetic-and-fragrance-trends-for-2026) (noting the 500% surge in niche interest) and **Euromonitor International** beauty forecasts.
-* **Corporate & financial intelligence**: [givaudan 2025 full year results](https://www.givaudan.com/media/media-releases/2026/2025-full-year-results) (verifying 18.3% Fine Fragrance growth) and **L’Occitane Group** investor decks.
-* **Technology & AI tracking**: [morningstar / bloomberg nvidia analysis (oct 2025)](https://www.morningstar.com/markets/nvidia-crosses-5-trillion-5-charts-unstoppable-tech-rally) — documenting the $5T market cap and 92% GPU market dominance.
-* **Macroeconomic metrics**: [IMF World Economic Outlook 2025](https://www.imf.org/external/datamapper/NGDPDPC@WEO/JPN/POL) and **XYZ Economic Summary** regarding Poland’s convergence with Japan in PPP.
-* **Academic & machine learning data**: [unraveling of men's fragrance preferences](https://doi.org/10.52436/1.jutif.2024.5.6.4187) (DBSCAN clustering study).
-## 📊 Strategic Pillars
-| Pillar | Focus Area | Data Driven Insight |
+## 📊 Strategic Pillars 2026
+| Pillar | Focus Area | Key Metric |
 | :--- | :--- | :--- |
-| **Market Valuation** | Global Performance | Projected **$593.2B** valuation by end of 2026. |
-| **Growth Drivers** | Product Categories | Fragrance driving **23%** of total category growth. |
-| **Neuro-Scent** | Givaudan Tech | Implementation of **MYRSI AI** for chemical-to-color mapping. |
-| **Regional Intelligence** | Russia / local champions | Local brands (Faberlic, Novaya Zarya) holding **68%** market share. |
+| **Market Valuation** | Global Performance | **$593.2B** valuation by 2026. |
+| **Growth Drivers** | Categories | Fragrance driving **23%** of total growth. |
+| **Neuro-Scent** | Givaudan Tech | **MYRSI AI** color-mapping implementation. |
+| **Regional Power** | Russia | Local brands holding **68%** market share. |
 
-## 🌌 The Project Ecosystem
-The **Global Fragrance Intelligence Hub** is the central "master dashboard" that synthesizes data and logic from three foundational sub-projects. Each repository below served as a specific research or engineering stepping stone:
+---
 
-### 🌍 [Aromo Market Intelligence](https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence)
-> **Role:** Data scraping engine & initial regional dashboard.
-> 
-> *Focusing specifically on the Russian market structure, local heritage, and isolationist trends.*
+## 🌌 Project Ecosystem
+* 🌍 **[Aromo Market Intelligence](https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence)** — regional dashboard & scraping engine.
+* 🔍 **[Perfume Finder](https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit)** — recommendation logic & fuzzy data fusion.
+* 📊 **[Olfactory Insights](https://github.com/MagdalenaRomaniecka/Olfactory-Insights)** — deep learning trend visualization.
+* 🧪 **[ScentSational LFS](https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS)** — high-fidelity dataset management.
 
-### 🔍 [Perfume Finder Streamlit](https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit)
-> **Role:** Consumer recommendation system & Algorithm PoC.
-> 
-> *Developed the complex matching logic and fuzzy data fusion used to precisely recommend fragrance profiles.*
-
-### 📊 [ScentSational Analytics / Olfactory Insights](https://github.com/MagdalenaRomaniecka/Olfactory-Insights)
-> **Role:** Deep learning analysis and data visualization.
-> 
-> *Extracts and visualizes global community olfactory insights to track overarching market trends.*
-
-### 🧪 [ScentSational Fragrantica LFS](https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS)
-> **Role:** Backend engineering hub.
-> 
-> *Designed to process and securely handle massive, high-fidelity fragrance datasets utilizing Git Large File Storage (LFS).*
+---
 
 ## 🛠️ Technical Atelier
-This hub is built using a "Luxury-Code" approach, ensuring the UI reflects the premium nature of the products analyzed:
+* **frontend**: `Streamlit` with custom **Luxury Atelier CSS** (Obsidian & Gold).
+* **transcription**: `OpenAI Whisper` (medium model).
+* **visuals**: `Plotly Express` interactive bubble charts.
 
-* **Frontend:** `Streamlit` with a custom **Luxury Atelier CSS** (Obsidian gradients & D4AF37 Gold accents).
-* **NLP & Transcription:** `OpenAI Whisper` (Medium model) for high-fidelity audio-to-text alignment.
-* **Analytics:** `Plotly Express` for interactive Sentiment vs. Popularity bubble charts.
-* **Logic:** Modular `data_loader` system with fallback mechanisms for root and asset directory handling.
+---
 
-## 📥 Installation & Deployment
-To run this intelligence hub locally, execute the following commands in your terminal:
-
+## 📥 Quick Start
 ```bash
-# Clone the Atelier
 git clone [https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub.git](https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub.git)
-
-# Install dependencies
 pip install -r requirements.txt
-
-# Launch the hub
 streamlit run app.py
 
 ---
