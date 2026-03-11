@@ -12,7 +12,12 @@
 
 ## 🏛️ Project Vision
 The **Global Fragrance Intelligence Hub** is a luxury-grade analytical platform designed for the 2026 landscape. It synthesizes advanced **audio-driven market insights** with interactive data, transforming spoken intelligence into actionable strategic forecasts. Moving beyond basic metrics, this hub explores the **"Fragrance Effect"**—a shift where scent has become the key driver in a multi-billion dollar global market (covering EU, RU, and US sectors).
+## 🧠 AI Methodology & Data Provenance
+The platform's credibility relies on a rigorous, innovative data extraction and synthesis pipeline (AI Orchestration):
 
+* **Data extraction (raw insight)**: the foundational datasets powering the satellite repositories were algorithmically scraped from platforms such as **Fragrantica**, **Aromo.ru**, and **eBay** using custom Python scripts.
+* **Macroeconomic synthesis (google deep research)**: complex economic trends—including US protectionism, AI infrastructure scaling, and demographic shifts in Europe—were synthesized using **Google Deep Research**.
+* **Strategic audio transformation (google notebooklm)**: the dense, analytical findings were transformed into an immersive, dual-host strategic briefing using **Google NotebookLM**.
 ## 🎙️ Intelligence Briefing (Podcast Sync)
 The core of the experience is an **AI-Synthesized Strategic Briefing**. By leveraging **OpenAI Whisper**, the platform transforms a standard audio report into an interactive data narrative, allowing for precision navigation across key strategic topics:
 
