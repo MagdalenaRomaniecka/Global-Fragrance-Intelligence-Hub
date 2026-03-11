@@ -29,6 +29,14 @@ This hub synthesizes macroeconomic data—from Poland's rise to a trillion-dolla
 
 ---
 
+## 🌎 Strategic Geographical Scope
+To provide a high-fidelity analysis of the 2026 landscape, the hub focuses on three distinct economic archetypes. This targeted approach allows for a deeper understanding of how the "Fragrance Effect" manifests under different market pressures:
+
+* **the united states (market maturity & tech leadership)**: as the world's primary luxury consumption hub, the US serves as the benchmark for the "recession glam" phenomenon and the integration of AI giants like **nvidia** into the retail ecosystem.
+* **poland (the emerging european powerhouse)**: chosen for its unprecedented economic convergence, poland represents the fastest-growing fragrance market in the EU, providing a unique case study of rising purchasing power parity (PPP) and a "trillion-dollar" growth trajectory.
+* **the russian federation (market autonomy & resilience)**: an analysis of a "closed-loop" economy, focusing on import substitution, the strategic pivot toward Eastern trade partners (UAE, Turkey), and the resilience of domestic heritage brands.
+
+---
 ## 🎙️ Intelligence Briefing (App Guide)
 The application serves as an interactive dashboard where users can explore the **2025–2026 Fragrance Outlook**. By clicking the **Access Intelligence Hub** badge above, you enter a multi-layered analytical environment:
 
