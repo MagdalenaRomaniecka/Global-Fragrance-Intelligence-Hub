@@ -15,11 +15,12 @@
 ---
 
 ## 🏛️ Project Vision
-The **Global Fragrance Intelligence Hub** is a luxury-grade predictive platform analyzing the shift toward the **"Fragrance Effect"** in the 2026 landscape. While the intelligence framework is global in scope, the analysis focuses on three strategic pillars: the **United States** (as the luxury consumption leader), **Poland** (as the EU's fastest-growing emerging powerhouse), and the **Russian Federation** (as a case study in market autonomy and regional pivot). 
+The **Global Fragrance Intelligence Hub** is a luxury-grade predictive platform analyzing the shift toward the **"Fragrance Effect"** in the 2026 landscape. As the beauty sector reaches a **$593.2 billion valuation**, fragrances are positioned to drive **23% of total category growth**. This platform transforms raw macroeconomic indicators including Poland's trillion-dollar economic rise and the massive valuation of AI infrastructure leaders into high-value strategic insights.
 
-This hub synthesizes macroeconomic data—from Poland's rise to a trillion-dollar economy to the $5 trillion market cap of AI leaders—transforming raw data into actionable strategic insights.
+This hub synthesizes macroeconomic data, from Poland's rise to a trillion-dollar economy to the $5 trillion market cap of AI leaders—transforming raw data into actionable strategic insights. 
 
 ---
+
 
 ## 🧠 AI Methodology & Technical Atelier
 * **data extraction & engineering**: custom **python** scripts for high-fidelity scraping of global sentiment and real-world pricing from platforms like **fragrantica** and **aromo.ru**.
