@@ -32,6 +32,15 @@ The core of the experience is an **AI-Synthesized Strategic Briefing**. By lever
 * **III. Givaudan & Neural Edge:** How the industry leader uses AI and neuroscience (Cereboost) to digitize emotions.
 * **IV. Regional Intelligence:** A deep dive into the **resilience and strategic adaptation** of the Russian "Duhi" market, exploring local heritage and economic autonomy.
 
+### Strategic Intelligence Stack
+The 2026 analytical framework was synthesized from a curated collection of over 50+ high-authority sources and specialized formats:
+
+* **Strategic audio briefings**: immersive, dual-host podcasts generated via **NotebookLM**, based on raw financial transcripts and market trend reports.
+* **Tier 1 market research**: [pinterest predicts 2026 report](https://www.gcimagazine.com/consumers-markets/news/22957242/scent-stacking-to-glitchy-glam-pinterest-predicts-cosmetic-and-fragrance-trends-for-2026) (noting the 500% surge in niche interest) and **Euromonitor International** beauty forecasts.
+* **Corporate & financial intelligence**: [givaudan 2025 full year results](https://www.givaudan.com/media/media-releases/2026/2025-full-year-results) (verifying 18.3% Fine Fragrance growth) and **L’Occitane Group** investor decks.
+* **Technology & AI tracking**: [morningstar / bloomberg nvidia analysis (oct 2025)](https://www.morningstar.com/markets/nvidia-crosses-5-trillion-5-charts-unstoppable-tech-rally) — documenting the $5T market cap and 92% GPU market dominance.
+* **Macroeconomic metrics**: [IMF World Economic Outlook 2025](https://www.imf.org/external/datamapper/NGDPDPC@WEO/JPN/POL) and **XYZ Economic Summary** regarding Poland’s convergence with Japan in PPP.
+* **Academic & machine learning data**: [unraveling of men's fragrance preferences](https://doi.org/10.52436/1.jutif.2024.5.6.4187) (DBSCAN clustering study).
 ## 📊 Strategic Pillars
 | Pillar | Focus Area | Data Driven Insight |
 | :--- | :--- | :--- |
