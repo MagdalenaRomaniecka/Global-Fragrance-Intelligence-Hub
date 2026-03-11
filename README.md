@@ -17,7 +17,7 @@
 ## 🏛️ Project Vision
 The **Global Fragrance Intelligence Hub** is a luxury-grade predictive platform analyzing the shift toward the **"Fragrance Effect"** in the 2026 landscape. As the beauty sector reaches a **$593.2 billion valuation**, fragrances are positioned to drive **23% of total category growth**. This platform transforms raw macroeconomic indicators including Poland's trillion-dollar economic rise and the massive valuation of AI infrastructure leaders into high-value strategic insights.
 
-This hub synthesizes macroeconomic data, from Poland's rise to a trillion-dollar economy to the $5 trillion market cap of AI leaders—transforming raw data into actionable strategic insights. 
+This hub synthesizes macroeconomic data, from Poland's rise to a trillion-dollar economy to the $5 trillion market cap of AI leaders, transforming raw data into actionable strategic insights. 
 
 ---
 
