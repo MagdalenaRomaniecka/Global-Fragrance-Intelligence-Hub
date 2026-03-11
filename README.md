@@ -10,9 +10,6 @@
 
 </div>
 
----
-The **Global Fragrance Intelligence Hub** is a luxury-grade analytical platform designed for the 2026 landscape. It synthesizes advanced **audio-driven market insights** with interactive data, transforming spoken intelligence into actionable strategic forecasts. Moving beyond basic metrics, this hub explores the **"Fragrance Effect"**—a shift where scent has become the key driver in a multi-billion dollar global market (covering EU, RU, and US sectors).
-
 ## 🏛️ Project Vision
 The **Global Fragrance Intelligence Hub** is a luxury-grade analytical platform designed for the 2026 landscape. It synthesizes advanced **audio-driven market insights** with interactive data, transforming spoken intelligence into actionable strategic forecasts. Moving beyond basic metrics, this hub explores the **"Fragrance Effect"**—a shift where scent has become the key driver in a multi-billion dollar global market (covering EU, RU, and US sectors).
 
