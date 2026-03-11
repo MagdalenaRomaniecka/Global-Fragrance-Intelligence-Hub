@@ -13,31 +13,30 @@
 </div>
 
 ---
+---
 
 ## 🏛️ Project Vision
 The **Global Fragrance Intelligence Hub** is a luxury-grade predictive platform analyzing the shift toward the **"Fragrance Effect"** in the 2026 landscape. As the beauty sector reaches a **$593.2 billion valuation**, fragrances are positioned to drive **23% of total category growth**. This platform transforms raw macroeconomic indicators including Poland's trillion-dollar economic rise and the massive valuation of AI infrastructure leaders into high-value strategic insights.
 
-This hub synthesizes macroeconomic data, from Poland's rise to a trillion-dollar economy to the $5 trillion market cap of AI leaders, transforming raw data into actionable strategic insights. 
-
 ---
 
-
 ## 🧠 AI Methodology & Technical Atelier
-* **data extraction & engineering**: custom **python** scripts for high-fidelity scraping of global sentiment and real-world pricing from platforms like **fragrantica** and **aromo.ru**.
-* **macroeconomic synthesis**: utilization of **google deep research** to analyze complex global shifts, including us trade protectionism and the **$5 trillion** market capitalization of ai infrastructure leaders.
-* **strategic audio transformation**: integration of **google notebooklm** to transform dense financial transcripts into immersive, executive-level strategic briefings.
-* **precision transcription**: implementation of **openai whisper** to enable interactive, time-stamped navigation through the 2025–2026 market dynamics.
+* **Data curation & engineering**: utilization of extensive, high-fidelity datasets sourced from **Kaggle**, comprising comprehensive **Fragrantica** and **Aromo.ru** archives. these were processed through custom **python** cleaning, merging, and normalization pipelines.
+* **Macroeconomic synthesis**: utilization of **google deep research** to analyze complex global shifts including us trade protectionism and the **$5 trillion** market capitalization of ai infrastructure leaders.
+* **Strategic audio transformation**: integration of **google notebooklm** to transform dense financial transcripts into immersive, executive-level strategic briefings.
+* **Precision transcription**: implementation of **openai whisper** to enable interactive, time-stamped navigation through the 2025–2026 market dynamics.
 
 ---
 
 ## 🌎 Strategic Geographical Scope
-To provide a high-fidelity analysis of the 2026 landscape, the hub focuses on three distinct economic archetypes. This targeted approach allows for a deeper understanding of how the "Fragrance Effect" manifests under different market pressures:
+To provide a high-fidelity analysis of the 2026 landscape, the hub focuses on three distinct economic archetypes. This targeted approach justifies the "Global" framework through deep-dive case studies instead of broad generalizations:
 
-* **the united states (market maturity & tech leadership)**: as the world's primary luxury consumption hub, the US serves as the benchmark for the "recession glam" phenomenon and the integration of AI giants like **nvidia** into the retail ecosystem.
-* **poland (the emerging european powerhouse)**: chosen for its unprecedented economic convergence, poland represents the fastest-growing fragrance market in the EU, providing a unique case study of rising purchasing power parity (PPP) and a "trillion-dollar" growth trajectory.
-* **the russian federation (market autonomy & resilience)**: an analysis of a "closed-loop" economy, focusing on import substitution, the strategic pivot toward Eastern trade partners (UAE, Turkey), and the resilience of domestic heritage brands.
+* **The United States (Market Maturity)**: analyzed as the world's primary luxury consumption hub and the benchmark for the "recession glam" phenomenon and ai-driven retail scaling.
+* **Poland (The Emerging Powerhouse)**: selected for its unprecedented economic growth and ppp convergence, representing the fastest-growing fragrance market within the european union.
+* **The Russian Federation (Market Autonomy)**: examined as a unique case study in economic resilience, focusing on import substitution and the strategic shift toward eastern trade corridors.
 
 ---
+
 ## 🎙️ Intelligence Briefing (App Guide)
 The application serves as an interactive dashboard where users can explore the **2025–2026 Fragrance Outlook**. By clicking the **Access Intelligence Hub** badge above, you enter a multi-layered analytical environment:
 
