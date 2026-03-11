@@ -3,11 +3,12 @@
 # ✨ Global Fragrance Intelligence Hub
 ### Strategic Market Briefing • 2026 Predictive Analysis • AI-Powered Insights
 
+[![Access the Intelligence Hub](https://img.shields.io/badge/Access_Intelligence_Hub-D4AF37?style=for-the-badge&logo=streamlit&logoColor=white)](https://global-fragrance-intelligence-app-fqjkvd9syohbhfpczxgnph.streamlit.app/)
+
 ![Python](https://img.shields.io/badge/Python-3.9+-D4AF37?style=for-the-badge&logo=python&logoColor=white)
 ![Google Deep Research](https://img.shields.io/badge/Deep_Research-4285F4?style=for-the-badge&logo=google&logoColor=white)
 ![OpenAI Whisper](https://img.shields.io/badge/Whisper_v3-412991?style=for-the-badge&logo=openai&logoColor=white)
 ![NotebookLM](https://img.shields.io/badge/NotebookLM-34A853?style=for-the-badge&logo=google&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 
 </div>
 
@@ -26,6 +27,15 @@ The **Global Fragrance Intelligence Hub** is a luxury-grade predictive platform 
 
 ---
 
+## 🎙️ Intelligence Briefing (App Guide)
+The application serves as an interactive dashboard where users can explore the **2025–2026 Fragrance Outlook**. By clicking the **Access Intelligence Hub** badge above, you enter a multi-layered analytical environment:
+
+* **Interactive Audio Narratives**: high-fidelity strategic briefings synchronized with real-time data visualizations.
+* **Olfactory Sentiment Mapping**: deep dives into the "Gourmand 2.0" trend and the rise of functional scents.
+* **Corporate Performance Tracking**: real-time analysis of industry titans like **Givaudan** and the **Sol de Janeiro** phenomenon.
+
+---
+
 ## 📚 Strategic Intelligence Stack
 *Foundational data derived from high-authority industry reports and corporate intelligence:*
 
@@ -41,18 +51,24 @@ The **Global Fragrance Intelligence Hub** is a luxury-grade predictive platform 
 * 🌍 **Macroeconomics**
     * **IMF World Economic Outlook**
     * **XYZ Economic Summary** (Poland vs Japan PPP convergence)
-* 🎓 **Academic Data**
-    * [Machine Learning Study (DBSCAN Clustering)](https://doi.org/10.52436/1.jutif.2024.5.6.4187) via **Jutif**
 
 ---
 
-## 📊 Strategic Pillars 2026
-| Pillar | Focus Area | Data-Driven Insight |
-| :--- | :--- | :--- |
-| **Market Valuation** | Global Performance | Projected **$593.2B** valuation by end of 2026. |
-| **Growth Drivers** | Product Categories | Fragrance driving **23%** of total category growth. |
-| **Neuro-Scent** | Givaudan Tech | Implementation of **MYRSI AI** for scent-to-color mapping. |
-| **Regional Power** | Russia / Local Market | Local champions holding **68%** market share. |
+## 🌌 Project Ecosystem
+*This hub acts as the central synthesis engine for our specialized satellite repositories:*
+
+* 🌍 **[Aromo Market Intelligence](https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence)** — regional dashboard & scraping engine.
+* 🔍 **[Perfume Finder](https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit)** — recommendation logic & fuzzy data fusion.
+* 📊 **[Olfactory Insights](https://github.com/MagdalenaRomaniecka/Olfactory-Insights)** — deep learning trend visualization.
+* 🧪 **[ScentSational LFS](https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS)** — high-fidelity dataset management via Git LFS.
+
+---
+
+## 📥 Quick Start
+```bash
+git clone [https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub.git](https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub.git)
+pip install -r requirements.txt
+streamlit run app.py
 
 ---
 ```
