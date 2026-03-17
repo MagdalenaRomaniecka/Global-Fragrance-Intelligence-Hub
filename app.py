@@ -5,7 +5,7 @@ import os
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# 1. ATELIER SUPREME CSS (RECOVERED AESTHETICS + MOBILE RESPONSIVE)
+# 1. RECOVERED ATELIER CSS (MARCH 9 AESTHETICS + MOBILE RESPONSIVE)
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 
@@ -13,7 +13,7 @@ st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Lato:wght@300;400;700&display=swap');
 
-    /* Background & Global */
+    /* Global Style */
     .stApp { 
         background-color: #000000; 
         background-image: radial-gradient(circle at 50% 0%, #111 0%, #000 100%); 
@@ -23,7 +23,7 @@ st.markdown("""
     /* RECOVERED: Original Centered Gold Header Wrapper */
     .header-wrapper { display: flex; justify-content: center; padding: 30px 0 15px 0; }
     .header-outer { border: 1px solid #333; padding: 6px; display: inline-block; width: 100%; max-width: 600px; box-sizing: border-box; }
-    .header-inner { border: 1px solid #D4AF37; padding: 25px 60px; text-align: center; background-color: #050505; }
+    .header-inner { border: 1px solid #D4AF37; padding: 25px 60px; text-align: center; background-color: #050505; box-shadow: inset 0 0 20px rgba(212,175,55,0.1); }
     .main-title { font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 4px; margin: 0; }
     .sub-title { font-family: 'Lato', sans-serif; color: #888; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; font-weight: 300; }
     
@@ -38,16 +38,16 @@ st.markdown("""
     
     /* RECOVERED: Original Transcript & Report Styling */
     .transcript-box { font-family: 'Lato', sans-serif; font-size: 0.95rem; line-height: 1.6; color: #cccccc; background: #080808; padding: 30px; border: 1px solid #222; overflow-x: hidden; text-align: justify; }
-    .transcript-box h1 { color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.5rem; text-align: center; border-bottom: 1px solid #D4AF37; padding-bottom: 15px; margin-bottom: 25px; text-transform: uppercase; }
-    .transcript-box h2 { color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 1.25rem; border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 25px; text-align: center; }
+    .transcript-box h1 { color: #D4AF37 !important; font-family: 'Tenor Sans', sans-serif !important; font-size: 1.5rem !important; text-align: center; border-bottom: 1px solid #D4AF37; padding-bottom: 15px; margin-bottom: 25px; text-transform: uppercase; }
+    .transcript-box h2 { color: #F0E68C !important; font-family: 'Tenor Sans', sans-serif !important; font-size: 1.25rem !important; border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 25px; text-align: center; }
     .transcript-box strong { color: #F0E68C; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; font-weight: 700; }
 
-    /* RECOVERED: Centered Vault Card Style */
-    .vault-card { border: 1px solid #D4AF37; background: #050505; padding: 40px 20px; margin-top: 20px; text-align: center; border-radius: 2px; }
-    .vault-title { font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.2rem; letter-spacing: 2px; margin-bottom: 5px; text-transform: uppercase; }
+    /* RECOVERED: Centered Vault Card Style (Faberlic look) */
+    .vault-card { border: 1px solid #D4AF37; background: #050505; padding: 40px 20px; margin-top: 20px; text-align: center; border-radius: 2px; box-shadow: 0 0 20px rgba(212,175,55,0.1); }
+    .vault-title { font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.2rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 5px; }
     .vault-subtitle { font-family: 'Lato', sans-serif; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 30px; }
 
-    /* Project Cards & Mobile Responsiveness */
+    /* Ecosystem & Mobile Responsiveness */
     .project-card { border:1px solid #222; background:#0a0a0a; padding:20px; transition:0.3s; display:flex; flex-direction:column; justify-content:space-between; height:100%; }
     .project-card:hover { border-color:#D4AF37; }
     .btn-launch { display:block; width:100%; padding:10px; background:#D4AF37; color:#000 !important; text-align:center; font-weight:bold; text-transform:uppercase; font-size:0.7rem; margin-bottom:10px; text-decoration:none; }
@@ -67,14 +67,14 @@ st.markdown("""
 df = load_and_merge_data()
 
 # -----------------------------------------------------------------------------
-# 2. HEADER & TOP KPI (RECOVERED LAYOUT)
+# 2. HEADER & TOP KPI (RECOVERED CENTERING)
 # -----------------------------------------------------------------------------
 st.markdown("""
     <div class="header-wrapper">
         <div class="header-outer">
             <div class="header-inner">
                 <h1 class="main-title">Fragrance Intelligence</h1>
-                <div class="sub-title">Global Hub • Strategic Forecast 2026</div>
+                <div class="sub-title">Global Strategic Hub • Predictive Forecast 2026</div>
             </div>
         </div>
     </div>
@@ -84,16 +84,16 @@ c1, c2, c3, c4 = st.columns(4)
 c1.markdown('<div class="metric-box"><div class="metric-label">Global Beauty Market</div><div class="metric-value">$593.2B</div></div>', unsafe_allow_html=True)
 c2.markdown('<div class="metric-box"><div class="metric-label">EU Market Growth</div><div class="metric-value">+16.2%</div></div>', unsafe_allow_html=True)
 c3.markdown('<div class="metric-box"><div class="metric-label">Poland Growth (Max)</div><div class="metric-value">+75.3%</div></div>', unsafe_allow_html=True)
-c4.markdown('<div class="metric-box"><div class="metric-label">Model Reliability</div><div class="metric-value">91%</div></div>', unsafe_allow_html=True)
+c4.markdown('<div class="metric-box"><div class="metric-label">Intelligence Precision</div><div class="metric-value">91%</div></div>', unsafe_allow_html=True)
 
 st.write("")
 
 # -----------------------------------------------------------------------------
-# 3. STRATEGIC TABS (LATEST CONTENT)
+# 3. ANALYTICAL TABS (LATEST CONTENT)
 # -----------------------------------------------------------------------------
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["STRATEGIC BRIEFING", "MARKET ANALYTICS", "FRAGRANCE VAULT", "2026 OUTLOOK", "ECOSYSTEM"])
 
-# --- TAB 1: STRATEGIC BRIEFING ---
+# --- TAB 1: STRATEGIC BRIEFING (WITH MACRO REPORT 2026) ---
 with tab1:
     col_audio, col_viz = st.columns([1, 1.4], gap="large")
     
@@ -108,8 +108,8 @@ with tab1:
         if "Ep. 1" in episode:
             current_transcript, current_audio = "podcast_transcript.md", "https://raw.githubusercontent.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/main/podcast_trends.mp3"
             report_file = "trend_report_2025.md"
-            f_type, v_title = "Notes_Gourmand", "The Gourmand 2.0 Movement"
-            desc = "Analyzing 'The Lipstick Effect' and Sol de Janeiro's dominance."
+            f_type, v_title = "Notes_Gourmand", "The Gourmand 2.0 Phenomenon"
+            desc = "Analyzing 'The Lipstick Effect' and Sol de Janeiro's global scent-stacking dominance."
         elif "Ep. 2" in episode:
             current_transcript, current_audio = "podcast_transcript_2026.md", "podcast_2026.mp3"
             report_file = "macro_report_2026.md"
@@ -117,9 +117,9 @@ with tab1:
             desc = "Deep dive into NVIDIA's AI dominance, US trade protectionism, and neuro-perfumery."
         else:
             current_transcript, current_audio = "ep3_whisper_transcript_EN.md", "ep3_europe_barbell.mp3"
-            report_file = "macro_report_2026.md"
+            report_file = "macro_report_2026.md" # PRZYWRÓCONO: Epizod 3 bazuje na fundamentach 2026
             f_type, v_title = "Barbell", "The Barbell Market Structure 2026"
-            desc = "Bifurcation of the EU market: The hollowing out of the middle tier."
+            desc = "Bifurcation of the EU market: The hollowing out of the 'Squeezed Middle' tier."
 
         st.audio(current_audio)
         st.markdown(f'<p style="color:#888; font-size:0.85rem; font-style:italic; margin-top:15px; border-left: 2px solid #333; padding-left: 15px;">{desc}</p>', unsafe_allow_html=True)
@@ -166,39 +166,38 @@ with tab1:
                     st.markdown(f'<div class="transcript-box">{f.read()}</div>', unsafe_allow_html=True)
             except: st.info(f"Report file '{report_file}' not found.")
 
-# --- TAB 2: MARKET ANALYTICS ---
+# --- TAB 2: MARKET ANALYTICS (WITH STRATEGIC INSIGHT BOX) ---
 with tab2:
     st.markdown('<div class="section-header">Quality vs. Popularity Strategic Matrix</div>', unsafe_allow_html=True)
     fig_b = px.scatter(df, x="community_votes", y="community_score", size="price_usd", color="segment",
                        hover_name="name", color_discrete_sequence=['#D4AF37', '#F0E68C', '#444'],
                        template="plotly_dark", size_max=45)
-    fig_b.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=600)
+    fig_b.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=600, font_family="Lato")
     st.plotly_chart(fig_b, use_container_width=True)
 
-    # RECOVERED: Original Strategic Insight Box
+    # RECOVERED: Original Strategic Insight Box (Wycentrowany, złoty)
     st.markdown("""
         <div style="border: 1px solid #D4AF37; background: #080808; padding: 35px; margin-top: 30px; border-radius: 2px;">
             <div style="color: #D4AF37; font-family: 'Tenor Sans'; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 15px; text-align: center;">
                 Strategic Insight: The Trickle-Down Effect
             </div>
             <div style="color: #ccc; font-family: 'Lato'; font-size: 1rem; line-height: 1.8; text-align: justify;">
-                Market data reveals a clear <strong>Trickle-Down Effect</strong>. Innovations typically originate in the <strong>Niche</strong> segment, prioritizing artistry. Within 1-2 years, these profiles are commercialized by <strong>Prestige</strong> houses. Finally, the trend reaches the <strong>Mass-Market</strong> maturity phase, driving massive volume and community engagement.
+                Market data reveals a clear <strong>Trickle-Down Effect</strong>. Innovations typically originate in the <strong>Niche</strong> segment, prioritizing artistry. Within 1-2 years, these profiles are commercialized by <strong>Prestige</strong> houses. Finally, the trend reaches the <strong>Mass-Market</strong> maturity phase, driving massive volume and community engagement as affordable alternatives hit drugstore shelves.
             </div>
         </div>
     """, unsafe_allow_html=True)
 
-# --- TAB 3: FRAGRANCE VAULT ---
+# --- TAB 3: FRAGRANCE VAULT (CENTRED GOLD CARD) ---
 with tab3:
     st.markdown('<div class="section-header">Fragrance Market Case Studies</div>', unsafe_allow_html=True)
-    f_choice = st.selectbox("Select Profile:", ["-- Choose a Profile --"] + sorted(df['name'].tolist()))
+    f_choice = st.selectbox("Select Intelligence Profile:", ["-- Choose a Profile --"] + sorted(df['name'].tolist()))
     if f_choice != "-- Choose a Profile --":
         f_data = df[df['name'] == f_choice].iloc[0]
-        # RECOVERED: Centered Luxury Card
         st.markdown(f"""
             <div class="vault-card">
                 <div class="vault-title">{f_data['name']}</div>
                 <div class="vault-subtitle">{f_data['brand']} • {f_data['segment']}</div>
-                <div style="display: flex; justify-content: center; gap: 70px; margin: 45px 0; flex-wrap: wrap;">
+                <div style="display: flex; justify-content: center; gap: 60px; margin: 45px 0; flex-wrap: wrap;">
                     <div><p style="color:#666; font-size:0.75rem; letter-spacing:2px; margin-bottom:12px;">QUALITY SCORE</p><h3 style="color:#F0E68C; font-family:'Tenor Sans'; font-size:2.2rem;">{f_data['community_score']}/5.0</h3></div>
                     <div><p style="color:#666; font-size:0.75rem; letter-spacing:2px; margin-bottom:12px;">GLOBAL VOTES</p><h3 style="color:#F0E68C; font-family:'Tenor Sans'; font-size:2.2rem;">{f_data['community_votes']}</h3></div>
                 </div>
@@ -214,9 +213,9 @@ with tab4:
     st.markdown('<div class="section-header">Strategic Trend Radar 2026–2030</div>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
     t_list = [
-        ("🧪 Functional Scent", "AI-designed neuro-perfs designed for mental wellness. Scent becomes a biotech pillar."),
-        ("🧛‍♀️ Vamp Romantic", "The shift toward gothic opulence. Dark cherry and leather dominance in Gen Z prestige."),
-        ("📈 Macro Resilience", "Poland's trillion-dollar powerhouse status. Supply chains adapting to regional shifts.")
+        ("🧪 Functional Scent", "Mood-regulating neuro-perfs designed by AI. Scent moves from aesthetics to biotech wellness."),
+        ("🧛‍♀️ Vamp Romantic", "The definitive shift toward gothic opulence. Dark cherry and leather dominance in Gen Z prestige."),
+        ("📈 Macro Resilience", "Poland's rise as a top-tier European powerhouse. Supply chains adapting to regional shifts.")
     ]
     for col, (t_title, t_text) in zip([c1, c2, c3], t_list):
         col.markdown(f'<div style="border:1px solid #333; background:rgba(10,10,10,0.95); padding:35px; border-left: 4px solid #D4AF37; height:100%;"><h4 style="color:#D4AF37; font-family:Tenor Sans; letter-spacing:1px; margin-bottom:15px;">{t_title}</h4><p style="color:#bbb; font-size:0.95rem; line-height:1.7;">{t_text}</p></div>', unsafe_allow_html=True)
@@ -226,8 +225,8 @@ with tab5:
     st.markdown('<div class="section-header">Interconnected Analytical Ecosystem</div>', unsafe_allow_html=True)
     ecosystem = [
         ("🌍 Aromo Intelligence", "Russian market scraping engine and strategic regional dashboard.", "https://huggingface.co/spaces/Baphomert/Aromo-Market-Intelligence"),
-        ("🔍 Perfume Finder", "Consumer recommendation PoC based on preference matching.", "https://perfume-finder-app-btskyvq7eytc5ujrgzr2dk.streamlit.app/"),
-        ("📊 ScentSational Analytics", "Deep learning trend visualization and community mapping.", "https://scentsational-zbznjhgc4xv7faddappdc2b.streamlit.app/"),
+        ("🔍 Perfume Finder", "Consumer recommendation PoC based on high-fidelity preference matching.", "https://perfume-finder-app-btskyvq7eytc5ujrgzr2dk.streamlit.app/"),
+        ("📊 ScentSational Analytics", "Deep learning trend visualization and community olfactory mapping.", "https://scentsational-zbznjhgc4xv7faddappdc2b.streamlit.app/"),
         ("🧪 ScentSational LFS Hub", "Backend architecture for high-fidelity massive dataset management.", "https://baphomert-scentsational-fragrantica-lfs2.hf.space/")
     ]
     e_cols = st.columns(2)
