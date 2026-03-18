@@ -42,11 +42,7 @@ def load_and_merge_data():
         else: segments.append('Prestige')
 
     np.random.seed(42)
-    prices = []
-    for s in segments:
-        if s == 'Mass-Market': prices.append(np.random.uniform(25, 65)) 
-        elif s == 'Niche': prices.append(np.random.uniform(210, 450)) 
-        else: prices.append(np.random.uniform(85, 175)) 
+    prices = [np.random.uniform(25, 65) if s == 'Mass-Market' else np.random.uniform(210, 450) if s == 'Niche' else np.random.uniform(85, 175) for s in segments]
 
     df = pd.DataFrame({
         'name': names, 'brand': brands, 'segment': segments, 'price_usd': prices,
