@@ -5,7 +5,7 @@ import os
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# 1. ATELIER SUPREME CSS (RECOVERED AESTHETICS + MOBILE RESPONSIVE)
+# 1. ATELIER SUPREME CSS (GOLD CENTERING & LUXURY TYPOGRAPHY)
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 

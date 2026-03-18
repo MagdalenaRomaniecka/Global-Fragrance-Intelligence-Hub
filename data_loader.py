@@ -9,10 +9,8 @@ def classify_barbell_structure(price):
 
 def load_and_merge_data():
     """
-    Enhanced Data Loader: 55 Fragrances to demonstrate a real 'Barbell Market' effect.
+    Enhanced Data Loader: 55 Fragrances for a professional Barbell Market effect.
     """
-    
-    # Comprehensive List of 55 Products
     names = [
         'Sol de Janeiro 62', 'Paco Rabanne Phantom', 'The Nue Co. Functional', 'Tom Ford Lost Cherry',
         'Room 1015 Cherry Punk', 'Zara Cherry Smoothie', 'Zara Red Temptation', 'Faberlic Russian Beauty',
@@ -49,16 +47,12 @@ def load_and_merge_data():
         else:
             segments.append('Prestige')
 
-    # Setting prices to simulate the Barbell Effect
     np.random.seed(42)
     prices = []
     for s in segments:
-        if s == 'Mass-Market':
-            prices.append(np.random.uniform(25, 65)) 
-        elif s == 'Niche':
-            prices.append(np.random.uniform(210, 450)) 
-        else:
-            prices.append(np.random.uniform(85, 175)) 
+        if s == 'Mass-Market': prices.append(np.random.uniform(25, 65)) 
+        elif s == 'Niche': prices.append(np.random.uniform(210, 450)) 
+        else: prices.append(np.random.uniform(85, 175)) 
 
     df = pd.DataFrame({
         'fragrance_id': range(len(names)),
@@ -72,7 +66,6 @@ def load_and_merge_data():
     })
 
     df['market_structure'] = df['price_usd'].apply(classify_barbell_structure)
-    
     europe_brands = ['Paco Rabanne', 'Zara', 'Dior', 'MFK', 'YSL', 'Byredo', 'Diptyque', 'Xerjoff', 'Parfums de Marly', 'Montale', 'Mancera', 'Jo Malone', 'Kilian', 'Versace', 'Chanel', 'Prada', 'Gucci', 'JPG', 'V&R', 'LV', 'F. Malle', 'Nasomatto']
     df['region'] = df['brand'].apply(lambda x: 'Europe' if x in europe_brands else 'Global')
 
