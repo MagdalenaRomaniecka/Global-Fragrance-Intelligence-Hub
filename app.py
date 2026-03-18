@@ -5,7 +5,7 @@ import os
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# 1. ATELIER SUPREME CSS (GOLD CENTERING & LUXURY TYPOGRAPHY)
+# 1. ATELIER SUPREME CSS (FORCED GOLD TYPOGRAPHY & CENTERING)
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 
@@ -15,36 +15,84 @@ st.markdown("""
 
     .stApp { 
         background-color: #000000; 
-        background-image: radial-gradient(circle at 50% 0%, #111 0%, #000 100%); 
+        background-image: radial-gradient(circle at 50% 0%, #151515 0%, #000 100%); 
         font-family: 'Lato', sans-serif !important; 
     }
 
-    .header-wrapper { display: flex; justify-content: center; padding: 30px 0 15px 0; }
-    .header-outer { border: 1px solid #333; padding: 6px; display: inline-block; width: 100%; max-width: 650px; box-sizing: border-box; }
-    .header-inner { border: 1px solid #D4AF37; padding: 25px 60px; text-align: center; background-color: #050505; box-shadow: inset 0 0 20px rgba(212,175,55,0.1); }
-    .main-title { font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.4rem; text-transform: uppercase; letter-spacing: 5px; margin: 0; }
+    /* MAIN APP HEADER - RECOVERED CENTERING */
+    .header-wrapper { display: flex; justify-content: center; padding: 30px 0 20px 0; }
+    .header-outer { border: 1px solid #444; padding: 8px; display: inline-block; width: 100%; max-width: 650px; box-sizing: border-box; }
+    .header-inner { border: 1px solid #D4AF37; padding: 30px 60px; text-align: center; background-color: #050505; box-shadow: inset 0 0 20px rgba(212,175,55,0.1); }
+    .main-title { font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.5rem; text-transform: uppercase; letter-spacing: 6px; margin: 0; }
     .sub-title { font-family: 'Lato', sans-serif; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; margin-top: 10px; font-weight: 300; }
     
+    /* STRATEGIC METRICS */
     .metric-box { border: 1px solid #222; background-color: #080808; padding: 20px; text-align: center; transition: 0.3s; height: 100%; border-radius: 2px; }
     .metric-box:hover { border-color: #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); transform: translateY(-3px); }
     .metric-label { color: #666; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 8px; font-weight: 700; }
     .metric-value { color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 2rem; margin: 0; }
     
-    .section-header { color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.4rem; border-left: 4px solid #D4AF37; padding-left: 18px; margin: 30px 0 20px 0; text-transform: uppercase; letter-spacing: 2px; }
-    
-    .transcript-box { font-family: 'Lato', sans-serif; font-size: 1rem; line-height: 1.8; color: #dfdfdf; background: #080808; padding: 40px; border: 1px solid #222; box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: justify; }
-    .transcript-box h1 { color: #D4AF37 !important; font-family: 'Tenor Sans', sans-serif !important; font-size: 1.8rem !important; text-align: center; border-bottom: 1px solid #D4AF37; padding-bottom: 15px; margin-bottom: 25px; text-transform: uppercase; }
-    .transcript-box h2 { color: #F0E68C !important; font-family: 'Tenor Sans', sans-serif !important; font-size: 1.4rem !important; border-top: 1px solid #333; padding-top: 25px; margin-top: 30px; text-align: center; }
-    .transcript-box strong { color: #F0E68C; font-weight: 700; }
+    /* LUXURY TRANSCRIPT & REPORT BOX */
+    .transcript-box { 
+        font-family: 'Lato', sans-serif; 
+        font-size: 1.05rem; 
+        line-height: 1.9; 
+        color: #dfdfdf; 
+        background: #080808; 
+        padding: 45px; 
+        border: 1px solid #222; 
+        border-radius: 2px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        text-align: justify;
+    }
 
+    /* FORCED GOLD HEADERS (Markdown Support) */
+    .transcript-box h1 { 
+        color: #D4AF37 !important; 
+        font-family: 'Tenor Sans', sans-serif !important; 
+        font-size: 1.9rem !important; 
+        text-align: center !important; 
+        border-bottom: 1px solid #D4AF37 !important; 
+        padding-bottom: 20px !important; 
+        margin-bottom: 30px !important; 
+        text-transform: uppercase !important; 
+        letter-spacing: 3px !important;
+    }
+
+    .transcript-box h2 { 
+        color: #F0E68C !important; 
+        font-family: 'Tenor Sans', sans-serif !important; 
+        font-size: 1.4rem !important; 
+        margin-top: 40px !important; 
+        text-align: center !important; 
+        border-top: 1px solid #333 !important; 
+        padding-top: 25px !important; 
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+    }
+
+    .transcript-box h3 { 
+        color: #D4AF37 !important; 
+        font-family: 'Tenor Sans', sans-serif !important; 
+        font-size: 1.2rem !important; 
+        margin-top: 30px !important; 
+        border-left: 3px solid #D4AF37 !important; 
+        padding-left: 15px !important; 
+    }
+
+    .transcript-box strong { color: #F0E68C !important; font-weight: 700 !important; }
+
+    /* VAULT CARD - FABERLIC STYLE CENTERING */
     .vault-card { border: 1px solid #D4AF37; background: #050505; padding: 45px 25px; text-align: center; border-radius: 2px; box-shadow: 0 0 30px rgba(212,175,55,0.15); margin-top: 25px; }
     .vault-title { font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.4rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
     .vault-subtitle { font-family: 'Lato', sans-serif; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 40px; }
 
+    /* ECOSYSTEM PROJECT TILES */
     .project-card { border:1px solid #222; background:rgba(15,15,15,0.9); padding:25px; transition:0.3s; display:flex; flex-direction:column; justify-content:space-between; height:100%; }
     .project-card:hover { border-color:#D4AF37; }
-    .btn-launch { display:block; width:100%; padding:12px; background:#D4AF37; color:#000 !important; text-align:center; font-weight:bold; text-transform:uppercase; font-size:0.75rem; text-decoration:none; letter-spacing: 1px; }
+    .btn-launch { display:block; width:100%; padding:12px; background:#D4AF37 !important; color:#000 !important; text-align:center; font-weight:bold; text-transform:uppercase; font-size:0.75rem; text-decoration:none; letter-spacing: 1px; }
     
+    /* MOBILE OPTIMIZATION */
     @media (max-width: 768px) {
         .main-title { font-size: 1.6rem; letter-spacing: 3px; }
         .sub-title { font-size: 0.65rem; }
@@ -53,6 +101,7 @@ st.markdown("""
         .vault-title { font-size: 1.8rem; }
     }
 
+    .section-header { color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.4rem; border-left: 4px solid #D4AF37; padding-left: 18px; margin: 30px 0 20px 0; text-transform: uppercase; letter-spacing: 2px; }
     .footer { position: fixed; left: 0; bottom: 0; width: 100%; background-color: #000; color: #444; text-align: center; padding: 12px; font-size: 0.65rem; border-top: 1px solid #111; z-index: 999; letter-spacing: 2px; text-transform: uppercase; }
     </style>
 """, unsafe_allow_html=True)
@@ -81,7 +130,7 @@ for col, (lab, val) in zip([c1, c2, c3, c4], metrics):
 st.write("")
 
 # -----------------------------------------------------------------------------
-# 3. TABS
+# 3. ANALYTICAL TABS
 # -----------------------------------------------------------------------------
 tabs = st.tabs(["STRATEGIC BRIEFING", "MARKET ANALYTICS", "FRAGRANCE VAULT", "2026 OUTLOOK", "ECOSYSTEM"])
 
@@ -90,7 +139,7 @@ with tabs[0]:
     col_audio, col_viz = st.columns([1, 1.4], gap="large")
     with col_audio:
         st.markdown('<div class="section-header">Audio Intelligence Hub</div>', unsafe_allow_html=True)
-        episode = st.radio("Select Intelligence Series:", [
+        episode = st.radio("Intelligence Briefing Series:", [
             "🎧 Ep. 1: Recession Glam & 2025 Market", 
             "🔮 Ep. 2: 2026 Outlook & AI Architecture",
             "🌍 Ep. 3: The European Barbell & Poland"
@@ -149,10 +198,10 @@ with tabs[1]:
     fig_b.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=600)
     st.plotly_chart(fig_b, use_container_width=True)
     st.markdown("""
-        <div style="border: 1px solid #D4AF37; background: #080808; padding: 35px; margin-top: 30px; border-radius: 2px;">
-            <div style="color: #D4AF37; font-family: 'Tenor Sans'; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 15px; text-align: center;">Strategic Insight: The Trickle-Down Effect</div>
-            <div style="color: #ccc; font-family: 'Lato'; font-size: 1rem; line-height: 1.8; text-align: justify;">
-                Market data reveals a clear <strong>Trickle-Down Effect</strong>. Innovations typically originate in the <strong>Niche</strong> segment, prioritizing artistry. Within 1-2 years, these profiles are commercialized by <strong>Prestige</strong> houses. Finally, the trend reaches the <strong>Mass-Market</strong>, driving massive volume.
+        <div style="border: 1px solid #D4AF37; background: #080808; padding: 40px; margin-top: 30px; border-radius: 2px;">
+            <div style="color: #D4AF37; font-family: 'Tenor Sans'; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 20px; text-align: center;">Strategic Insight: The Trickle-Down Effect</div>
+            <div style="color: #ccc; font-family: 'Lato'; font-size: 1.1rem; line-height: 1.9; text-align: justify;">
+                Market data reveals a clear <strong>Trickle-Down Effect</strong>. Innovations typically originate in the <strong>Niche</strong> segment, prioritizing artistry and exotic molecules. Within 1-2 years, these profiles are commercialized by <strong>Prestige</strong> houses. Finally, the trend reaches the <strong>Mass-Market</strong>, driving massive volume through affordable alternatives.
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -167,7 +216,7 @@ with tabs[2]:
             <div class="vault-card">
                 <div class="vault-title">{f_data['name']}</div>
                 <div class="vault-subtitle">{f_data['brand']} • {f_data['segment']}</div>
-                <div style="display: flex; justify-content: center; gap: 60px; margin: 45px 0; flex-wrap: wrap;">
+                <div style="display: flex; justify-content: center; gap: 70px; margin: 45px 0; flex-wrap: wrap;">
                     <div><p style="color:#666; font-size:0.75rem; letter-spacing:2px; margin-bottom:12px;">QUALITY SCORE</p><h3 style="color:#F0E68C; font-family:'Tenor Sans'; font-size:2.2rem;">{f_data['community_score']}/5.0</h3></div>
                     <div><p style="color:#666; font-size:0.75rem; letter-spacing:2px; margin-bottom:12px;">GLOBAL VOTES</p><h3 style="color:#F0E68C; font-family:'Tenor Sans'; font-size:2.2rem;">{f_data['community_votes']}</h3></div>
                 </div>

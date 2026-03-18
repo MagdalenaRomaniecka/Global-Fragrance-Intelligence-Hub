@@ -39,13 +39,13 @@ def load_and_merge_data():
         'Aromatix', 'Niche Emarati', 'Swiss Arabian', 'Rasasi', 'Al Haramain', 'Bvlgari', 'LV', 'F. Malle', 'Nasomatto'
     ]
 
-    # Note pool to activate app filters (Gourmand, Vamp Romantic, etc.)
+    # Note pool to activate app filters (Vanilla and Pistachio are key for Ep 1)
     note_templates = [
-        'Vanilla, Salted Caramel, Pistachio (Gourmand)',
-        'Black Cherry, Liqueur, Bitter Almond (Vamp)',
-        'Saffron, Amberwood, Jasmine (Luxury)',
-        'Lavender, Lemon, AI Neuro-Molecules',
-        'Sandalwood, Leather, Cardamom'
+        'Vanilla, Salted Caramel, Pistachio (Gourmand Focus)',
+        'Black Cherry, Liqueur, Bitter Almond (Vamp Romantic)',
+        'Saffron, Amberwood, Jasmine (Luxury Niche)',
+        'Lavender, Lemon, AI Neuro-Molecules (Functional)',
+        'Sandalwood, Leather, Cardamom (Minimalist)'
     ]
 
     segments = []
