@@ -9,9 +9,6 @@ def classify_barbell_structure(price):
     else: return 'Squeezed Middle'
 
 def load_and_merge_data():
-    """
-    Strategic Data Loader: 55 Fragrances with real Olfactory Notes for filtering.
-    """
     names = [
         'Sol de Janeiro 62', 'Paco Rabanne Phantom', 'The Nue Co. Functional', 'Tom Ford Lost Cherry',
         'Room 1015 Cherry Punk', 'Zara Cherry Smoothie', 'Zara Red Temptation', 'Faberlic Russian Beauty',
@@ -29,37 +26,26 @@ def load_and_merge_data():
         'Rasasi Hawas', 'Al Haramain Amber Oud', 'Bvlgari Tygar', 'Louis Vuitton Ombre Nomade',
         'Frederick Malle Portrait of a Lady', 'Nasomatto Black Afgano'
     ]
-
     brands = [
         'Sol de Janeiro', 'Paco Rabanne', 'The Nue Co.', 'Tom Ford', 'Room 1015', 'Zara', 'Zara', 'Faberlic', 
         'Novaya Zarya', 'Dior', 'MFK', 'Amouage', 'Ariana Grande', 'YSL', 'Le Labo', 'Byredo', 'Creed', 'Diptyque',
         'Zara', 'Lattafa', 'Armaf', 'Xerjoff', 'Parfums de Marly', 'Montale', 'Mancera', 'Glossier', 'Phlur', 
         'Jo Malone', 'Kayali', 'Initio', 'Roja Dove', 'Clive Christian', 'Afnan', 'Missoni', 'Lalique', 'Zimaya',
         'Maison Alhambra', 'Kilian', 'Tom Ford', 'Versace', 'Chanel', 'Prada', 'Gucci', 'JPG', 'V&R', 'Zara',
-        'Aromatix', 'Niche Emarati', 'Swiss Arabian', 'Rasasi', Al Haramain', 'Bvlgari', 'LV', 'F. Malle', 'Nasomatto'
+        'Aromatix', 'Niche Emarati', 'Swiss Arabian', 'Rasasi', 'Al Haramain', 'Bvlgari', 'LV', 'F. Malle', 'Nasomatto'
     ]
-
-    np.random.seed(42)
-    note_templates = [
-        'Vanilla, Salted Caramel, Pistachio', 'Black Cherry, Leather, Bitter Almond',
-        'Saffron, Amberwood, Jasmine', 'Lavender, Lemon, AI Molecules', 'Sandalwood, Musk, Fresh notes'
-    ]
+    # Nuty zapachowe niezbędne do działania filtrów w app.py
+    note_templates = ['Vanilla, Salted Caramel, Pistachio', 'Black Cherry, Leather, Almond', 'Saffron, Jasmine', 'Lavender, AI Molecules', 'Sandalwood']
     
-    segments = [np.random.choice(['Mass-Market', 'Prestige', 'Niche'], p=[0.5, 0.3, 0.2]) for _ in names]
+    np.random.seed(42)
+    segments = [np.random.choice(['Mass-Market', 'Prestige', 'Niche']) for _ in names]
     
     df = pd.DataFrame({
-        'fragrance_id': range(len(names)),
-        'name': names,
-        'brand': brands,
-        'segment': segments,
+        'name': names, 'brand': brands, 'segment': segments,
         'price_usd': [np.random.uniform(25, 65) if s == 'Mass-Market' else np.random.uniform(210, 450) if s == 'Niche' else np.random.uniform(85, 175) for s in segments],
-        'top_notes': [np.random.choice(note_templates) for _ in names],
+        'top_notes': [random.choice(note_templates) for _ in names],
         'community_score': np.random.uniform(3.5, 4.9, size=len(names)),
         'community_votes': np.random.randint(100, 3000, size=len(names))
     })
-
     df['market_structure'] = df['price_usd'].apply(classify_barbell_structure)
-    europe_brands = ['Paco Rabanne', 'Zara', 'Dior', 'MFK', 'YSL', 'Byredo', 'Diptyque', 'Xerjoff', 'Parfums de Marly', 'Montale', 'Mancera', 'Jo Malone', 'Kilian', 'Versace', 'Chanel', 'Prada', 'Gucci', 'JPG', 'V&R', 'LV', 'F. Malle', 'Nasomatto']
-    df['region'] = df['brand'].apply(lambda x: 'Europe' if x in europe_brands else 'Global')
-
     return df
