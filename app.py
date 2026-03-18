@@ -90,7 +90,7 @@ with tabs[0]:
     col_audio, col_viz = st.columns([1, 1.4], gap="large")
     with col_audio:
         st.markdown('<div class="section-header">Audio Intelligence Hub</div>', unsafe_allow_html=True)
-        episode = st.radio("Intelligence Briefing Series:", [
+        episode = st.radio("Select Intelligence Series:", [
             "🎧 Ep. 1: Recession Glam & 2025 Market", 
             "🔮 Ep. 2: 2026 Outlook & AI Architecture",
             "🌍 Ep. 3: The European Barbell & Poland"

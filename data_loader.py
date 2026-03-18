@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import random
 
 def classify_barbell_structure(price):
     if pd.isna(price): return 'Unknown'
@@ -9,7 +10,7 @@ def classify_barbell_structure(price):
 
 def load_and_merge_data():
     """
-    Enhanced Data Loader: 55 Fragrances for a professional Barbell Market effect.
+    Strategic Data Loader: 55 Fragrances with real Olfactory Notes for filtering.
     """
     names = [
         'Sol de Janeiro 62', 'Paco Rabanne Phantom', 'The Nue Co. Functional', 'Tom Ford Lost Cherry',
@@ -38,6 +39,15 @@ def load_and_merge_data():
         'Aromatix', 'Niche Emarati', 'Swiss Arabian', 'Rasasi', 'Al Haramain', 'Bvlgari', 'LV', 'F. Malle', 'Nasomatto'
     ]
 
+    # Note pool to activate app filters (Gourmand, Vamp Romantic, etc.)
+    note_templates = [
+        'Vanilla, Salted Caramel, Pistachio (Gourmand)',
+        'Black Cherry, Liqueur, Bitter Almond (Vamp)',
+        'Saffron, Amberwood, Jasmine (Luxury)',
+        'Lavender, Lemon, AI Neuro-Molecules',
+        'Sandalwood, Leather, Cardamom'
+    ]
+
     segments = []
     for b in brands:
         if b in ['Zara', 'Lattafa', 'Armaf', 'Afnan', 'Missoni', 'Lalique', 'Faberlic', 'Novaya Zarya', 'Rasasi', 'Al Haramain', 'Zimaya', 'Maison Alhambra']:
@@ -60,7 +70,7 @@ def load_and_merge_data():
         'brand': brands,
         'segment': segments,
         'price_usd': prices,
-        'top_notes': ['Strategic Olfactory Profile' for _ in names],
+        'top_notes': [random.choice(note_templates) for _ in names],
         'community_score': np.random.uniform(3.5, 4.9, size=len(names)),
         'community_votes': np.random.randint(100, 3000, size=len(names))
     })
