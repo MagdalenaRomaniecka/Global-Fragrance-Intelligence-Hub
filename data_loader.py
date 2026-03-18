@@ -34,15 +34,18 @@ def load_and_merge_data():
         'Maison Alhambra', 'Kilian', 'Tom Ford', 'Versace', 'Chanel', 'Prada', 'Gucci', 'JPG', 'V&R', 'Zara',
         'Aromatix', 'Niche Emarati', 'Swiss Arabian', 'Rasasi', 'Al Haramain', 'Bvlgari', 'LV', 'F. Malle', 'Nasomatto'
     ]
-    # Nuty zapachowe niezbędne do działania filtrów w app.py
-    note_templates = ['Vanilla, Salted Caramel, Pistachio', 'Black Cherry, Leather, Almond', 'Saffron, Jasmine', 'Lavender, AI Molecules', 'Sandalwood']
-    
+    note_templates = ['Vanilla, Salted Caramel, Pistachio', 'Black Cherry, Leather, Almond', 'Saffron, Amberwood, Jasmine', 'Lavender, Lemon, AI Molecules', 'Sandalwood, Cardamom']
+    segments = []
+    for b in brands:
+        if b in ['Zara', 'Lattafa', 'Armaf', 'Afnan', 'Missoni', 'Lalique', 'Faberlic', 'Novaya Zarya', 'Rasasi', 'Al Haramain', 'Zimaya', 'Maison Alhambra']: segments.append('Mass-Market')
+        elif b in ['Tom Ford', 'Creed', 'Xerjoff', 'Amouage', 'Roja Dove', 'Clive Christian', 'MFK', 'Le Labo', 'Byredo', 'Initio', 'LV', 'F. Malle', 'Nasomatto', 'Bvlgari']: segments.append('Niche')
+        else: segments.append('Prestige')
+
     np.random.seed(42)
-    segments = [np.random.choice(['Mass-Market', 'Prestige', 'Niche']) for _ in names]
+    prices = [np.random.uniform(25, 65) if s == 'Mass-Market' else np.random.uniform(210, 450) if s == 'Niche' else np.random.uniform(85, 175) for s in segments]
     
     df = pd.DataFrame({
-        'name': names, 'brand': brands, 'segment': segments,
-        'price_usd': [np.random.uniform(25, 65) if s == 'Mass-Market' else np.random.uniform(210, 450) if s == 'Niche' else np.random.uniform(85, 175) for s in segments],
+        'name': names, 'brand': brands, 'segment': segments, 'price_usd': prices,
         'top_notes': [random.choice(note_templates) for _ in names],
         'community_score': np.random.uniform(3.5, 4.9, size=len(names)),
         'community_votes': np.random.randint(100, 3000, size=len(names))
