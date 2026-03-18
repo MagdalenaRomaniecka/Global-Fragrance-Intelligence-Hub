@@ -10,7 +10,7 @@ def classify_barbell_structure(price):
 
 def load_and_merge_data():
     """
-    Strategic Data Loader: 55 Fragrances with real Olfactory Notes for filtering.
+    Strategic Data Loader: 55 Fragrances with real Olfactory Notes.
     """
     names = [
         'Sol de Janeiro 62', 'Paco Rabanne Phantom', 'The Nue Co. Functional', 'Tom Ford Lost Cherry',
@@ -39,13 +39,12 @@ def load_and_merge_data():
         'Aromatix', 'Niche Emarati', 'Swiss Arabian', 'Rasasi', 'Al Haramain', 'Bvlgari', 'LV', 'F. Malle', 'Nasomatto'
     ]
 
-    # Note pool to activate app filters (Vanilla and Pistachio are key for Ep 1)
     note_templates = [
         'Vanilla, Salted Caramel, Pistachio (Gourmand Focus)',
         'Black Cherry, Liqueur, Bitter Almond (Vamp Romantic)',
         'Saffron, Amberwood, Jasmine (Luxury Niche)',
         'Lavender, Lemon, AI Neuro-Molecules (Functional)',
-        'Sandalwood, Leather, Cardamom (Minimalist)'
+        'Sandalwood, Leather, Cardamom'
     ]
 
     segments = []
