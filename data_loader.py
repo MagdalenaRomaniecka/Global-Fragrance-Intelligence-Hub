@@ -36,13 +36,12 @@ def load_and_merge_data():
     ]
     
     np.random.seed(42)
-    # Celowe rozproszenie cen dla lepszej czytelności wykresu
-    prices = [np.random.uniform(20, 80) if i % 3 == 0 else np.random.uniform(90, 180) if i % 3 == 1 else np.random.uniform(220, 500) for i in range(len(names))]
+    prices = [np.random.uniform(25, 75) if i % 3 == 0 else np.random.uniform(85, 175) if i % 3 == 1 else np.random.uniform(210, 480) for i in range(len(names))]
     
     df = pd.DataFrame({
         'name': names, 'brand': brands, 'price_usd': prices,
         'top_notes': [random.choice(['Vanilla, Pistachio', 'Cherry, Leather', 'Saffron, Amber', 'Lavender, AI Molecules', 'Sandalwood']) for _ in names],
-        'community_score': np.random.uniform(3.5, 4.9, size=len(names)),
+        'community_score': np.random.uniform(3.4, 4.9, size=len(names)),
         'community_votes': np.random.randint(100, 3000, size=len(names))
     })
     
