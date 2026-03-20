@@ -26,16 +26,10 @@ def load_and_merge_data():
         'Rasasi Hawas', 'Al Haramain Amber Oud', 'Bvlgari Tygar', 'Louis Vuitton Ombre Nomade',
         'Frederick Malle Portrait of a Lady', 'Nasomatto Black Afgano'
     ]
-    brands = [
-        'Sol de Janeiro', 'Paco Rabanne', 'The Nue Co.', 'Tom Ford', 'Room 1015', 'Zara', 'Zara', 'Faberlic', 
-        'Novaya Zarya', 'Dior', 'MFK', 'Amouage', 'Ariana Grande', 'YSL', 'Le Labo', 'Byredo', 'Creed', 'Diptyque',
-        'Zara', 'Lattafa', 'Armaf', 'Xerjoff', 'Parfums de Marly', 'Montale', 'Mancera', 'Glossier', 'Phlur', 
-        'Jo Malone', 'Kayali', 'Initio', 'Roja Dove', 'Clive Christian', 'Afnan', 'Missoni', 'Lalique', 'Zimaya',
-        'Maison Alhambra', 'Kilian', 'Tom Ford', 'Versace', 'Chanel', 'Prada', 'Gucci', 'JPG', 'V&R', 'Zara',
-        'Aromatix', 'Niche Emarati', 'Swiss Arabian', 'Rasasi', 'Al Haramain', 'Bvlgari', 'LV', 'F. Malle', 'Nasomatto'
-    ]
+    brands = ['Sol de Janeiro', 'Paco Rabanne', 'The Nue Co.', 'Tom Ford', 'Room 1015', 'Zara', 'Zara', 'Faberlic', 'Novaya Zarya', 'Dior', 'MFK', 'Amouage', 'Ariana Grande', 'YSL', 'Le Labo', 'Byredo', 'Creed', 'Diptyque', 'Zara', 'Lattafa', 'Armaf', 'Xerjoff', 'Parfums de Marly', 'Montale', 'Mancera', 'Glossier', 'Phlur', 'Jo Malone', 'Kayali', 'Initio', 'Roja Dove', 'Clive Christian', 'Afnan', 'Missoni', 'Lalique', 'Zimaya', 'Maison Alhambra', 'Kilian', 'Tom Ford', 'Versace', 'Chanel', 'Prada', 'Gucci', 'JPG', 'V&R', 'Zara', 'Aromatix', 'Niche Emarati', 'Swiss Arabian', 'Rasasi', 'Al Haramain', 'Bvlgari', 'LV', 'F. Malle', 'Nasomatto']
     
     np.random.seed(42)
+    # Balanced data distribution for clear quadrants
     prices = [np.random.uniform(25, 75) if i % 3 == 0 else np.random.uniform(85, 175) if i % 3 == 1 else np.random.uniform(210, 480) for i in range(len(names))]
     
     df = pd.DataFrame({
