@@ -4,7 +4,7 @@ import pandas as pd
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# 1. ATELIER SUPREME CSS - CENTERED LUXURY, 100% ENGLISH & GOLD PLAQUES
+# 1. ATELIER SUPREME CSS - CENTERED LUXURY & CLEAN TYPOGRAPHY (100% ENGLISH)
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 
@@ -42,62 +42,6 @@ st.markdown("""
     .metric-box:hover { border-color: #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
     .metric-label { color: #666; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2.5px; font-weight: 700; margin-bottom: 8px; }
     .metric-value { color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 1.8rem; }
-    
-    /* ------------------------------------------------------------------------
-       ULTIMATE VAULT CARD (INSPIRED BY YOUR MIDJOURNEY CONCEPT)
-       ------------------------------------------------------------------------ */
-    .vault-card-outer {
-        border: 2px solid #D4AF37;
-        padding: 6px;
-        background: #000;
-        margin: 30px auto;
-        max-width: 900px;
-        box-shadow: 0 0 30px rgba(212,175,55,0.15);
-    }
-    .vault-card-inner {
-        border: 1px solid rgba(212,175,55,0.4);
-        background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%);
-        padding: 50px 30px;
-        text-align: center;
-    }
-    .vault-title { font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.8rem; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 10px; }
-    .vault-subtitle { color: #D4AF37; font-size: 0.9rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px; }
-    
-    /* THE GOLDEN PLAQUES FOR METRICS */
-    .metric-plaque-container {
-        display: flex;
-        justify-content: center;
-        gap: 40px;
-        margin-bottom: 40px;
-        flex-wrap: wrap;
-    }
-    .metric-plaque {
-        border: 2px solid #D4AF37;
-        background: linear-gradient(145deg, #1a1500 0%, #050505 100%);
-        padding: 25px 40px;
-        min-width: 250px;
-        box-shadow: inset 0 0 15px rgba(212,175,55,0.1), 0 10px 20px rgba(0,0,0,0.8);
-        border-radius: 2px;
-        position: relative;
-    }
-    /* Inner line for the plaque */
-    .metric-plaque::before {
-        content: '';
-        position: absolute;
-        top: 4px; left: 4px; right: 4px; bottom: 4px;
-        border: 1px solid rgba(212,175,55,0.3);
-        pointer-events: none;
-    }
-    
-    .vault-huge-number { color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 3.5rem; line-height: 1.2; margin: 0; text-shadow: 0 0 10px rgba(240, 230, 140, 0.2); }
-    
-    /* GOLD DIVIDER LINE */
-    .gold-divider {
-        border: 0;
-        height: 1px;
-        background: linear-gradient(to right, transparent, #D4AF37, transparent);
-        margin: 40px 0;
-    }
 
     /* REPORTS & TRANSCRIPTS */
     .report-frame { background: #080808; padding: 45px; border: 1px solid #222; box-shadow: 0 15px 40px rgba(0,0,0,0.6); color: #dfdfdf; line-height: 1.9; text-align: justify; margin-bottom: 30px; font-size: 1.05rem; }
@@ -113,15 +57,6 @@ st.markdown("""
 
     /* FOOTER */
     .footer { position: fixed; left: 0; bottom: 0; width: 100%; background-color: #000; color: #444; text-align: center; padding: 12px; font-size: 0.65rem; border-top: 1px solid #111; z-index: 999; letter-spacing: 2px; }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-        .main-title { font-size: 1.5rem; letter-spacing: 2px; }
-        .metric-value { font-size: 1.3rem; }
-        .vault-title { font-size: 1.8rem; }
-        .vault-huge-number { font-size: 2.5rem; }
-        .metric-plaque { min-width: 100%; padding: 20px; }
-    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -210,10 +145,8 @@ with tabs[0]:
 with tabs[1]:
     st.markdown('<div class="section-header">Market Segmentation Strategic Hierarchy</div>', unsafe_allow_html=True)
     
-    # STRATEGIC FILTERING: Get only Top 5 fragrances for each segment to ensure readability
     df_sunburst = df.groupby('segment').apply(lambda x: x.nlargest(5, 'community_votes')).reset_index(drop=True)
     
-    # IDM Vibe Sunburst Chart with filtered data
     fig_sun = px.sunburst(df_sunburst, path=[px.Constant("Global Market"), 'segment', 'brand', 'name'], 
                           values='community_votes', color='segment',
                           color_discrete_map={'(?)':'#333', 'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#555'},
@@ -228,7 +161,6 @@ with tabs[1]:
         margin=dict(t=20, l=10, r=10, b=20),
         font=dict(family="Lato, sans-serif")
     )
-    
     st.plotly_chart(fig_sun, use_container_width=True)
     
     st.markdown("""
@@ -240,34 +172,45 @@ with tabs[1]:
         </div>
     """, unsafe_allow_html=True)
 
-# --- TAB 3: FRAGRANCE VAULT (REDESIGNED WITH GOLD PLAQUES) ---
+# --- TAB 3: FRAGRANCE VAULT (BULLETPROOF INLINE CSS FOR PLAQUES) ---
 with tabs[2]:
     st.markdown('<div class="section-header">Fragrance Market Case Studies</div>', unsafe_allow_html=True)
     f_choice = st.selectbox("Select Intelligence Profile:", ["-- Choose a Profile --"] + sorted(df['name'].tolist()))
     
     if f_choice != "-- Choose a Profile --":
         f_data = df[df['name'] == f_choice].iloc[0]
+        
+        # BULLETPROOF INLINE STYLES - Streamlit CANNOT strip these!
         st.markdown(f"""
-            <div class="vault-card-outer">
-                <div class="vault-card-inner">
-                    <div class="vault-title">{f_data['name']}</div>
-                    <div class="vault-subtitle">{f_data['brand']} • {f_data['segment']}</div>
+            <div style="border: 2px solid #D4AF37; padding: 6px; background: #000; margin: 30px auto; max-width: 900px; box-shadow: 0 0 30px rgba(212,175,55,0.15);">
+                <div style="border: 1px solid rgba(212,175,55,0.4); background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%); padding: 50px 30px; text-align: center;">
                     
-                    <div class="metric-plaque-container">
-                        <div class="metric-plaque">
-                            <div style="color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;">Quality Score</div>
-                            <div class="vault-huge-number">{f_data['community_score']:.1f}/5.0</div>
+                    <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.8rem; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 10px;">{f_data['name']}</div>
+                    <div style="color: #D4AF37; font-size: 0.9rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px;">{f_data['brand']} • {f_data['segment']}</div>
+                    
+                    <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 40px; flex-wrap: wrap;">
+                        
+                        <div style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 250px; box-shadow: 0 10px 20px rgba(0,0,0,0.8); border-radius: 2px;">
+                            <div style="border: 1px solid rgba(212,175,55,0.3); padding: 20px 30px;">
+                                <div style="color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;">Quality Score</div>
+                                <div style="color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 3.5rem; line-height: 1.2; margin: 0; text-shadow: 0 0 10px rgba(240, 230, 140, 0.2);">{f_data['community_score']:.1f}/5.0</div>
+                            </div>
                         </div>
-                        <div class="metric-plaque">
-                            <div style="color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;">Global Votes</div>
-                            <div class="vault-huge-number">{f_data['community_votes']}</div>
+
+                        <div style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 250px; box-shadow: 0 10px 20px rgba(0,0,0,0.8); border-radius: 2px;">
+                            <div style="border: 1px solid rgba(212,175,55,0.3); padding: 20px 30px;">
+                                <div style="color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;">Global Votes</div>
+                                <div style="color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 3.5rem; line-height: 1.2; margin: 0; text-shadow: 0 0 10px rgba(240, 230, 140, 0.2);">{f_data['community_votes']}</div>
+                            </div>
                         </div>
+
                     </div>
                     
-                    <hr class="gold-divider">
+                    <hr style="border: 0; height: 1px; background: linear-gradient(to right, transparent, #D4AF37, transparent); margin: 40px 0;">
                     
                     <div style="color:#D4AF37; font-size:0.9rem; font-weight:bold; letter-spacing:3px; margin-bottom:15px; text-transform:uppercase;">Olfactory Strategic Profile</div>
                     <div style="color:#F0E68C; font-family:'Tenor Sans'; font-size:1.6rem; font-style:italic;">{f_data['top_notes']}</div>
+                    
                 </div>
             </div>
         """, unsafe_allow_html=True)
