@@ -4,7 +4,7 @@ import pandas as pd
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# 1. ATELIER SUPREME CSS - CENTERED LUXURY & CLEAN TYPOGRAPHY (100% ENGLISH)
+# 1. ATELIER SUPREME CSS - CENTERED LUXURY, 100% ENGLISH & GOLD PLAQUES
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 
@@ -28,39 +28,14 @@ st.markdown("""
     }
 
     /* MAIN TITLE HEADER */
-    .header-wrapper {
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        padding: 40px 0 20px 0;
-    }
-    .header-outer {
-        border: 1px solid #444;
-        padding: 10px;
-        display: inline-block;
-        width: 100%;
-        max-width: 650px;
-    }
-    .header-inner {
-        border: 1px solid #D4AF37;
-        padding: 25px 50px;
-        background-color: #050505;
-        box-shadow: inset 0 0 20px rgba(212,175,55,0.1);
-    }
-    .main-title {
-        font-family: 'Tenor Sans', sans-serif;
-        color: #D4AF37;
-        font-size: 2.2rem;
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        margin: 0;
-        border: none !important;
-    }
+    .header-wrapper { display: flex; justify-content: center; text-align: center; padding: 40px 0 20px 0; }
+    .header-outer { border: 1px solid #444; padding: 10px; display: inline-block; width: 100%; max-width: 650px; }
+    .header-inner { border: 1px solid #D4AF37; padding: 25px 50px; background-color: #050505; box-shadow: inset 0 0 20px rgba(212,175,55,0.1); }
+    .main-title { font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 5px; margin: 0; border: none !important; }
     
     /* GLOBAL MARKDOWN HEADERS STYLING */
     h1 { color: #D4AF37 !important; font-family: 'Tenor Sans' !important; border-bottom: 1px solid #D4AF37 !important; padding-bottom: 15px !important; text-transform: uppercase !important; font-size: 1.8rem !important; }
     h2 { color: #F0E68C !important; font-family: 'Tenor Sans' !important; text-transform: uppercase !important; border-top: 1px solid #333 !important; padding-top: 30px !important; margin-top: 45px !important; font-size: 1.4rem !important; }
-    h3 { color: #D4AF37 !important; font-family: 'Tenor Sans' !important; border-left: 4px solid #D4AF37 !important; padding-left: 15px !important; font-size: 1.1rem !important; text-align: left !important; }
 
     /* KPI BOXES */
     .metric-box { border: 1px solid #222; background-color: #080808; padding: 20px; text-align: center; transition: 0.3s; border-radius: 2px; }
@@ -68,12 +43,61 @@ st.markdown("""
     .metric-label { color: #666; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2.5px; font-weight: 700; margin-bottom: 8px; }
     .metric-value { color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 1.8rem; }
     
-    /* VAULT CARD - Centered Case Studies */
-    .vault-card { border: 1px solid #D4AF37; background: #050505; padding: 50px 30px; text-align: center; border-radius: 2px; box-shadow: 0 0 30px rgba(212,175,55,0.15); margin: 20px auto; max-width: 850px; }
-    .vault-title { font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.6rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 10px; }
+    /* ------------------------------------------------------------------------
+       ULTIMATE VAULT CARD (INSPIRED BY YOUR MIDJOURNEY CONCEPT)
+       ------------------------------------------------------------------------ */
+    .vault-card-outer {
+        border: 2px solid #D4AF37;
+        padding: 6px;
+        background: #000;
+        margin: 30px auto;
+        max-width: 900px;
+        box-shadow: 0 0 30px rgba(212,175,55,0.15);
+    }
+    .vault-card-inner {
+        border: 1px solid rgba(212,175,55,0.4);
+        background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%);
+        padding: 50px 30px;
+        text-align: center;
+    }
+    .vault-title { font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.8rem; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 10px; }
+    .vault-subtitle { color: #D4AF37; font-size: 0.9rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px; }
     
-    /* MASSIVE VAULT METRICS (NO BARS) */
-    .vault-huge-number { color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 3.5rem; line-height: 1; margin: 0; }
+    /* THE GOLDEN PLAQUES FOR METRICS */
+    .metric-plaque-container {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+    }
+    .metric-plaque {
+        border: 2px solid #D4AF37;
+        background: linear-gradient(145deg, #1a1500 0%, #050505 100%);
+        padding: 25px 40px;
+        min-width: 250px;
+        box-shadow: inset 0 0 15px rgba(212,175,55,0.1), 0 10px 20px rgba(0,0,0,0.8);
+        border-radius: 2px;
+        position: relative;
+    }
+    /* Inner line for the plaque */
+    .metric-plaque::before {
+        content: '';
+        position: absolute;
+        top: 4px; left: 4px; right: 4px; bottom: 4px;
+        border: 1px solid rgba(212,175,55,0.3);
+        pointer-events: none;
+    }
+    
+    .vault-huge-number { color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 3.5rem; line-height: 1.2; margin: 0; text-shadow: 0 0 10px rgba(240, 230, 140, 0.2); }
+    
+    /* GOLD DIVIDER LINE */
+    .gold-divider {
+        border: 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #D4AF37, transparent);
+        margin: 40px 0;
+    }
 
     /* REPORTS & TRANSCRIPTS */
     .report-frame { background: #080808; padding: 45px; border: 1px solid #222; box-shadow: 0 15px 40px rgba(0,0,0,0.6); color: #dfdfdf; line-height: 1.9; text-align: justify; margin-bottom: 30px; font-size: 1.05rem; }
@@ -94,9 +118,9 @@ st.markdown("""
     @media (max-width: 768px) {
         .main-title { font-size: 1.5rem; letter-spacing: 2px; }
         .metric-value { font-size: 1.3rem; }
-        .report-frame { padding: 20px; font-size: 0.95rem; }
         .vault-title { font-size: 1.8rem; }
-        .vault-huge-number { font-size: 2.8rem; }
+        .vault-huge-number { font-size: 2.5rem; }
+        .metric-plaque { min-width: 100%; padding: 20px; }
     }
     </style>
 """, unsafe_allow_html=True)
@@ -195,10 +219,7 @@ with tabs[1]:
                           color_discrete_map={'(?)':'#333', 'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#555'},
                           template="plotly_dark")
     
-    fig_sun.update_traces(
-        textfont=dict(family="Lato, sans-serif", size=14),
-        insidetextorientation='auto'
-    )
+    fig_sun.update_traces(textfont=dict(family="Lato, sans-serif", size=14), insidetextorientation='auto')
     
     fig_sun.update_layout(
         paper_bgcolor='rgba(0,0,0,0)', 
@@ -219,7 +240,7 @@ with tabs[1]:
         </div>
     """, unsafe_allow_html=True)
 
-# --- TAB 3: FRAGRANCE VAULT (FIXED: MASSIVE NUMBERS, NO AWKWARD BARS) ---
+# --- TAB 3: FRAGRANCE VAULT (REDESIGNED WITH GOLD PLAQUES) ---
 with tabs[2]:
     st.markdown('<div class="section-header">Fragrance Market Case Studies</div>', unsafe_allow_html=True)
     f_choice = st.selectbox("Select Intelligence Profile:", ["-- Choose a Profile --"] + sorted(df['name'].tolist()))
@@ -227,22 +248,26 @@ with tabs[2]:
     if f_choice != "-- Choose a Profile --":
         f_data = df[df['name'] == f_choice].iloc[0]
         st.markdown(f"""
-            <div class="vault-card">
-                <div class="vault-title">{f_data['name']}</div>
-                <div style="font-family: 'Lato'; color: #888; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 50px;">{f_data['brand']} • {f_data['segment']}</div>
-                <div style="display: flex; justify-content: center; gap: 100px; margin: 40px 0 50px 0; flex-wrap: wrap;">
-                    <div style="text-align: center;">
-                        <p style="color:#666; font-size:0.85rem; letter-spacing:3px; margin-bottom:15px; text-transform:uppercase;">QUALITY SCORE</p>
-                        <div class="vault-huge-number">{f_data['community_score']:.1f}/5.0</div>
+            <div class="vault-card-outer">
+                <div class="vault-card-inner">
+                    <div class="vault-title">{f_data['name']}</div>
+                    <div class="vault-subtitle">{f_data['brand']} • {f_data['segment']}</div>
+                    
+                    <div class="metric-plaque-container">
+                        <div class="metric-plaque">
+                            <div style="color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;">Quality Score</div>
+                            <div class="vault-huge-number">{f_data['community_score']:.1f}/5.0</div>
+                        </div>
+                        <div class="metric-plaque">
+                            <div style="color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;">Global Votes</div>
+                            <div class="vault-huge-number">{f_data['community_votes']}</div>
+                        </div>
                     </div>
-                    <div style="text-align: center;">
-                        <p style="color:#666; font-size:0.85rem; letter-spacing:3px; margin-bottom:15px; text-transform:uppercase;">GLOBAL VOTES</p>
-                        <div class="vault-huge-number">{f_data['community_votes']}</div>
-                    </div>
-                </div>
-                <div style="border-top:1px solid #222; padding-top:40px; max-width:700px; margin:0 auto;">
-                    <p style="color:#D4AF37; font-size:0.9rem; font-weight:bold; letter-spacing:3px; margin-bottom:20px; text-transform:uppercase;">Olfactory Strategic Profile</p>
-                    <p style="color:#ccc; font-size:1.35rem; line-height:1.8; font-style:italic;">{f_data['top_notes']}</p>
+                    
+                    <hr class="gold-divider">
+                    
+                    <div style="color:#D4AF37; font-size:0.9rem; font-weight:bold; letter-spacing:3px; margin-bottom:15px; text-transform:uppercase;">Olfactory Strategic Profile</div>
+                    <div style="color:#F0E68C; font-family:'Tenor Sans'; font-size:1.6rem; font-style:italic;">{f_data['top_notes']}</div>
                 </div>
             </div>
         """, unsafe_allow_html=True)
