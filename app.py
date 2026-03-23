@@ -1,6 +1,5 @@
 import streamlit as st
 import plotly.express as px
-import plotly.graph_objects as go  # Dodane dla wykresu lizakowego
 import pandas as pd
 from data_loader import load_and_merge_data
 
@@ -179,47 +178,33 @@ with tabs[0]:
                     st.markdown('</div>', unsafe_allow_html=True)
             except: st.info(f"Report '{report_f}' not found in directory.")
 
-# --- TAB 2: MARKET ANALYTICS (LOLLIPOP CHART) ---
+# --- TAB 2: MARKET ANALYTICS (EXECUTIVE SUNBURST - TOP 5 PER SEGMENT) ---
 with tabs[1]:
-    st.markdown('<div class="section-header">Market Hierarchy & Popularity Index</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-header">Market Segmentation Strategic Hierarchy</div>', unsafe_allow_html=True)
     
-    # Top 25 for mobile readability
-    df_lol = df.nlargest(25, 'community_votes').sort_values('community_votes', ascending=True)
+    # STRATEGIC FILTERING: Get only Top 5 fragrances for each segment to ensure readability
+    df_sunburst = df.groupby('segment').apply(lambda x: x.nlargest(5, 'community_votes')).reset_index(drop=True)
     
-    fig_lol = go.Figure()
-    color_map = {'Niche': '#D4AF37', 'Prestige': '#F0E68C', 'Mass-Market': '#555555'}
+    # IDM Vibe Sunburst Chart with filtered data
+    fig_sun = px.sunburst(df_sunburst, path=[px.Constant("Global Market"), 'segment', 'brand', 'name'], 
+                          values='community_votes', color='segment',
+                          color_discrete_map={'(?)':'#333', 'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#555'},
+                          template="plotly_dark")
     
-    # Add lines (sticks)
-    for i, row in df_lol.iterrows():
-        fig_lol.add_shape(
-            type='line',
-            x0=0, y0=row['name'],
-            x1=row['community_votes'], y1=row['name'],
-            line=dict(color=color_map.get(row['segment'], '#D4AF37'), width=2)
-        )
-        
-    # Add markers (candies)
-    for seg in df_lol['segment'].unique():
-        df_seg = df_lol[df_lol['segment'] == seg]
-        fig_lol.add_trace(go.Scatter(
-            x=df_seg['community_votes'],
-            y=df_seg['name'],
-            mode='markers',
-            name=seg,
-            marker=dict(color=color_map.get(seg, '#D4AF37'), size=10)
-        ))
-
-    fig_lol.update_layout(
+    fig_sun.update_traces(
+        textfont=dict(family="Lato, sans-serif", size=14),
+        insidetextorientation='auto'
+    )
+    
+    fig_sun.update_layout(
         paper_bgcolor='rgba(0,0,0,0)', 
         plot_bgcolor='rgba(0,0,0,0)', 
-        height=700, 
-        font=dict(family="Lato, sans-serif", color="#ccc"),
-        xaxis=dict(showgrid=False, title="Global Community Votes", zeroline=False),
-        yaxis=dict(showgrid=False, title=""),
-        margin=dict(l=10, r=20, t=30, b=20),
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+        height=750, 
+        margin=dict(t=20, l=10, r=10, b=20),
+        font=dict(family="Lato, sans-serif")
     )
-    st.plotly_chart(fig_lol, use_container_width=True)
+    
+    st.plotly_chart(fig_sun, use_container_width=True)
     
     st.markdown("""
         <div style="border: 1px solid #D4AF37; background: #080808; padding: 40px; margin-top: 40px; text-align: center;">
