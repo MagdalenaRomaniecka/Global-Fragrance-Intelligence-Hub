@@ -84,9 +84,9 @@ for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
 # -----------------------------------------------------------------------------
 # 3. ANALYTICAL TABS
 # -----------------------------------------------------------------------------
-tabs = st.tabs(["STRATEGIC BRIEFING", "MARKET ANALYTICS", "FRAGRANCE VAULT", "2026 OUTLOOK", "ECOSYSTEM"])
+tabs = st.tabs(["STRATEGIC BRIEFING", "MARKET ANALYTICS", "FRAGRANCE VAULT", "REPORTS & OUTLOOK", "ECOSYSTEM"])
 
-# --- TAB 1: STRATEGIC BRIEFING ---
+# --- TAB 1: STRATEGIC BRIEFING (CLEANED UP - AUDIO & TRANSCRIPTS ONLY) ---
 with tabs[0]:
     col_audio, col_viz = st.columns([1, 1.5], gap="large")
     with col_audio:
@@ -94,14 +94,20 @@ with tabs[0]:
         episode = st.radio("Briefing Series Selection:", ["🎧 Ep. 1: Recession Glam & 2025 Market", "🔮 Ep. 2: 2026 Outlook & AI Architecture", "🌍 Ep. 3: The European Barbell & Poland"], label_visibility="collapsed")
         
         if "Ep. 1" in episode:
-            current_t, current_a, report_f, f_type, v_title = "podcast_transcript.md", "https://raw.githubusercontent.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/main/podcast_trends.mp3", "trend_report_2025.md", "Popularity", "Global Popularity Ranking"
+            current_t = "podcast_transcript.md"
+            current_a = "https://raw.githubusercontent.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/main/podcast_trends.mp3"
+            f_type, v_title = "Popularity", "Global Popularity Ranking"
             desc = "Analyzing the Lipstick Effect and Sol de Janeiro's market dominance."
-        else:
-            current_t = "podcast_transcript_2026.md" if "Ep. 2" in episode else "ep3_whisper_transcript_EN.md"
-            current_a = "podcast_2026.mp3" if "Ep. 2" in episode else "ep3_europe_barbell.mp3"
-            report_f, f_type = "macro_report_2026.md", ("None" if "Ep. 2" in episode else "Barbell")
-            v_title = "2026 Global Projections" if "Ep. 2" in episode else "The Barbell Market Structure 2026"
+        elif "Ep. 2" in episode:
+            current_t = "podcast_transcript_2026.md"
+            current_a = "podcast_2026.mp3"
+            f_type, v_title = "None", "2026 Global Projections"
             desc = "Strategic deep dive into macroeconomic shifts and the hollowing out of the middle tier."
+        else:
+            current_t = "ep3_whisper_transcript_EN.md"
+            current_a = "ep3_europe_barbell.mp3"
+            f_type, v_title = "Barbell", "The Barbell Market Structure 2026"
+            desc = "The debate: Data vs. Chemistry in the rapidly growing European market."
 
         st.audio(current_a)
         st.markdown(f'<p style="color:#888; font-size:0.9rem; font-style:italic; margin-top:20px; border-left: 3px solid #333; padding-left: 20px;">{desc}</p>', unsafe_allow_html=True)
@@ -122,23 +128,16 @@ with tabs[0]:
         st.plotly_chart(fig, use_container_width=True)
 
     st.write("---")
-    d1, d2 = st.columns(2)
-    with d1:
-        with st.expander("📄 READ EXECUTIVE SUMMARY TRANSCRIPT"):
-            try:
-                with open(current_t, 'r', encoding='utf-8') as f:
-                    st.markdown('<div class="report-frame">', unsafe_allow_html=True)
-                    st.markdown(f.read())
-                    st.markdown('</div>', unsafe_allow_html=True)
-            except: st.error("Transcript missing.")
-    with d2:
-        with st.expander("📈 READ SELECTED EPISODE REPORT"):
-            try:
-                with open(report_f, 'r', encoding='utf-8') as f:
-                    st.markdown('<div class="report-frame">', unsafe_allow_html=True)
-                    st.markdown(f.read())
-                    st.markdown('</div>', unsafe_allow_html=True)
-            except: st.info(f"Report '{report_f}' not found in directory.")
+    
+    # FULL WIDTH TRANSCRIPT (Removed the confusing split-column reports)
+    with st.expander("📄 READ FULL AUDIO TRANSCRIPT"):
+        try:
+            with open(current_t, 'r', encoding='utf-8') as f:
+                st.markdown('<div class="report-frame">', unsafe_allow_html=True)
+                st.markdown(f.read())
+                st.markdown('</div>', unsafe_allow_html=True)
+        except: 
+            st.error(f"Transcript missing. Please ensure '{current_t}' is uploaded to GitHub.")
 
 # --- TAB 2: MARKET ANALYTICS (EXECUTIVE SUNBURST - TOP 5 PER SEGMENT) ---
 with tabs[1]:
@@ -203,18 +202,17 @@ with tabs[2]:
         )
         st.markdown(vault_html, unsafe_allow_html=True)
 
-# --- TAB 4: 2026 OUTLOOK (DEDICATED FULL REPORT) ---
+# --- TAB 4: REPORTS & OUTLOOK (CLEANED UP - DEDICATED REPORT ZONE) ---
 with tabs[3]:
     st.markdown('<div class="section-header">2026 Macroeconomic & Olfactory Report</div>', unsafe_allow_html=True)
     
-    # THE DEDICATED 2026 REPORT LIVES HERE NOW:
     try:
         with open("macro_report_2026.md", 'r', encoding='utf-8') as f:
             st.markdown('<div class="report-frame">', unsafe_allow_html=True)
             st.markdown(f.read())
             st.markdown('</div>', unsafe_allow_html=True)
     except:
-        st.info("Report 'macro_report_2026.md' not found in directory. Please ensure the file is uploaded to GitHub.")
+        st.info("Report 'macro_report_2026.md' not found. Please ensure the file is uploaded to GitHub.")
     
     st.markdown('<div class="section-header">Strategic Trend Radar 2026–2030</div>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
