@@ -86,7 +86,7 @@ for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
 # -----------------------------------------------------------------------------
 tabs = st.tabs(["STRATEGIC BRIEFING", "MARKET ANALYTICS", "FRAGRANCE VAULT", "REPORTS & OUTLOOK", "ECOSYSTEM"])
 
-# --- TAB 1: STRATEGIC BRIEFING (CLEANED UP - AUDIO & TRANSCRIPTS ONLY) ---
+# --- TAB 1: STRATEGIC BRIEFING (CLEANED UP - AUDIO & NOTES ONLY) ---
 with tabs[0]:
     col_audio, col_viz = st.columns([1, 1.5], gap="large")
     with col_audio:
@@ -129,15 +129,15 @@ with tabs[0]:
 
     st.write("---")
     
-    # ZMIENIONA NAZWA EXPANDERA:
-    with st.expander("📄 READ AI-GENERATED TRANSCRIPT"):
+    # NEW PREMIUM EXPANDER NAME
+    with st.expander("📄 READ EXECUTIVE BRIEFING"):
         try:
             with open(current_t, 'r', encoding='utf-8') as f:
                 st.markdown('<div class="report-frame">', unsafe_allow_html=True)
                 st.markdown(f.read())
                 st.markdown('</div>', unsafe_allow_html=True)
         except: 
-            st.error(f"Transcript missing. Please ensure '{current_t}' is uploaded to GitHub.")
+            st.error(f"Briefing file missing. Please ensure '{current_t}' is uploaded to GitHub.")
 
 # --- TAB 2: MARKET ANALYTICS (EXECUTIVE SUNBURST - TOP 5 PER SEGMENT) ---
 with tabs[1]:
