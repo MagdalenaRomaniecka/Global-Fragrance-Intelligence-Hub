@@ -1,5 +1,6 @@
 import streamlit as st
 import plotly.express as px
+import plotly.graph_objects as go  # Dodane dla wykresu lizakowego
 import pandas as pd
 from data_loader import load_and_merge_data
 
@@ -178,32 +179,48 @@ with tabs[0]:
                     st.markdown('</div>', unsafe_allow_html=True)
             except: st.info(f"Report '{report_f}' not found in directory.")
 
-# --- TAB 2: MARKET ANALYTICS (SUNBURST CHART) ---
+# --- TAB 2: MARKET ANALYTICS (LOLLIPOP CHART) ---
 with tabs[1]:
-    st.markdown('<div class="section-header">Market Segmentation Strategic Hierarchy</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-header">Market Hierarchy & Popularity Index</div>', unsafe_allow_html=True)
     
-    # IDM Vibe Sunburst Chart
-    fig_sun = px.sunburst(df, path=[px.Constant("Global Market"), 'segment', 'brand', 'name'], 
-                          values='community_votes', color='segment',
-                          color_discrete_map={'(?)':'#333', 'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#555'},
-                          template="plotly_dark")
+    # Top 25 for mobile readability
+    df_lol = df.nlargest(25, 'community_votes').sort_values('community_votes', ascending=True)
     
-    fig_sun.update_traces(
-        textfont=dict(family="Lato, sans-serif", size=14),
-        insidetextorientation='auto'
-    )
+    fig_lol = go.Figure()
+    color_map = {'Niche': '#D4AF37', 'Prestige': '#F0E68C', 'Mass-Market': '#555555'}
     
-    fig_sun.update_layout(
+    # Add lines (sticks)
+    for i, row in df_lol.iterrows():
+        fig_lol.add_shape(
+            type='line',
+            x0=0, y0=row['name'],
+            x1=row['community_votes'], y1=row['name'],
+            line=dict(color=color_map.get(row['segment'], '#D4AF37'), width=2)
+        )
+        
+    # Add markers (candies)
+    for seg in df_lol['segment'].unique():
+        df_seg = df_lol[df_lol['segment'] == seg]
+        fig_lol.add_trace(go.Scatter(
+            x=df_seg['community_votes'],
+            y=df_seg['name'],
+            mode='markers',
+            name=seg,
+            marker=dict(color=color_map.get(seg, '#D4AF37'), size=10)
+        ))
+
+    fig_lol.update_layout(
         paper_bgcolor='rgba(0,0,0,0)', 
         plot_bgcolor='rgba(0,0,0,0)', 
-        height=750, 
-        margin=dict(t=20, l=10, r=10, b=20),
-        font=dict(family="Lato, sans-serif")
+        height=700, 
+        font=dict(family="Lato, sans-serif", color="#ccc"),
+        xaxis=dict(showgrid=False, title="Global Community Votes", zeroline=False),
+        yaxis=dict(showgrid=False, title=""),
+        margin=dict(l=10, r=20, t=30, b=20),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
     )
+    st.plotly_chart(fig_lol, use_container_width=True)
     
-    st.plotly_chart(fig_sun, use_container_width=True)
-    
-    # Strategic Note (100% English Fix)
     st.markdown("""
         <div style="border: 1px solid #D4AF37; background: #080808; padding: 40px; margin-top: 40px; text-align: center;">
             <div style="color: #D4AF37; font-family: 'Tenor Sans'; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 20px;">Strategic Insight: The Trickle-Down Effect</div>
@@ -225,7 +242,7 @@ with tabs[2]:
                 <div class="vault-title">{f_data['name']}</div>
                 <div style="font-family: 'Lato'; color: #888; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 45px;">{f_data['brand']} • {f_data['segment']}</div>
                 <div style="display: flex; justify-content: center; gap: 80px; margin: 50px 0; flex-wrap: wrap;">
-                    <div><p style="color:#666; font-size:0.8rem; letter-spacing:3px; margin-bottom:15px;">QUALITY SCORE</p><h3 style="color:#F0E68C; font-family:'Tenor Sans'; font-size:2.5rem; margin:0; border:none!important;">{f_data['community_score']:.2f}</h3></div>
+                    <div><p style="color:#666; font-size:0.8rem; letter-spacing:3px; margin-bottom:15px;">QUALITY SCORE</p><h3 style="color:#F0E68C; font-family:'Tenor Sans'; font-size:2.5rem; margin:0; border:none!important;">{f_data['community_score']:.1f}/5.0</h3></div>
                     <div><p style="color:#666; font-size:0.8rem; letter-spacing:3px; margin-bottom:15px;">GLOBAL VOTES</p><h3 style="color:#F0E68C; font-family:'Tenor Sans'; font-size:2.5rem; margin:0; border:none!important;">{f_data['community_votes']}</h3></div>
                 </div>
                 <div style="border-top:1px solid #222; padding-top:40px; max-width:700px; margin:0 auto;">
