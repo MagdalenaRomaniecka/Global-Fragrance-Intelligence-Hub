@@ -69,8 +69,11 @@ st.markdown("""
     .metric-value { color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 1.8rem; }
     
     /* VAULT CARD - Centered Case Studies */
-    .vault-card { border: 1px solid #D4AF37; background: #050505; padding: 45px 25px; text-align: center; border-radius: 2px; box-shadow: 0 0 30px rgba(212,175,55,0.15); margin: 20px auto; max-width: 850px; }
-    .vault-title { font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.4rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; }
+    .vault-card { border: 1px solid #D4AF37; background: #050505; padding: 50px 30px; text-align: center; border-radius: 2px; box-shadow: 0 0 30px rgba(212,175,55,0.15); margin: 20px auto; max-width: 850px; }
+    .vault-title { font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.6rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 10px; }
+    
+    /* MASSIVE VAULT METRICS (NO BARS) */
+    .vault-huge-number { color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 3.5rem; line-height: 1; margin: 0; }
 
     /* REPORTS & TRANSCRIPTS */
     .report-frame { background: #080808; padding: 45px; border: 1px solid #222; box-shadow: 0 15px 40px rgba(0,0,0,0.6); color: #dfdfdf; line-height: 1.9; text-align: justify; margin-bottom: 30px; font-size: 1.05rem; }
@@ -93,6 +96,7 @@ st.markdown("""
         .metric-value { font-size: 1.3rem; }
         .report-frame { padding: 20px; font-size: 0.95rem; }
         .vault-title { font-size: 1.8rem; }
+        .vault-huge-number { font-size: 2.8rem; }
     }
     </style>
 """, unsafe_allow_html=True)
@@ -215,7 +219,7 @@ with tabs[1]:
         </div>
     """, unsafe_allow_html=True)
 
-# --- TAB 3: FRAGRANCE VAULT ---
+# --- TAB 3: FRAGRANCE VAULT (FIXED: MASSIVE NUMBERS, NO AWKWARD BARS) ---
 with tabs[2]:
     st.markdown('<div class="section-header">Fragrance Market Case Studies</div>', unsafe_allow_html=True)
     f_choice = st.selectbox("Select Intelligence Profile:", ["-- Choose a Profile --"] + sorted(df['name'].tolist()))
@@ -225,14 +229,20 @@ with tabs[2]:
         st.markdown(f"""
             <div class="vault-card">
                 <div class="vault-title">{f_data['name']}</div>
-                <div style="font-family: 'Lato'; color: #888; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 45px;">{f_data['brand']} • {f_data['segment']}</div>
-                <div style="display: flex; justify-content: center; gap: 80px; margin: 50px 0; flex-wrap: wrap;">
-                    <div><p style="color:#666; font-size:0.8rem; letter-spacing:3px; margin-bottom:15px;">QUALITY SCORE</p><h3 style="color:#F0E68C; font-family:'Tenor Sans'; font-size:2.5rem; margin:0; border:none!important;">{f_data['community_score']:.1f}/5.0</h3></div>
-                    <div><p style="color:#666; font-size:0.8rem; letter-spacing:3px; margin-bottom:15px;">GLOBAL VOTES</p><h3 style="color:#F0E68C; font-family:'Tenor Sans'; font-size:2.5rem; margin:0; border:none!important;">{f_data['community_votes']}</h3></div>
+                <div style="font-family: 'Lato'; color: #888; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 50px;">{f_data['brand']} • {f_data['segment']}</div>
+                <div style="display: flex; justify-content: center; gap: 100px; margin: 40px 0 50px 0; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <p style="color:#666; font-size:0.85rem; letter-spacing:3px; margin-bottom:15px; text-transform:uppercase;">QUALITY SCORE</p>
+                        <div class="vault-huge-number">{f_data['community_score']:.1f}/5.0</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <p style="color:#666; font-size:0.85rem; letter-spacing:3px; margin-bottom:15px; text-transform:uppercase;">GLOBAL VOTES</p>
+                        <div class="vault-huge-number">{f_data['community_votes']}</div>
+                    </div>
                 </div>
                 <div style="border-top:1px solid #222; padding-top:40px; max-width:700px; margin:0 auto;">
                     <p style="color:#D4AF37; font-size:0.9rem; font-weight:bold; letter-spacing:3px; margin-bottom:20px; text-transform:uppercase;">Olfactory Strategic Profile</p>
-                    <p style="color:#ccc; font-size:1.3rem; line-height:1.8; font-style:italic;">{f_data['top_notes']}</p>
+                    <p style="color:#ccc; font-size:1.35rem; line-height:1.8; font-style:italic;">{f_data['top_notes']}</p>
                 </div>
             </div>
         """, unsafe_allow_html=True)
