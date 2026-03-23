@@ -4,7 +4,7 @@ import pandas as pd
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# 1. ATELIER SUPREME CSS - CENTERED LUXURY & CLEAN TYPOGRAPHY
+# 1. ATELIER SUPREME CSS - CENTERED LUXURY & CLEAN TYPOGRAPHY (100% ENGLISH)
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 
@@ -132,7 +132,7 @@ with tabs[0]:
         
         if "Ep. 1" in episode:
             current_t, current_a, report_f, f_type, v_title = "podcast_transcript.md", "https://raw.githubusercontent.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/main/podcast_trends.mp3", "trend_report_2025.md", "Popularity", "Global Popularity Ranking"
-            desc = "Analyzing 'The Lipstick Effect' and Sol de Janeiro's dominance."
+            desc = "Analyzing 'The Lipstick Effect' and Sol de Janeiro's market dominance."
         else:
             current_t = "podcast_transcript_2026.md" if "Ep. 2" in episode else "ep3_whisper_transcript_EN.md"
             current_a = "podcast_2026.mp3" if "Ep. 2" in episode else "ep3_europe_barbell.mp3"
@@ -178,7 +178,7 @@ with tabs[0]:
                     st.markdown('</div>', unsafe_allow_html=True)
             except: st.info(f"Report '{report_f}' not found in directory.")
 
-# --- TAB 2: MARKET ANALYTICS (CLEAN & READABLE SUNBURST) ---
+# --- TAB 2: MARKET ANALYTICS (SUNBURST CHART) ---
 with tabs[1]:
     st.markdown('<div class="section-header">Market Segmentation Strategic Hierarchy</div>', unsafe_allow_html=True)
     
@@ -188,29 +188,27 @@ with tabs[1]:
                           color_discrete_map={'(?)':'#333', 'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#555'},
                           template="plotly_dark")
     
-    # WYMUSZENIE CZYTELNEJ CZCIONKI LATO ORAZ ZWIĘKSZENIE JEJ ROZMIARU W WYKRESIE
     fig_sun.update_traces(
         textfont=dict(family="Lato, sans-serif", size=14),
-        insidetextorientation='auto' # Pozwala tekstom układać się bardziej naturalnie
+        insidetextorientation='auto'
     )
     
-    # ZWIĘKSZENIE WYSOKOŚCI WYKRESU DLA LEPSZEJ CZYTELNOŚCI (750px zamiast 650px)
     fig_sun.update_layout(
         paper_bgcolor='rgba(0,0,0,0)', 
         plot_bgcolor='rgba(0,0,0,0)', 
         height=750, 
         margin=dict(t=20, l=10, r=10, b=20),
-        font=dict(family="Lato, sans-serif") # Globalna czcionka dla tooltipów
+        font=dict(family="Lato, sans-serif")
     )
     
     st.plotly_chart(fig_sun, use_container_width=True)
     
-    # Strategic Note
+    # Strategic Note (100% English Fix)
     st.markdown("""
         <div style="border: 1px solid #D4AF37; background: #080808; padding: 40px; margin-top: 40px; text-align: center;">
             <div style="color: #D4AF37; font-family: 'Tenor Sans'; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 20px;">Strategic Insight: The Trickle-Down Effect</div>
             <div style="color: #ccc; font-family: 'Lato'; font-size: 1.1rem; line-height: 1.9; text-align: justify;">
-                Analiza rynkowa wykazuje wyraźny <strong>Trickle-Down Effect</strong>. Innowacje olfaktoryczne zazwyczaj debiutują w segmencie <strong>Niche</strong>, gdzie priorytetem jest artyzm i unikalne molekuły. W ciągu 18-24 miesięcy te same profile zapachowe są komercjalizowane przez domy <strong>Prestige</strong>. Ostatecznie trend osiąga fazę dojrzałości w segmencie <strong>Mass-Market</strong>, generując ogromne wolumeny sprzedaży poprzez przystępne cenowo alternatywy.
+                Market analysis reveals a clear <strong>Trickle-Down Effect</strong>. Olfactory innovations typically debut in the <strong>Niche</strong> segment, where artistry and unique molecules are prioritized. Within 18-24 months, these same fragrance profiles are commercialized by <strong>Prestige</strong> houses. Ultimately, the trend reaches maturity in the <strong>Mass-Market</strong> segment, generating massive sales volumes through affordable alternatives.
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -242,9 +240,9 @@ with tabs[3]:
     st.markdown('<div class="section-header">Strategic Trend Radar 2026–2030</div>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
     t_list = [
-        ("🧪 Functional Scent", "AI-designed neuro-perfs designed for mental wellness."), 
-        ("🧛‍♀️ Vamp Romantic", "Gothic opulence. Dark cherry and leather dominance in Gen Z prestige."), 
-        ("📈 Macro Resilience", "Poland's rise as a top-tier European economy.")]
+        ("🧪 Functional Scent", "AI-designed neuro-perfs engineered for mental wellness and cognitive optimization."), 
+        ("🧛‍♀️ Vamp Romantic", "Gothic opulence. Dark cherry and leather dominance in Gen Z prestige collections."), 
+        ("📈 Macro Resilience", "Poland's rise as a top-tier European economy with highly resilient supply chains.")]
     for col, (t_title, t_text) in zip([c1, c2, c3], t_list):
         col.markdown(f'<div style="border:1px solid #333; background:rgba(10,10,10,0.95); padding:40px; border-left: 5px solid #D4AF37; height:100%;"><h4 style="color:#D4AF37; font-family:Tenor Sans; font-size:1.4rem; letter-spacing:2px; margin-bottom:20px; text-transform:uppercase;">{t_title}</h4><p style="color:#bbb; font-size:1.05rem; line-height:1.8;">{t_text}</p></div>', unsafe_allow_html=True)
 
