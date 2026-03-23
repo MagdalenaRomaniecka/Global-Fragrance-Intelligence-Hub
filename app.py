@@ -129,8 +129,8 @@ with tabs[0]:
 
     st.write("---")
     
-    # FULL WIDTH TRANSCRIPT (Removed the confusing split-column reports)
-    with st.expander("📄 READ FULL AUDIO TRANSCRIPT"):
+    # ZMIENIONA NAZWA EXPANDERA:
+    with st.expander("📄 READ AI-GENERATED TRANSCRIPT"):
         try:
             with open(current_t, 'r', encoding='utf-8') as f:
                 st.markdown('<div class="report-frame">', unsafe_allow_html=True)
