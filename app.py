@@ -132,8 +132,7 @@ with tabs[0]:
                     st.markdown('</div>', unsafe_allow_html=True)
             except: st.error("Transcript missing.")
     with d2:
-        r_label = "📈 READ 2025 TREND REPORT" if "Ep. 1" in episode else "📈 READ 2026 MACRO REPORT"
-        with st.expander(r_label):
+        with st.expander("📈 READ SELECTED EPISODE REPORT"):
             try:
                 with open(report_f, 'r', encoding='utf-8') as f:
                     st.markdown('<div class="report-frame">', unsafe_allow_html=True)
@@ -180,7 +179,6 @@ with tabs[2]:
     if f_choice != "-- Choose a Profile --":
         f_data = df[df['name'] == f_choice].iloc[0]
         
-        # Single continuous HTML string to bypass Streamlit's Markdown parser formatting issues
         vault_html = (
             "<div style='border: 2px solid #D4AF37; padding: 6px; background: #000; margin: 30px auto; max-width: 900px; box-shadow: 0 0 30px rgba(212,175,55,0.15);'>"
             "<div style='border: 1px solid rgba(212,175,55,0.4); background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%); padding: 50px 30px; text-align: center;'>"
@@ -205,8 +203,19 @@ with tabs[2]:
         )
         st.markdown(vault_html, unsafe_allow_html=True)
 
-# --- TAB 4: 2026 OUTLOOK ---
+# --- TAB 4: 2026 OUTLOOK (DEDICATED FULL REPORT) ---
 with tabs[3]:
+    st.markdown('<div class="section-header">2026 Macroeconomic & Olfactory Report</div>', unsafe_allow_html=True)
+    
+    # THE DEDICATED 2026 REPORT LIVES HERE NOW:
+    try:
+        with open("macro_report_2026.md", 'r', encoding='utf-8') as f:
+            st.markdown('<div class="report-frame">', unsafe_allow_html=True)
+            st.markdown(f.read())
+            st.markdown('</div>', unsafe_allow_html=True)
+    except:
+        st.info("Report 'macro_report_2026.md' not found in directory. Please ensure the file is uploaded to GitHub.")
+    
     st.markdown('<div class="section-header">Strategic Trend Radar 2026–2030</div>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
     t_list = [
