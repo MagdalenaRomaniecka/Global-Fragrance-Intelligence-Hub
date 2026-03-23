@@ -26,20 +26,29 @@ def load_and_merge_data():
         'Rasasi Hawas', 'Al Haramain Amber Oud', 'Bvlgari Tygar', 'Louis Vuitton Ombre Nomade',
         'Frederick Malle Portrait of a Lady', 'Nasomatto Black Afgano'
     ]
-    brands = ['Sol de Janeiro', 'Paco Rabanne', 'The Nue Co.', 'Tom Ford', 'Room 1015', 'Zara', 'Zara', 'Faberlic', 'Novaya Zarya', 'Dior', 'MFK', 'Amouage', 'Ariana Grande', 'YSL', 'Le Labo', 'Byredo', 'Creed', 'Diptyque', 'Zara', 'Lattafa', 'Armaf', 'Xerjoff', 'Parfums de Marly', 'Montale', 'Mancera', 'Glossier', 'Phlur', 'Jo Malone', 'Kayali', 'Initio', 'Roja Dove', 'Clive Christian', 'Afnan', 'Missoni', 'Lalique', 'Zimaya', 'Maison Alhambra', 'Kilian', 'Tom Ford', 'Versace', 'Chanel', 'Prada', 'Gucci', 'JPG', 'V&R', 'Zara', 'Aromatix', 'Niche Emarati', 'Swiss Arabian', 'Rasasi', 'Al Haramain', 'Bvlgari', 'LV', 'F. Malle', 'Nasomatto']
-    
+    brands = [
+        'Sol de Janeiro', 'Paco Rabanne', 'The Nue Co.', 'Tom Ford', 'Room 1015', 'Zara', 'Zara', 'Faberlic', 
+        'Novaya Zarya', 'Dior', 'MFK', 'Amouage', 'Ariana Grande', 'YSL', 'Le Labo', 'Byredo', 'Creed', 'Diptyque',
+        'Zara', 'Lattafa', 'Armaf', 'Xerjoff', 'Parfums de Marly', 'Montale', 'Mancera', 'Glossier', 'Phlur', 
+        'Jo Malone', 'Kayali', 'Initio', 'Roja Dove', 'Clive Christian', 'Afnan', 'Missoni', 'Lalique', 'Zimaya',
+        'Maison Alhambra', 'Kilian', 'Tom Ford', 'Versace', 'Chanel', 'Prada', 'Gucci', 'JPG', 'V&R', 'Zara',
+        'Aromatix', 'Niche Emarati', 'Swiss Arabian', 'Rasasi', 'Al Haramain', 'Bvlgari', 'LV', 'F. Malle', 'Nasomatto'
+    ]
+    note_templates = ['Vanilla, Salted Caramel, Pistachio', 'Black Cherry, Leather, Almond', 'Saffron, Amberwood, Jasmine', 'Lavender, Lemon, AI Molecules', 'Sandalwood, Cardamom']
+    segments = []
+    for b in brands:
+        if b in ['Zara', 'Lattafa', 'Armaf', 'Afnan', 'Missoni', 'Lalique', 'Faberlic', 'Novaya Zarya', 'Rasasi', 'Al Haramain', 'Zimaya', 'Maison Alhambra']: segments.append('Mass-Market')
+        elif b in ['Tom Ford', 'Creed', 'Xerjoff', 'Amouage', 'Roja Dove', 'Clive Christian', 'MFK', 'Le Labo', 'Byredo', 'Initio', 'LV', 'F. Malle', 'Nasomatto', 'Bvlgari']: segments.append('Niche')
+        else: segments.append('Prestige')
+
     np.random.seed(42)
-    # Balanced data distribution for clear quadrants
-    prices = [np.random.uniform(25, 75) if i % 3 == 0 else np.random.uniform(85, 175) if i % 3 == 1 else np.random.uniform(210, 480) for i in range(len(names))]
+    prices = [np.random.uniform(25, 65) if s == 'Mass-Market' else np.random.uniform(210, 450) if s == 'Niche' else np.random.uniform(85, 175) for s in segments]
     
     df = pd.DataFrame({
-        'name': names, 'brand': brands, 'price_usd': prices,
-        'top_notes': [random.choice(['Vanilla, Pistachio', 'Cherry, Leather', 'Saffron, Amber', 'Lavender, AI Molecules', 'Sandalwood']) for _ in names],
-        'community_score': np.random.uniform(3.4, 4.9, size=len(names)),
+        'name': names, 'brand': brands, 'segment': segments, 'price_usd': prices,
+        'top_notes': [random.choice(note_templates) for _ in names],
+        'community_score': np.random.uniform(3.5, 4.9, size=len(names)),
         'community_votes': np.random.randint(100, 3000, size=len(names))
     })
-    
-    niche_brands = ['Tom Ford', 'Creed', 'Xerjoff', 'Amouage', 'Roja Dove', 'MFK', 'Le Labo', 'Byredo', 'Initio', 'LV', 'F. Malle', 'Nasomatto']
-    df['segment'] = df['brand'].apply(lambda x: 'Niche' if x in niche_brands else ('Mass-Market' if 'Zara' in x or 'Lattafa' in x else 'Prestige'))
     df['market_structure'] = df['price_usd'].apply(classify_barbell_structure)
     return df
