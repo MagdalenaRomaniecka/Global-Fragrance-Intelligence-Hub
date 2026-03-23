@@ -4,7 +4,7 @@ import pandas as pd
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# 1. ATELIER SUPREME CSS - CENTERED LUXURY (CORRECTED)
+# 1. ATELIER SUPREME CSS - CENTERED LUXURY & CLEAN TYPOGRAPHY
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 
@@ -19,7 +19,7 @@ st.markdown("""
         font-family: 'Lato', sans-serif !important; 
     }
 
-    /* FORCED HEADER CENTERING - Applies to markdown H1 and H2 across app */
+    /* FORCED HEADER CENTERING */
     [data-testid="stMarkdownContainer"] h1, [data-testid="stMarkdownContainer"] h2 {
         text-align: center !important;
         justify-content: center !important;
@@ -165,7 +165,6 @@ with tabs[0]:
             try:
                 with open(current_t, 'r', encoding='utf-8') as f:
                     st.markdown('<div class="report-frame">', unsafe_allow_html=True)
-                    # Headers inside here will be centered by CSS targeting stMarkdownContainer
                     st.markdown(f.read())
                     st.markdown('</div>', unsafe_allow_html=True)
             except: st.error("Transcript missing.")
@@ -179,19 +178,31 @@ with tabs[0]:
                     st.markdown('</div>', unsafe_allow_html=True)
             except: st.info(f"Report '{report_f}' not found in directory.")
 
-# --- TAB 2: MARKET ANALYTICS (NOW INTERACTIVE SUNBURST) ---
+# --- TAB 2: MARKET ANALYTICS (CLEAN & READABLE SUNBURST) ---
 with tabs[1]:
-    # Users requested proposition 3: Hierarchy Sunburst. Overwriting Treemap.
     st.markdown('<div class="section-header">Market Segmentation Strategic Hierarchy</div>', unsafe_allow_html=True)
     
-    # IDM Vibe Sunburst Chart: Global Market -> Segment -> Brand -> Name
+    # IDM Vibe Sunburst Chart
     fig_sun = px.sunburst(df, path=[px.Constant("Global Market"), 'segment', 'brand', 'name'], 
                           values='community_votes', color='segment',
                           color_discrete_map={'(?)':'#333', 'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#555'},
                           template="plotly_dark")
     
-    fig_sun.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=650, margin=dict(t=0, l=0, r=0, b=0))
-    # users want symmetry and symmetry
+    # WYMUSZENIE CZYTELNEJ CZCIONKI LATO ORAZ ZWIĘKSZENIE JEJ ROZMIARU W WYKRESIE
+    fig_sun.update_traces(
+        textfont=dict(family="Lato, sans-serif", size=14),
+        insidetextorientation='auto' # Pozwala tekstom układać się bardziej naturalnie
+    )
+    
+    # ZWIĘKSZENIE WYSOKOŚCI WYKRESU DLA LEPSZEJ CZYTELNOŚCI (750px zamiast 650px)
+    fig_sun.update_layout(
+        paper_bgcolor='rgba(0,0,0,0)', 
+        plot_bgcolor='rgba(0,0,0,0)', 
+        height=750, 
+        margin=dict(t=20, l=10, r=10, b=20),
+        font=dict(family="Lato, sans-serif") # Globalna czcionka dla tooltipów
+    )
+    
     st.plotly_chart(fig_sun, use_container_width=True)
     
     # Strategic Note
