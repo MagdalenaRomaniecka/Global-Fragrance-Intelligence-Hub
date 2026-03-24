@@ -137,7 +137,6 @@ with tabs[0]:
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450)
         st.plotly_chart(fig, use_container_width=True)
 
-        # THE NEW BARBELL INSIGHT BOX (Appears only on Episode 3)
         if f_type == "Barbell":
             st.markdown("""
             <div style="border: 1px solid rgba(212,175,55,0.4); background: #050505; padding: 15px; margin-top: 10px; border-radius: 2px; text-align: center;">
@@ -222,17 +221,27 @@ with tabs[2]:
         )
         st.markdown(vault_html, unsafe_allow_html=True)
 
-# --- TAB 4: REPORTS & OUTLOOK ---
+# --- TAB 4: REPORTS & OUTLOOK (NOW WITH BOTH REPORTS) ---
 with tabs[3]:
-    st.markdown('<div class="section-header">2026 Macroeconomic & Olfactory Report</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-header">Intelligence Reports Library</div>', unsafe_allow_html=True)
     
-    try:
-        with open("macro_report_2026.md", 'r', encoding='utf-8') as f:
-            st.markdown('<div class="report-frame">', unsafe_allow_html=True)
-            st.markdown(f.read())
-            st.markdown('</div>', unsafe_allow_html=True)
-    except:
-        st.info("Report 'macro_report_2026.md' not found. Please ensure the file is uploaded to GitHub.")
+    with st.expander("📈 READ 2026 MACROECONOMIC & OLFACTORY REPORT", expanded=True):
+        try:
+            with open("macro_report_2026.md", 'r', encoding='utf-8') as f:
+                st.markdown('<div class="report-frame">', unsafe_allow_html=True)
+                st.markdown(f.read())
+                st.markdown('</div>', unsafe_allow_html=True)
+        except:
+            st.info("Report 'macro_report_2026.md' not found. Please ensure the file is uploaded to GitHub.")
+
+    with st.expander("📊 READ 2025 TREND REPORT: RECESSION GLAM"):
+        try:
+            with open("trend_report_2025.md", 'r', encoding='utf-8') as f:
+                st.markdown('<div class="report-frame">', unsafe_allow_html=True)
+                st.markdown(f.read())
+                st.markdown('</div>', unsafe_allow_html=True)
+        except:
+            st.info("Report 'trend_report_2025.md' not found. Please ensure the file is uploaded to GitHub.")
     
     st.markdown('<div class="section-header">Strategic Trend Radar 2026–2030</div>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
