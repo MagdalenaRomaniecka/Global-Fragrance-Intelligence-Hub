@@ -48,7 +48,7 @@ st.markdown("""
     .section-header { color: #D4AF37; font-family: 'Tenor Sans'; font-size: 1.4rem; border-left: 5px solid #D4AF37; padding-left: 20px; margin: 30px 0 20px 0; text-transform: uppercase; letter-spacing: 3px; }
     
     /* ------------------------------------------------------------------------
-       CENTERED TABS CSS (NEW!)
+       CENTERED TABS CSS
        ------------------------------------------------------------------------ */
     .stTabs [data-baseweb="tab-list"] {
         justify-content: center; /* Centers the tab container */
@@ -92,75 +92,12 @@ for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
     col.markdown(f'<div class="metric-box"><div class="metric-label">{lab}</div><div class="metric-value">{val}</div></div>', unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
-# 3. ANALYTICAL TABS (NEW ORDER: VAULT -> ANALYTICS -> BRIEFING -> REPORTS -> ECOSYSTEM)
+# 3. ANALYTICAL TABS
 # -----------------------------------------------------------------------------
-tabs = st.tabs(["FRAGRANCE VAULT", "MARKET ANALYTICS", "STRATEGIC BRIEFING", "REPORTS & OUTLOOK", "ECOSYSTEM"])
+tabs = st.tabs(["STRATEGIC BRIEFING", "MARKET ANALYTICS", "FRAGRANCE VAULT", "REPORTS & OUTLOOK", "ECOSYSTEM"])
 
-# --- TAB 1: FRAGRANCE VAULT (PREVIOUSLY TAB 3) ---
+# --- TAB 1: STRATEGIC BRIEFING ---
 with tabs[0]:
-    st.markdown('<div class="section-header">Fragrance Market Case Studies</div>', unsafe_allow_html=True)
-    f_choice = st.selectbox("Select Intelligence Profile:", ["-- Choose a Profile --"] + sorted(df['name'].tolist()))
-    
-    if f_choice != "-- Choose a Profile --":
-        f_data = df[df['name'] == f_choice].iloc[0]
-        
-        vault_html = (
-            "<div style='border: 2px solid #D4AF37; padding: 6px; background: #000; margin: 30px auto; max-width: 900px; box-shadow: 0 0 30px rgba(212,175,55,0.15);'>"
-            "<div style='border: 1px solid rgba(212,175,55,0.4); background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%); padding: 50px 30px; text-align: center;'>"
-            f"<div style=\"font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.8rem; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 10px;\">{f_data['name']}</div>"
-            f"<div style='color: #D4AF37; font-size: 0.9rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px;'>{f_data['brand']} • {f_data['segment']}</div>"
-            "<div style='display: flex; justify-content: center; gap: 40px; margin-bottom: 40px; flex-wrap: wrap;'>"
-            "<div style='border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 250px; box-shadow: 0 10px 20px rgba(0,0,0,0.8); border-radius: 2px;'>"
-            "<div style='border: 1px solid rgba(212,175,55,0.3); padding: 20px 30px;'>"
-            "<div style='color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;'>Quality Score</div>"
-            f"<div style=\"color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 3.5rem; line-height: 1.2; margin: 0; text-shadow: 0 0 10px rgba(240, 230, 140, 0.2);\">{f_data['community_score']:.1f}/5.0</div>"
-            "</div></div>"
-            "<div style='border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 250px; box-shadow: 0 10px 20px rgba(0,0,0,0.8); border-radius: 2px;'>"
-            "<div style='border: 1px solid rgba(212,175,55,0.3); padding: 20px 30px;'>"
-            "<div style='color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;'>Global Votes</div>"
-            f"<div style=\"color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 3.5rem; line-height: 1.2; margin: 0; text-shadow: 0 0 10px rgba(240, 230, 140, 0.2);\">{f_data['community_votes']}</div>"
-            "</div></div>"
-            "</div>"
-            "<hr style='border: 0; height: 1px; background: linear-gradient(to right, transparent, #D4AF37, transparent); margin: 40px 0;'>"
-            "<div style='color:#D4AF37; font-size:0.9rem; font-weight:bold; letter-spacing:3px; margin-bottom:15px; text-transform:uppercase;'>Olfactory Strategic Profile</div>"
-            f"<div style=\"color:#F0E68C; font-family:'Tenor Sans'; font-size:1.6rem; font-style:italic;\">{f_data['top_notes']}</div>"
-            "</div></div>"
-        )
-        st.markdown(vault_html, unsafe_allow_html=True)
-
-# --- TAB 2: MARKET ANALYTICS (PREVIOUSLY TAB 2 - KEPT IN SAME SPOT) ---
-with tabs[1]:
-    st.markdown('<div class="section-header">Market Segmentation Strategic Hierarchy</div>', unsafe_allow_html=True)
-    
-    df_sunburst = df.groupby('segment').apply(lambda x: x.nlargest(5, 'community_votes')).reset_index(drop=True)
-    
-    fig_sun = px.sunburst(df_sunburst, path=[px.Constant("Global Market"), 'segment', 'brand', 'name'], 
-                          values='community_votes', color='segment',
-                          color_discrete_map={'(?)':'#333', 'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#555'},
-                          template="plotly_dark")
-    
-    fig_sun.update_traces(textfont=dict(family="Lato, sans-serif", size=14), insidetextorientation='auto')
-    
-    fig_sun.update_layout(
-        paper_bgcolor='rgba(0,0,0,0)', 
-        plot_bgcolor='rgba(0,0,0,0)', 
-        height=750, 
-        margin=dict(t=20, l=10, r=10, b=20),
-        font=dict(family="Lato, sans-serif")
-    )
-    st.plotly_chart(fig_sun, use_container_width=True)
-    
-    st.markdown("""
-<div style="border: 1px solid #D4AF37; background: #080808; padding: 40px; margin-top: 40px; text-align: center;">
-<div style="color: #D4AF37; font-family: 'Tenor Sans'; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 20px;">Strategic Insight: The Trickle-Down Effect</div>
-<div style="color: #ccc; font-family: 'Lato'; font-size: 1.1rem; line-height: 1.9; text-align: justify;">
-Market analysis reveals a clear <strong>Trickle-Down Effect</strong>. Olfactory innovations typically debut in the <strong>Niche</strong> segment, where artistry and unique molecules are prioritized. Within 18-24 months, these same fragrance profiles are commercialized by <strong>Prestige</strong> houses. Ultimately, the trend reaches maturity in the <strong>Mass-Market</strong> segment, generating massive sales volumes through affordable alternatives.
-</div>
-</div>
-    """, unsafe_allow_html=True)
-
-# --- TAB 3: STRATEGIC BRIEFING (PREVIOUSLY TAB 1) ---
-with tabs[2]:
     col_audio, col_viz = st.columns([1, 1.5], gap="large")
     with col_audio:
         st.markdown('<div class="section-header">Audio Intelligence Hub</div>', unsafe_allow_html=True)
@@ -211,7 +148,70 @@ with tabs[2]:
         except: 
             st.error(f"Briefing file missing. Please ensure '{current_t}' is uploaded to GitHub.")
 
-# --- TAB 4: REPORTS & OUTLOOK (KEPT IN SAME SPOT) ---
+# --- TAB 2: MARKET ANALYTICS ---
+with tabs[1]:
+    st.markdown('<div class="section-header">Market Segmentation Strategic Hierarchy</div>', unsafe_allow_html=True)
+    
+    df_sunburst = df.groupby('segment').apply(lambda x: x.nlargest(5, 'community_votes')).reset_index(drop=True)
+    
+    fig_sun = px.sunburst(df_sunburst, path=[px.Constant("Global Market"), 'segment', 'brand', 'name'], 
+                          values='community_votes', color='segment',
+                          color_discrete_map={'(?)':'#333', 'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#555'},
+                          template="plotly_dark")
+    
+    fig_sun.update_traces(textfont=dict(family="Lato, sans-serif", size=14), insidetextorientation='auto')
+    
+    fig_sun.update_layout(
+        paper_bgcolor='rgba(0,0,0,0)', 
+        plot_bgcolor='rgba(0,0,0,0)', 
+        height=750, 
+        margin=dict(t=20, l=10, r=10, b=20),
+        font=dict(family="Lato, sans-serif")
+    )
+    st.plotly_chart(fig_sun, use_container_width=True)
+    
+    st.markdown("""
+<div style="border: 1px solid #D4AF37; background: #080808; padding: 40px; margin-top: 40px; text-align: center;">
+<div style="color: #D4AF37; font-family: 'Tenor Sans'; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 20px;">Strategic Insight: The Trickle-Down Effect</div>
+<div style="color: #ccc; font-family: 'Lato'; font-size: 1.1rem; line-height: 1.9; text-align: justify;">
+Market analysis reveals a clear <strong>Trickle-Down Effect</strong>. Olfactory innovations typically debut in the <strong>Niche</strong> segment, where artistry and unique molecules are prioritized. Within 18-24 months, these same fragrance profiles are commercialized by <strong>Prestige</strong> houses. Ultimately, the trend reaches maturity in the <strong>Mass-Market</strong> segment, generating massive sales volumes through affordable alternatives.
+</div>
+</div>
+    """, unsafe_allow_html=True)
+
+# --- TAB 3: FRAGRANCE VAULT ---
+with tabs[2]:
+    st.markdown('<div class="section-header">Fragrance Market Case Studies</div>', unsafe_allow_html=True)
+    f_choice = st.selectbox("Select Intelligence Profile:", ["-- Choose a Profile --"] + sorted(df['name'].tolist()))
+    
+    if f_choice != "-- Choose a Profile --":
+        f_data = df[df['name'] == f_choice].iloc[0]
+        
+        vault_html = (
+            "<div style='border: 2px solid #D4AF37; padding: 6px; background: #000; margin: 30px auto; max-width: 900px; box-shadow: 0 0 30px rgba(212,175,55,0.15);'>"
+            "<div style='border: 1px solid rgba(212,175,55,0.4); background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%); padding: 50px 30px; text-align: center;'>"
+            f"<div style=\"font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.8rem; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 10px;\">{f_data['name']}</div>"
+            f"<div style='color: #D4AF37; font-size: 0.9rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px;'>{f_data['brand']} • {f_data['segment']}</div>"
+            "<div style='display: flex; justify-content: center; gap: 40px; margin-bottom: 40px; flex-wrap: wrap;'>"
+            "<div style='border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 250px; box-shadow: 0 10px 20px rgba(0,0,0,0.8); border-radius: 2px;'>"
+            "<div style='border: 1px solid rgba(212,175,55,0.3); padding: 20px 30px;'>"
+            "<div style='color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;'>Quality Score</div>"
+            f"<div style=\"color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 3.5rem; line-height: 1.2; margin: 0; text-shadow: 0 0 10px rgba(240, 230, 140, 0.2);\">{f_data['community_score']:.1f}/5.0</div>"
+            "</div></div>"
+            "<div style='border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 250px; box-shadow: 0 10px 20px rgba(0,0,0,0.8); border-radius: 2px;'>"
+            "<div style='border: 1px solid rgba(212,175,55,0.3); padding: 20px 30px;'>"
+            "<div style='color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;'>Global Votes</div>"
+            f"<div style=\"color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 3.5rem; line-height: 1.2; margin: 0; text-shadow: 0 0 10px rgba(240, 230, 140, 0.2);\">{f_data['community_votes']}</div>"
+            "</div></div>"
+            "</div>"
+            "<hr style='border: 0; height: 1px; background: linear-gradient(to right, transparent, #D4AF37, transparent); margin: 40px 0;'>"
+            "<div style='color:#D4AF37; font-size:0.9rem; font-weight:bold; letter-spacing:3px; margin-bottom:15px; text-transform:uppercase;'>Olfactory Strategic Profile</div>"
+            f"<div style=\"color:#F0E68C; font-family:'Tenor Sans'; font-size:1.6rem; font-style:italic;\">{f_data['top_notes']}</div>"
+            "</div></div>"
+        )
+        st.markdown(vault_html, unsafe_allow_html=True)
+
+# --- TAB 4: REPORTS & OUTLOOK ---
 with tabs[3]:
     st.markdown('<div class="section-header">2026 Macroeconomic & Olfactory Report</div>', unsafe_allow_html=True)
     
@@ -232,7 +232,7 @@ with tabs[3]:
     for col, (t_title, t_text) in zip([c1, c2, c3], t_list):
         col.markdown(f'<div style="border:1px solid #333; background:rgba(10,10,10,0.95); padding:40px; border-left: 5px solid #D4AF37; height:100%;"><h4 style="color:#D4AF37; font-family:Tenor Sans; font-size:1.4rem; letter-spacing:2px; margin-bottom:20px; text-transform:uppercase;">{t_title}</h4><p style="color:#bbb; font-size:1.05rem; line-height:1.8;">{t_text}</p></div>', unsafe_allow_html=True)
 
-# --- TAB 5: ECOSYSTEM (KEPT IN SAME SPOT) ---
+# --- TAB 5: ECOSYSTEM ---
 with tabs[4]:
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
     eco = [
