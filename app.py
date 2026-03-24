@@ -51,8 +51,8 @@ st.markdown("""
        CENTERED TABS CSS
        ------------------------------------------------------------------------ */
     .stTabs [data-baseweb="tab-list"] {
-        justify-content: center; /* Centers the tab container */
-        gap: 20px; /* Adds a bit of space between tabs */
+        justify-content: center;
+        gap: 20px; 
     }
     .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p { 
         text-align: center !important; 
@@ -123,18 +123,43 @@ with tabs[0]:
         st.markdown(f'<p style="color:#888; font-size:0.9rem; font-style:italic; margin-top:20px; border-left: 3px solid #333; padding-left: 20px;">{desc}</p>', unsafe_allow_html=True)
 
     with col_viz:
-        st.markdown(f'<div class="section-header">Live Market Data: {v_title}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="section-header">Live Market Data ✦ {v_title}</div>', unsafe_allow_html=True)
+        
         if f_type == "Barbell":
             b_counts = df['market_structure'].value_counts().reset_index()
             b_counts.columns = ['Tier', 'Count']
             b_order = ['Budget (Barbell Bottom)', 'Squeezed Middle', 'Ultra-Niche (Barbell Top)']
             b_counts['Tier'] = pd.Categorical(b_counts['Tier'], categories=b_order, ordered=True)
             fig = px.bar(b_counts.sort_values('Tier'), x='Tier', y='Count', color='Tier', text='Count', color_discrete_map={'Ultra-Niche (Barbell Top)': '#D4AF37', 'Budget (Barbell Bottom)': '#F0E68C', 'Squeezed Middle': '#333333'}, template="plotly_dark")
+            
+            # CZYSTY DESIGN WYKRESU SZTANGI
+            fig.update_traces(textposition='outside', textfont=dict(size=18, color='#D4AF37', family="Tenor Sans"))
+            fig.update_layout(
+                xaxis_title=None, 
+                yaxis_title=None,
+                showlegend=False, 
+                xaxis=dict(showgrid=False, tickfont=dict(size=13, color='#bbb')),
+                yaxis=dict(showgrid=False, showticklabels=False)
+            )
+            fig.update_yaxes(range=[0, b_counts['Count'].max() * 1.3]) # Margines na górze
+
         else:
             df_v = df.copy()
             df_t = df_v.nlargest(10, 'community_votes').sort_values('community_votes', ascending=True)
             fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment", text="community_votes", color_discrete_sequence=['#D4AF37', '#F0E68C', '#444'], template="plotly_dark")
-        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450)
+            
+            # CZYSTY DESIGN WYKRESU POPULARNOŚCI
+            fig.update_traces(textposition='outside', textfont=dict(size=15, color='#D4AF37', family="Lato"))
+            fig.update_layout(
+                xaxis_title=None, 
+                yaxis_title=None,
+                legend_title_text=None,
+                xaxis=dict(showgrid=False, showticklabels=False),
+                yaxis=dict(showgrid=False, tickfont=dict(size=13, color='#ddd'))
+            )
+            fig.update_xaxes(range=[0, df_t['community_votes'].max() * 1.3]) # Margines po prawej
+
+        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, margin=dict(t=20, b=10, l=10, r=10))
         st.plotly_chart(fig, use_container_width=True)
 
         if f_type == "Barbell":
@@ -221,7 +246,7 @@ with tabs[2]:
         )
         st.markdown(vault_html, unsafe_allow_html=True)
 
-# --- TAB 4: REPORTS & OUTLOOK (NOW WITH BOTH REPORTS) ---
+# --- TAB 4: REPORTS & OUTLOOK ---
 with tabs[3]:
     st.markdown('<div class="section-header">Intelligence Reports Library</div>', unsafe_allow_html=True)
     
