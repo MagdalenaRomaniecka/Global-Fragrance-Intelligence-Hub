@@ -137,6 +137,17 @@ with tabs[0]:
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450)
         st.plotly_chart(fig, use_container_width=True)
 
+        # THE NEW BARBELL INSIGHT BOX (Appears only on Episode 3)
+        if f_type == "Barbell":
+            st.markdown("""
+            <div style="border: 1px solid rgba(212,175,55,0.4); background: #050505; padding: 15px; margin-top: 10px; border-radius: 2px; text-align: center;">
+                <span style="color: #D4AF37; font-family: 'Tenor Sans'; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 2px;">Strategic Insight: The Barbell Effect</span><br>
+                <span style="color: #ccc; font-family: 'Lato'; font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 5px;">
+                    The market is polarizing into two extremes: affordable <strong>Budget</strong> dupes and high-end <strong>Ultra-Niche</strong> luxury. The traditional <strong>Squeezed Middle</strong> is losing consumers to both ends.
+                </span>
+            </div>
+            """, unsafe_allow_html=True)
+
     st.write("---")
     
     with st.expander("📄 READ EXECUTIVE BRIEFING"):
