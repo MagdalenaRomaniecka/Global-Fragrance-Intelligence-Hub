@@ -1,6 +1,11 @@
 # 🎧 Intelligence Briefing. The European Barbell & Data vs Chemistry
 **Strategic Deep Dive • Audio Transcript**
 
+> **[ STRATEGIC SCOPE ]**
+> ✦ **Primary Analysis Area** European Union market (emphasis on offline dominance in Poland) vs digital markets (USA).
+> ✦ **Data Intelligence** Global Fragrance Intelligence Hub, Stanford University algorithmic research, Kaggle and eBay datasets.
+> ✦ **Key Phenomenon** Market polarization (The Barbell Effect), chemical regulations (IFRA and REACH) vs digital scent profiling.
+
 ***
 
 **HOST 1**

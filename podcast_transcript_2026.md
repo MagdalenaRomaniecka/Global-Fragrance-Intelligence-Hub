@@ -1,6 +1,11 @@
 # 🎙️ Intelligence Briefing. 2026 Outlook
 **AI, Tariffs & Functional Fragrance • Audio Transcript**
 
+> **[ STRATEGIC SCOPE ]**
+> ✦ **Primary Analysis Area** Global supply chain, USA tech sector, Central and Eastern Europe (Poland).
+> ✦ **Data Intelligence** Market capitalization (Nvidia, Orlen), IMF indicators (PPP), Givaudan financial reports.
+> ✦ **Key Phenomenon** Tariff shocks, demographic pressure in the CEE region, and the rise of Neurocosmetics.
+
 ***
 
 **HOST 1**

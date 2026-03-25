@@ -1,6 +1,11 @@
 # 🎙️ Intelligence Briefing. The 2026 Fragrance Landscape
 **Strategic Deep Dive • Audio Transcript**
 
+> **[ STRATEGIC SCOPE ]**
+> ✦ **Primary Analysis Area** Western Markets (North America, Europe), Russian domestic market.
+> ✦ **Data Intelligence** Euromonitor International, Pinterest 2026 consumer trends, Sephora and Amazon sales data.
+> ✦ **Key Phenomenon** Recession Glam and the shift from luxury perfumes to body mists (Scent Stacking).
+
 ***
 
 ### Part I. The $600 Billion Contradiction & Recession Glam
