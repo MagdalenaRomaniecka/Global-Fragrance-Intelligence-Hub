@@ -36,3 +36,20 @@ Poland not only maintained its status as the fastest growing large economy in th
 ✦ **Blue Beauty and Biotech** A shift in European and American laboratories towards lab produced plant molecules via fermentation, intended to decouple the industry from disruptions in agricultural supply chains.
 ✦ **Vamp Romantic and Glitchy Glam** Global Gen Z preferences in Western metropolises are driving dark, bold aesthetics alongside asymmetrical visual concepts.
 ✦ **The Russian Market** Driven by forced territorial isolation and 35% import tariffs on goods from Western countries, the domestic Russian market is forecast to grow from $672.5 million in 2024 to nearly $1.1 billion in 2035. Local producers now control 68% of the local market.
+
+***
+
+## Strategic Insights ✦ Consumer Psychology and Jobs to be Done
+Based on the macroeconomic framework above, in 2026 the target customer is not buying perfume solely to smell pleasant. They are hiring the product to perform a specific emotional and psychological job.
+
+✦ **Job 1 ✦ Anesthesia and Focus**
+> *I hire a functional mist with active neurocosmetics to quickly and discreetly lower my stress levels in a high pressure environment, without having to take a physical break from work.*
+
+✦ **Job 2 ✦ Protection of Unique Identity**
+> *I hire the Scent Stacking ritual and combine several fragrances to create a completely unique scent bubble that no one in my environment will be able to copy or identify.*
+
+✦ **Job 3 ✦ Flawless Investment Verification**
+> *I hire a visit to a physical drugstore to ensure that the fragrance I fell in love with via an AI algorithm on my screen actually synergizes with my skin chemistry before I risk losing my capital.*
+
+✦ **Job 4 ✦ Ethical Luxury without Compromise**
+> *I hire niche perfumes created through the method of biotechnological fermentation to feel absolute sophistication and status, while reassuring my conscience that I am not contributing to the destruction of biodiversity.*
