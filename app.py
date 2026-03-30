@@ -168,29 +168,43 @@ with tabs[0]:
 
     st.write("---")
     
-    # INTELLIGENCE LIBRARY SECTION (CLEANED UP - ONLY DOCUMENTS)
+    # INTELLIGENCE LIBRARY SECTION (SIDE-BY-SIDE ON DESKTOP)
     st.markdown('<div class="section-header">Intelligence Library</div>', unsafe_allow_html=True)
     
-    with st.expander("📄 READ EXECUTIVE AUDIO TRANSCRIPT", expanded=True):
-        try:
-            target_t = current_t if os.path.exists(current_t) else current_t.replace(".md", "_PL.md")
-            with open(target_t, 'r', encoding='utf-8') as f:
-                st.markdown('<div class="report-frame">', unsafe_allow_html=True)
-                st.markdown(f.read())
-                st.markdown('</div>', unsafe_allow_html=True)
-        except: 
-            st.error(f"Briefing file missing. Please ensure '{current_t}' is uploaded to GitHub.")
-
     if rep_file:
-        with st.expander(rep_title):
+        col_trans, col_rep = st.columns(2, gap="large")
+        
+        with col_trans:
+            with st.expander("📄 READ EXECUTIVE AUDIO TRANSCRIPT"):
+                try:
+                    target_t = current_t if os.path.exists(current_t) else current_t.replace(".md", "_PL.md")
+                    with open(target_t, 'r', encoding='utf-8') as f:
+                        st.markdown('<div class="report-frame">', unsafe_allow_html=True)
+                        st.markdown(f.read())
+                        st.markdown('</div>', unsafe_allow_html=True)
+                except: 
+                    st.error(f"Briefing file missing. Please ensure '{current_t}' is uploaded to GitHub.")
+                    
+        with col_rep:
+            with st.expander(rep_title):
+                try:
+                    target_r = rep_file if os.path.exists(rep_file) else rep_file.replace(".md", "_PL.md")
+                    with open(target_r, 'r', encoding='utf-8') as f:
+                        st.markdown('<div class="report-frame">', unsafe_allow_html=True)
+                        st.markdown(f.read())
+                        st.markdown('</div>', unsafe_allow_html=True)
+                except:
+                    st.info(f"Report '{rep_file}' not found. Please ensure the file is uploaded to GitHub.")
+    else:
+        with st.expander("📄 READ EXECUTIVE AUDIO TRANSCRIPT"):
             try:
-                target_r = rep_file if os.path.exists(rep_file) else rep_file.replace(".md", "_PL.md")
-                with open(target_r, 'r', encoding='utf-8') as f:
+                target_t = current_t if os.path.exists(current_t) else current_t.replace(".md", "_PL.md")
+                with open(target_t, 'r', encoding='utf-8') as f:
                     st.markdown('<div class="report-frame">', unsafe_allow_html=True)
                     st.markdown(f.read())
                     st.markdown('</div>', unsafe_allow_html=True)
-            except:
-                st.info(f"Report '{rep_file}' not found. Please ensure the file is uploaded to GitHub.")
+            except: 
+                st.error(f"Briefing file missing. Please ensure '{current_t}' is uploaded to GitHub.")
 
 
 # --- TAB 2: MARKET ANALYTICS (MOVED TREND RADAR HERE) ---
