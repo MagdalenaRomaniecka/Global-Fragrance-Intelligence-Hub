@@ -93,7 +93,7 @@ for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
     col.markdown(f'<div class="metric-box"><div class="metric-label">{lab}</div><div class="metric-value">{val}</div></div>', unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
-# 3. ANALYTICAL TABS (REDUCED TO 4 CLEAN TABS)
+# 3. ANALYTICAL TABS (4 CLEAN TABS)
 # -----------------------------------------------------------------------------
 tabs = st.tabs(["STRATEGIC BRIEFINGS", "MARKET ANALYTICS", "FRAGRANCE VAULT", "ECOSYSTEM"])
 
@@ -172,6 +172,7 @@ with tabs[0]:
     st.markdown('<div class="section-header">Intelligence Library</div>', unsafe_allow_html=True)
     
     if rep_file:
+        # Transcript on LEFT, Report on RIGHT
         col_trans, col_rep = st.columns(2, gap="large")
         
         with col_trans:
