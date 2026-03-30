@@ -168,12 +168,11 @@ with tabs[0]:
 
     st.write("---")
     
-    # NEW INTELLIGENCE LIBRARY SECTION
+    # INTELLIGENCE LIBRARY SECTION (CLEANED UP - ONLY DOCUMENTS)
     st.markdown('<div class="section-header">Intelligence Library</div>', unsafe_allow_html=True)
     
     with st.expander("📄 READ EXECUTIVE AUDIO TRANSCRIPT", expanded=True):
         try:
-            # Automatyczne ładowanie wersji EN lub PL
             target_t = current_t if os.path.exists(current_t) else current_t.replace(".md", "_PL.md")
             with open(target_t, 'r', encoding='utf-8') as f:
                 st.markdown('<div class="report-frame">', unsafe_allow_html=True)
@@ -193,18 +192,8 @@ with tabs[0]:
             except:
                 st.info(f"Report '{rep_file}' not found. Please ensure the file is uploaded to GitHub.")
 
-    st.write("---")
-    
-    st.markdown('<div class="section-header">Strategic Trend Radar 2026–2030</div>', unsafe_allow_html=True)
-    c1, c2, c3 = st.columns(3)
-    t_list = [
-        ("🧪 Functional Scent", "AI-designed neuro-perfs engineered for mental wellness and cognitive optimization."), 
-        ("🧛‍♀️ Vamp Romantic", "Gothic opulence. Dark cherry and leather dominance in Gen Z prestige collections."), 
-        ("📈 Macro Resilience", "Poland's rise as a top-tier European economy with highly resilient supply chains.")]
-    for col, (t_title, t_text) in zip([c1, c2, c3], t_list):
-        col.markdown(f'<div style="border:1px solid #333; background:rgba(10,10,10,0.95); padding:40px; border-left: 5px solid #D4AF37; height:100%;"><h4 style="color:#D4AF37; font-family:Tenor Sans; font-size:1.4rem; letter-spacing:2px; margin-bottom:20px; text-transform:uppercase;">{t_title}</h4><p style="color:#bbb; font-size:1.05rem; line-height:1.8;">{t_text}</p></div>', unsafe_allow_html=True)
 
-# --- TAB 2: MARKET ANALYTICS ---
+# --- TAB 2: MARKET ANALYTICS (MOVED TREND RADAR HERE) ---
 with tabs[1]:
     st.markdown('<div class="section-header">Market Segmentation Strategic Hierarchy</div>', unsafe_allow_html=True)
     
@@ -227,13 +216,25 @@ with tabs[1]:
     st.plotly_chart(fig_sun, use_container_width=True)
     
     st.markdown("""
-<div style="border: 1px solid #D4AF37; background: #080808; padding: 40px; margin-top: 40px; text-align: center;">
+<div style="border: 1px solid #D4AF37; background: #080808; padding: 40px; margin-top: 40px; margin-bottom: 40px; text-align: center;">
 <div style="color: #D4AF37; font-family: 'Tenor Sans'; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 20px;">Strategic Insight: The Trickle-Down Effect</div>
 <div style="color: #ccc; font-family: 'Lato'; font-size: 1.1rem; line-height: 1.9; text-align: justify;">
 Market analysis reveals a clear <strong>Trickle-Down Effect</strong>. Olfactory innovations typically debut in the <strong>Niche</strong> segment, where artistry and unique molecules are prioritized. Within 18-24 months, these same fragrance profiles are commercialized by <strong>Prestige</strong> houses. Ultimately, the trend reaches maturity in the <strong>Mass-Market</strong> segment, generating massive sales volumes through affordable alternatives.
 </div>
 </div>
     """, unsafe_allow_html=True)
+
+    # MOVED TREND RADAR TO TAB 2
+    st.write("---")
+    st.markdown('<div class="section-header">Strategic Trend Radar 2026–2030</div>', unsafe_allow_html=True)
+    c1, c2, c3 = st.columns(3)
+    t_list = [
+        ("🧪 Functional Scent", "AI-designed neuro-perfs engineered for mental wellness and cognitive optimization."), 
+        ("🧛‍♀️ Vamp Romantic", "Gothic opulence. Dark cherry and leather dominance in Gen Z prestige collections."), 
+        ("📈 Macro Resilience", "Poland's rise as a top-tier European economy with highly resilient supply chains.")]
+    for col, (t_title, t_text) in zip([c1, c2, c3], t_list):
+        col.markdown(f'<div style="border:1px solid #333; background:rgba(10,10,10,0.95); padding:40px; border-left: 5px solid #D4AF37; height:100%;"><h4 style="color:#D4AF37; font-family:Tenor Sans; font-size:1.4rem; letter-spacing:2px; margin-bottom:20px; text-transform:uppercase;">{t_title}</h4><p style="color:#bbb; font-size:1.05rem; line-height:1.8;">{t_text}</p></div>', unsafe_allow_html=True)
+
 
 # --- TAB 3: FRAGRANCE VAULT ---
 with tabs[2]:
