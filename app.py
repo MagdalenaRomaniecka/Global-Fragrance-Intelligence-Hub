@@ -124,8 +124,8 @@ with tabs[0]:
             current_a = "ep3_europe_barbell.mp3"
             f_type, v_title = "Barbell", "The Barbell Market Structure 2026"
             desc = "The debate: Data vs. Chemistry in the rapidly growing European market."
-            rep_file = None
-            rep_title = None
+            rep_file = "barbell_strategy_2026.md" 
+            rep_title = "⚖️ READ 2026 EUROPEAN BARBELL STRATEGY"
 
         st.audio(current_a)
         st.markdown(f'<p style="color:#888; font-size:0.9rem; font-style:italic; margin-top:20px; border-left: 3px solid #333; padding-left: 20px;">{desc}</p>', unsafe_allow_html=True)
@@ -172,11 +172,10 @@ with tabs[0]:
     st.markdown('<div class="section-header">Intelligence Library</div>', unsafe_allow_html=True)
     
     if rep_file:
-        # Transcript on LEFT, Report on RIGHT
         col_trans, col_rep = st.columns(2, gap="large")
         
         with col_trans:
-            with st.expander("📄 READ EXECUTIVE AUDIO TRANSCRIPT"):
+            with st.expander("📄 READ EXECUTIVE AUDIO DEBRIEF"):
                 try:
                     target_t = current_t if os.path.exists(current_t) else current_t.replace(".md", "_PL.md")
                     with open(target_t, 'r', encoding='utf-8') as f:
@@ -197,7 +196,7 @@ with tabs[0]:
                 except:
                     st.info(f"Report '{rep_file}' not found. Please ensure the file is uploaded to GitHub.")
     else:
-        with st.expander("📄 READ EXECUTIVE AUDIO TRANSCRIPT"):
+        with st.expander("📄 READ EXECUTIVE AUDIO DEBRIEF"):
             try:
                 target_t = current_t if os.path.exists(current_t) else current_t.replace(".md", "_PL.md")
                 with open(target_t, 'r', encoding='utf-8') as f:
@@ -208,7 +207,7 @@ with tabs[0]:
                 st.error(f"Briefing file missing. Please ensure '{current_t}' is uploaded to GitHub.")
 
 
-# --- TAB 2: MARKET ANALYTICS (MOVED TREND RADAR HERE) ---
+# --- TAB 2: MARKET ANALYTICS ---
 with tabs[1]:
     st.markdown('<div class="section-header">Market Segmentation Strategic Hierarchy</div>', unsafe_allow_html=True)
     
@@ -239,7 +238,7 @@ Market analysis reveals a clear <strong>Trickle-Down Effect</strong>. Olfactory 
 </div>
     """, unsafe_allow_html=True)
 
-    # MOVED TREND RADAR TO TAB 2
+    # TREND RADAR
     st.write("---")
     st.markdown('<div class="section-header">Strategic Trend Radar 2026–2030</div>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
