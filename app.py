@@ -1,10 +1,11 @@
 import streamlit as st
 import plotly.express as px
 import pandas as pd
+import os
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# 1. ATELIER SUPREME CSS - CENTERED LUXURY & CLEAN TYPOGRAPHY (100% ENGLISH)
+# 1. ATELIER SUPREME CSS - CENTERED LUXURY & CLEAN TYPOGRAPHY
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 
@@ -92,32 +93,39 @@ for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
     col.markdown(f'<div class="metric-box"><div class="metric-label">{lab}</div><div class="metric-value">{val}</div></div>', unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
-# 3. ANALYTICAL TABS
+# 3. ANALYTICAL TABS (REDUCED TO 4 CLEAN TABS)
 # -----------------------------------------------------------------------------
-tabs = st.tabs(["STRATEGIC BRIEFING", "MARKET ANALYTICS", "FRAGRANCE VAULT", "REPORTS & OUTLOOK", "ECOSYSTEM"])
+tabs = st.tabs(["STRATEGIC BRIEFINGS", "MARKET ANALYTICS", "FRAGRANCE VAULT", "ECOSYSTEM"])
 
-# --- TAB 1: STRATEGIC BRIEFING ---
+# --- TAB 1: STRATEGIC BRIEFINGS (AUDIO + TEXT MERGED) ---
 with tabs[0]:
     col_audio, col_viz = st.columns([1, 1.5], gap="large")
     with col_audio:
         st.markdown('<div class="section-header">Audio Intelligence Hub</div>', unsafe_allow_html=True)
         episode = st.radio("Briefing Series Selection:", ["🎧 Ep. 1: Recession Glam & 2025 Market", "🔮 Ep. 2: 2026 Outlook & AI Architecture", "🌍 Ep. 3: The European Barbell & Poland"], label_visibility="collapsed")
         
+        # DYNAMIC REPORT LOADING BASED ON EPISODE
         if "Ep. 1" in episode:
             current_t = "podcast_transcript.md"
             current_a = "https://raw.githubusercontent.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub/main/podcast_trends.mp3"
             f_type, v_title = "Popularity", "Global Popularity Ranking"
             desc = "Analyzing the Lipstick Effect and Sol de Janeiro's market dominance."
+            rep_file = "trend_report_2025.md"
+            rep_title = "📊 READ 2025 TREND REPORT: RECESSION GLAM"
         elif "Ep. 2" in episode:
             current_t = "podcast_transcript_2026.md"
             current_a = "podcast_2026.mp3"
             f_type, v_title = "None", "2026 Global Projections"
             desc = "Strategic deep dive into macroeconomic shifts and the hollowing out of the middle tier."
+            rep_file = "macro_report_2026.md" 
+            rep_title = "📈 READ 2026 MACROECONOMIC & OLFACTORY REPORT"
         else:
             current_t = "ep3_whisper_transcript_EN.md"
             current_a = "ep3_europe_barbell.mp3"
             f_type, v_title = "Barbell", "The Barbell Market Structure 2026"
             desc = "The debate: Data vs. Chemistry in the rapidly growing European market."
+            rep_file = None
+            rep_title = None
 
         st.audio(current_a)
         st.markdown(f'<p style="color:#888; font-size:0.9rem; font-style:italic; margin-top:20px; border-left: 3px solid #333; padding-left: 20px;">{desc}</p>', unsafe_allow_html=True)
@@ -132,32 +140,18 @@ with tabs[0]:
             b_counts['Tier'] = pd.Categorical(b_counts['Tier'], categories=b_order, ordered=True)
             fig = px.bar(b_counts.sort_values('Tier'), x='Tier', y='Count', color='Tier', text='Count', color_discrete_map={'Ultra-Niche (Barbell Top)': '#D4AF37', 'Budget (Barbell Bottom)': '#F0E68C', 'Squeezed Middle': '#333333'}, template="plotly_dark")
             
-            # CZYSTY DESIGN WYKRESU SZTANGI
             fig.update_traces(textposition='outside', textfont=dict(size=18, color='#D4AF37', family="Tenor Sans"))
-            fig.update_layout(
-                xaxis_title=None, 
-                yaxis_title=None,
-                showlegend=False, 
-                xaxis=dict(showgrid=False, tickfont=dict(size=13, color='#bbb')),
-                yaxis=dict(showgrid=False, showticklabels=False)
-            )
-            fig.update_yaxes(range=[0, b_counts['Count'].max() * 1.3]) # Margines na górze
+            fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=False, xaxis=dict(showgrid=False, tickfont=dict(size=13, color='#bbb')), yaxis=dict(showgrid=False, showticklabels=False))
+            fig.update_yaxes(range=[0, b_counts['Count'].max() * 1.3])
 
         else:
             df_v = df.copy()
             df_t = df_v.nlargest(10, 'community_votes').sort_values('community_votes', ascending=True)
             fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment", text="community_votes", color_discrete_sequence=['#D4AF37', '#F0E68C', '#444'], template="plotly_dark")
             
-            # CZYSTY DESIGN WYKRESU POPULARNOŚCI
             fig.update_traces(textposition='outside', textfont=dict(size=15, color='#D4AF37', family="Lato"))
-            fig.update_layout(
-                xaxis_title=None, 
-                yaxis_title=None,
-                legend_title_text=None,
-                xaxis=dict(showgrid=False, showticklabels=False),
-                yaxis=dict(showgrid=False, tickfont=dict(size=13, color='#ddd'))
-            )
-            fig.update_xaxes(range=[0, df_t['community_votes'].max() * 1.3]) # Margines po prawej
+            fig.update_layout(xaxis_title=None, yaxis_title=None, legend_title_text=None, xaxis=dict(showgrid=False, showticklabels=False), yaxis=dict(showgrid=False, tickfont=dict(size=13, color='#ddd')))
+            fig.update_xaxes(range=[0, df_t['community_votes'].max() * 1.3])
 
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, margin=dict(t=20, b=10, l=10, r=10))
         st.plotly_chart(fig, use_container_width=True)
@@ -174,14 +168,41 @@ with tabs[0]:
 
     st.write("---")
     
-    with st.expander("📄 READ EXECUTIVE BRIEFING"):
+    # NEW INTELLIGENCE LIBRARY SECTION
+    st.markdown('<div class="section-header">Intelligence Library</div>', unsafe_allow_html=True)
+    
+    with st.expander("📄 READ EXECUTIVE AUDIO TRANSCRIPT", expanded=True):
         try:
-            with open(current_t, 'r', encoding='utf-8') as f:
+            # Automatyczne ładowanie wersji EN lub PL
+            target_t = current_t if os.path.exists(current_t) else current_t.replace(".md", "_PL.md")
+            with open(target_t, 'r', encoding='utf-8') as f:
                 st.markdown('<div class="report-frame">', unsafe_allow_html=True)
                 st.markdown(f.read())
                 st.markdown('</div>', unsafe_allow_html=True)
         except: 
             st.error(f"Briefing file missing. Please ensure '{current_t}' is uploaded to GitHub.")
+
+    if rep_file:
+        with st.expander(rep_title):
+            try:
+                target_r = rep_file if os.path.exists(rep_file) else rep_file.replace(".md", "_PL.md")
+                with open(target_r, 'r', encoding='utf-8') as f:
+                    st.markdown('<div class="report-frame">', unsafe_allow_html=True)
+                    st.markdown(f.read())
+                    st.markdown('</div>', unsafe_allow_html=True)
+            except:
+                st.info(f"Report '{rep_file}' not found. Please ensure the file is uploaded to GitHub.")
+
+    st.write("---")
+    
+    st.markdown('<div class="section-header">Strategic Trend Radar 2026–2030</div>', unsafe_allow_html=True)
+    c1, c2, c3 = st.columns(3)
+    t_list = [
+        ("🧪 Functional Scent", "AI-designed neuro-perfs engineered for mental wellness and cognitive optimization."), 
+        ("🧛‍♀️ Vamp Romantic", "Gothic opulence. Dark cherry and leather dominance in Gen Z prestige collections."), 
+        ("📈 Macro Resilience", "Poland's rise as a top-tier European economy with highly resilient supply chains.")]
+    for col, (t_title, t_text) in zip([c1, c2, c3], t_list):
+        col.markdown(f'<div style="border:1px solid #333; background:rgba(10,10,10,0.95); padding:40px; border-left: 5px solid #D4AF37; height:100%;"><h4 style="color:#D4AF37; font-family:Tenor Sans; font-size:1.4rem; letter-spacing:2px; margin-bottom:20px; text-transform:uppercase;">{t_title}</h4><p style="color:#bbb; font-size:1.05rem; line-height:1.8;">{t_text}</p></div>', unsafe_allow_html=True)
 
 # --- TAB 2: MARKET ANALYTICS ---
 with tabs[1]:
@@ -246,39 +267,8 @@ with tabs[2]:
         )
         st.markdown(vault_html, unsafe_allow_html=True)
 
-# --- TAB 4: REPORTS & OUTLOOK ---
+# --- TAB 4: ECOSYSTEM ---
 with tabs[3]:
-    st.markdown('<div class="section-header">Intelligence Reports Library</div>', unsafe_allow_html=True)
-    
-    with st.expander("📈 READ 2026 MACROECONOMIC & OLFACTORY REPORT", expanded=True):
-        try:
-            with open("macro_report_2026.md", 'r', encoding='utf-8') as f:
-                st.markdown('<div class="report-frame">', unsafe_allow_html=True)
-                st.markdown(f.read())
-                st.markdown('</div>', unsafe_allow_html=True)
-        except:
-            st.info("Report 'macro_report_2026.md' not found. Please ensure the file is uploaded to GitHub.")
-
-    with st.expander("📊 READ 2025 TREND REPORT: RECESSION GLAM"):
-        try:
-            with open("trend_report_2025.md", 'r', encoding='utf-8') as f:
-                st.markdown('<div class="report-frame">', unsafe_allow_html=True)
-                st.markdown(f.read())
-                st.markdown('</div>', unsafe_allow_html=True)
-        except:
-            st.info("Report 'trend_report_2025.md' not found. Please ensure the file is uploaded to GitHub.")
-    
-    st.markdown('<div class="section-header">Strategic Trend Radar 2026–2030</div>', unsafe_allow_html=True)
-    c1, c2, c3 = st.columns(3)
-    t_list = [
-        ("🧪 Functional Scent", "AI-designed neuro-perfs engineered for mental wellness and cognitive optimization."), 
-        ("🧛‍♀️ Vamp Romantic", "Gothic opulence. Dark cherry and leather dominance in Gen Z prestige collections."), 
-        ("📈 Macro Resilience", "Poland's rise as a top-tier European economy with highly resilient supply chains.")]
-    for col, (t_title, t_text) in zip([c1, c2, c3], t_list):
-        col.markdown(f'<div style="border:1px solid #333; background:rgba(10,10,10,0.95); padding:40px; border-left: 5px solid #D4AF37; height:100%;"><h4 style="color:#D4AF37; font-family:Tenor Sans; font-size:1.4rem; letter-spacing:2px; margin-bottom:20px; text-transform:uppercase;">{t_title}</h4><p style="color:#bbb; font-size:1.05rem; line-height:1.8;">{t_text}</p></div>', unsafe_allow_html=True)
-
-# --- TAB 5: ECOSYSTEM ---
-with tabs[4]:
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
     eco = [
         ("🌍 Aromo Intelligence", "Russian market scraping engine and strategic dashboard.", "https://huggingface.co/spaces/Baphomert/Aromo-Market-Intelligence"), 
