@@ -1,9 +1,9 @@
-# 🎙️ Intelligence Briefing. The 2026 Fragrance Landscape
+# 🎙️ Intelligence Briefing. The 2025 Fragrance Landscape
 **Strategic Deep Dive • Audio Transcript**
 
 > **[ STRATEGIC SCOPE ]**
 > ✦ **Primary Analysis Area** Western Markets (North America, Europe), Russian domestic market.
-> ✦ **Data Intelligence** Euromonitor International, Pinterest 2026 consumer trends, Sephora and Amazon sales data.
+> ✦ **Data Intelligence** Euromonitor International, Pinterest 2025 consumer trends, Sephora and Amazon sales data.
 > ✦ **Key Phenomenon** Recession Glam and the shift from luxury perfumes to body mists (Scent Stacking).
 
 ***
@@ -45,7 +45,7 @@ That is almost a quarter of all growth in beauty from just one category. It tell
 Which brings us to the mission for today's deep dive. We aren't just here to review perfumes. We are tracking the money. We are going to look at why a Brazilian inspired brand called **Sol de Janeiro** is suddenly outperforming heritage luxury brands.
 
 **CO HOST**
-And then we are going to go to the engine room of the whole industry, the Swiss giant **Givaudan**. We are going there to see how they are using Artificial Intelligence to digitize smell. Because it turns out, in 2026, we aren't just smelling nice. It feels like we are *self medicating* with scent.
+And then we are going to go to the engine room of the whole industry, the Swiss giant **Givaudan**. We are going there to see how they are using Artificial Intelligence to digitize smell. Because it turns out, in 2025, we aren't just smelling nice. It feels like we are *self medicating* with scent.
 
 **HOST**
 That is the core of it. We are looking at this incredible intersection of economics, neuroscience, machine learning, and just raw nostalgia. So let's start with this concept of Recession Glam. The vehicle for this growth isn't the high end $300 **Eau de Parfum**.
@@ -88,7 +88,7 @@ The safety of warmth, sugar, and fat. It is a dopamine hit for $38. A cheap, acc
 ### Part III. Market Trends ✦ Gourmand 2.0 to Moody Aquatics
 
 **HOST**
-So if Sol de Janeiro is the poster child for edible comfort, what else is happening in 2026?
+So if Sol de Janeiro is the poster child for edible comfort, what else is happening in 2025?
 
 **CO HOST**
 The landscape is fragmented, but there are four main pillars.
@@ -171,7 +171,7 @@ Local brands now hold **68%** of the market. But consumers still want Luxury. Th
 ### Conclusion
 
 **HOST**
-So, what is the big story of 2026?
+So, what is the big story of 2025?
 
 **CO HOST**
 Fragrance has graduated.
