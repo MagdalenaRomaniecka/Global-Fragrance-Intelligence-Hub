@@ -5,7 +5,7 @@ import os
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# 1. ATELIER SUPREME CSS
+# 1. ATELIER SUPREME CSS - FULL LUXURY RESTORED
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 
@@ -24,13 +24,13 @@ st.markdown("""
     .metric-box:hover { border-color: #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
     .metric-label { color: #666; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2.5px; font-weight: 700; margin-bottom: 8px; }
     .metric-value { color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 1.8rem; }
-    .report-frame { background: #080808; padding: 45px; border: 1px solid #222; box-shadow: 0 15px 40px rgba(0,0,0,0.6); color: #dfdfdf; line-height: 1.9; text-align: justify; margin-bottom: 30px; font-size: 1.05rem; }
+    .report-frame { background: #080808; padding: 45px; border: 1px solid #222; box-shadow: 0 15px 40px rgba(0,0,0,0.6); color: #dfdfdf; line-height: 1.9; text-align: justify; margin: 30px auto; font-size: 1.1rem; width: 100%; max-width: 1200px; }
     .section-header { color: #D4AF37; font-family: 'Tenor Sans'; font-size: 1.4rem; border-left: 5px solid #D4AF37; padding-left: 20px; margin: 30px 0 20px 0; text-transform: uppercase; letter-spacing: 3px; }
     .stTabs [data-baseweb="tab-list"] { justify-content: center; gap: 20px; }
     .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p { text-align: center !important; font-family: 'Tenor Sans', sans-serif !important; letter-spacing: 2px; }
-    .project-card { border:1px solid #222; background:rgba(15,15,15,0.95); padding:25px; transition:0.3s; height:100%; display:flex; flex-direction:column; justify-content:space-between; margin-bottom: 20px; }
-    .project-card:hover { border-color:#D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.1); }
-    .btn-launch { display:block; width:100%; padding:12px; background:#D4AF37 !important; color:#000 !important; text-align:center; font-weight:bold; text-transform:uppercase; font-size:0.75rem; text-decoration:none; letter-spacing: 1px; cursor: pointer; }
+    .project-card { border:1px solid #222; background:rgba(15,15,15,0.95); padding:25px; transition:0.3s; height:100%; display:flex; flex-direction:column; justify-content:space-between; margin-bottom: 20px; border-radius: 2px; }
+    .project-card:hover { border-color:#D4AF37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.15); }
+    .btn-launch { display:block; width:100%; padding:12px; background:#D4AF37 !important; color:#000 !important; text-align:center; font-weight:bold; text-transform:uppercase; font-size:0.7rem; text-decoration:none; letter-spacing: 2px; border-radius: 2px; }
     .footer { position: fixed; left: 0; bottom: 0; width: 100%; background-color: #000; color: #444; text-align: center; padding: 12px; font-size: 0.65rem; border-top: 1px solid #111; z-index: 999; letter-spacing: 2px; }
     </style>
 """, unsafe_allow_html=True)
@@ -38,7 +38,7 @@ st.markdown("""
 df = load_and_merge_data()
 
 st.markdown("""<div class="header-wrapper"><div class="header-outer"><div class="header-inner"><h1 class="main-title">Fragrance Intelligence</h1>
-<div style="font-family: 'Lato', color: #888, font-size: 0.8rem, text-transform: uppercase, letter-spacing: 4px, margin-top: 10px;">Global Strategic Hub ✦ Predictive Forecast 2026</div></div></div></div>""", unsafe_allow_html=True)
+<div style="font-family: 'Lato'; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; margin-top: 10px;">Global Strategic Hub ✦ Predictive Forecast 2026</div></div></div></div>""", unsafe_allow_html=True)
 
 m1, m2, m3, m4 = st.columns(4)
 metrics = [("Global Beauty Market", "$593.2B"), ("EU Market Growth", "+16.2%"), ("Poland Growth (Max)", "+75.3%"), ("Intelligence Precision", "91%")]
@@ -54,20 +54,22 @@ with tabs[0]:
         episode = st.radio("Selection:", ["🎧 Ep. 1: Recession Glam", "📊 Ep. 2: Global Trade", "🔮 Ep. 3: 2026 Outlook", "🌍 Ep. 4: European Barbell", "🧬 Ep. 5: Master Synthesis"], label_visibility="collapsed")
         
         if "Ep. 1" in episode:
-            current_t, current_a = "podcast_transcript.md", "podcast_trends.mp3"
-            f_type, v_title, rep_file, rep_title = "Popularity", "Global Popularity Ranking", "trend_report_2025.md", "📊 READ 2025 TREND REPORT"
+            current_t, current_a, rep_file = "podcast_transcript.md", "podcast_trends.mp3", "trend_report_2025.md"
+            f_type, v_title = "Popularity", "Global Popularity Ranking"
         elif "Ep. 2" in episode:
-            current_t, current_a = "ep2_trade_transcript.md", "ep2_audio.mp3"
-            f_type, v_title, rep_file, rep_title = "None", "Global Trade Volume 2024", "ep2_trade_report.md", "📊 READ GLOBAL TRADE REPORT"
+            current_t, current_a, rep_file = "ep2_trade_transcript.md", "ep2_audio.mp3", "ep2_trade_report.md"
+            f_type, v_title = "None", "Global Trade Volume 2024"
         elif "Ep. 3" in episode:
-            current_t, current_a = "podcast_transcript_2026.md", "podcast_2026.mp3"
-            f_type, v_title, rep_file, rep_title = "None", "2026 Global Projections", "macro_report_2026.md", "📈 READ 2026 MACROECONOMIC REPORT"
+            # Ep 3 teraz ma swój raport trendów, a raport 2026 przeszedł na sam koniec
+            current_t, current_a, rep_file = "podcast_transcript_2026.md", "podcast_2026.mp3", "macro_report_2026.md"
+            f_type, v_title = "None", "2026 Global Projections"
         elif "Ep. 4" in episode:
-            current_t, current_a = "ep3_whisper_transcript_EN.md", "ep3_europe_barbell.mp3"
-            f_type, v_title, rep_file, rep_title = "Barbell", "The Barbell Market Structure 2026", "barbell_strategy_2026.md", "⚖️ READ 2026 BARBELL STRATEGY"
+            current_t, current_a, rep_file = "ep3_whisper_transcript_EN.md", "ep3_europe_barbell.mp3", "barbell_strategy_2026.md"
+            f_type, v_title = "Barbell", "The Barbell Market Structure 2026"
         else:
-            current_t, current_a = "ep5_summary_transcript.md", "ep5_audio.mp3"
-            f_type, v_title, rep_file, rep_title = "None", "Strategic Synthesis 2025-2026", "ep5_summary_report.md", "🧬 READ MASTER STRATEGIC SYNTHESIS"
+            # EPISODE 5 - ZWIEŃCZENIE WSZYSTKIEGO
+            current_t, current_a, rep_file = "ep5_summary_transcript.md", "ep5_audio.mp3", "macro_report_2026.md"
+            f_type, v_title = "None", "Master Strategic Synthesis 2026-2035"
 
         st.audio(current_a)
         st.markdown(f'<p style="color:#888; font-size:0.9rem; font-style:italic; margin-top:20px; border-left: 3px solid #333; padding-left: 20px;">Powered by Magdalena Romaniecka Analysis</p>', unsafe_allow_html=True)
@@ -77,7 +79,7 @@ with tabs[0]:
         if f_type == "Barbell":
             b_counts = df['market_structure'].value_counts().reset_index()
             b_counts.columns = ['Tier', 'Count']
-            fig = px.bar(b_counts, x='Tier', y='Count', color='Tier', text='Count', color_discrete_sequence=['#D4AF37', '#F0E68C', '#333'], template="plotly_dark")
+            fig = px.bar(b_counts, x='Tier', y='Count', color='Tier', text='Count', color_discrete_map={'Ultra-Niche (Barbell Top)': '#D4AF37', 'Budget (Barbell Bottom)': '#F0E68C', 'Squeezed Middle': '#333333'}, template="plotly_dark")
             fig.update_traces(textposition='outside', textfont=dict(size=18, color='#D4AF37'))
         else:
             df_t = df.nlargest(10, 'community_votes').sort_values('community_votes', ascending=True)
@@ -87,25 +89,15 @@ with tabs[0]:
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, xaxis=dict(showgrid=False, showticklabels=False), yaxis=dict(showgrid=False))
         st.plotly_chart(fig, use_container_width=True)
 
+    # RAPORT FINALNY WIDOCZNY NA WIERZCHU
     st.write("---")
-    st.markdown('<div class="section-header">Intelligence Library</div>', unsafe_allow_html=True)
-    c_left, c_right = st.columns(2, gap="large")
-    with c_left:
-        with st.expander("📄 READ EXECUTIVE AUDIO DEBRIEF"):
-            try:
-                with open(current_t, 'r', encoding='utf-8') as f:
-                    st.markdown('<div class="report-frame">', unsafe_allow_html=True)
-                    st.markdown(f.read())
-                    st.markdown('</div>', unsafe_allow_html=True)
-            except: st.error("Debrief missing.")
-    with c_right:
-        with st.expander(rep_title):
-            try:
-                with open(rep_file, 'r', encoding='utf-8') as f:
-                    st.markdown('<div class="report-frame">', unsafe_allow_html=True)
-                    st.markdown(f.read())
-                    st.markdown('</div>', unsafe_allow_html=True)
-            except: st.info("Report missing.")
+    st.markdown('<div class="section-header">Executive Master Dossier</div>', unsafe_allow_html=True)
+    try:
+        with open(rep_file, 'r', encoding='utf-8') as f:
+            st.markdown('<div class="report-frame">', unsafe_allow_html=True)
+            st.markdown(f.read())
+            st.markdown('</div>', unsafe_allow_html=True)
+    except: st.error("Executive Dossier missing.")
 
 with tabs[1]:
     st.markdown('<div class="section-header">Market Segmentation Strategic Hierarchy</div>', unsafe_allow_html=True)
@@ -118,6 +110,7 @@ with tabs[2]:
     st.markdown('<div class="section-header">Fragrance Market Case Studies</div>', unsafe_allow_html=True)
     f_choice = st.selectbox("Select Profile:", sorted(df['name'].tolist()))
     f_data = df[df['name'] == f_choice].iloc[0]
+    
     vault_html = f"""
     <div style="border: 2px solid #D4AF37; padding: 6px; background: #000; margin: 30px auto; max-width: 900px; box-shadow: 0 0 30px rgba(212,175,55,0.15);">
         <div style="border: 1px solid rgba(212,175,55,0.4); background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%); padding: 50px 30px; text-align: center;">
@@ -142,14 +135,35 @@ with tabs[2]:
     """
     st.markdown(vault_html, unsafe_allow_html=True)
 
+# -----------------------------------------------------------------------------
+# 5. RESTORED ECOSYSTEM - 4 APPS FIX
+# -----------------------------------------------------------------------------
 with tabs[3]:
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
-    e1, e2, e3 = st.columns(3)
+    e1, e2, e3, e4 = st.columns(4)
     with e1:
-        st.markdown('<div class="project-card"><h4 style="color:#D4AF37;">🌍 Aromo Intelligence</h4><p style="color:#888;">Custom scraping engine for Eurasian markets, tracking real-time price fluctuations and consumer sentiment.</p><div class="btn-launch">INTERNAL LAUNCH</div></div>', unsafe_allow_html=True)
+        st.markdown("""<div class="project-card">
+            <h4 style="color:#D4AF37; margin-top:0;">🌍 Aromo Intelligence</h4>
+            <p style="color:#888; font-size:0.85rem;">Custom scraping engine for Eurasian markets, tracking real-time price fluctuations and consumer sentiment across 15+ retailers.</p>
+            <a class="btn-launch" href="#">INTERNAL LAUNCH</a>
+        </div>""", unsafe_allow_html=True)
     with e2:
-        st.markdown('<div class="project-card"><h4 style="color:#D4AF37;">🧬 Prediction Engine</h4><p style="color:#888;">Kaggle-based regression models calculating price elasticity and identifying the next Sol de Janeiro candidates.</p><div class="btn-launch">ACCESS MODELS</div></div>', unsafe_allow_html=True)
+        st.markdown("""<div class="project-card">
+            <h4 style="color:#D4AF37; margin-top:0;">🧬 Prediction Engine</h4>
+            <p style="color:#888; font-size:0.85rem;">Kaggle-based regression models calculating price elasticity and identifying the next 'Sol de Janeiro' viral candidates.</p>
+            <a class="btn-launch" href="#">ACCESS MODELS</a>
+        </div>""", unsafe_allow_html=True)
     with e3:
-        st.markdown('<div class="project-card"><h4 style="color:#D4AF37;">📊 Market Pulse</h4><p style="color:#888;">Real-time dashboard integrating Google Deep Research data with live import-export tracking across EU and US borders.</p><div class="btn-launch">LIVE MONITOR</div></div>', unsafe_allow_html=True)
+        st.markdown("""<div class="project-card">
+            <h4 style="color:#D4AF37; margin-top:0;">📊 Market Pulse</h4>
+            <p style="color:#888; font-size:0.85rem;">Real-time dashboard integrating Google Deep Research data with live import/export tracking across EU and US borders.</p>
+            <a class="btn-launch" href="#">LIVE MONITOR</a>
+        </div>""", unsafe_allow_html=True)
+    with e4:
+        st.markdown("""<div class="project-card">
+            <h4 style="color:#D4AF37; margin-top:0;">📡 Deep Research AI</h4>
+            <p style="color:#888; font-size:0.85rem;">Advanced macroeconomic analysis engine processing geopolitical shifts and long-term scent trend forecasts for 2035.</p>
+            <a class="btn-launch" href="#">LAUNCH AI HUB</a>
+        </div>""", unsafe_allow_html=True)
 
 st.markdown('<div class="footer">FRAGRANCE INTELLIGENCE HUB ✦ STRATEGIC DESIGN BY MAGDALENA ROMANIECKA</div>', unsafe_allow_html=True)
