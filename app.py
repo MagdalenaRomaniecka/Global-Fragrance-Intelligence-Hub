@@ -5,7 +5,7 @@ import os
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# 1. ATELIER SUPREME CSS - LUXURY RESTORED
+# 1. ATELIER SUPREME CSS
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 
@@ -30,7 +30,7 @@ st.markdown("""
     .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p { text-align: center !important; font-family: 'Tenor Sans', sans-serif !important; letter-spacing: 2px; }
     .project-card { border:1px solid #222; background:rgba(15,15,15,0.95); padding:25px; transition:0.3s; height:100%; display:flex; flex-direction:column; justify-content:space-between; margin-bottom: 20px; }
     .project-card:hover { border-color:#D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.1); }
-    .btn-launch { display:block; width:100%; padding:12px; background:#D4AF37 !important; color:#000 !important; text-align:center; font-weight:bold; text-transform:uppercase; font-size:0.75rem; text-decoration:none; letter-spacing: 1px; }
+    .btn-launch { display:block; width:100%; padding:12px; background:#D4AF37 !important; color:#000 !important; text-align:center; font-weight:bold; text-transform:uppercase; font-size:0.75rem; text-decoration:none; letter-spacing: 1px; cursor: pointer; }
     .footer { position: fixed; left: 0; bottom: 0; width: 100%; background-color: #000; color: #444; text-align: center; padding: 12px; font-size: 0.65rem; border-top: 1px solid #111; z-index: 999; letter-spacing: 2px; }
     </style>
 """, unsafe_allow_html=True)
@@ -146,10 +146,10 @@ with tabs[3]:
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
     e1, e2, e3 = st.columns(3)
     with e1:
-        st.markdown('<div class="project-card"><h4 style="color:#D4AF37;">🌍 Aromo Intelligence</h4><p style="color:#888;">Custom scraping engine for Eurasian markets, tracking real-time price fluctuations and consumer sentiment.</p><a class="btn-launch" href="#">INTERNAL LAUNCH</a></div>', unsafe_allow_html=True)
+        st.markdown('<div class="project-card"><h4 style="color:#D4AF37;">🌍 Aromo Intelligence</h4><p style="color:#888;">Custom scraping engine for Eurasian markets, tracking real-time price fluctuations and consumer sentiment.</p><div class="btn-launch">INTERNAL LAUNCH</div></div>', unsafe_allow_html=True)
     with e2:
-        st.markdown('<div class="project-card"><h4 style="color:#D4AF37;">🧬 Prediction Engine</h4><p style="color:#888;">Kaggle-based regression models calculating price elasticity and identifying the next Sol de Janeiro candidates.</p><a class="btn-launch" href="#">ACCESS MODELS</a></div>', unsafe_allow_html=True)
+        st.markdown('<div class="project-card"><h4 style="color:#D4AF37;">🧬 Prediction Engine</h4><p style="color:#888;">Kaggle-based regression models calculating price elasticity and identifying the next Sol de Janeiro candidates.</p><div class="btn-launch">ACCESS MODELS</div></div>', unsafe_allow_html=True)
     with e3:
-        st.markdown('<div class="project-card"><h4 style="color:#D4AF37;">📊 Market Pulse</h4><p style="color:#888;">Real-time dashboard integrating Google Deep Research data with live import-export tracking across EU and US borders.</p><a class="btn-launch" href="#">LIVE MONITOR</a></div>', unsafe_allow_html=True)
+        st.markdown('<div class="project-card"><h4 style="color:#D4AF37;">📊 Market Pulse</h4><p style="color:#888;">Real-time dashboard integrating Google Deep Research data with live import-export tracking across EU and US borders.</p><div class="btn-launch">LIVE MONITOR</div></div>', unsafe_allow_html=True)
 
 st.markdown('<div class="footer">FRAGRANCE INTELLIGENCE HUB ✦ STRATEGIC DESIGN BY MAGDALENA ROMANIECKA</div>', unsafe_allow_html=True)
