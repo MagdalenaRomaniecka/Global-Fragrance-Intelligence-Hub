@@ -5,7 +5,7 @@ import os
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# 1. ATELIER SUPREME CSS (Semicolons required for CSS to work)
+# 1. ATELIER SUPREME CSS - LUXURY RESTORED
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 
@@ -28,8 +28,8 @@ st.markdown("""
     .section-header { color: #D4AF37; font-family: 'Tenor Sans'; font-size: 1.4rem; border-left: 5px solid #D4AF37; padding-left: 20px; margin: 30px 0 20px 0; text-transform: uppercase; letter-spacing: 3px; }
     .stTabs [data-baseweb="tab-list"] { justify-content: center; gap: 20px; }
     .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p { text-align: center !important; font-family: 'Tenor Sans', sans-serif !important; letter-spacing: 2px; }
-    .project-card { border:1px solid #222; background:rgba(15,15,15,0.95); padding:25px; transition:0.3s; height:100%; display:flex; flex-direction:column; justify-content:space-between; }
-    .project-card:hover { border-color:#D4AF37; }
+    .project-card { border:1px solid #222; background:rgba(15,15,15,0.95); padding:25px; transition:0.3s; height:100%; display:flex; flex-direction:column; justify-content:space-between; margin-bottom: 20px; }
+    .project-card:hover { border-color:#D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.1); }
     .btn-launch { display:block; width:100%; padding:12px; background:#D4AF37 !important; color:#000 !important; text-align:center; font-weight:bold; text-transform:uppercase; font-size:0.75rem; text-decoration:none; letter-spacing: 1px; }
     .footer { position: fixed; left: 0; bottom: 0; width: 100%; background-color: #000; color: #444; text-align: center; padding: 12px; font-size: 0.65rem; border-top: 1px solid #111; z-index: 999; letter-spacing: 2px; }
     </style>
@@ -51,72 +51,41 @@ with tabs[0]:
     col_audio, col_viz = st.columns([1, 1.5], gap="large")
     with col_audio:
         st.markdown('<div class="section-header">Audio Intelligence Hub</div>', unsafe_allow_html=True)
-        episode = st.radio("Selection:", [
-            "🎧 Ep. 1: Recession Glam and 2025 Market", 
-            "📊 Ep. 2: Global Trade and Russian Autarky",
-            "🔮 Ep. 3: 2026 Outlook and AI Architecture", 
-            "🌍 Ep. 4: The European Barbell and Poland",
-            "🧬 Ep. 5: Strategic Synthesis"
-        ], label_visibility="collapsed")
+        episode = st.radio("Selection:", ["🎧 Ep. 1: Recession Glam", "📊 Ep. 2: Global Trade", "🔮 Ep. 3: 2026 Outlook", "🌍 Ep. 4: European Barbell", "🧬 Ep. 5: Master Synthesis"], label_visibility="collapsed")
         
         if "Ep. 1" in episode:
             current_t, current_a = "podcast_transcript.md", "podcast_trends.mp3"
-            f_type, v_title = "Popularity", "Global Popularity Ranking"
-            desc = "Analyzing Recession Glam and Sol de Janeiro dominance."
-            rep_file, rep_title = "trend_report_2025.md", "📊 READ 2025 TREND REPORT"
+            f_type, v_title, rep_file, rep_title = "Popularity", "Global Popularity Ranking", "trend_report_2025.md", "📊 READ 2025 TREND REPORT"
         elif "Ep. 2" in episode:
             current_t, current_a = "ep2_trade_transcript.md", "ep2_audio.mp3"
-            f_type, v_title = "None", "Global Trade Volume 2024"
-            desc = "Hard data analysis of USA imports EU surplus and Russian domestic production records."
-            rep_file, rep_title = "ep2_trade_report.md", "📊 READ GLOBAL TRADE AND AUTARKY REPORT"
+            f_type, v_title, rep_file, rep_title = "None", "Global Trade Volume 2024", "ep2_trade_report.md", "📊 READ GLOBAL TRADE REPORT"
         elif "Ep. 3" in episode:
             current_t, current_a = "podcast_transcript_2026.md", "podcast_2026.mp3"
-            f_type, v_title = "None", "2026 Global Projections"
-            desc = "Deep dive into the AI era and the 2025 Tariff Shock."
-            rep_file, rep_title = "macro_report_2026.md", "📈 READ 2026 MACROECONOMIC REPORT"
+            f_type, v_title, rep_file, rep_title = "None", "2026 Global Projections", "macro_report_2026.md", "📈 READ 2026 MACROECONOMIC REPORT"
         elif "Ep. 4" in episode:
             current_t, current_a = "ep3_whisper_transcript_EN.md", "ep3_europe_barbell.mp3"
-            f_type, v_title = "Barbell", "The Barbell Market Structure 2026"
-            desc = "Mapping the European Barbell structure and Poland rising PPP."
-            rep_file, rep_title = "barbell_strategy_2026.md", "⚖️ READ 2026 EUROPEAN BARBELL STRATEGY"
+            f_type, v_title, rep_file, rep_title = "Barbell", "The Barbell Market Structure 2026", "barbell_strategy_2026.md", "⚖️ READ 2026 BARBELL STRATEGY"
         else:
             current_t, current_a = "ep5_summary_transcript.md", "ep5_audio.mp3"
-            f_type, v_title = "None", "Strategic Synthesis 2025 to 2026"
-            desc = "Final dossier powered by Google Deep Research and analysis by Magdalena Romaniecka."
-            rep_file, rep_title = "ep5_summary_report.md", "🧬 READ MASTER STRATEGIC SYNTHESIS"
+            f_type, v_title, rep_file, rep_title = "None", "Strategic Synthesis 2025-2026", "ep5_summary_report.md", "🧬 READ MASTER STRATEGIC SYNTHESIS"
 
         st.audio(current_a)
-        st.markdown(f'<p style="color:#888; font-size:0.9rem; font-style:italic; margin-top:20px; border-left: 3px solid #333; padding-left: 20px;">{desc}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="color:#888; font-size:0.9rem; font-style:italic; margin-top:20px; border-left: 3px solid #333; padding-left: 20px;">Powered by Magdalena Romaniecka Analysis</p>', unsafe_allow_html=True)
 
     with col_viz:
         st.markdown(f'<div class="section-header">Live Market Data ✦ {v_title}</div>', unsafe_allow_html=True)
-        
         if f_type == "Barbell":
             b_counts = df['market_structure'].value_counts().reset_index()
             b_counts.columns = ['Tier', 'Count']
-            b_order = ['Budget (Barbell Bottom)', 'Squeezed Middle', 'Ultra-Niche (Barbell Top)']
-            b_counts['Tier'] = pd.Categorical(b_counts['Tier'], categories=b_order, ordered=True)
-            
-            fig = px.bar(b_counts.sort_values('Tier'), x='Tier', y='Count', color='Tier', text='Count', 
-                         color_discrete_map={'Ultra-Niche (Barbell Top)': '#D4AF37', 'Budget (Barbell Bottom)': '#F0E68C', 'Squeezed Middle': '#333333'}, template="plotly_dark")
-            fig.update_traces(textposition='outside', textfont=dict(size=18, color='#D4AF37', family="Tenor Sans"))
-            fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=False, xaxis=dict(showgrid=False, tickfont=dict(size=13, color='#bbb')), yaxis=dict(showgrid=False, showticklabels=False))
-            fig.update_yaxes(range=[0, b_counts['Count'].max() * 1.3])
-            
-            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, margin=dict(t=20, b=10, l=10, r=10))
-            st.plotly_chart(fig, use_container_width=True)
-            st.markdown('<p style="color:#666; font-size:0.75rem; text-align:right; font-style:italic; letter-spacing:1px;">Data Origin: Macroeconomic Market Segmentation Forecast 2026</p>', unsafe_allow_html=True)
+            fig = px.bar(b_counts, x='Tier', y='Count', color='Tier', text='Count', color_discrete_sequence=['#D4AF37', '#F0E68C', '#333'], template="plotly_dark")
+            fig.update_traces(textposition='outside', textfont=dict(size=18, color='#D4AF37'))
         else:
             df_t = df.nlargest(10, 'community_votes').sort_values('community_votes', ascending=True)
-            fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment", text="community_votes", 
-                         color_discrete_sequence=['#D4AF37', '#F0E68C', '#444'], template="plotly_dark")
-            fig.update_traces(textposition='outside', textfont=dict(size=15, color='#D4AF37', family="Lato"))
-            fig.update_layout(xaxis_title=None, yaxis_title=None, legend_title_text=None, xaxis=dict(showgrid=False, showticklabels=False), yaxis=dict(showgrid=False, tickfont=dict(size=13, color='#ddd')))
-            fig.update_xaxes(range=[0, df_t['community_votes'].max() * 1.3])
-            
-            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, margin=dict(t=20, b=10, l=10, r=10))
-            st.plotly_chart(fig, use_container_width=True)
-            st.markdown('<p style="color:#666; font-size:0.75rem; text-align:right; font-style:italic; letter-spacing:1px;">Data Intelligence: Fragrantica and Aromo Sentiment Engines (Historical Aggregation 2020 to 2024)</p>', unsafe_allow_html=True)
+            fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment", text="community_votes", color_discrete_sequence=['#D4AF37', '#F0E68C', '#444'], template="plotly_dark")
+            fig.update_traces(textposition='outside', textfont=dict(size=15, color='#D4AF37'))
+        
+        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, xaxis=dict(showgrid=False, showticklabels=False), yaxis=dict(showgrid=False))
+        st.plotly_chart(fig, use_container_width=True)
 
     st.write("---")
     st.markdown('<div class="section-header">Intelligence Library</div>', unsafe_allow_html=True)
@@ -141,22 +110,14 @@ with tabs[0]:
 with tabs[1]:
     st.markdown('<div class="section-header">Market Segmentation Strategic Hierarchy</div>', unsafe_allow_html=True)
     df_sunburst = df.groupby('segment').apply(lambda x: x.nlargest(5, 'community_votes')).reset_index(drop=True)
-    fig_sun = px.sunburst(df_sunburst, path=[px.Constant("Global Market"), 'segment', 'brand', 'name'], 
-                          values='community_votes', color='segment',
-                          color_discrete_map={'(?)':'#333', 'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#555'},
-                          template="plotly_dark")
-    fig_sun.update_traces(textfont=dict(family="Lato, sans-serif", size=14), insidetextorientation='auto')
-    fig_sun.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=700, font_family="Lato")
+    fig_sun = px.sunburst(df_sunburst, path=[px.Constant("Global Market"), 'segment', 'brand', 'name'], values='community_votes', color='segment', color_discrete_map={'(?)':'#333', 'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#555'}, template="plotly_dark")
+    fig_sun.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=700)
     st.plotly_chart(fig_sun, use_container_width=True)
 
-# -----------------------------------------------------------------------------
-# 4. RESTORED LUXURY FRAGRANCE VAULT HTML 
-# -----------------------------------------------------------------------------
 with tabs[2]:
     st.markdown('<div class="section-header">Fragrance Market Case Studies</div>', unsafe_allow_html=True)
     f_choice = st.selectbox("Select Profile:", sorted(df['name'].tolist()))
     f_data = df[df['name'] == f_choice].iloc[0]
-    
     vault_html = f"""
     <div style="border: 2px solid #D4AF37; padding: 6px; background: #000; margin: 30px auto; max-width: 900px; box-shadow: 0 0 30px rgba(212,175,55,0.15);">
         <div style="border: 1px solid rgba(212,175,55,0.4); background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%); padding: 50px 30px; text-align: center;">
@@ -183,6 +144,12 @@ with tabs[2]:
 
 with tabs[3]:
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
-    st.markdown('<div class="project-card"><h4 style="color:#D4AF37;">🌍 Aromo Intelligence</h4><p style="color:#888;">Russian market scraping engine.</p></div>', unsafe_allow_html=True)
+    e1, e2, e3 = st.columns(3)
+    with e1:
+        st.markdown('<div class="project-card"><h4 style="color:#D4AF37;">🌍 Aromo Intelligence</h4><p style="color:#888;">Custom scraping engine for Eurasian markets, tracking real-time price fluctuations and consumer sentiment.</p><a class="btn-launch" href="#">INTERNAL LAUNCH</a></div>', unsafe_allow_html=True)
+    with e2:
+        st.markdown('<div class="project-card"><h4 style="color:#D4AF37;">🧬 Prediction Engine</h4><p style="color:#888;">Kaggle-based regression models calculating price elasticity and identifying the next Sol de Janeiro candidates.</p><a class="btn-launch" href="#">ACCESS MODELS</a></div>', unsafe_allow_html=True)
+    with e3:
+        st.markdown('<div class="project-card"><h4 style="color:#D4AF37;">📊 Market Pulse</h4><p style="color:#888;">Real-time dashboard integrating Google Deep Research data with live import-export tracking across EU and US borders.</p><a class="btn-launch" href="#">LIVE MONITOR</a></div>', unsafe_allow_html=True)
 
 st.markdown('<div class="footer">FRAGRANCE INTELLIGENCE HUB ✦ STRATEGIC DESIGN BY MAGDALENA ROMANIECKA</div>', unsafe_allow_html=True)
