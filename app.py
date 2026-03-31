@@ -5,7 +5,7 @@ import os
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# 1. ATELIER SUPREME CSS
+# 1. ATELIER SUPREME CSS (Semicolons required for CSS to work)
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 
@@ -63,7 +63,7 @@ with tabs[0]:
             current_t, current_a = "podcast_transcript.md", "podcast_trends.mp3"
             f_type, v_title = "Popularity", "Global Popularity Ranking"
             desc = "Analyzing Recession Glam and Sol de Janeiro dominance."
-            rep_file, rep_title = "trend_report_2025.md", "📊 READ 2025 TREND REPORT: RECESSION GLAM"
+            rep_file, rep_title = "trend_report_2025.md", "📊 READ 2025 TREND REPORT"
         elif "Ep. 2" in episode:
             current_t, current_a = "ep2_trade_transcript.md", "ep2_audio.mp3"
             f_type, v_title = "None", "Global Trade Volume 2024"
@@ -72,7 +72,7 @@ with tabs[0]:
         elif "Ep. 3" in episode:
             current_t, current_a = "podcast_transcript_2026.md", "podcast_2026.mp3"
             f_type, v_title = "None", "2026 Global Projections"
-            desc = "Deep dive into the 5T AI era and the 2025 Tariff Shock."
+            desc = "Deep dive into the AI era and the 2025 Tariff Shock."
             rep_file, rep_title = "macro_report_2026.md", "📈 READ 2026 MACROECONOMIC REPORT"
         elif "Ep. 4" in episode:
             current_t, current_a = "ep3_whisper_transcript_EN.md", "ep3_europe_barbell.mp3"
@@ -107,7 +107,6 @@ with tabs[0]:
             st.plotly_chart(fig, use_container_width=True)
             st.markdown('<p style="color:#666; font-size:0.75rem; text-align:right; font-style:italic; letter-spacing:1px;">Data Origin: Macroeconomic Market Segmentation Forecast 2026</p>', unsafe_allow_html=True)
         else:
-            # SORTOWANIE I LUXURY KOLORY DLA GŁÓWNEGO WYKRESU
             df_t = df.nlargest(10, 'community_votes').sort_values('community_votes', ascending=True)
             fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment", text="community_votes", 
                          color_discrete_sequence=['#D4AF37', '#F0E68C', '#444'], template="plotly_dark")
@@ -150,11 +149,37 @@ with tabs[1]:
     fig_sun.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=700, font_family="Lato")
     st.plotly_chart(fig_sun, use_container_width=True)
 
+# -----------------------------------------------------------------------------
+# 4. RESTORED LUXURY FRAGRANCE VAULT HTML 
+# -----------------------------------------------------------------------------
 with tabs[2]:
     st.markdown('<div class="section-header">Fragrance Market Case Studies</div>', unsafe_allow_html=True)
     f_choice = st.selectbox("Select Profile:", sorted(df['name'].tolist()))
     f_data = df[df['name'] == f_choice].iloc[0]
-    st.markdown(f"<div style='border: 2px solid #D4AF37; padding: 50px; background: #000; text-align: center;'><h1 style='color:#D4AF37; border:none;'>{f_data['name']}</h1><p style='color:#888;'>{f_data['brand']} ✦ {f_data['segment']}</p></div>", unsafe_allow_html=True)
+    
+    vault_html = f"""
+    <div style="border: 2px solid #D4AF37; padding: 6px; background: #000; margin: 30px auto; max-width: 900px; box-shadow: 0 0 30px rgba(212,175,55,0.15);">
+        <div style="border: 1px solid rgba(212,175,55,0.4); background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%); padding: 50px 30px; text-align: center;">
+            <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.8rem; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 10px;">{f_data['name']}</div>
+            <div style="color: #D4AF37; font-size: 0.9rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px;">{f_data['brand']} ✦ {f_data['segment']}</div>
+            <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 40px; flex-wrap: wrap;">
+                <div style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 250px; border-radius: 2px;">
+                    <div style="border: 1px solid rgba(212,175,55,0.3); padding: 20px 30px;">
+                        <div style="color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;">Quality Score</div>
+                        <div style="color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 3.5rem; line-height: 1.2; margin: 0;">{f_data['community_score']:.1f}/5.0</div>
+                    </div>
+                </div>
+                <div style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 250px; border-radius: 2px;">
+                    <div style="border: 1px solid rgba(212,175,55,0.3); padding: 20px 30px;">
+                        <div style="color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;">Key Notes</div>
+                        <div style="color: #ccc; font-size: 1.1rem; line-height: 1.5; margin: 0;">{f_data['top_notes']}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    """
+    st.markdown(vault_html, unsafe_allow_html=True)
 
 with tabs[3]:
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
