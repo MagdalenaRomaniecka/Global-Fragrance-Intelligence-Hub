@@ -5,7 +5,7 @@ import os
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# 1. ATELIER SUPREME CSS - MOBILE RESPONSIVE & LUXURY (Semicolons in CSS only)
+# 1. ATELIER SUPREME CSS - MOBILE RESPONSIVE LUXURY
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence | Atelier", page_icon="✨", layout="wide")
 
@@ -19,12 +19,11 @@ st.markdown("""
         font-family: 'Lato', sans-serif !important; 
     }
     
-    /* Responsywność dla telefonu */
     @media (max-width: 768px) {
-        .main-title { font-size: 1.6rem !important; letter-spacing: 2px !important; }
-        .metric-value { font-size: 1.5rem !important; }
-        .report-frame { padding: 25px !important; font-size: 0.95rem !important; }
-        .section-header { font-size: 1.1rem !important; }
+        .main-title { font-size: 1.5rem !important; letter-spacing: 2px !important; }
+        .metric-value { font-size: 1.4rem !important; }
+        .report-frame { padding: 20px !important; font-size: 0.95rem !important; }
+        h1 { font-size: 1.4rem !important; }
     }
 
     [data-testid="stMarkdownContainer"] h1, [data-testid="stMarkdownContainer"] h2 {
@@ -54,7 +53,7 @@ st.markdown("""
 
     .project-card { border:1px solid #222; background:rgba(15,15,15,0.95); padding:25px; transition:0.3s; height:100%; display:flex; flex-direction:column; justify-content:space-between; margin-bottom: 20px; border-radius: 2px; }
     .project-card:hover { border-color:#D4AF37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.15); }
-    .btn-launch { display:block; width:100%; padding:12px; background:#D4AF37 !important; color:#000 !important; text-align:center; font-weight:bold; text-transform:uppercase; font-size:0.7rem; text-decoration:none; letter-spacing: 2px; border-radius: 2px; cursor: pointer; }
+    .btn-launch { display:block; width:100%; padding:12px; background:#D4AF37 !important; color:#000 !important; text-align:center; font-weight:bold; text-transform:uppercase; font-size:0.7rem; text-decoration:none; letter-spacing: 2px; border-radius: 2px; }
 
     .footer { position: relative; width: 100%; background-color: #000; color: #444; text-align: center; padding: 30px; font-size: 0.65rem; border-top: 1px solid #111; z-index: 999; letter-spacing: 2px; margin-top: 50px; }
     </style>
@@ -63,7 +62,7 @@ st.markdown("""
 df = load_and_merge_data()
 
 # -----------------------------------------------------------------------------
-# 2. HEADER & KPI METRICS
+# 2. HEADER
 # -----------------------------------------------------------------------------
 st.markdown("""<div class="header-wrapper"><div class="header-outer"><div class="header-inner"><h1 class="main-title">Fragrance Intelligence</h1>
 <div style="font-family: 'Lato'; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; margin-top: 10px;">Global Strategic Hub ✦ Predictive Forecast 2026</div></div></div></div>""", unsafe_allow_html=True)
@@ -74,7 +73,7 @@ for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
     col.markdown(f'<div class="metric-box"><div class="metric-label">{lab}</div><div class="metric-value">{val}</div></div>', unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
-# 3. STRATEGIC BRIEFINGS TAB
+# 3. ANALYTICAL TABS
 # -----------------------------------------------------------------------------
 tabs = st.tabs(["STRATEGIC BRIEFINGS", "MARKET ANALYTICS", "FRAGRANCE VAULT", "ECOSYSTEM"])
 
@@ -82,13 +81,7 @@ with tabs[0]:
     col_audio, col_viz = st.columns([1, 1.5], gap="large")
     with col_audio:
         st.markdown('<div class="section-header">Audio Intelligence Hub</div>', unsafe_allow_html=True)
-        episode = st.radio("Selection:", [
-            "🎧 Ep. 1: Recession Glam", 
-            "📊 Ep. 2: Global Trade", 
-            "🔮 Ep. 3: 2026 Outlook", 
-            "🌍 Ep. 4: European Barbell", 
-            "🧬 Ep. 5: Master Synthesis"
-        ], label_visibility="collapsed")
+        episode = st.radio("Selection:", ["🎧 Ep. 1: Recession Glam", "📊 Ep. 2: Global Trade", "🔮 Ep. 3: 2026 Outlook", "🌍 Ep. 4: European Barbell", "🧬 Ep. 5: Master Synthesis"], label_visibility="collapsed")
         
         if "Ep. 1" in episode:
             current_t, current_a, rep_file = "podcast_transcript.md", "podcast_trends.mp3", "trend_report_2025.md"
@@ -97,15 +90,14 @@ with tabs[0]:
             current_t, current_a, rep_file = "ep2_trade_transcript.md", "ep2_audio.mp3", "ep2_trade_report.md"
             f_type, v_title, desc = "None", "Global Trade Volume 2024", "Hard data analysis of USA imports EU surplus and Russian production."
         elif "Ep. 3" in episode:
-            current_t, current_a, rep_file = "podcast_transcript_2026.md", "podcast_2026.mp3", "macro_report_2026.md"
+            current_t, current_a, rep_file = "podcast_transcript_2026.md", "podcast_2026.mp3", "podcast_transcript_2026.md"
             f_type, v_title, desc = "None", "2026 Global Projections", "Deep dive into the 5T AI era and the 2025 Tariff Shock."
         elif "Ep. 4" in episode:
             current_t, current_a, rep_file = "ep3_whisper_transcript_EN.md", "ep3_europe_barbell.mp3", "barbell_strategy_2026.md"
             f_type, v_title, desc = "Barbell", "The Barbell Market Structure 2026", "Mapping the European Barbell structure and Poland rising PPP."
         else:
-            # EPISODE 5 - CROWNING FINALE
             current_t, current_a, rep_file = "ep5_summary_transcript.md", "ep5_audio.mp3", "macro_report_2026.md"
-            f_type, v_title, desc = "None", "Master Strategic Synthesis 2026", "The crowning analysis powered by Magdalena Romaniecka."
+            f_type, v_title, desc = "None", "Master Strategic Synthesis 2026", "Final dossier powered by analysis by Magdalena Romaniecka."
 
         st.audio(current_a)
         st.markdown(f'<p style="color:#D4AF37; font-size:0.95rem; font-style:italic; margin-top:20px; border-left: 3px solid #D4AF37; padding-left: 20px;">{desc}</p>', unsafe_allow_html=True)
@@ -115,22 +107,23 @@ with tabs[0]:
         if f_type == "Barbell":
             b_counts = df['market_structure'].value_counts().reset_index()
             b_counts.columns = ['Tier', 'Count']
-            fig = px.bar(b_counts, x='Tier', y='Count', color='Tier', text='Count', 
-                         color_discrete_map={'Ultra-Niche (Barbell Top)': '#D4AF37', 'Budget (Barbell Bottom)': '#F0E68C', 'Squeezed Middle': '#333333'}, template="plotly_dark")
+            fig = px.bar(b_counts, x='Tier', y='Count', color='Tier', text='Count', color_discrete_map={'Ultra-Niche (Barbell Top)': '#D4AF37', 'Budget (Barbell Bottom)': '#F0E68C', 'Squeezed Middle': '#333333'}, template="plotly_dark")
             fig.update_traces(textposition='outside', textfont=dict(size=18, color='#D4AF37'))
             fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.5, xanchor="center", x=0.5))
         else:
             df_t = df.nlargest(10, 'community_votes').sort_values('community_votes', ascending=True)
-            fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment", text="community_votes", 
-                         color_discrete_sequence=['#D4AF37', '#F0E68C', '#444'], template="plotly_dark")
-            fig.update_traces(textposition='outside', textfont=dict(size=14, color='#D4AF37'))
-            fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.5, xanchor="center", x=0.5))
+            fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment", text="community_votes", color_discrete_sequence=['#D4AF37', '#F0E68C', '#444'], template="plotly_dark")
+            
+            # POPRAWKA UCINANIA LICZB: cliponaxis=False i większy zakres osi X
+            fig.update_traces(textposition='outside', textfont=dict(size=15, color='#D4AF37'), cliponaxis=False)
+            max_val = df_t['community_votes'].max()
+            fig.update_xaxes(range=[0, max_val * 1.35], showgrid=False, showticklabels=False)
+            fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.6, xanchor="center", x=0.5))
         
-        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, xaxis=dict(showgrid=False, showticklabels=False), yaxis=dict(showgrid=False))
+        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, yaxis=dict(showgrid=False), margin=dict(r=100))
         st.plotly_chart(fig, use_container_width=True)
-        st.markdown('<p style="color:#666; font-size:0.75rem; text-align:right; font-style:italic; letter-spacing:1px;">Data Intelligence: Fragrantica and Aromo Eurasia Engines (2020 ✦ 2024)</p>', unsafe_allow_html=True)
 
-    # UKŁAD KOLUMNOWY LEWA (DEBRIEF) | PRAWA (DOSSIER)
+    # TWO-COLUMN LAYOUT: TRANSCRIPTION (LEFT) | DOSSIER (RIGHT)
     st.write("---")
     l_col, r_col = st.columns(2, gap="large")
     with l_col:
@@ -150,9 +143,6 @@ with tabs[0]:
                 st.markdown('</div>', unsafe_allow_html=True)
         except: st.error("Dossier missing.")
 
-# -----------------------------------------------------------------------------
-# 4. MARKET ANALYTICS & FRAGRANCE VAULT
-# -----------------------------------------------------------------------------
 with tabs[1]:
     st.markdown('<div class="section-header">Market Strategic Hierarchy</div>', unsafe_allow_html=True)
     df_sun = df.groupby('segment').apply(lambda x: x.nlargest(5, 'community_votes')).reset_index(drop=True)
@@ -188,9 +178,6 @@ with tabs[2]:
     """
     st.markdown(vault_html, unsafe_allow_html=True)
 
-# -----------------------------------------------------------------------------
-# 5. ANALYTICAL ECOSYSTEM - 4 APPS
-# -----------------------------------------------------------------------------
 with tabs[3]:
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
     e1, e2, e3, e4 = st.columns(4)
