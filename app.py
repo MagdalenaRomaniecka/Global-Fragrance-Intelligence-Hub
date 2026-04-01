@@ -87,35 +87,20 @@ for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
     col.markdown(f'<div class="metric-box"><div class="metric-label">{lab}</div><div class="metric-value">{val}</div></div>', unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
-# 3. ANALYTICAL TABS (NOW WITH 5 TABS)
+# 3. ANALYTICAL TABS (RESTORED TO 4 TABS)
 # -----------------------------------------------------------------------------
-tabs = st.tabs(["GLOBAL FOUNDATION", "STRATEGIC BRIEFINGS", "MARKET ANALYTICS", "FRAGRANCE VAULT", "ECOSYSTEM"])
+tabs = st.tabs(["STRATEGIC BRIEFINGS", "MARKET ANALYTICS", "FRAGRANCE VAULT", "ECOSYSTEM"])
 
-# --- TAB 0: GLOBAL FOUNDATION (PROLOGUE) ---
 with tabs[0]:
-    st.markdown('<div class="section-header">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
-    
-    # Placeholder for your future NotebookLM video
-    st.info("🎥 NotebookLM Video Briefing: Production Pending...")
-    
-    try:
-        with open("master_prologue.md", 'r', encoding='utf-8') as f:
-            content_p = f.read()
-            # Split tags so Markdown renders correctly
-            st.markdown('<div class="report-frame">', unsafe_allow_html=True)
-            st.markdown(content_p)
-            st.markdown('</div>', unsafe_allow_html=True)
-    except: 
-        st.error("Master Prologue file is missing. Please sync repository.")
-
-# --- TAB 1: STRATEGIC BRIEFINGS (AUDIO HUB) ---
-with tabs[1]:
-    col_audio, col_viz = st.columns([1, 1.5], gap="large")
-    with col_audio:
-        st.markdown('<div class="section-header">Audio Intelligence Hub</div>', unsafe_allow_html=True)
-        episode = st.radio("Selection:", ["🎧 Ep. 1: Recession Glam", "📊 Ep. 2: Global Trade", "🔮 Ep. 3: 2026 Outlook", "🌍 Ep. 4: European Barbell", "🧬 Ep. 5: Master Synthesis"], label_visibility="collapsed")
+    col_nav, col_viz = st.columns([1, 1.5], gap="large")
+    with col_nav:
+        st.markdown('<div class="section-header">Executive Selection</div>', unsafe_allow_html=True)
+        episode = st.radio("Selection:", ["🏛️ 0. Global Foundation", "🎧 Ep. 1: Recession Glam", "📊 Ep. 2: Global Trade", "🔮 Ep. 3: 2026 Outlook", "🌍 Ep. 4: European Barbell", "🧬 Ep. 5: Master Synthesis"], label_visibility="collapsed")
         
-        if "Ep. 1" in episode:
+        if "0. Global" in episode:
+            current_t, current_a, rep_file = None, None, "master_prologue.md"
+            f_type, v_title, desc = "None", "Macroeconomic Foundations 2026", "The 5T Nvidia era, Hollowing Out, and the Section 122 Tariff Shock."
+        elif "Ep. 1" in episode:
             current_t, current_a, rep_file = "podcast_transcript.md", "podcast_trends.mp3", "trend_report_2025.md"
             f_type, v_title, desc = "Popularity", "Global Popularity Ranking", "Analyzing Sol de Janeiro dominance Lattafa viral surge and Givaudan neuro active solutions."
         elif "Ep. 2" in episode:
@@ -155,32 +140,43 @@ with tabs[1]:
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, yaxis=dict(showgrid=False))
         st.plotly_chart(fig, use_container_width=True)
 
+    # -------------------------------------------------------------------------
+    # DYNAMIC LAYOUT ENGINE (PROLOGUE VS EPISODES)
+    # -------------------------------------------------------------------------
     st.write("---")
-    l_col, r_col = st.columns(2, gap="large")
-    with l_col:
-        st.markdown('<div class="section-header">Executive Audio Debrief</div>', unsafe_allow_html=True)
-        try:
-            with open(current_t, 'r', encoding='utf-8') as f:
-                content_t = f.read()
-                st.markdown('<div class="report-frame">', unsafe_allow_html=True)
-                st.markdown(content_t)
-                st.markdown('</div>', unsafe_allow_html=True)
-        except: 
-            st.error("Debrief missing.")
-            
-    with r_col:
-        st.markdown('<div class="section-header">Executive Master Dossier</div>', unsafe_allow_html=True)
+    
+    if "0. Global" in episode:
+        st.markdown('<div class="section-header" style="text-align: center;">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
+        st.info("🎥 NotebookLM Video Briefing: Production Pending...")
         try:
             with open(rep_file, 'r', encoding='utf-8') as f:
                 content_r = f.read()
-                st.markdown('<div class="report-frame">', unsafe_allow_html=True)
-                st.markdown(content_r)
-                st.markdown('</div>', unsafe_allow_html=True)
+                # Markdown tags \n\n ensure proper formatting
+                st.markdown(f'<div class="report-frame">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
         except: 
             st.error("Dossier missing.")
+            
+    else:
+        l_col, r_col = st.columns(2, gap="large")
+        with l_col:
+            st.markdown('<div class="section-header">Executive Audio Debrief</div>', unsafe_allow_html=True)
+            try:
+                with open(current_t, 'r', encoding='utf-8') as f:
+                    content_t = f.read()
+                    st.markdown(f'<div class="report-frame">\n\n{content_t}\n\n</div>', unsafe_allow_html=True)
+            except: 
+                st.error("Debrief missing.")
+                
+        with r_col:
+            st.markdown('<div class="section-header">Executive Master Dossier</div>', unsafe_allow_html=True)
+            try:
+                with open(rep_file, 'r', encoding='utf-8') as f:
+                    content_r = f.read()
+                    st.markdown(f'<div class="report-frame">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
+            except: 
+                st.error("Dossier missing.")
 
-# --- TAB 2: MARKET ANALYTICS ---
-with tabs[2]:
+with tabs[1]:
     st.markdown('<div class="section-header">Market Strategic Hierarchy</div>', unsafe_allow_html=True)
     df_sun = df.sort_values('community_votes', ascending=False).groupby('segment').head(5).reset_index(drop=True)
     df_sun['Global Market'] = 'Global Market'
@@ -189,8 +185,7 @@ with tabs[2]:
     fig_sun.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=700)
     st.plotly_chart(fig_sun, use_container_width=True)
 
-# --- TAB 3: FRAGRANCE VAULT ---
-with tabs[3]:
+with tabs[2]:
     st.markdown('<div class="section-header">Fragrance Market Case Studies</div>', unsafe_allow_html=True)
     f_choice = st.selectbox("Select Profile:", sorted(df['name'].tolist()))
     f_data = df[df['name'] == f_choice].iloc[0]
@@ -218,8 +213,7 @@ with tabs[3]:
     """
     st.markdown(vault_html, unsafe_allow_html=True)
 
-# --- TAB 4: ECOSYSTEM ---
-with tabs[4]:
+with tabs[3]:
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
     e1, e2, e3, e4 = st.columns(4)
     apps = [
