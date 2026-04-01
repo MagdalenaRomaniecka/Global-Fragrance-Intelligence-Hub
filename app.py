@@ -73,16 +73,16 @@ st.markdown("""
                 Global Strategic Hub ✦ Predictive Forecast 2026
             </div>
             <div style="font-family: 'Lato'; color: #555; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 15px; border-top: 1px solid #222; padding-top: 10px;">
-                Data Intelligence Google Deep Research ✦ Kaggle Datasets ✦ Chestny ZNAK
+                Data Intelligence Google Deep Research ✦ Aromo and Fragrantica Datasets ✦ Chestny ZNAK
             </div>
         </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# AKTUALIZACJA KPI NA BAZIE DEEP RESEARCH
+# UPDATED KPI METRICS
 m1, m2, m3, m4 = st.columns(4)
-metrics = [("Global Beauty Market", "$593B"), ("Prestige Elasticity", "-1.81"), ("Digital Correlation", "0.28"), ("Russian Autarky Vol.", "93M")]
+metrics = [("Global Beauty Market", "$593B"), ("EU Trade Surplus", "€238B"), ("Poland PPP 2026", "> Japan"), ("Prestige Elasticity", "-1.81")]
 for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
     col.markdown(f'<div class="metric-box"><div class="metric-label">{lab}</div><div class="metric-value">{val}</div></div>', unsafe_allow_html=True)
 
@@ -127,8 +127,6 @@ with tabs[0]:
         else:
             df_t = df.nlargest(10, 'community_votes').sort_values('community_votes', ascending=True)
             fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment", text="community_votes", color_discrete_sequence=['#D4AF37', '#F0E68C', '#444'], template="plotly_dark")
-            
-            # WIDE MARGIN FIX FOR NO CLIPPING
             fig.update_traces(textposition='outside', textfont=dict(size=15, color='#D4AF37'), cliponaxis=False)
             max_val = df_t['community_votes'].max()
             fig.update_xaxes(range=[0, max_val * 1.35], showgrid=False, showticklabels=False)
@@ -159,8 +157,11 @@ with tabs[0]:
 
 with tabs[1]:
     st.markdown('<div class="section-header">Market Strategic Hierarchy</div>', unsafe_allow_html=True)
-    df_sun = df.groupby('segment').apply(lambda x: x.nlargest(5, 'community_votes')).reset_index(drop=True)
-    fig_sun = px.sunburst(df_sun, path=[px.Constant("Global Market"), 'segment', 'brand', 'name'], values='community_votes', color='segment', color_discrete_map={'(?)':'#333', 'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#555'}, template="plotly_dark")
+    # BULLETPROOF FIX FOR SUNBURST
+    df_sun = df.sort_values('community_votes', ascending=False).groupby('segment').head(5).reset_index(drop=True)
+    df_sun['Global Market'] = 'Global Market'
+    
+    fig_sun = px.sunburst(df_sun, path=['Global Market', 'segment', 'brand', 'name'], values='community_votes', color='segment', color_discrete_map={'(?)':'#333', 'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#555'}, template="plotly_dark")
     fig_sun.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=700)
     st.plotly_chart(fig_sun, use_container_width=True)
 
