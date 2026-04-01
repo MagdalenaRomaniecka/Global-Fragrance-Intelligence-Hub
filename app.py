@@ -62,13 +62,27 @@ st.markdown("""
 df = load_and_merge_data()
 
 # -----------------------------------------------------------------------------
-# 2. HEADER
+# 2. HEADER WITH DATA ORIGIN
 # -----------------------------------------------------------------------------
-st.markdown("""<div class="header-wrapper"><div class="header-outer"><div class="header-inner"><h1 class="main-title">Fragrance Intelligence</h1>
-<div style="font-family: 'Lato'; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; margin-top: 10px;">Global Strategic Hub ✦ Predictive Forecast 2026</div></div></div></div>""", unsafe_allow_html=True)
+st.markdown("""
+<div class="header-wrapper">
+    <div class="header-outer">
+        <div class="header-inner">
+            <h1 class="main-title">Fragrance Intelligence</h1>
+            <div style="font-family: 'Lato'; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; margin-top: 10px;">
+                Global Strategic Hub ✦ Predictive Forecast 2026
+            </div>
+            <div style="font-family: 'Lato'; color: #555; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 15px; border-top: 1px solid #222; padding-top: 10px;">
+                Data Intelligence Google Deep Research ✦ Kaggle Datasets ✦ Chestny ZNAK
+            </div>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
+# AKTUALIZACJA KPI NA BAZIE DEEP RESEARCH
 m1, m2, m3, m4 = st.columns(4)
-metrics = [("Global Beauty Market", "$593.2B"), ("EU Market Growth", "+16.2%"), ("Poland Growth (Max)", "+75.3%"), ("Intelligence Precision", "91%")]
+metrics = [("Global Beauty Market", "$593B"), ("Prestige Elasticity", "-1.81"), ("Digital Correlation", "0.28"), ("Russian Autarky Vol.", "93M")]
 for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
     col.markdown(f'<div class="metric-box"><div class="metric-label">{lab}</div><div class="metric-value">{val}</div></div>', unsafe_allow_html=True)
 
@@ -85,19 +99,19 @@ with tabs[0]:
         
         if "Ep. 1" in episode:
             current_t, current_a, rep_file = "podcast_transcript.md", "podcast_trends.mp3", "trend_report_2025.md"
-            f_type, v_title, desc = "Popularity", "Global Popularity Ranking", "Analyzing Recession Glam and Sol de Janeiro dominance."
+            f_type, v_title, desc = "Popularity", "Global Popularity Ranking", "Analyzing Sol de Janeiro dominance Lattafa viral surge and Givaudan neuro active solutions."
         elif "Ep. 2" in episode:
             current_t, current_a, rep_file = "ep2_trade_transcript.md", "ep2_audio.mp3", "ep2_trade_report.md"
-            f_type, v_title, desc = "None", "Global Trade Volume 2024", "Hard data analysis of USA imports EU surplus and Russian production."
+            f_type, v_title, desc = "None", "Global Trade Volume 2024", "Deep Research data on US Section 122 tariffs EU surplus and Russian autarky 93M units."
         elif "Ep. 3" in episode:
-            current_t, current_a, rep_file = "podcast_transcript_2026.md", "podcast_2026.mp3", "podcast_transcript_2026.md"
-            f_type, v_title, desc = "None", "2026 Global Projections", "Deep dive into the 5T AI era and the 2025 Tariff Shock."
+            current_t, current_a, rep_file = "podcast_transcript_2026.md", "podcast_2026.mp3", "ep3_outlook_report.md"
+            f_type, v_title, desc = "None", "2026 Global Projections", "Impact of the 5T Nvidia era the 2025 Tariff Shock and negative 1.81 price elasticity."
         elif "Ep. 4" in episode:
             current_t, current_a, rep_file = "ep3_whisper_transcript_EN.md", "ep3_europe_barbell.mp3", "barbell_strategy_2026.md"
-            f_type, v_title, desc = "Barbell", "The Barbell Market Structure 2026", "Mapping the European Barbell structure and Poland rising PPP."
+            f_type, v_title, desc = "Barbell", "The Barbell Market Structure 2026", "Mapping the European Barbell structure Poland PPP breakthrough and 0.28 digital correlation."
         else:
             current_t, current_a, rep_file = "ep5_summary_transcript.md", "ep5_audio.mp3", "macro_report_2026.md"
-            f_type, v_title, desc = "None", "Master Strategic Synthesis 2026", "Final dossier powered by analysis by Magdalena Romaniecka."
+            f_type, v_title, desc = "None", "Master Strategic Synthesis 2026", "Final dossier compiled via Deep Research and Kaggle datasets curated by Magdalena Romaniecka."
 
         st.audio(current_a)
         st.markdown(f'<p style="color:#D4AF37; font-size:0.95rem; font-style:italic; margin-top:20px; border-left: 3px solid #D4AF37; padding-left: 20px;">{desc}</p>', unsafe_allow_html=True)
@@ -114,13 +128,13 @@ with tabs[0]:
             df_t = df.nlargest(10, 'community_votes').sort_values('community_votes', ascending=True)
             fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment", text="community_votes", color_discrete_sequence=['#D4AF37', '#F0E68C', '#444'], template="plotly_dark")
             
-            # POPRAWKA UCINANIA LICZB: cliponaxis=False i większy zakres osi X
+            # WIDE MARGIN FIX FOR NO CLIPPING
             fig.update_traces(textposition='outside', textfont=dict(size=15, color='#D4AF37'), cliponaxis=False)
             max_val = df_t['community_votes'].max()
             fig.update_xaxes(range=[0, max_val * 1.35], showgrid=False, showticklabels=False)
-            fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.6, xanchor="center", x=0.5))
+            fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.6, xanchor="center", x=0.5), margin=dict(r=100))
         
-        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, yaxis=dict(showgrid=False), margin=dict(r=100))
+        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, yaxis=dict(showgrid=False))
         st.plotly_chart(fig, use_container_width=True)
 
     # TWO-COLUMN LAYOUT: TRANSCRIPTION (LEFT) | DOSSIER (RIGHT)
