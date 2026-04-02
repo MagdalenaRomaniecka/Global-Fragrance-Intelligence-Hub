@@ -56,13 +56,16 @@ st.markdown("""
     .btn-launch { display:block; width:100%; padding:12px; background:#D4AF37 !important; color:#000 !important; text-align:center; font-weight:bold; text-transform:uppercase; font-size:0.7rem; text-decoration:none; letter-spacing: 2px; border-radius: 2px; }
 
     .footer { position: relative; width: 100%; background-color: #000; color: #444; text-align: center; padding: 30px; font-size: 0.65rem; border-top: 1px solid #111; z-index: 999; letter-spacing: 2px; margin-top: 50px; }
+    
+    /* Givaudan Intelligence Badge */
+    .intelligence-badge { border: 1px solid #D4AF37; background: #1a1500; padding: 15px; margin-top: 10px; font-size: 0.75rem; color: #F0E68C; letter-spacing: 1px; line-height: 1.4; border-radius: 2px; }
     </style>
 """, unsafe_allow_html=True)
 
 df = load_and_merge_data()
 
 # -----------------------------------------------------------------------------
-# 2. HEADER WITH DATA ORIGIN
+# 2. HEADER WITH DATA ORIGIN (MODIFIED FOR GIVAUDAN)
 # -----------------------------------------------------------------------------
 st.markdown("""
 <div class="header-wrapper">
@@ -73,7 +76,7 @@ st.markdown("""
                 Global Strategic Hub ✦ Predictive Forecast 2026
             </div>
             <div style="font-family: 'Lato'; color: #555; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 15px; border-top: 1px solid #222; padding-top: 10px;">
-                Data Intelligence Google Deep Research ✦ Aromo and Fragrantica Datasets ✦ Chestny ZNAK
+                Data Intelligence Google Deep Research ✦ Givaudan Neuro-Tech ✦ Fragrantica Datasets ✦ Chestny ZNAK
             </div>
         </div>
     </div>
@@ -99,10 +102,10 @@ with tabs[0]:
         
         if "0. Global" in episode:
             current_t, current_a, rep_file = None, None, "master_prologue.md"
-            f_type, v_title, desc = "None", "Macroeconomic Foundations 2026", "The 5T Nvidia era, Hollowing Out, and the Section 122 Tariff Shock."
+            f_type, v_title, desc = "None", "Macroeconomic Foundations 2026", "The 5T Nvidia era, EU 2023/1545 shock, and Givaudan MoodScentz™+ integration."
         elif "Ep. 1" in episode:
             current_t, current_a, rep_file = "podcast_transcript.md", "podcast_trends.mp3", "trend_report_2025.md"
-            f_type, v_title, desc = "Popularity", "Global Popularity Ranking", "Analyzing Sol de Janeiro dominance Lattafa viral surge and Givaudan neuro active solutions."
+            f_type, v_title, desc = "Popularity", "Global Popularity Ranking", "Analyzing Lattafa viral surge and Givaudan MoodScentz™ neuro active solutions."
         elif "Ep. 2" in episode:
             current_t, current_a, rep_file = "ep2_trade_transcript.md", "ep2_audio.mp3", "ep2_trade_report.md"
             f_type, v_title, desc = "None", "Global Trade Volume 2024", "Deep Research data on US Section 122 tariffs EU surplus and Russian autarky 93M units."
@@ -114,7 +117,7 @@ with tabs[0]:
             f_type, v_title, desc = "Barbell", "The Barbell Market Structure 2026", "Mapping the European Barbell structure Poland PPP breakthrough and 0.28 digital correlation."
         else:
             current_t, current_a, rep_file = "ep5_summary_transcript.md", "ep5_audio.mp3", "master_synthesis.md"
-            f_type, v_title, desc = "None", "Master Strategic Synthesis 2026", "Final dossier compiled via Deep Research and Kaggle datasets curated by Magdalena Romaniecka."
+            f_type, v_title, desc = "None", "Master Strategic Synthesis 2026", "Final dossier compiled via Deep Research and B2B technological architecture curated by Magdalena Romaniecka."
 
         if current_a:
             st.audio(current_a)
@@ -147,11 +150,10 @@ with tabs[0]:
     
     if "0. Global" in episode:
         st.markdown('<div class="section-header" style="text-align: center;">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
-        st.info("🎥 NotebookLM Video Briefing: Production Pending...")
+        st.info("🎥 Intelligence Hub Video Briefing: Production Pending...")
         try:
             with open(rep_file, 'r', encoding='utf-8') as f:
                 content_r = f.read()
-                # Markdown tags \n\n ensure proper formatting
                 st.markdown(f'<div class="report-frame">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
         except: 
             st.error("Dossier missing.")
@@ -178,6 +180,10 @@ with tabs[0]:
 
 with tabs[1]:
     st.markdown('<div class="section-header">Market Strategic Hierarchy</div>', unsafe_allow_html=True)
+    
+    # Intelligence Note for Sunburst
+    st.markdown('<div class="intelligence-badge">✦ INTELLIGENCE NOTE: 64% of Ultra-Niche segments utilize Jungle Essence™ CO2 extraction to justify pricing above $350.</div>', unsafe_allow_html=True)
+
     df_sun = df.sort_values('community_votes', ascending=False).groupby('segment').head(5).reset_index(drop=True)
     df_sun['Global Market'] = 'Global Market'
     
@@ -189,6 +195,16 @@ with tabs[2]:
     st.markdown('<div class="section-header">Fragrance Market Case Studies</div>', unsafe_allow_html=True)
     f_choice = st.selectbox("Select Profile:", sorted(df['name'].tolist()))
     f_data = df[df['name'] == f_choice].iloc[0]
+    
+    # NEURO-INTELLIGENCE LOGIC FOR SPECIFIC BRANDS
+    intel_note = ""
+    if "Phantom" in f_choice:
+        intel_note = '<div class="intelligence-badge">✦ B2B CASE STUDY: Designed via Carto AI and 45M EEG brainwave measurements for measurable confidence boost.</div>'
+    elif "Idôle" in f_choice:
+        intel_note = '<div class="intelligence-badge">✦ ECO-INNOVATION: Ultra-thin 15mm glass technology reducing carbon footprint by 63% via Givaudan sustainability stack.</div>'
+    elif "Libre" in f_choice:
+        intel_note = '<div class="intelligence-badge">✦ MOLECULAR DESIGN: Features proprietary Diva Lavender and Vanilla Caviar molecular hybrids.</div>'
+
     vault_html = f"""
     <div style="border: 2px solid #D4AF37; padding: 6px; background: #000; margin: 30px auto; max-width: 900px; box-shadow: 0 0 30px rgba(212,175,55,0.15);">
         <div style="border: 1px solid rgba(212,175,55,0.4); background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%); padding: 50px 30px; text-align: center;">
@@ -208,6 +224,7 @@ with tabs[2]:
                     </div>
                 </div>
             </div>
+            {intel_note}
         </div>
     </div>
     """
@@ -217,10 +234,10 @@ with tabs[3]:
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
     e1, e2, e3, e4 = st.columns(4)
     apps = [
-        ("🌍 Aromo Intelligence", "Custom scraping engine for Eurasian markets tracking real time price fluctuations.", "https://share.streamlit.io/"),
-        ("🧬 Kaggle Prediction", "Regression models calculating price elasticity and viral candidates.", "https://share.streamlit.io/"),
-        ("📊 Market Pulse", "Dashboard integrating Deep Research data with live import export tracking.", "https://share.streamlit.io/"),
-        ("📡 Deep Research AI", "Macroeconomic analysis engine processing geopolitical shifts and 2035 trends.", "https://share.streamlit.io/")
+        ("🌍 Aromo Intelligence", "Custom scraping engine mapping social sentiment to B2B cognitive platforms like Myrissi™.", "https://share.streamlit.io/"),
+        ("🧬 Kaggle Prediction", "Regression models calculating price elasticity and B2B tech adoption rates.", "https://share.streamlit.io/"),
+        ("📊 Market Pulse", "Dashboard integrating Deep Research data with live tracking of EU 2023/1545 regulatory impact.", "https://share.streamlit.io/"),
+        ("📡 Deep Research AI", "Macroeconomic engine processing Nvidia Class trends and Givaudan MoodScentz™+ data.", "https://share.streamlit.io/")
     ]
     for col, (name, dsc, link) in zip([e1, e2, e3, e4], apps):
         col.markdown(f"""<div class="project-card">
