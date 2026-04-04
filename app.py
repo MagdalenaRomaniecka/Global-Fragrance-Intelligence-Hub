@@ -19,22 +19,15 @@ st.markdown("""
         font-family: 'Lato', sans-serif !important;
     }
     
-    /* MOBILE OPTIMIZATION OVERRIDES */
     @media (max-width: 768px) {
         .main-title { font-size: 1.2rem !important; letter-spacing: 2px !important; }
         .header-inner { padding: 15px 10px !important; }
         .metric-value { font-size: 1.2rem !important; }
         .metric-label { font-size: 0.55rem !important; letter-spacing: 1.5px !important; }
-        .report-frame { 
-            padding: 15px !important; 
-            font-size: 0.9rem !important; 
-            text-align: left !important; 
-            line-height: 1.6 !important;
-        }
+        .report-frame { padding: 15px !important; font-size: 0.9rem !important; text-align: left !important; line-height: 1.6 !important; }
         .section-header { font-size: 1.1rem !important; padding-left: 10px !important; margin: 20px 0 10px 0 !important; }
         h1 { font-size: 1.2rem !important; }
         h2 { font-size: 1.1rem !important; }
-        
         .vault-main-title { font-size: 1.6rem !important; letter-spacing: 2px !important; }
         .vault-stats-container { gap: 15px !important; }
         .vault-stat-box { min-width: 100% !important; padding: 15px !important; }
@@ -62,9 +55,7 @@ st.markdown("""
     .section-header { color: #D4AF37; font-family: 'Tenor Sans'; font-size: 1.4rem; border-left: 5px solid #D4AF37; padding-left: 20px; margin: 30px 0 20px 0; text-transform: uppercase; letter-spacing: 3px; }
     
     .stTabs [data-baseweb="tab-list"] { justify-content: center; gap: 10px; }
-    .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
-        text-align: center !important; font-family: 'Tenor Sans', sans-serif !important; letter-spacing: 1px; font-size: 0.8rem;
-    }
+    .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p { text-align: center !important; font-family: 'Tenor Sans', sans-serif !important; letter-spacing: 1px; font-size: 0.8rem; }
 
     .project-card { border:1px solid #222; background:rgba(15,15,15,0.95); padding:20px; transition:0.3s; height:100%; display:flex; flex-direction:column; justify-content:space-between; margin-bottom: 20px; border-radius: 2px; }
     .project-card:hover { border-color:#D4AF37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.15); }
@@ -149,6 +140,13 @@ with tabs[0]:
 
     if "0 ✦ Global" in episode:
         with top_right:
+            # NOWY PANEL: EXECUTIVE SUMMARY
+            intro_html = """<div style="background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.3); padding: 25px; margin-bottom: 25px; border-radius: 2px;">
+<div style="color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">Strategic Intelligence Hub</div>
+<div style="color: #ccc; font-size: 0.95rem; line-height: 1.6;">This application is an advanced data synthesis engine ✦ It processes millions of data points from Kaggle ✦ Chestny ZNAK ✦ and Givaudan neuro technology to map the 2026 global market ✦ It transforms raw empirical data into actionable predictive intelligence ✦ proving that the industry has shifted from traditional beauty into an economic survival and bio hacking sector</div>
+</div>"""
+            st.markdown(intro_html, unsafe_allow_html=True)
+            
             st.markdown('<div class="section-header" style="margin-top:0;">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
             try:
                 with open(find_file(rep_file), 'r', encoding='utf-8') as f:
@@ -165,7 +163,6 @@ with tabs[0]:
 
         fig = px.bar(df_barbell, x="segment", y="community_votes", color="segment", text="community_votes",
                      color_discrete_map={'Niche':'#D4AF37', 'Prestige':'#1a1a1a', 'Mass Market':'#F0E68C'}, template="plotly_dark")
-        
         fig.update_traces(textposition='outside', textfont=dict(size=18, family="Lato", color='#ffffff'), cliponaxis=False, hovertemplate="<b>Segment</b> %{x}<br><b>Votes</b> %{y}<extra></extra>")
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=350, xaxis_title=None, yaxis_title=None, showlegend=False, margin=dict(t=20, b=10, l=0, r=0), xaxis=dict(showgrid=False, tickfont=dict(size=14, color='#aaaaaa')), yaxis=dict(showgrid=False, showticklabels=False))
         st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
@@ -196,53 +193,50 @@ with tabs[0]:
                 
             else:
                 st.markdown('<div class="section-header" style="margin-top:0;">Intelligence Architecture</div>', unsafe_allow_html=True)
-                infographic_html = """
-                <style>
-                .blueprint-container { border: 1px solid rgba(212,175,55,0.2); background: radial-gradient(circle at 50% -20%, #151515 0%, #000 100%); padding: 30px; border-radius: 2px; position: relative; overflow: hidden; box-shadow: inset 0 0 30px rgba(0,0,0,0.8); margin: 15px auto; max-width: 95%; }
-                .blueprint-container::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.8), transparent); animation: scanline 4s linear infinite; }
-                @keyframes scanline { 100% { left: 200%; } }
-                .bp-title { color: #D4AF37; text-align: center; font-size: 1.1rem; letter-spacing: 4px; margin-bottom: 30px; font-weight: 400; font-family: 'Tenor Sans', sans-serif; text-transform: uppercase; }
-                .bp-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-                .bp-card { background: rgba(10,10,10,0.8); border: 1px solid #1a1a1a; padding: 25px 15px; flex: 1; min-width: 180px; text-align: center; transition: all 0.4s ease; border-bottom: 2px solid #111; }
-                .bp-card:hover { border-color: rgba(212,175,55,0.4); background: rgba(15,15,15,1); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(212,175,55,0.05); border-bottom: 2px solid #D4AF37; }
-                .bp-icon { font-size: 1.8rem; margin-bottom: 15px; filter: grayscale(100%) brightness(1.5) sepia(100%) hue-rotate(5deg) saturate(300%); }
-                .bp-header { color: #D4AF37; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; font-weight: bold; }
-                .bp-list { color: #999; font-size: 0.85rem; line-height: 1.8; list-style-type: none; padding: 0; margin: 0; }
-                </style>
-                
-                <div class="blueprint-container">
-                    <div class="bp-title">Givaudan Carto ✦ Data Ecosystem</div>
-                    <div class="bp-grid">
-                        <div class="bp-card">
-                            <div class="bp-icon">📥</div>
-                            <div class="bp-header">Raw Data Input</div>
-                            <ul class="bp-list">
-                                <li>Kaggle Global Sets</li>
-                                <li>Chestny ZNAK Logs</li>
-                                <li>Consumer Sentiment</li>
-                            </ul>
-                        </div>
-                        <div class="bp-card">
-                            <div class="bp-icon">⚙️</div>
-                            <div class="bp-header">Processing Engine</div>
-                            <ul class="bp-list">
-                                <li>Carto AI Algorithms</li>
-                                <li>Python Regressions</li>
-                                <li>Neuro Mood Mapping</li>
-                            </ul>
-                        </div>
-                        <div class="bp-card">
-                            <div class="bp-icon">💎</div>
-                            <div class="bp-header">Strategic Output</div>
-                            <ul class="bp-list">
-                                <li>Neuro Active Scents</li>
-                                <li>Dopamine Hacking</li>
-                                <li>Predictive Playbook</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                """
+                infographic_html = """<style>
+.blueprint-container { border: 1px solid rgba(212,175,55,0.2); background: radial-gradient(circle at 50% -20%, #151515 0%, #000 100%); padding: 30px; border-radius: 2px; position: relative; overflow: hidden; box-shadow: inset 0 0 30px rgba(0,0,0,0.8); margin: 15px auto; max-width: 95%; }
+.blueprint-container::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.8), transparent); animation: scanline 4s linear infinite; }
+@keyframes scanline { 100% { left: 200%; } }
+.bp-title { color: #D4AF37; text-align: center; font-size: 1.1rem; letter-spacing: 4px; margin-bottom: 30px; font-weight: 400; font-family: 'Tenor Sans', sans-serif; text-transform: uppercase; }
+.bp-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.bp-card { background: rgba(10,10,10,0.8); border: 1px solid #1a1a1a; padding: 25px 15px; flex: 1; min-width: 180px; text-align: center; transition: all 0.4s ease; border-bottom: 2px solid #111; }
+.bp-card:hover { border-color: rgba(212,175,55,0.4); background: rgba(15,15,15,1); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(212,175,55,0.05); border-bottom: 2px solid #D4AF37; }
+.bp-icon { font-size: 1.8rem; margin-bottom: 15px; filter: grayscale(100%) brightness(1.5) sepia(100%) hue-rotate(5deg) saturate(300%); }
+.bp-header { color: #D4AF37; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; font-weight: bold; }
+.bp-list { color: #999; font-size: 0.85rem; line-height: 1.8; list-style-type: none; padding: 0; margin: 0; }
+</style>
+<div class="blueprint-container">
+<div class="bp-title">Givaudan Carto ✦ Data Ecosystem</div>
+<div class="bp-grid">
+<div class="bp-card">
+<div class="bp-icon">📥</div>
+<div class="bp-header">Raw Data Input</div>
+<ul class="bp-list">
+<li>Kaggle Global Sets</li>
+<li>Chestny ZNAK Logs</li>
+<li>Consumer Sentiment</li>
+</ul>
+</div>
+<div class="bp-card">
+<div class="bp-icon">⚙️</div>
+<div class="bp-header">Processing Engine</div>
+<ul class="bp-list">
+<li>Carto AI Algorithms</li>
+<li>Python Regressions</li>
+<li>Neuro Mood Mapping</li>
+</ul>
+</div>
+<div class="bp-card">
+<div class="bp-icon">💎</div>
+<div class="bp-header">Strategic Output</div>
+<ul class="bp-list">
+<li>Neuro Active Scents</li>
+<li>Dopamine Hacking</li>
+<li>Predictive Playbook</li>
+</ul>
+</div>
+</div>
+</div>"""
                 st.markdown(infographic_html, unsafe_allow_html=True)
 
         st.write("---")
@@ -290,34 +284,30 @@ with tabs[2]:
         strat_label = "The Squeezed Middle"
         strat_desc = "Highly sensitive to price elasticity ✦ Most impacted by Section 122 tariffs ✦ Requires urgent transition to biotech value"
 
-    vault_html = f"""
-    <div style="border: 2px solid #D4AF37; padding: 4px; background: #000; margin: 15px auto; max-width: 95%; box-shadow: 0 0 30px rgba(212,175,55,0.15);">
-        <div style="border: 1px solid rgba(212,175,55,0.4); background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%); padding: 30px 15px; text-align: center;">
-            <div class="vault-main-title" style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.2rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px;">{f_data['name']}</div>
-            <div style="color: #D4AF37; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px;">{f_data['brand']} ✦ {f_data['segment']}</div>
-            
-            <div class="strat-box-mobile" style="background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.2); padding: 15px 30px; margin: 0 auto 30px auto; border-radius: 2px; max-width: 800px;">
-                <div style="color:#D4AF37; font-size:0.75rem; letter-spacing:2px; margin-bottom:8px; text-transform:uppercase; font-weight:bold;">Strategic Market Context ✦ {strat_label}</div>
-                <div style="color: #ccc; font-size: 0.85rem; font-style: italic; letter-spacing: 1px;">{strat_desc}</div>
-            </div>
-
-            <div class="vault-stats-container" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
-                <div class="vault-stat-box" style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 200px; flex: 1;">
-                    <div style="border: 1px solid rgba(212,175,55,0.3); padding: 15px 20px; height: 100%;">
-                        <div style="color:#D4AF37; font-size:0.75rem; letter-spacing:2px; margin-bottom:10px; text-transform:uppercase;">Quality Score</div>
-                        <div style="color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 2.5rem; line-height: 1.2; margin: 0;">{f_data['community_score']:.1f} / 5.0</div>
-                    </div>
-                </div>
-                <div class="vault-stat-box" style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 200px; flex: 1;">
-                    <div style="border: 1px solid rgba(212,175,55,0.3); padding: 15px 20px; height: 100%; display: flex; flex-direction: column; justify-content: center;">
-                        <div style="color:#D4AF37; font-size:0.75rem; letter-spacing:2px; margin-bottom:10px; text-transform:uppercase;">Key Notes</div>
-                        <div style="color: #ccc; font-size: 0.95rem; line-height: 1.4; margin: 0;">{f_data['top_notes'].replace('-', ' ')}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    """
+    vault_html = f"""<div style="border: 2px solid #D4AF37; padding: 4px; background: #000; margin: 15px auto; max-width: 95%; box-shadow: 0 0 30px rgba(212,175,55,0.15);">
+<div style="border: 1px solid rgba(212,175,55,0.4); background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%); padding: 30px 15px; text-align: center;">
+<div class="vault-main-title" style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.2rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px;">{f_data['name']}</div>
+<div style="color: #D4AF37; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px;">{f_data['brand']} ✦ {f_data['segment']}</div>
+<div class="strat-box-mobile" style="background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.2); padding: 15px 30px; margin: 0 auto 30px auto; border-radius: 2px; max-width: 800px;">
+<div style="color:#D4AF37; font-size:0.75rem; letter-spacing:2px; margin-bottom:8px; text-transform:uppercase; font-weight:bold;">Strategic Market Context ✦ {strat_label}</div>
+<div style="color: #ccc; font-size: 0.85rem; font-style: italic; letter-spacing: 1px;">{strat_desc}</div>
+</div>
+<div class="vault-stats-container" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+<div class="vault-stat-box" style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 200px; flex: 1;">
+<div style="border: 1px solid rgba(212,175,55,0.3); padding: 15px 20px; height: 100%;">
+<div style="color:#D4AF37; font-size:0.75rem; letter-spacing:2px; margin-bottom:10px; text-transform:uppercase;">Quality Score</div>
+<div style="color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 2.5rem; line-height: 1.2; margin: 0;">{f_data['community_score']:.1f} / 5.0</div>
+</div>
+</div>
+<div class="vault-stat-box" style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 200px; flex: 1;">
+<div style="border: 1px solid rgba(212,175,55,0.3); padding: 15px 20px; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+<div style="color:#D4AF37; font-size:0.75rem; letter-spacing:2px; margin-bottom:10px; text-transform:uppercase;">Key Notes</div>
+<div style="color: #ccc; font-size: 0.95rem; line-height: 1.4; margin: 0;">{f_data['top_notes'].replace('-', ' ')}</div>
+</div>
+</div>
+</div>
+</div>
+</div>"""
     st.markdown(vault_html, unsafe_allow_html=True)
 
 with tabs[3]:
