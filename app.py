@@ -115,7 +115,6 @@ for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
 tabs = st.tabs(["STRATEGIC BRIEFINGS", "MARKET ANALYTICS", "FRAGRANCE VAULT", "ECOSYSTEM"])
 
 with tabs[0]:
-    # UŻYCIE KOLUMN DO UŁOŻENIA ELEMENTÓW OBOK SIEBIE
     top_left, top_right = st.columns([1, 1.5], gap="large")
     
     with top_left:
@@ -154,31 +153,63 @@ with tabs[0]:
             df_barbell = df_barbell.sort_values('sort_order')
 
             fig = px.bar(df_barbell, x="segment", y="community_votes", color="segment", text="community_votes",
-                         color_discrete_map={'Niche':'#D4AF37', 'Prestige':'#444', 'Mass-Market':'#F0E68C'}, template="plotly_dark")
-            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=320,
-                              xaxis_title=None, yaxis_title=None, showlegend=False, yaxis=dict(showgrid=False), margin=dict(t=10, b=10))
-            fig.update_traces(textposition='outside', textfont=dict(size=16, color='#D4AF37'), cliponaxis=False)
-            st.plotly_chart(fig, use_container_width=True)
+                         color_discrete_map={'Niche':'#D4AF37', 'Prestige':'#1a1a1a', 'Mass-Market':'#F0E68C'}, template="plotly_dark")
+            
+            fig.update_traces(
+                textposition='outside', 
+                textfont=dict(size=18, family="Lato", color='#ffffff'), 
+                cliponaxis=False,
+                hovertemplate="<b>Segment:</b> %{x}<br><b>Volume:</b> %{y}<extra></extra>"
+            )
+            
+            fig.update_layout(
+                paper_bgcolor='rgba(0,0,0,0)', 
+                plot_bgcolor='rgba(0,0,0,0)', 
+                font_family="Lato", 
+                height=320,
+                xaxis_title=None, 
+                yaxis_title=None, 
+                showlegend=False,
+                margin=dict(t=20, b=10, l=0, r=0),
+                xaxis=dict(showgrid=False, tickfont=dict(size=14, color='#aaaaaa')),
+                yaxis=dict(showgrid=False, showticklabels=False)
+            )
+            st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
 
         elif "Ep. 1" in episode:
             st.markdown('<div class="section-header" style="margin-top:0;">Live Market Data ✦ Viral Shift</div>', unsafe_allow_html=True)
             df_t = df.nlargest(8, 'community_votes').sort_values('community_votes', ascending=True)
+            
             fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment", text="community_votes",
-                         color_discrete_map={'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#444'}, template="plotly_dark")
-            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=320,
-                              xaxis_title=None, yaxis_title=None, showlegend=False, yaxis=dict(showgrid=False), margin=dict(t=10, b=10))
-            fig.update_traces(textposition='outside', textfont=dict(size=14, color='#D4AF37'), cliponaxis=False)
-            fig.update_xaxes(range=[0, df_t['community_votes'].max() * 1.35], showgrid=False, showticklabels=False)
-            st.plotly_chart(fig, use_container_width=True)
+                         color_discrete_map={'Niche':'#D4AF37', 'Prestige':'#1a1a1a', 'Mass-Market':'#F0E68C'}, template="plotly_dark")
+            
+            fig.update_traces(
+                textposition='outside', 
+                textfont=dict(size=16, family="Lato", color='#ffffff'), 
+                cliponaxis=False,
+                hovertemplate="<b>Brand:</b> %{y}<br><b>Votes:</b> %{x}<extra></extra>"
+            )
+            
+            fig.update_layout(
+                paper_bgcolor='rgba(0,0,0,0)', 
+                plot_bgcolor='rgba(0,0,0,0)', 
+                font_family="Lato", 
+                height=320,
+                xaxis_title=None, 
+                yaxis_title=None, 
+                showlegend=False, 
+                margin=dict(t=20, b=10, l=0, r=0),
+                xaxis=dict(range=[0, df_t['community_votes'].max() * 1.35], showgrid=False, showticklabels=False),
+                yaxis=dict(showgrid=False, tickfont=dict(size=13, color='#aaaaaa'))
+            )
+            st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
             
         else:
-            # Placeholder for episodes without charts to keep layout balanced
             st.markdown('<div class="section-header" style="margin-top:0; color:#333; border-left-color:#333;">Data Intelligence</div>', unsafe_allow_html=True)
-            st.markdown('<div style="height: 250px; display: flex; align-items: center; justify-content: center; color: #444; font-style: italic; font-size: 0.85rem; text-align: center; border: 1px dashed #222; border-radius: 2px;">Audio debrief & dossier active.<br>No dynamic visual required for this strategic section.</div>', unsafe_allow_html=True)
+            st.markdown('<div style="height: 250px; display: flex; align-items: center; justify-content: center; color: #444; font-style: italic; font-size: 0.85rem; text-align: center; border: 1px dashed #222; border-radius: 2px; padding: 20px;">Audio debrief & dossier active.<br><br>No dynamic visual required for this strategic section.</div>', unsafe_allow_html=True)
 
     st.write("---")
 
-    # TEXT SECTION
     if "0. Global" in episode:
         st.markdown('<div class="section-header" style="text-align: center;">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
         try:
