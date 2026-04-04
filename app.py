@@ -35,7 +35,6 @@ st.markdown("""
         h1 { font-size: 1.2rem !important; }
         h2 { font-size: 1.1rem !important; }
         
-        /* Fix for the Vault profile on mobile */
         .vault-main-title { font-size: 1.8rem !important; letter-spacing: 2px !important; }
         .vault-stats-container { gap: 15px !important; }
         .vault-stat-box { min-width: 100% !important; padding: 15px !important; }
@@ -116,62 +115,68 @@ for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
 tabs = st.tabs(["STRATEGIC BRIEFINGS", "MARKET ANALYTICS", "FRAGRANCE VAULT", "ECOSYSTEM"])
 
 with tabs[0]:
-    st.markdown('<div class="section-header">Executive Selection</div>', unsafe_allow_html=True)
+    # UŻYCIE KOLUMN DO UŁOŻENIA ELEMENTÓW OBOK SIEBIE
+    top_left, top_right = st.columns([1, 1.5], gap="large")
     
-    # NAVIGATION AND AUDIO
-    episode = st.radio("Selection:", ["🏛️ 0. Global Foundation", "🎧 Ep. 1: Recession Glam", "📊 Ep. 2: Global Trade", "🔮 Ep. 3: 2026 Outlook", "🌍 Ep. 4: European Barbell", "🧬 Ep. 5: Master Synthesis"], label_visibility="collapsed")
-    
-    if "0. Global" in episode:
-        current_t, current_a, rep_file = None, None, "master_prologue.md"
-        desc = "The 5T Nvidia era, Hollowing Out, and the Section 122 Tariff Shock."
-    elif "Ep. 1" in episode:
-        current_t, current_a, rep_file = "podcast_transcript.md", "podcast_trends.mp3", "trend_report_2025.md"
-        desc = "Analyzing Lattafa viral surge and Givaudan MoodScentz™ neuro-active solutions."
-    elif "Ep. 2" in episode:
-        current_t, current_a, rep_file = "ep2_trade_transcript.md", "ep2_audio.mp3", "ep2_trade_report.md"
-        desc = "Deep Research data on US Section 122 tariffs, EU surplus, and Russian autarky (93M units)."
-    elif "Ep. 3" in episode:
-        current_t, current_a, rep_file = "podcast_transcript_2026.md", "podcast_2026.mp3", "macro_report_2026.md"
-        desc = "Impact of the 5T Nvidia era, the 2025 Tariff Shock, and negative 1.81 price elasticity."
-    elif "Ep. 4" in episode:
-        current_t, current_a, rep_file = "ep3_whisper_transcript_EN.md", "ep3_europe_barbell.mp3", "barbell_strategy_2026.md"
-        desc = "Mapping the European Barbell structure, Poland PPP breakthrough, and 0.28 digital correlation."
-    else:
-        current_t, current_a, rep_file = "ep5_summary_transcript.md", "ep5_audio.mp3", "ep5_summary_report.md"
-        desc = "Final dossier compiled via Deep Research and Givaudan technological architecture."
+    with top_left:
+        st.markdown('<div class="section-header" style="margin-top:0;">Executive Selection</div>', unsafe_allow_html=True)
+        episode = st.radio("Selection:", ["🏛️ 0. Global Foundation", "🎧 Ep. 1: Recession Glam", "📊 Ep. 2: Global Trade", "🔮 Ep. 3: 2026 Outlook", "🌍 Ep. 4: European Barbell", "🧬 Ep. 5: Master Synthesis"], label_visibility="collapsed")
+        
+        if "0. Global" in episode:
+            current_t, current_a, rep_file = None, None, "master_prologue.md"
+            desc = "The 5T Nvidia era, Hollowing Out, and the Section 122 Tariff Shock."
+        elif "Ep. 1" in episode:
+            current_t, current_a, rep_file = "podcast_transcript.md", "podcast_trends.mp3", "trend_report_2025.md"
+            desc = "Analyzing Lattafa viral surge and Givaudan MoodScentz™ neuro-active solutions."
+        elif "Ep. 2" in episode:
+            current_t, current_a, rep_file = "ep2_trade_transcript.md", "ep2_audio.mp3", "ep2_trade_report.md"
+            desc = "Deep Research data on US Section 122 tariffs, EU surplus, and Russian autarky (93M units)."
+        elif "Ep. 3" in episode:
+            current_t, current_a, rep_file = "podcast_transcript_2026.md", "podcast_2026.mp3", "macro_report_2026.md"
+            desc = "Impact of the 5T Nvidia era, the 2025 Tariff Shock, and negative 1.81 price elasticity."
+        elif "Ep. 4" in episode:
+            current_t, current_a, rep_file = "ep3_whisper_transcript_EN.md", "ep3_europe_barbell.mp3", "barbell_strategy_2026.md"
+            desc = "Mapping the European Barbell structure, Poland PPP breakthrough, and 0.28 digital correlation."
+        else:
+            current_t, current_a, rep_file = "ep5_summary_transcript.md", "ep5_audio.mp3", "ep5_summary_report.md"
+            desc = "Final dossier compiled via Deep Research and Givaudan technological architecture."
 
-    if current_a:
-        st.audio(find_file(current_a))
-    
-    st.markdown(f'<p style="color:#D4AF37; font-size:0.95rem; font-style:italic; margin-top:15px; border-left: 3px solid #D4AF37; padding-left: 20px;">{desc}</p>', unsafe_allow_html=True)
+        if current_a:
+            st.audio(find_file(current_a))
+        
+        st.markdown(f'<p style="color:#D4AF37; font-size:0.95rem; font-style:italic; margin-top:15px; border-left: 3px solid #D4AF37; padding-left: 20px;">{desc}</p>', unsafe_allow_html=True)
+
+    with top_right:
+        if "0. Global" in episode or "Ep. 4" in episode:
+            st.markdown('<div class="section-header" style="margin-top:0;">Live Market Data ✦ The Barbell</div>', unsafe_allow_html=True)
+            df_barbell = df.groupby('segment')['community_votes'].sum().reset_index()
+            df_barbell['sort_order'] = df_barbell['segment'].map({'Mass-Market': 0, 'Prestige': 1, 'Niche': 2})
+            df_barbell = df_barbell.sort_values('sort_order')
+
+            fig = px.bar(df_barbell, x="segment", y="community_votes", color="segment", text="community_votes",
+                         color_discrete_map={'Niche':'#D4AF37', 'Prestige':'#444', 'Mass-Market':'#F0E68C'}, template="plotly_dark")
+            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=320,
+                              xaxis_title=None, yaxis_title=None, showlegend=False, yaxis=dict(showgrid=False), margin=dict(t=10, b=10))
+            fig.update_traces(textposition='outside', textfont=dict(size=16, color='#D4AF37'), cliponaxis=False)
+            st.plotly_chart(fig, use_container_width=True)
+
+        elif "Ep. 1" in episode:
+            st.markdown('<div class="section-header" style="margin-top:0;">Live Market Data ✦ Viral Shift</div>', unsafe_allow_html=True)
+            df_t = df.nlargest(8, 'community_votes').sort_values('community_votes', ascending=True)
+            fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment", text="community_votes",
+                         color_discrete_map={'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#444'}, template="plotly_dark")
+            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=320,
+                              xaxis_title=None, yaxis_title=None, showlegend=False, yaxis=dict(showgrid=False), margin=dict(t=10, b=10))
+            fig.update_traces(textposition='outside', textfont=dict(size=14, color='#D4AF37'), cliponaxis=False)
+            fig.update_xaxes(range=[0, df_t['community_votes'].max() * 1.35], showgrid=False, showticklabels=False)
+            st.plotly_chart(fig, use_container_width=True)
+            
+        else:
+            # Placeholder for episodes without charts to keep layout balanced
+            st.markdown('<div class="section-header" style="margin-top:0; color:#333; border-left-color:#333;">Data Intelligence</div>', unsafe_allow_html=True)
+            st.markdown('<div style="height: 250px; display: flex; align-items: center; justify-content: center; color: #444; font-style: italic; font-size: 0.85rem; text-align: center; border: 1px dashed #222; border-radius: 2px;">Audio debrief & dossier active.<br>No dynamic visual required for this strategic section.</div>', unsafe_allow_html=True)
+
     st.write("---")
-
-    # DYNAMIC CHARTS
-    if "0. Global" in episode or "Ep. 4" in episode:
-        st.markdown('<div class="section-header">Live Market Data ✦ The Barbell Distribution</div>', unsafe_allow_html=True)
-        df_barbell = df.groupby('segment')['community_votes'].sum().reset_index()
-        df_barbell['sort_order'] = df_barbell['segment'].map({'Mass-Market': 0, 'Prestige': 1, 'Niche': 2})
-        df_barbell = df_barbell.sort_values('sort_order')
-
-        fig = px.bar(df_barbell, x="segment", y="community_votes", color="segment", text="community_votes",
-                     color_discrete_map={'Niche':'#D4AF37', 'Prestige':'#444', 'Mass-Market':'#F0E68C'}, template="plotly_dark")
-        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=350,
-                          xaxis_title=None, yaxis_title=None, showlegend=False, yaxis=dict(showgrid=False))
-        fig.update_traces(textposition='outside', textfont=dict(size=16, color='#D4AF37'), cliponaxis=False)
-        st.plotly_chart(fig, use_container_width=True)
-        st.write("---")
-
-    elif "Ep. 1" in episode:
-        st.markdown('<div class="section-header">Live Market Data ✦ Viral Popularity Shift</div>', unsafe_allow_html=True)
-        df_t = df.nlargest(8, 'community_votes').sort_values('community_votes', ascending=True)
-        fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment", text="community_votes",
-                     color_discrete_map={'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#444'}, template="plotly_dark")
-        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=350,
-                          xaxis_title=None, yaxis_title=None, showlegend=False, yaxis=dict(showgrid=False))
-        fig.update_traces(textposition='outside', textfont=dict(size=14, color='#D4AF37'), cliponaxis=False)
-        fig.update_xaxes(range=[0, df_t['community_votes'].max() * 1.35], showgrid=False, showticklabels=False)
-        st.plotly_chart(fig, use_container_width=True)
-        st.write("---")
 
     # TEXT SECTION
     if "0. Global" in episode:
