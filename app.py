@@ -98,13 +98,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# KPI METRICS
-m1, m2, m3, m4 = st.columns(4)
-metrics = [("Global Beauty Market", "$593B"), ("EU Trade Surplus", "€238B"), ("Poland PPP 2026", "> Japan"), ("Prestige Elasticity", "Minus 1.81")]
-for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
-    col.markdown(f'<div class="metric-box"><div class="metric-label">{lab}</div><div class="metric-value">{val}</div></div>', unsafe_allow_html=True)
-
-# GLOBAL EXECUTIVE SUMMARY
+# GLOBAL EXECUTIVE SUMMARY (Przed KPI)
 global_intro_html = """
 <div style="background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.3); padding: 25px; margin-top: 10px; margin-bottom: 30px; border-radius: 2px; text-align: center;">
     <div style="color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">Strategic Intelligence Hub</div>
@@ -114,6 +108,12 @@ global_intro_html = """
 </div>
 """
 st.markdown(global_intro_html, unsafe_allow_html=True)
+
+# KPI METRICS
+m1, m2, m3, m4 = st.columns(4)
+metrics = [("Global Beauty Market", "$593B"), ("EU Trade Surplus", "€238B"), ("Poland PPP 2026", "> Japan"), ("Prestige Elasticity", "Minus 1.81")]
+for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
+    col.markdown(f'<div class="metric-box"><div class="metric-label">{lab}</div><div class="metric-value">{val}</div></div>', unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
 # 3. ANALYTICAL TABS
