@@ -147,7 +147,7 @@ with tabs[0]:
 
     with top_right:
         if "0. Global" in episode or "Ep. 4" in episode:
-            st.markdown('<div class="section-header" style="margin-top:0;">Live Market Data ✦ The Barbell</div>', unsafe_allow_html=True)
+            st.markdown('<div class="section-header" style="margin-top:0;">Live Market Data ✦ The Barbell Structure</div>', unsafe_allow_html=True)
             df_barbell = df.groupby('segment')['community_votes'].sum().reset_index()
             df_barbell['sort_order'] = df_barbell['segment'].map({'Mass-Market': 0, 'Prestige': 1, 'Niche': 2})
             df_barbell = df_barbell.sort_values('sort_order')
@@ -159,7 +159,7 @@ with tabs[0]:
                 textposition='outside', 
                 textfont=dict(size=18, family="Lato", color='#ffffff'), 
                 cliponaxis=False,
-                hovertemplate="<b>Segment:</b> %{x}<br><b>Volume:</b> %{y}<extra></extra>"
+                hovertemplate="<b>Segment:</b> %{x}<br><b>Votes:</b> %{y}<extra></extra>"
             )
             
             fig.update_layout(
@@ -177,8 +177,9 @@ with tabs[0]:
             st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
 
         elif "Ep. 1" in episode:
-            st.markdown('<div class="section-header" style="margin-top:0;">Live Market Data ✦ Viral Shift</div>', unsafe_allow_html=True)
-            df_t = df.nlargest(8, 'community_votes').sort_values('community_votes', ascending=True)
+            st.markdown('<div class="section-header" style="margin-top:0;">Live Market Data ✦ Viral Popularity Ranking</div>', unsafe_allow_html=True)
+            # PERFEKCYJNE SORTOWANIE: Od największego do najmniejszego na wykresie poziomym
+            df_t = df.nlargest(10, 'community_votes').sort_values('community_votes', ascending=True)
             
             fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment", text="community_votes",
                          color_discrete_map={'Niche':'#D4AF37', 'Prestige':'#1a1a1a', 'Mass-Market':'#F0E68C'}, template="plotly_dark")
@@ -205,8 +206,29 @@ with tabs[0]:
             st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
             
         else:
-            st.markdown('<div class="section-header" style="margin-top:0; color:#333; border-left-color:#333;">Data Intelligence</div>', unsafe_allow_html=True)
-            st.markdown('<div style="height: 250px; display: flex; align-items: center; justify-content: center; color: #444; font-style: italic; font-size: 0.85rem; text-align: center; border: 1px dashed #222; border-radius: 2px; padding: 20px;">Audio debrief & dossier active.<br><br>No dynamic visual required for this strategic section.</div>', unsafe_allow_html=True)
+            st.markdown('<div class="section-header" style="margin-top:0;">Educational Blueprint</div>', unsafe_allow_html=True)
+            infographic_html = f"""
+            <div style="border: 1px solid #D4AF37; padding: 6px; background: #000; margin: 15px auto; max-width: 95%; box-shadow: 0 0 30px rgba(212,175,55,0.15); font-family: 'Lato';">
+                <div style="border: 1px solid rgba(212,175,55,0.4); background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%); padding: 30px 20px; text-align: center;">
+                    <div style="color: #D4AF37; font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 25px; font-weight:bold;">Neuroperfumery: Givaudan's Carto System</div>
+                    <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; flex-wrap: wrap;">
+                        <div style="background: rgba(15,15,15,0.9); padding: 15px; flex: 1; min-width: 180px;">
+                            <div style="color:#D4AF37; font-size:0.75rem; letter-spacing:1px; margin-bottom:10px; text-transform:uppercase;">Data Input</div>
+                            <div style="color: #ccc; font-size: 0.9rem; line-height: 1.4;">Community Sentiment<br>Kaggle Prediction<br>EEG Biometrics<br>Chestny ZNAK</div>
+                        </div>
+                        <div style="background: rgba(15,15,15,0.9); padding: 15px; flex: 1; min-width: 180px;">
+                            <div style="color:#D4AF37; font-size:0.75rem; letter-spacing:1px; margin-bottom:10px; text-transform:uppercase;">Core Engine</div>
+                            <div style="color: #ccc; font-size: 0.9rem; line-height: 1.4;">Carto AI System<br>Neuro-Mood Mapping<br>Algorithmic Design<br>B2B Predictive Models</div>
+                        </div>
+                        <div style="background: rgba(15,15,15,0.9); padding: 15px; flex: 1; min-width: 180px;">
+                            <div style="color:#D4AF37; font-size:0.75rem; letter-spacing:1px; margin-bottom:10px; text-transform:uppercase;">Value Output</div>
+                            <div style="color: #ccc; font-size: 0.9rem; line-height: 1.4;">Neuro-Active Scents<br>Hacking Dopamine<br>B2B Intelligence<br>Evidence-Based Intel</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            """
+            st.markdown(infographic_html, unsafe_allow_html=True)
 
     st.write("---")
 
