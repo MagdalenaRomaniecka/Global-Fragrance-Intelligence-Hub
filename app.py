@@ -62,6 +62,8 @@ st.markdown("""
     .btn-launch { display:block; width:100%; padding:12px; background:#D4AF37 !important; color:#000 !important; text-align:center; font-weight:bold; text-transform:uppercase; font-size:0.7rem; text-decoration:none; letter-spacing: 2px; border-radius: 2px; }
 
     .footer { position: relative; width: 100%; background-color: #000; color: #444; text-align: center; padding: 30px; font-size: 0.65rem; border-top: 1px solid #111; z-index: 999; letter-spacing: 2px; margin-top: 50px; }
+    
+    .tab-intro { text-align: center; color: #888; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 30px; font-style: italic; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -102,12 +104,25 @@ metrics = [("Global Beauty Market", "$593B"), ("EU Trade Surplus", "€238B"), (
 for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
     col.markdown(f'<div class="metric-box"><div class="metric-label">{lab}</div><div class="metric-value">{val}</div></div>', unsafe_allow_html=True)
 
+# GLOBAL EXECUTIVE SUMMARY
+global_intro_html = """
+<div style="background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.3); padding: 25px; margin-top: 10px; margin-bottom: 30px; border-radius: 2px; text-align: center;">
+    <div style="color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">Strategic Intelligence Hub</div>
+    <div style="color: #ccc; font-size: 0.95rem; line-height: 1.6; max-width: 900px; margin: 0 auto;">
+        This application is an advanced data synthesis engine ✦ It processes millions of data points from Kaggle ✦ Chestny ZNAK ✦ and Givaudan neuro technology to map the 2026 global market ✦ It transforms raw empirical data into actionable predictive intelligence ✦ proving that the industry has shifted from traditional beauty into an economic survival and bio hacking sector
+    </div>
+</div>
+"""
+st.markdown(global_intro_html, unsafe_allow_html=True)
+
 # -----------------------------------------------------------------------------
 # 3. ANALYTICAL TABS
 # -----------------------------------------------------------------------------
 tabs = st.tabs(["STRATEGIC BRIEFINGS", "MARKET ANALYTICS", "FRAGRANCE VAULT", "ECOSYSTEM"])
 
 with tabs[0]:
+    st.markdown('<div class="tab-intro">Audio intelligence and executive dossiers ✦ Select a briefing to load dynamic data and macroeconomic reports</div>', unsafe_allow_html=True)
+    
     top_left, top_right = st.columns([1, 1.5], gap="large")
     
     with top_left:
@@ -140,13 +155,6 @@ with tabs[0]:
 
     if "0 ✦ Global" in episode:
         with top_right:
-            # NOWY PANEL: EXECUTIVE SUMMARY
-            intro_html = """<div style="background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.3); padding: 25px; margin-bottom: 25px; border-radius: 2px;">
-<div style="color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">Strategic Intelligence Hub</div>
-<div style="color: #ccc; font-size: 0.95rem; line-height: 1.6;">This application is an advanced data synthesis engine ✦ It processes millions of data points from Kaggle ✦ Chestny ZNAK ✦ and Givaudan neuro technology to map the 2026 global market ✦ It transforms raw empirical data into actionable predictive intelligence ✦ proving that the industry has shifted from traditional beauty into an economic survival and bio hacking sector</div>
-</div>"""
-            st.markdown(intro_html, unsafe_allow_html=True)
-            
             st.markdown('<div class="section-header" style="margin-top:0;">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
             try:
                 with open(find_file(rep_file), 'r', encoding='utf-8') as f:
@@ -261,6 +269,7 @@ with tabs[0]:
                 st.error("Dossier missing")
 
 with tabs[1]:
+    st.markdown('<div class="tab-intro">Visualizing the 2026 market hierarchy ✦ Interactive sunburst chart mapping the flow of capital across segments</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-header">Market Strategic Hierarchy</div>', unsafe_allow_html=True)
     df_sun = df.sort_values('community_votes', ascending=False).groupby('segment').head(5).reset_index(drop=True)
     df_sun['Global Market'] = 'Global Market'
@@ -270,6 +279,7 @@ with tabs[1]:
     st.plotly_chart(fig_sun, use_container_width=True)
 
 with tabs[2]:
+    st.markdown('<div class="tab-intro">Empirical evidence and strategic case studies ✦ Analyzing specific assets through the lens of the Barbell Strategy</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-header">Empirical Evidence ✦ Case Studies</div>', unsafe_allow_html=True)
     f_choice = st.selectbox("Select Case Study", sorted(df['name'].tolist()), label_visibility="collapsed")
     f_data = df[df['name'] == f_choice].iloc[0]
@@ -311,6 +321,7 @@ with tabs[2]:
     st.markdown(vault_html, unsafe_allow_html=True)
 
 with tabs[3]:
+    st.markdown('<div class="tab-intro">The analytical infrastructure ✦ Connected applications powering the global predictive forecast</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
     e1, e2, e3, e4 = st.columns(4)
     apps = [
