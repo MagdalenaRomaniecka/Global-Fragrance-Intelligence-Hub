@@ -5,7 +5,7 @@ import os
 from data_loader import load_and_merge_data
 
 # -----------------------------------------------------------------------------
-# 1. ATELIER SUPREME CSS ✦ MOBILE RESPONSIVE LUXURY
+# 1. ATELIER SUPREME CSS ✦ MOBILE RESPONSIVE LUXURY + TERMINAL SCROLL
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="Fragrance Intelligence ✦ Atelier", page_icon="✨", layout="wide")
 
@@ -51,7 +51,33 @@ st.markdown("""
     .metric-label { color: #666; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2.5px; font-weight: 700; margin-bottom: 8px; }
     .metric-value { color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 1.8rem; }
 
-    .report-frame { background: #080808; padding: 45px; border: 1px solid #222; box-shadow: 0 15px 40px rgba(0,0,0,0.6); color: #dfdfdf; line-height: 1.9; text-align: justify; margin-bottom: 20px; font-size: 1.05rem; border-radius: 2px; width: 100%; overflow-wrap: break-word; }
+    /* CORE DASHBOARD REPORT STYLE */
+    .report-frame { 
+        background: #080808; 
+        padding: 30px 40px; 
+        border: 1px solid #222; 
+        box-shadow: 0 15px 40px rgba(0,0,0,0.6); 
+        color: #dfdfdf; 
+        line-height: 1.8; 
+        text-align: justify; 
+        margin-bottom: 20px; 
+        font-size: 0.95rem; 
+        border-radius: 2px; 
+        width: 100%; 
+        overflow-wrap: break-word; 
+    }
+    
+    /* TERMINAL SCROLL MECHANICS */
+    .scroll-box {
+        max-height: 420px;
+        overflow-y: auto;
+        padding-right: 20px;
+    }
+    .scroll-box::-webkit-scrollbar { width: 6px; }
+    .scroll-box::-webkit-scrollbar-track { background: #080808; border-left: 1px solid #111; }
+    .scroll-box::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+    .scroll-box::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+
     .section-header { color: #D4AF37; font-family: 'Tenor Sans'; font-size: 1.4rem; border-left: 5px solid #D4AF37; padding-left: 20px; margin: 30px 0 20px 0; text-transform: uppercase; letter-spacing: 3px; }
     
     .stTabs [data-baseweb="tab-list"] { justify-content: center; gap: 10px; }
@@ -154,7 +180,7 @@ with tabs[0]:
         st.markdown(f'<p style="color:#D4AF37; font-size:0.95rem; font-style:italic; margin-top:15px; border-left: 3px solid #D4AF37; padding-left: 20px;">{desc}</p>', unsafe_allow_html=True)
 
     if "0 ✦ Global" in episode:
-        # IMPROVED LAYOUT FOR FOUNDATION: Chart on top right, Text below
+        # SUPER CLEAN LAYOUT FOR FOUNDATION: Chart on top, Scrollable Text below (both in right column)
         with top_right:
             st.markdown('<div class="section-header" style="margin-top:0;">Live Market Data ✦ The Barbell Structure</div>', unsafe_allow_html=True)
             df_barbell = df.groupby('segment')['community_votes'].sum().reset_index()
@@ -167,14 +193,15 @@ with tabs[0]:
             fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=320, xaxis_title=None, yaxis_title=None, showlegend=False, margin=dict(t=20, b=10, l=0, r=0), xaxis=dict(showgrid=False, tickfont=dict(size=14, color='#aaaaaa')), yaxis=dict(showgrid=False, showticklabels=False))
             st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
 
-        st.write("---")
-        st.markdown('<div class="section-header" style="text-align: center;">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
-        try:
-            with open(find_file(rep_file), 'r', encoding='utf-8') as f:
-                content_r = f.read().replace(':', ' ✦').replace('-', ' ').replace(';', ' ')
-                st.markdown(f'<div class="report-frame" style="max-width: 900px; margin: 0 auto;">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
-        except:
-            st.error("Dossier missing")
+            st.write("---")
+            st.markdown('<div class="section-header" style="margin-top:0;">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
+            try:
+                with open(find_file(rep_file), 'r', encoding='utf-8') as f:
+                    content_r = f.read().replace(':', ' ✦').replace('-', ' ').replace(';', ' ')
+                    # Scrollbox is applied here!
+                    st.markdown(f'<div class="report-frame scroll-box">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
+            except:
+                st.error("Dossier missing")
 
     else:
         # STANDARD EPISODE LAYOUT
@@ -256,7 +283,8 @@ with tabs[0]:
             try:
                 with open(find_file(current_t), 'r', encoding='utf-8') as f:
                     content_t = f.read().replace(':', ' ✦').replace('-', ' ').replace(';', ' ')
-                    st.markdown(f'<div class="report-frame">\n\n{content_t}\n\n</div>', unsafe_allow_html=True)
+                    # Scrollbox applied to reports!
+                    st.markdown(f'<div class="report-frame scroll-box">\n\n{content_t}\n\n</div>', unsafe_allow_html=True)
             except:
                 st.error("Debrief missing")
                 
@@ -265,7 +293,8 @@ with tabs[0]:
             try:
                 with open(find_file(rep_file), 'r', encoding='utf-8') as f:
                     content_r = f.read().replace(':', ' ✦').replace('-', ' ').replace(';', ' ')
-                    st.markdown(f'<div class="report-frame">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
+                    # Scrollbox applied to reports!
+                    st.markdown(f'<div class="report-frame scroll-box">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
             except:
                 st.error("Dossier missing")
 
