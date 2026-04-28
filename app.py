@@ -323,13 +323,17 @@ with tabs[2]:
 with tabs[3]:
     st.markdown('<div class="tab-intro">The analytical infrastructure ✦ Connected applications powering the global predictive forecast</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
+    
     e1, e2, e3, e4 = st.columns(4)
+    
+    # Podpięcie Twoich linków pod najbardziej logiczne kategorie
     apps = [
-        ("🌍 Aromo Intelligence", "Custom scraping engine for Eurasian markets tracking real time price fluctuations", "https://share.streamlit.io/"),
-        ("🧬 Kaggle Prediction", "Regression models calculating price elasticity and viral candidates", "https://share.streamlit.io/"),
-        ("📊 Market Pulse", "Dashboard integrating Deep Research data with live import export tracking", "https://share.streamlit.io/"),
-        ("📡 Deep Research AI", "Macroeconomic analysis engine processing geopolitical shifts and 2035 trends", "https://share.streamlit.io/")
+        ("🌍 Aromo Intelligence", "Custom scraping engine for Eurasian markets tracking real-time price fluctuations.", "https://huggingface.co/spaces/Baphomert/Aromo-Market-Intelligence"),
+        ("🧬 Kaggle Prediction", "Regression models and viral trend analysis for market forecasting.", "https://scentsational-zbznjhgc4xv7faddappdc2b.streamlit.app/"),
+        ("📊 Market Pulse", "The main intelligence hub integrating all strategic research and metrics.", "https://global-fragrance-intelligence-app-fqjkvd9syohbhfpczxgnph.streamlit.app/"),
+        ("📡 Deep Research AI", "Macroeconomic analysis engine and predictive asset discovery.", "https://perfume-finder-app-btskyvq7eytc5ujrgzr2dk.streamlit.app/")
     ]
+    
     for col, (name, dsc, link) in zip([e1, e2, e3, e4], apps):
         col.markdown(f"""<div class="project-card">
             <h4 style="color:#D4AF37; margin-top:0; font-size:0.9rem;">{name}</h4>
