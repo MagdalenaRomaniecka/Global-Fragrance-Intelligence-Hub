@@ -98,7 +98,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# GLOBAL EXECUTIVE SUMMARY (Przed KPI)
+# GLOBAL EXECUTIVE SUMMARY
 global_intro_html = """
 <div style="background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.3); padding: 25px; margin-top: 10px; margin-bottom: 30px; border-radius: 2px; text-align: center;">
     <div style="color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">Strategic Intelligence Hub</div>
@@ -111,7 +111,7 @@ st.markdown(global_intro_html, unsafe_allow_html=True)
 
 # KPI METRICS
 m1, m2, m3, m4 = st.columns(4)
-metrics = [("Global Beauty Market", "$593B"), ("EU Trade Surplus", "€238B"), ("Poland PPP 2026", "> Japan"), ("Prestige Elasticity", "Minus 1.81")]
+metrics = [("Global Beauty Market", "$593B"), ("EU Trade Surplus", "€238B"), ("Poland PPP 2026", "> Japan"), ("Prestige Elasticity", "-1.81")]
 for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
     col.markdown(f'<div class="metric-box"><div class="metric-label">{lab}</div><div class="metric-value">{val}</div></div>', unsafe_allow_html=True)
 
@@ -140,7 +140,7 @@ with tabs[0]:
             desc = "Deep Research data on US Section 122 tariffs ✦ EU surplus ✦ and Russian autarky"
         elif "Episode 3" in episode:
             current_t, current_a, rep_file = "podcast_transcript_2026.md", "podcast_2026.mp3", "macro_report_2026.md"
-            desc = "Impact of the 5T Nvidia era ✦ the 2025 Tariff Shock ✦ and negative 1.81 price elasticity"
+            desc = "Impact of the 5T Nvidia era ✦ the 2025 Tariff Shock ✦ and -1.81 price elasticity"
         elif "Episode 4" in episode:
             current_t, current_a, rep_file = "ep3_whisper_transcript_EN.md", "ep3_europe_barbell.mp3", "barbell_strategy_2026.md"
             desc = "Mapping the European Barbell structure ✦ Poland PPP breakthrough ✦ and 0.28 digital correlation"
@@ -154,28 +154,30 @@ with tabs[0]:
         st.markdown(f'<p style="color:#D4AF37; font-size:0.95rem; font-style:italic; margin-top:15px; border-left: 3px solid #D4AF37; padding-left: 20px;">{desc}</p>', unsafe_allow_html=True)
 
     if "0 ✦ Global" in episode:
+        # IMPROVED LAYOUT FOR FOUNDATION: Chart on top right, Text below
         with top_right:
-            st.markdown('<div class="section-header" style="margin-top:0;">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
-            try:
-                with open(find_file(rep_file), 'r', encoding='utf-8') as f:
-                    content_r = f.read().replace(':', ' ✦').replace('-', ' ').replace(';', ' ')
-                    st.markdown(f'<div class="report-frame" style="margin-top: 15px;">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
-            except:
-                st.error("Dossier missing")
-                
-        st.write("---")
-        st.markdown('<div class="section-header" style="text-align: center;">Live Market Data ✦ The Barbell Structure</div>', unsafe_allow_html=True)
-        df_barbell = df.groupby('segment')['community_votes'].sum().reset_index()
-        df_barbell['sort_order'] = df_barbell['segment'].map({'Mass Market': 0, 'Prestige': 1, 'Niche': 2})
-        df_barbell = df_barbell.sort_values('sort_order')
+            st.markdown('<div class="section-header" style="margin-top:0;">Live Market Data ✦ The Barbell Structure</div>', unsafe_allow_html=True)
+            df_barbell = df.groupby('segment')['community_votes'].sum().reset_index()
+            df_barbell['sort_order'] = df_barbell['segment'].map({'Mass Market': 0, 'Prestige': 1, 'Niche': 2})
+            df_barbell = df_barbell.sort_values('sort_order')
 
-        fig = px.bar(df_barbell, x="segment", y="community_votes", color="segment", text="community_votes",
-                     color_discrete_map={'Niche':'#D4AF37', 'Prestige':'#1a1a1a', 'Mass Market':'#F0E68C'}, template="plotly_dark")
-        fig.update_traces(textposition='outside', textfont=dict(size=18, family="Lato", color='#ffffff'), cliponaxis=False, hovertemplate="<b>Segment</b> %{x}<br><b>Votes</b> %{y}<extra></extra>")
-        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=350, xaxis_title=None, yaxis_title=None, showlegend=False, margin=dict(t=20, b=10, l=0, r=0), xaxis=dict(showgrid=False, tickfont=dict(size=14, color='#aaaaaa')), yaxis=dict(showgrid=False, showticklabels=False))
-        st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
+            fig = px.bar(df_barbell, x="segment", y="community_votes", color="segment", text="community_votes",
+                         color_discrete_map={'Niche':'#D4AF37', 'Prestige':'#1a1a1a', 'Mass Market':'#F0E68C'}, template="plotly_dark")
+            fig.update_traces(textposition='outside', textfont=dict(size=18, family="Lato", color='#ffffff'), cliponaxis=False, hovertemplate="<b>Segment</b> %{x}<br><b>Votes</b> %{y}<extra></extra>")
+            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=320, xaxis_title=None, yaxis_title=None, showlegend=False, margin=dict(t=20, b=10, l=0, r=0), xaxis=dict(showgrid=False, tickfont=dict(size=14, color='#aaaaaa')), yaxis=dict(showgrid=False, showticklabels=False))
+            st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
+
+        st.write("---")
+        st.markdown('<div class="section-header" style="text-align: center;">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
+        try:
+            with open(find_file(rep_file), 'r', encoding='utf-8') as f:
+                content_r = f.read().replace(':', ' ✦').replace('-', ' ').replace(';', ' ')
+                st.markdown(f'<div class="report-frame" style="max-width: 900px; margin: 0 auto;">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
+        except:
+            st.error("Dossier missing")
 
     else:
+        # STANDARD EPISODE LAYOUT
         with top_right:
             if "Episode 4" in episode:
                 st.markdown('<div class="section-header" style="margin-top:0;">Live Market Data ✦ The Barbell Structure</div>', unsafe_allow_html=True)
@@ -248,7 +250,6 @@ with tabs[0]:
                 st.markdown(infographic_html, unsafe_allow_html=True)
 
         st.write("---")
-        
         l_col, r_col = st.columns(2, gap="large")
         with l_col:
             st.markdown('<div class="section-header">Executive Audio Debrief</div>', unsafe_allow_html=True)
@@ -289,7 +290,7 @@ with tabs[2]:
         strat_desc = "Inelastic demand profile ✦ High cognitive value shielding consumers from digital noise ✦ Immune to Section 122 shocks"
     elif f_data['segment'] == 'Mass Market':
         strat_label = "Smart Efficiency ✦ Dopamine Hacking"
-        strat_desc = "Capturing the squeezed middle class ✦ High performance to price ratio ✦ Beneficiary of the Minus 1.81 elasticity shift"
+        strat_desc = "Capturing the squeezed middle class ✦ High performance to price ratio ✦ Beneficiary of the -1.81 elasticity shift"
     else:
         strat_label = "The Squeezed Middle"
         strat_desc = "Highly sensitive to price elasticity ✦ Most impacted by Section 122 tariffs ✦ Requires urgent transition to biotech value"
@@ -323,17 +324,13 @@ with tabs[2]:
 with tabs[3]:
     st.markdown('<div class="tab-intro">The analytical infrastructure ✦ Connected applications powering the global predictive forecast</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
-    
     e1, e2, e3, e4 = st.columns(4)
-    
-    # Podpięcie Twoich linków pod najbardziej logiczne kategorie
     apps = [
-        ("🌍 Aromo Intelligence", "Custom scraping engine for Eurasian markets tracking real-time price fluctuations.", "https://huggingface.co/spaces/Baphomert/Aromo-Market-Intelligence"),
-        ("🧬 Kaggle Prediction", "Regression models and viral trend analysis for market forecasting.", "https://scentsational-zbznjhgc4xv7faddappdc2b.streamlit.app/"),
-        ("📊 Market Pulse", "The main intelligence hub integrating all strategic research and metrics.", "https://global-fragrance-intelligence-app-fqjkvd9syohbhfpczxgnph.streamlit.app/"),
-        ("📡 Deep Research AI", "Macroeconomic analysis engine and predictive asset discovery.", "https://perfume-finder-app-btskyvq7eytc5ujrgzr2dk.streamlit.app/")
+        ("📊 Market Pulse", "The primary intelligence hub integrating all strategic research ✦ macroeconomic metrics ✦ and final synthesis.", "https://global-fragrance-intelligence-app-fqjkvd9syohbhfpczxgnph.streamlit.app/"),
+        ("🌍 Aromo Intelligence", "Custom scraping engine for Eurasian markets tracking real-time price fluctuations and raw data inputs.", "https://huggingface.co/spaces/Baphomert/Aromo-Market-Intelligence"),
+        ("🧬 Kaggle Prediction", "Regression models and community sentiment analysis for predictive market forecasting.", "https://scentsational-zbznjhgc4xv7faddappdc2b.streamlit.app/"),
+        ("📡 Deep Research AI", "Deep dive asset discovery engine and consumer-facing predictive analysis.", "https://perfume-finder-app-btskyvq7eytc5ujrgzr2dk.streamlit.app/")
     ]
-    
     for col, (name, dsc, link) in zip([e1, e2, e3, e4], apps):
         col.markdown(f"""<div class="project-card">
             <h4 style="color:#D4AF37; margin-top:0; font-size:0.9rem;">{name}</h4>
