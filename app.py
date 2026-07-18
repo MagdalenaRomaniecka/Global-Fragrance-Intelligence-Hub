@@ -26,10 +26,6 @@ st.markdown("""
         .section-header { font-size: 1.1rem !important; margin: 20px 0 10px 0 !important; }
         h1 { font-size: 1.2rem !important; }
         h2 { font-size: 1.1rem !important; }
-        .vault-main-title { font-size: 1.6rem !important; letter-spacing: 2px !important; }
-        .vault-stats-container { gap: 15px !important; }
-        .vault-stat-box { min-width: 100% !important; padding: 15px !important; }
-        .strat-box-mobile { padding: 15px !important; }
     }
     
     [data-testid="stMarkdownContainer"] h1, [data-testid="stMarkdownContainer"] h2 {
@@ -63,12 +59,6 @@ st.markdown("""
         overflow-wrap: break-word;
     }
     
-    .scroll-box { max-height: 420px; overflow-y: auto; padding-right: 20px; }
-    .scroll-box::-webkit-scrollbar { width: 6px; }
-    .scroll-box::-webkit-scrollbar-track { background: #121212; border-left: 1px solid #1F1F1F; }
-    .scroll-box::-webkit-scrollbar-thumb { background: #333333; border-radius: 3px; }
-    .scroll-box::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
-    
     .section-header { 
         color: #D4AF37; 
         font-family: 'Tenor Sans'; 
@@ -91,8 +81,7 @@ st.markdown("""
     .btn-launch { display: block; width: 100%; padding: 12px; background: #D4AF37 !important; color: #0E0E0E !important; text-align: center; font-weight: bold; text-transform: uppercase; font-size: 0.7rem; text-decoration: none; letter-spacing: 2px; border-radius: 2px; }
     .footer { position: relative; width: 100%; background-color: #0E0E0E; color: #666666; text-align: center; padding: 30px; font-size: 0.65rem; border-top: 1px solid #1F1F1F; z-index: 999; letter-spacing: 2px; margin-top: 50px; }
     
-    .tab-intro { text-align: center; color: #888888; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 30px; font-style: italic; }
-    .intelligence-badge { text-align: center; color: #D4AF37; font-size: 0.85rem; font-style: italic; margin-bottom: 25px; letter-spacing: 1px; border: 1px solid rgba(212,175,55,0.3); padding: 10px; background: rgba(212,175,55,0.05); }
+    .intelligence-badge { text-align: center; color: #D4AF37; font-size: 0.85rem; font-style: italic; margin: 15px auto 25px auto; letter-spacing: 1px; border: 1px solid rgba(212,175,55,0.3); padding: 12px; background: rgba(212,175,55,0.05); max-width: 800px; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -255,40 +244,32 @@ with tabs[2]:
         
         intel_note = ""
         if "Phantom" in f_choice:
-            intel_note = '<div class="intelligence-badge">✦ B2B CASE STUDY: Designed via Givaudan Carto AI and 45M EEG brainwave measurements to optimize confidence-boosting neuro-responses.</div>'
+            intel_note = '<div class="intelligence-badge" style="margin-top: 25px;">✦ B2B CASE STUDY: Designed via Givaudan Carto AI and 45M EEG brainwave measurements to optimize confidence-boosting neuro-responses.</div>'
         elif "Idôle" in f_choice:
-            intel_note = '<div class="intelligence-badge">✦ ECO-INNOVATION: Features ultra-thin 15mm glass technology reducing carbon footprint by 63% via Givaudan sustainability stack.</div>'
+            intel_note = '<div class="intelligence-badge" style="margin-top: 25px;">✦ ECO-INNOVATION: Features ultra-thin 15mm glass technology reducing carbon footprint by 63% via Givaudan sustainability stack.</div>'
         elif "Libre" in f_choice:
-            intel_note = '<div class="intelligence-badge">✦ MOLECULAR DESIGN: Features proprietary Diva Lavender and Vanilla Caviar molecular hybrids developed in Givaudan laboratories.</div>'
+            intel_note = '<div class="intelligence-badge" style="margin-top: 25px;">✦ MOLECULAR DESIGN: Features proprietary Diva Lavender and Vanilla Caviar molecular hybrids developed in Givaudan laboratories.</div>'
 
-        score_val = f_data['community_score'] if 'community_score' in f_data else 4.5
-        notes_val = f_data['top_notes'] if 'top_notes' in f_data else "Proprietary Accord Stack"
-        brand_val = f_data['brand'] if 'brand' in f_data else "Global Brand"
-        seg_val = f_data['segment'] if 'segment' in f_data else "Prestige"
+        score_val = f_data.get('community_score', 4.5)
+        notes_val = f_data.get('top_notes', "Proprietary Accord Stack")
+        brand_val = f_data.get('brand', "Global Brand")
+        seg_val = f_data.get('segment', "Prestige")
 
-        vault_html = f"""
-        <div style="border: 2px solid #D4AF37; padding: 6px; background: #000; margin: 30px auto; max-width: 900px; box-shadow: 0 0 30px rgba(212,175,55,0.15);">
-            <div style="border: 1px solid rgba(212,175,55,0.4); background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%); padding: 50px 30px; text-align: center;">
-                <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.8rem; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 10px;">{f_data['name']}</div>
-                <div style="color: #D4AF37; font-size: 0.9rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px;">{brand_val} ✦ {seg_val}</div>
-                <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 40px; flex-wrap: wrap;">
-                    <div style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 250px; border-radius: 2px;">
-                        <div style="border: 1px solid rgba(212,175,55,0.3); padding: 20px 30px;">
-                            <div style="color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;">Quality Score</div>
-                            <div style="color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 3.5rem; line-height: 1.2; margin: 0;">{score_val:.1f}/5.0</div>
-                        </div>
-                    </div>
-                    <div style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 250px; border-radius: 2px;">
-                        <div style="border: 1px solid rgba(212,175,55,0.3); padding: 20px 30px;">
-                            <div style="color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;">Key Notes</div>
-                            <div style="color: #ccc; font-size: 1.1rem; line-height: 1.5; margin: 0;">{notes_val}</div>
-                        </div>
-                    </div>
+        vault_html = f"""<div style="background-color: #0E0E0E; border: 2px solid #D4AF37; border-radius: 4px; padding: 40px; margin: 20px auto; max-width: 850px; text-align: center; box-shadow: 0 0 25px rgba(212,175,55,0.15);">
+            <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.6rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 8px;">{f_data['name']}</div>
+            <div style="font-family: 'Lato', sans-serif; color: #888888; font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 35px;">{brand_val} ✦ {seg_val}</div>
+            <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; flex-wrap: wrap;">
+                <div style="border: 1px solid rgba(212,175,55,0.4); background: #121212; padding: 20px 30px; flex: 1; min-width: 220px;">
+                    <div style="color: #888888; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">Quality Score</div>
+                    <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 3rem; line-height: 1.1;">{score_val:.1f} / 5.0</div>
                 </div>
-                {intel_note}
+                <div style="border: 1px solid rgba(212,175,55,0.4); background: #121212; padding: 20px 30px; flex: 1; min-width: 220px; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="color: #888888; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">Key Notes</div>
+                    <div style="font-family: 'Lato', sans-serif; color: #E0E0E0; font-size: 1.05rem; line-height: 1.5;">{notes_val}</div>
+                </div>
             </div>
-        </div>
-        """
+            {intel_note}
+        </div>"""
         st.markdown(vault_html, unsafe_allow_html=True)
 
 with tabs[3]:
