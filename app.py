@@ -82,6 +82,22 @@ st.markdown("""
     .footer { position: relative; width: 100%; background-color: #0E0E0E; color: #666666; text-align: center; padding: 30px; font-size: 0.65rem; border-top: 1px solid #1F1F1F; z-index: 999; letter-spacing: 2px; margin-top: 50px; }
     
     .intelligence-badge { text-align: center; color: #D4AF37; font-size: 0.85rem; font-style: italic; margin: 15px auto 25px auto; letter-spacing: 1px; border: 1px solid rgba(212,175,55,0.3); padding: 12px; background: rgba(212,175,55,0.05); max-width: 800px; }
+    
+    .stSelectbox label, .stSelectbox [data-testid="stMarkdownContainer"] p {
+        font-family: 'Tenor Sans', sans-serif !important;
+        font-size: 1.1rem !important;
+        color: #D4AF37 !important;
+        text-align: center !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+        width: 100% !important;
+        display: block !important;
+    }
+    
+    div[data-testid="stSelectbox"] > div {
+        margin: 0 auto !important;
+        max-width: 400px !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -150,13 +166,13 @@ with tabs[0]:
             current_t, current_a, rep_file = "ep3_whisper_transcript_EN.md", "ep3_europe_barbell.mp3", "barbell_strategy_2026.md"
             f_type, v_title, desc = "Barbell", "The Barbell Market Structure 2026", "Mapping the European Barbell structure, Poland PPP breakthrough, and 0.28 digital correlation."
         elif "Masterclass 1" in episode:
-            current_t, current_a, rep_file = None, "masterclass_ep1_audio.mp3", "master_prologue.md"
+            current_t, current_a, rep_file = "ep5_summary_transcript.md", "masterclass_ep1_audio.mp3", "master_prologue.md"
             f_type, v_title, desc = "Popularity", "Givaudan Carto AI Infrastructure", "Deep-dive technical breakdown: Algorithmic scent formulation and EEG brainwave mapping."
         elif "Masterclass 2" in episode:
-            current_t, current_a, rep_file = None, "masterclass_ep2_audio.mp3", "ep2_trade_report.md"
+            current_t, current_a, rep_file = "ep2_trade_transcript.md", "masterclass_ep2_audio.mp3", "ep2_trade_report.md"
             f_type, v_title, desc = "None", "B2B Price Elasticity Vectors", "Advanced macroeconomic regression analyzing consumer behavior under severe inflation."
         elif "Masterclass 3" in episode:
-            current_t, current_a, rep_file = None, "masterclass_ep3_audio.mp3", "barbell_strategy_2026.md"
+            current_t, current_a, rep_file = "ep3_whisper_transcript_EN.md", "masterclass_ep3_audio.mp3", "barbell_strategy_2026.md"
             f_type, v_title, desc = "Barbell", "EU 2023/1545 Regulatory Compliance", "Strategic adaptation strategies for allergen restrictions and synthetic ingredient bans."
         else:
             current_t, current_a, rep_file = "ep5_summary_transcript.md", "ep5_audio.mp3", "master_synthesis.md"
@@ -214,7 +230,7 @@ with tabs[0]:
                 except: 
                     st.error("Debrief missing.")
             else:
-                st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Technical Masterclass audio briefing selected. Please refer to the Master Dossier on the right for accompanying documentation.</div>', unsafe_allow_html=True)
+                st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Technical audio briefing selected. Please refer to the Master Dossier on the right for accompanying documentation.</div>', unsafe_allow_html=True)
         with r_col:
             st.markdown('<div class="section-header">Executive Master Dossier</div>', unsafe_allow_html=True)
             try:
@@ -255,7 +271,8 @@ with tabs[2]:
         brand_val = f_data.get('brand', "Global Brand")
         seg_val = f_data.get('segment', "Prestige")
 
-        vault_html = f"""<div style="background-color: #0E0E0E; border: 2px solid #D4AF37; border-radius: 4px; padding: 40px; margin: 20px auto; max-width: 850px; text-align: center; box-shadow: 0 0 25px rgba(212,175,55,0.15);">
+        st.markdown(f"""
+        <div style="background-color: #0E0E0E; border: 2px solid #D4AF37; border-radius: 4px; padding: 40px; margin: 20px auto; max-width: 850px; text-align: center; box-shadow: 0 0 25px rgba(212,175,55,0.15);">
             <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.6rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 8px;">{f_data['name']}</div>
             <div style="font-family: 'Lato', sans-serif; color: #888888; font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 35px;">{brand_val} ✦ {seg_val}</div>
             <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; flex-wrap: wrap;">
@@ -269,8 +286,8 @@ with tabs[2]:
                 </div>
             </div>
             {intel_note}
-        </div>"""
-        st.markdown(vault_html, unsafe_allow_html=True)
+        </div>
+        """, unsafe_allow_html=True)
 
 with tabs[3]:
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
