@@ -84,14 +84,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-def find_file(filename):
-    for root, _, files in os.walk("."):
-        if filename in files:
-            return os.path.join(root, filename)
-    return filename
-
 df = load_and_merge_data()
-df['segment'] = df['segment'].str.replace('-', ' ')
 
 st.markdown("""
 <div class="header-wrapper">
@@ -109,16 +102,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-global_intro_html = """
-<div style="background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.3); padding: 25px; margin-top: 10px; margin-bottom: 30px; border-radius: 2px; text-align: center;">
-    <div style="color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">Strategic Intelligence Hub</div>
-    <div style="color: #E0E0E0; font-size: 0.95rem; line-height: 1.6; max-width: 900px; margin: 0 auto;">
-        This application is an advanced data synthesis engine ✦ It processes millions of data points from Kaggle ✦ Chestny ZNAK ✦ and Givaudan neuro technology to map the 2026 global market ✦ It transforms raw empirical data into actionable predictive intelligence ✦ proving that the industry has shifted from traditional beauty into an economic survival and bio hacking sector
-    </div>
-</div>
-"""
-st.markdown(global_intro_html, unsafe_allow_html=True)
-
 m1, m2, m3, m4 = st.columns(4)
 metrics = [("Global Beauty Market", "$593B"), ("EU Trade Surplus", "€238B"), ("Poland PPP 2026", "> Japan"), ("Prestige Elasticity", "-1.81")]
 for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
@@ -127,208 +110,140 @@ for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
 tabs = st.tabs(["STRATEGIC BRIEFINGS", "MARKET ANALYTICS", "FRAGRANCE VAULT", "ECOSYSTEM"])
 
 with tabs[0]:
-    st.markdown('<div class="tab-intro">Audio intelligence and executive dossiers ✦ Select a briefing to load dynamic data and macroeconomic reports</div>', unsafe_allow_html=True)
-    
-    top_left, top_right = st.columns([1, 1.5], gap="large")
-    
-    with top_left:
-        st.markdown('<div class="section-header" style="margin-top:0;">Executive Selection</div>', unsafe_allow_html=True)
-        episode = st.radio("Select Audio Briefing", ["🏛️ 0 ✦ Global Foundation", "🎧 Episode 1 ✦ Recession Glam", "📊 Episode 2 ✦ Global Trade", "🔮 Episode 3 ✦ 2026 Outlook", "🌍 Episode 4 ✦ European Barbell", "🧬 Episode 5 ✦ Master Synthesis"], label_visibility="collapsed")
+    col_nav, col_viz = st.columns([1, 1.5], gap="large")
+    with col_nav:
+        st.markdown('<div class="section-header">Executive Selection</div>', unsafe_allow_html=True)
+        episode = st.radio("Selection:", ["🏛️ 0. Global Foundation", "🎧 Ep. 1: Recession Glam", "📊 Ep. 2: Global Trade", "🔮 Ep. 3: 2026 Outlook", "🌍 Ep. 4: European Barbell", "🧬 Ep. 5: Master Synthesis"], label_visibility="collapsed")
         
-        if "0 ✦ Global" in episode:
+        if "0. Global" in episode:
             current_t, current_a, rep_file = None, None, "master_prologue.md"
-            desc = "The 5T Nvidia era ✦ Hollowing Out ✦ and the Section 122 Tariff Shock"
-        elif "Episode 1" in episode:
+            f_type, v_title, desc = "None", "Macroeconomic Foundations 2026", "The 5T Nvidia era, EU 2023/1545 shock, and Givaudan MoodScentz™+ integration."
+        elif "Ep. 1" in episode:
             current_t, current_a, rep_file = "podcast_transcript.md", "podcast_trends.mp3", "trend_report_2025.md"
-            desc = "Analyzing Lattafa viral surge and Givaudan MoodScentz neuro active solutions"
-        elif "Episode 2" in episode:
+            f_type, v_title, desc = "Popularity", "Global Popularity Ranking", "Analyzing Lattafa viral surge and Givaudan MoodScentz™ neuro-active solutions."
+        elif "Ep. 2" in episode:
             current_t, current_a, rep_file = "ep2_trade_transcript.md", "ep2_audio.mp3", "ep2_trade_report.md"
-            desc = "Deep Research data on US Section 122 tariffs ✦ EU surplus ✦ and Russian autarky"
-        elif "Episode 3" in episode:
-            current_t, current_a, rep_file = "podcast_transcript_2026.md", "podcast_2026.mp3", "macro_report_2026.md"
-            desc = "Impact of the 5T Nvidia era ✦ the 2025 Tariff Shock ✦ and -1.81 price elasticity"
-        elif "Episode 4" in episode:
+            f_type, v_title, desc = "None", "Global Trade Volume 2024", "Deep Research data on US Section 122 tariffs, EU surplus, and Russian autarky (93M units)."
+        elif "Ep. 3" in episode:
+            current_t, current_a, rep_file = "podcast_transcript_2026.md", "podcast_2026.mp3", "ep3_outlook_report.md"
+            f_type, v_title, desc = "None", "2026 Global Projections", "Impact of the 5T Nvidia era, the 2025 Tariff Shock, and negative 1.81 price elasticity."
+        elif "Ep. 4" in episode:
             current_t, current_a, rep_file = "ep3_whisper_transcript_EN.md", "ep3_europe_barbell.mp3", "barbell_strategy_2026.md"
-            desc = "Mapping the European Barbell structure ✦ Poland PPP breakthrough ✦ and 0.28 digital correlation"
+            f_type, v_title, desc = "Barbell", "The Barbell Market Structure 2026", "Mapping the European Barbell structure, Poland PPP breakthrough, and 0.28 digital correlation."
         else:
-            current_t, current_a, rep_file = "ep5_summary_transcript.md", "ep5_audio.mp3", "ep5_summary_report.md"
-            desc = "Final dossier compiled via Deep Research and Givaudan technological architecture"
-            
+            current_t, current_a, rep_file = "ep5_summary_transcript.md", "ep5_audio.mp3", "master_synthesis.md"
+            f_type, v_title, desc = "None", "Master Strategic Synthesis 2026", "Final dossier compiled via Deep Research and B2B technological architecture curated by Magdalena Romaniecka."
+
         if current_a:
-            st.audio(find_file(current_a))
+            st.audio(current_a)
         
-        st.markdown(f'<p style="color:#D4AF37; font-size:0.95rem; font-style:italic; margin-top:15px; border-left: 3px solid #D4AF37; padding-left: 20px;">{desc}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="color:#D4AF37; font-size:0.95rem; font-style:italic; margin-top:20px; border-left: 3px solid #D4AF37; padding-left: 20px;">{desc}</p>', unsafe_allow_html=True)
+
+    with col_viz:
+        st.markdown(f'<div class="section-header">Live Market Data ✦ {v_title}</div>', unsafe_allow_html=True)
+        if f_type == "Barbell":
+            b_counts = df['market_structure'].value_counts().reset_index()
+            b_counts.columns = ['Tier', 'Count']
+            fig = px.bar(b_counts, x='Tier', y='Count', color='Tier', text='Count', color_discrete_map={'Ultra-Niche (Barbell Top)': '#D4AF37', 'Budget (Barbell Bottom)': '#F0E68C', 'Squeezed Middle': '#333333'}, template="plotly_dark")
+            fig.update_traces(textposition='outside', textfont=dict(size=18, color='#D4AF37'))
+            fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.5, xanchor="center", x=0.5))
+        else:
+            df_t = df.nlargest(10, 'community_votes').sort_values('community_votes', ascending=True)
+            fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment", text="community_votes", color_discrete_sequence=['#D4AF37', '#F0E68C', '#444'], template="plotly_dark")
+            fig.update_traces(textposition='outside', textfont=dict(size=15, color='#D4AF37'), cliponaxis=False)
+            max_val = df_t['community_votes'].max()
+            fig.update_xaxes(range=[0, max_val * 1.35], showgrid=False, showticklabels=False)
+            fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.6, xanchor="center", x=0.5), margin=dict(r=100))
         
-    if "0 ✦ Global" in episode:
-        with top_right:
-            st.markdown('<div class="section-header" style="margin-top:0;">Live Market Data ✦ The Barbell Structure</div>', unsafe_allow_html=True)
-            df_barbell = df.groupby('segment')['community_votes'].sum().reset_index()
-            df_barbell['sort_order'] = df_barbell['segment'].map({'Mass Market': 0, 'Prestige': 1, 'Niche': 2})
-            df_barbell = df_barbell.sort_values('sort_order')
-            fig = px.bar(df_barbell, x="segment", y="community_votes", color="segment", text="community_votes",
-                         color_discrete_map={'Niche':'#D4AF37', 'Prestige':'#262626', 'Mass Market':'#888888'}, template="plotly_dark")
-            fig.update_traces(textposition='outside', textfont=dict(size=18, family="Lato", color='#E0E0E0'), cliponaxis=False, hovertemplate="<b>Segment</b> %{x}<br><b>Votes</b> %{y}<extra></extra>")
-            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=320, xaxis_title=None, yaxis_title=None, showlegend=False, margin=dict(t=20, b=10, l=0, r=0), xaxis=dict(showgrid=False, tickfont=dict(size=14, color='#888888')), yaxis=dict(showgrid=False, showticklabels=False))
-            st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
-            st.write("---")
-            st.markdown('<div class="section-header" style="margin-top:0;">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
-            try:
-                with open(find_file(rep_file), 'r', encoding='utf-8') as f:
-                    content_r = f.read().replace(':', ' ✦').replace('-', ' ').replace(';', ' ')
-                    st.markdown(f'<div class="report-frame scroll-box">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
-            except:
-                st.error("Dossier missing")
+        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, yaxis=dict(showgrid=False))
+        st.plotly_chart(fig, use_container_width=True)
+
+    st.write("---")
+    
+    if "0. Global" in episode:
+        st.markdown('<div class="section-header" style="text-align: center;">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
+        try:
+            with open(rep_file, 'r', encoding='utf-8') as f:
+                content_r = f.read()
+                st.markdown(f'<div class="report-frame">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
+        except: 
+            st.error("Dossier missing.")
     else:
-        with top_right:
-            if "Episode 4" in episode:
-                st.markdown('<div class="section-header" style="margin-top:0;">Live Market Data ✦ The Barbell Structure</div>', unsafe_allow_html=True)
-                df_barbell = df.groupby('segment')['community_votes'].sum().reset_index()
-                df_barbell['sort_order'] = df_barbell['segment'].map({'Mass Market': 0, 'Prestige': 1, 'Niche': 2})
-                df_barbell = df_barbell.sort_values('sort_order')
-                fig = px.bar(df_barbell, x="segment", y="community_votes", color="segment", text="community_votes",
-                             color_discrete_map={'Niche':'#D4AF37', 'Prestige':'#262626', 'Mass Market':'#888888'}, template="plotly_dark")
-                fig.update_traces(textposition='outside', textfont=dict(size=18, family="Lato", color='#E0E0E0'), cliponaxis=False, hovertemplate="<b>Segment</b> %{x}<br><b>Votes</b> %{y}<extra></extra>")
-                fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=320, xaxis_title=None, yaxis_title=None, showlegend=False, margin=dict(t=20, b=10, l=0, r=0), xaxis=dict(showgrid=False, tickfont=dict(size=14, color='#888888')), yaxis=dict(showgrid=False, showticklabels=False))
-                st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
-            elif "Episode 1" in episode:
-                st.markdown('<div class="section-header" style="margin-top:0;">Live Market Data ✦ Viral Popularity Ranking</div>', unsafe_allow_html=True)
-                df_t = df.nlargest(10, 'community_votes').sort_values('community_votes', ascending=True)
-                
-                fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment", text="community_votes",
-                             color_discrete_map={'Niche':'#D4AF37', 'Prestige':'#262626', 'Mass Market':'#888888'}, template="plotly_dark")
-                fig.update_traces(textposition='outside', textfont=dict(size=16, family="Lato", color='#E0E0E0'), cliponaxis=False, hovertemplate="<b>Brand</b> %{y}<br><b>Votes</b> %{x}<extra></extra>")
-                fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=320, xaxis_title=None, yaxis_title=None, showlegend=False, margin=dict(t=20, b=10, l=0, r=0), xaxis=dict(range=[0, df_t['community_votes'].max() * 1.35], showgrid=False, showticklabels=False), yaxis=dict(showgrid=False, tickfont=dict(size=13, color='#888888')))
-                st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
-            else:
-                st.markdown('<div class="section-header" style="margin-top:0;">Intelligence Architecture</div>', unsafe_allow_html=True)
-                infographic_html = """<style>
-.blueprint-container { border: 1px solid rgba(212,175,55,0.2); background: radial-gradient(circle at 50% -20%, #181818 0%, #0E0E0E 100%); padding: 30px; border-radius: 2px; position: relative; overflow: hidden; box-shadow: inset 0 0 30px rgba(0,0,0,0.8); margin: 15px auto; max-width: 95%; }
-.blueprint-container::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.8), transparent); animation: scanline 4s linear infinite; }
-@keyframes scanline { 100% { left: 200%; } }
-.bp-title { color: #D4AF37; text-align: center; font-size: 1.1rem; letter-spacing: 4px; margin-bottom: 30px; font-weight: 400; font-family: 'Tenor Sans', sans-serif; text-transform: uppercase; }
-.bp-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-.bp-card { background: rgba(18,18,18,0.8); border: 1px solid #262626; padding: 25px 15px; flex: 1; min-width: 180px; text-align: center; transition: all 0.4s ease; border-bottom: 2px solid #141414; }
-.bp-card:hover { border-color: rgba(212,175,55,0.4); background: rgba(22,22,22,1); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(212,175,55,0.05); border-bottom: 2px solid #D4AF37; }
-.bp-icon { font-size: 1.8rem; margin-bottom: 15px; filter: grayscale(100%) brightness(1.5) sepia(100%) hue-rotate(5deg) saturate(300%); }
-.bp-header { color: #D4AF37; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; font-weight: bold; }
-.bp-list { color: #A0A0A0; font-size: 0.85rem; line-height: 1.8; list-style-type: none; padding: 0; margin: 0; }
-</style>
-<div class="blueprint-container">
-<div class="bp-title">Givaudan Carto ✦ Data Ecosystem</div>
-<div class="bp-grid">
-<div class="bp-card">
-<div class="bp-icon">📥</div>
-<div class="bp-header">Raw Data Input</div>
-<ul class="bp-list">
-<li>Kaggle Global Sets</li>
-<li>Chestny ZNAK Logs</li>
-<li>Consumer Sentiment</li>
-</ul>
-</div>
-<div class="bp-card">
-<div class="bp-icon">⚙️</div>
-<div class="bp-header">Processing Engine</div>
-<ul class="bp-list">
-<li>Carto AI Algorithms</li>
-<li>Python Regressions</li>
-<li>Neuro Mood Mapping</li>
-</ul>
-</div>
-<div class="bp-card">
-<div class="bp-icon">💎</div>
-<div class="bp-header">Strategic Output</div>
-<ul class="bp-list">
-<li>Neuro Active Scents</li>
-<li>Dopamine Hacking</li>
-<li>Predictive Playbook</li>
-</ul>
-</div>
-</div>
-</div>"""
-                st.markdown(infographic_html, unsafe_allow_html=True)
-                
-        st.write("---")
         l_col, r_col = st.columns(2, gap="large")
-        
         with l_col:
             st.markdown('<div class="section-header">Executive Audio Debrief</div>', unsafe_allow_html=True)
             try:
-                with open(find_file(current_t), 'r', encoding='utf-8') as f:
-                    content_t = f.read().replace(':', ' ✦').replace('-', ' ').replace(';', ' ')
-                    st.markdown(f'<div class="report-frame scroll-box">\n\n{content_t}\n\n</div>', unsafe_allow_html=True)
-            except:
-                st.error("Debrief missing")
-                
+                with open(current_t, 'r', encoding='utf-8') as f:
+                    content_t = f.read()
+                    st.markdown(f'<div class="report-frame">\n\n{content_t}\n\n</div>', unsafe_allow_html=True)
+            except: 
+                st.error("Debrief missing.")
         with r_col:
             st.markdown('<div class="section-header">Executive Master Dossier</div>', unsafe_allow_html=True)
             try:
-                with open(find_file(rep_file), 'r', encoding='utf-8') as f:
-                    content_r = f.read().replace(':', ' ✦').replace('-', ' ').replace(';', ' ')
-                    st.markdown(f'<div class="report-frame scroll-box">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
-            except:
-                st.error("Dossier missing")
+                with open(rep_file, 'r', encoding='utf-8') as f:
+                    content_r = f.read()
+                    st.markdown(f'<div class="report-frame">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
+            except: 
+                st.error("Dossier missing.")
 
 with tabs[1]:
-    st.markdown('<div class="tab-intro">Visualizing the 2026 market hierarchy ✦ Interactive sunburst chart mapping the flow of capital across segments</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-header">Market Strategic Hierarchy</div>', unsafe_allow_html=True)
+    st.markdown('<div class="intelligence-badge">✦ INTELLIGENCE NOTE: 64% of analyzed Ultra-Niche segments utilize Jungle Essence™ CO2 extraction technologies to justify premium pricing above $350.</div>', unsafe_allow_html=True)
+
     df_sun = df.sort_values('community_votes', ascending=False).groupby('segment').head(5).reset_index(drop=True)
     df_sun['Global Market'] = 'Global Market'
     
-    fig_sun = px.sunburst(df_sun, path=['Global Market', 'segment', 'brand', 'name'], values='community_votes', color='segment', color_discrete_map={'(?)':'#262626', 'Niche':'#D4AF37', 'Prestige':'#A0A0A0', 'Mass Market':'#666666'}, template="plotly_dark")
+    fig_sun = px.sunburst(df_sun, path=['Global Market', 'segment', 'brand', 'name'], values='community_votes', color='segment', color_discrete_map={'(?)':'#333', 'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#555'}, template="plotly_dark")
     fig_sun.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=700)
     st.plotly_chart(fig_sun, use_container_width=True)
 
 with tabs[2]:
-    st.markdown('<div class="tab-intro">Empirical evidence and strategic case studies ✦ Analyzing specific assets through the lens of the Barbell Strategy</div>', unsafe_allow_html=True)
-    st.markdown('<div class="section-header">Empirical Evidence ✦ Case Studies</div>', unsafe_allow_html=True)
-    f_choice = st.selectbox("Select Case Study", sorted(df['name'].tolist()), label_visibility="collapsed")
+    st.markdown('<div class="section-header">Fragrance Market Case Studies</div>', unsafe_allow_html=True)
+    f_choice = st.selectbox("Select Profile:", sorted(df['name'].tolist()))
     f_data = df[df['name'] == f_choice].iloc[0]
     
-    if f_data['segment'] == 'Niche':
-        strat_label = "Identity Shielding Asset"
-        strat_desc = "Inelastic demand profile ✦ High cognitive value shielding consumers from digital noise ✦ Immune to Section 122 shocks"
-    elif f_data['segment'] == 'Mass Market':
-        strat_label = "Smart Efficiency ✦ Dopamine Hacking"
-        strat_desc = "Capturing the squeezed middle class ✦ High performance to price ratio ✦ Beneficiary of the -1.81 elasticity shift"
-    else:
-        strat_label = "The Squeezed Middle"
-        strat_desc = "Highly sensitive to price elasticity ✦ Most impacted by Section 122 tariffs ✦ Requires urgent transition to biotech value"
-        
-    vault_html = f"""<div style="border: 2px solid #D4AF37; padding: 4px; background: #0E0E0E; margin: 15px auto; max-width: 95%; box-shadow: 0 0 30px rgba(212,175,55,0.15);">
-<div style="border: 1px solid rgba(212,175,55,0.4); background: radial-gradient(circle at 50% 50%, #141414 0%, #0E0E0E 100%); padding: 30px 15px; text-align: center;">
-<div class="vault-main-title" style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.2rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px;">{f_data['name']}</div>
-<div style="color: #D4AF37; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px;">{f_data['brand']} ✦ {f_data['segment']}</div>
-<div class="strat-box-mobile" style="background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.2); padding: 15px 30px; margin: 0 auto 30px auto; border-radius: 2px; max-width: 800px;">
-<div style="color:#D4AF37; font-size:0.75rem; letter-spacing:2px; margin-bottom:8px; text-transform:uppercase; font-weight:bold;">Strategic Market Context ✦ {strat_label}</div>
-<div style="color: #E0E0E0; font-size: 0.85rem; font-style: italic; letter-spacing: 1px;">{strat_desc}</div>
-</div>
-<div class="vault-stats-container" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
-<div class="vault-stat-box" style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1A1A1A 0%, #0E0E0E 100%); padding: 4px; min-width: 200px; flex: 1;">
-<div style="border: 1px solid rgba(212,175,55,0.3); padding: 15px 20px; height: 100%;">
-<div style="color:#D4AF37; font-size:0.75rem; letter-spacing:2px; margin-bottom:10px; text-transform:uppercase;">Quality Score</div>
-<div style="color: #D4AF37; font-family: 'Tenor Sans', sans-serif; font-size: 2.5rem; line-height: 1.2; margin: 0;">{f_data['community_score']:.1f} / 5.0</div>
-</div>
-</div>
-<div class="vault-stat-box" style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1A1A1A 0%, #0E0E0E 100%); padding: 4px; min-width: 200px; flex: 1;">
-<div style="border: 1px solid rgba(212,175,55,0.3); padding: 15px 20px; height: 100%; display: flex; flex-direction: column; justify-content: center;">
-<div style="color:#D4AF37; font-size:0.75rem; letter-spacing:2px; margin-bottom:10px; text-transform:uppercase;">Key Notes</div>
-<div style="color: #E0E0E0; font-size: 0.95rem; line-height: 1.4; margin: 0;">{f_data['top_notes'].replace('-', ' ')}</div>
-</div>
-</div>
-</div>
-</div>
-</div>"""
+    intel_note = ""
+    if "Phantom" in f_choice:
+        intel_note = '<div class="intelligence-badge">✦ B2B CASE STUDY: Designed via Givaudan Carto AI and 45M EEG brainwave measurements to optimize confidence-boosting neuro-responses.</div>'
+    elif "Idôle" in f_choice:
+        intel_note = '<div class="intelligence-badge">✦ ECO-INNOVATION: Features ultra-thin 15mm glass technology reducing carbon footprint by 63% via Givaudan sustainability stack.</div>'
+    elif "Libre" in f_choice:
+        intel_note = '<div class="intelligence-badge">✦ MOLECULAR DESIGN: Features proprietary Diva Lavender and Vanilla Caviar molecular hybrids developed in Givaudan laboratories.</div>'
+
+    vault_html = f"""
+    <div style="border: 2px solid #D4AF37; padding: 6px; background: #000; margin: 30px auto; max-width: 900px; box-shadow: 0 0 30px rgba(212,175,55,0.15);">
+        <div style="border: 1px solid rgba(212,175,55,0.4); background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%); padding: 50px 30px; text-align: center;">
+            <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.8rem; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 10px;">{f_data['name']}</div>
+            <div style="color: #D4AF37; font-size: 0.9rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px;">{f_data['brand']} ✦ {f_data['segment']}</div>
+            <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 40px; flex-wrap: wrap;">
+                <div style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 250px; border-radius: 2px;">
+                    <div style="border: 1px solid rgba(212,175,55,0.3); padding: 20px 30px;">
+                        <div style="color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;">Quality Score</div>
+                        <div style="color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 3.5rem; line-height: 1.2; margin: 0;">{f_data['community_score']:.1f}/5.0</div>
+                    </div>
+                </div>
+                <div style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 250px; border-radius: 2px;">
+                    <div style="border: 1px solid rgba(212,175,55,0.3); padding: 20px 30px;">
+                        <div style="color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;">Key Notes</div>
+                        <div style="color: #ccc; font-size: 1.1rem; line-height: 1.5; margin: 0;">{f_data['top_notes']}</div>
+                    </div>
+                </div>
+            </div>
+            {intel_note}
+        </div>
+    </div>
+    """
     st.markdown(vault_html, unsafe_allow_html=True)
 
 with tabs[3]:
-    st.markdown('<div class="tab-intro">The analytical infrastructure ✦ Connected applications powering the global predictive forecast</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
     e1, e2, e3, e4 = st.columns(4)
     apps = [
-        ("📊 Market Pulse", "The primary intelligence hub integrating all strategic research ✦ macroeconomic metrics ✦ and final synthesis.", "https://global-fragrance-intelligence-app-fqjkvd9syohbhfpczxgnph.streamlit.app/"),
-        ("🌍 Aromo Intelligence", "Custom scraping engine for Eurasian markets tracking real-time price fluctuations and raw data inputs.", "https://huggingface.co/spaces/Baphomert/Aromo-Market-Intelligence"),
-        ("🧬 Kaggle Prediction", "Regression models and community sentiment analysis for predictive market forecasting.", "https://scentsational-zbznjhgc4xv7faddappdc2b.streamlit.app/"),
-        ("📡 Deep Research AI", "Deep dive asset discovery engine and consumer-facing predictive analysis.", "https://perfume-finder-app-btskyvq7eytc5ujrgzr2dk.streamlit.app/")
+        ("🌍 Aromo Intelligence", "Custom scraping engine mapping social sentiment to B2B platforms like Myrissi™.", "https://share.streamlit.io/"),
+        ("🧬 Kaggle Prediction", "Regression models calculating price elasticity and B2B tech adoption rates.", "https://share.streamlit.io/"),
+        ("📊 Market Pulse", "Dashboard integrating Deep Research data with live tracking of EU 2023/1545 regulatory impact.", "https://share.streamlit.io/"),
+        ("📡 Deep Research AI", "Macroeconomic engine processing Nvidia Class trends and Givaudan MoodScentz™+ data.", "https://share.streamlit.io/")
     ]
     for col, (name, dsc, link) in zip([e1, e2, e3, e4], apps):
         col.markdown(f"""<div class="project-card">
