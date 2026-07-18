@@ -23,7 +23,7 @@ st.markdown("""
         .metric-value { font-size: 1.2rem !important; }
         .metric-label { font-size: 0.55rem !important; letter-spacing: 1.5px !important; }
         .report-frame { padding: 15px !important; font-size: 0.9rem !important; text-align: left !important; line-height: 1.6 !important; }
-        .section-header { font-size: 1.1rem !important; padding-left: 10px !important; margin: 20px 0 10px 0 !important; }
+        .section-header { font-size: 1.1rem !important; margin: 20px 0 10px 0 !important; }
         h1 { font-size: 1.2rem !important; }
         h2 { font-size: 1.1rem !important; }
         .vault-main-title { font-size: 1.6rem !important; letter-spacing: 2px !important; }
@@ -69,7 +69,18 @@ st.markdown("""
     .scroll-box::-webkit-scrollbar-thumb { background: #333333; border-radius: 3px; }
     .scroll-box::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
     
-    .section-header { color: #D4AF37; font-family: 'Tenor Sans'; font-size: 1.4rem; border-left: 5px solid #D4AF37; padding-left: 20px; margin: 30px 0 20px 0; text-transform: uppercase; letter-spacing: 3px; }
+    .section-header { 
+        color: #D4AF37; 
+        font-family: 'Tenor Sans'; 
+        font-size: 1.4rem; 
+        text-align: center !important; 
+        border-bottom: 1px solid #D4AF37; 
+        padding-bottom: 10px; 
+        margin: 30px auto 20px auto; 
+        text-transform: uppercase; 
+        letter-spacing: 3px; 
+        width: 100%;
+    }
     
     .stTabs [data-baseweb="tab-list"] { justify-content: center; gap: 10px; background-color: #0E0E0E; }
     .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p { text-align: center !important; font-family: 'Tenor Sans', sans-serif !important; letter-spacing: 1px; font-size: 0.8rem; color: #E0E0E0; }
@@ -81,10 +92,19 @@ st.markdown("""
     .footer { position: relative; width: 100%; background-color: #0E0E0E; color: #666666; text-align: center; padding: 30px; font-size: 0.65rem; border-top: 1px solid #1F1F1F; z-index: 999; letter-spacing: 2px; margin-top: 50px; }
     
     .tab-intro { text-align: center; color: #888888; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 30px; font-style: italic; }
+    .intelligence-badge { text-align: center; color: #D4AF37; font-size: 0.85rem; font-style: italic; margin-bottom: 25px; letter-spacing: 1px; border: 1px solid rgba(212,175,55,0.3); padding: 10px; background: rgba(212,175,55,0.05); }
     </style>
 """, unsafe_allow_html=True)
 
+def find_file(filename):
+    for root, _, files in os.walk("."):
+        if filename in files:
+            return os.path.join(root, filename)
+    return filename
+
 df = load_and_merge_data()
+if 'segment' in df.columns:
+    df['segment'] = df['segment'].str.replace('-', ' ')
 
 st.markdown("""
 <div class="header-wrapper">
@@ -113,7 +133,17 @@ with tabs[0]:
     col_nav, col_viz = st.columns([1, 1.5], gap="large")
     with col_nav:
         st.markdown('<div class="section-header">Executive Selection</div>', unsafe_allow_html=True)
-        episode = st.radio("Selection:", ["🏛️ 0. Global Foundation", "🎧 Ep. 1: Recession Glam", "📊 Ep. 2: Global Trade", "🔮 Ep. 3: 2026 Outlook", "🌍 Ep. 4: European Barbell", "🧬 Ep. 5: Master Synthesis"], label_visibility="collapsed")
+        episode = st.radio("Selection:", [
+            "🏛️ 0. Global Foundation", 
+            "🎧 Ep. 1: Recession Glam", 
+            "📊 Ep. 2: Global Trade", 
+            "🔮 Ep. 3: 2026 Outlook", 
+            "🌍 Ep. 4: European Barbell", 
+            "🎓 Masterclass 1: Carto AI & Neuro-Tech",
+            "🎓 Masterclass 2: B2B Price Elasticity",
+            "🎓 Masterclass 3: EU Regulatory Shock",
+            "🧬 Ep. 5: Master Synthesis"
+        ], label_visibility="collapsed")
         
         if "0. Global" in episode:
             current_t, current_a, rep_file = None, None, "master_prologue.md"
@@ -130,40 +160,55 @@ with tabs[0]:
         elif "Ep. 4" in episode:
             current_t, current_a, rep_file = "ep3_whisper_transcript_EN.md", "ep3_europe_barbell.mp3", "barbell_strategy_2026.md"
             f_type, v_title, desc = "Barbell", "The Barbell Market Structure 2026", "Mapping the European Barbell structure, Poland PPP breakthrough, and 0.28 digital correlation."
+        elif "Masterclass 1" in episode:
+            current_t, current_a, rep_file = None, "masterclass_ep1_audio.mp3", "master_prologue.md"
+            f_type, v_title, desc = "Popularity", "Givaudan Carto AI Infrastructure", "Deep-dive technical breakdown: Algorithmic scent formulation and EEG brainwave mapping."
+        elif "Masterclass 2" in episode:
+            current_t, current_a, rep_file = None, "masterclass_ep2_audio.mp3", "ep2_trade_report.md"
+            f_type, v_title, desc = "None", "B2B Price Elasticity Vectors", "Advanced macroeconomic regression analyzing consumer behavior under severe inflation."
+        elif "Masterclass 3" in episode:
+            current_t, current_a, rep_file = None, "masterclass_ep3_audio.mp3", "barbell_strategy_2026.md"
+            f_type, v_title, desc = "Barbell", "EU 2023/1545 Regulatory Compliance", "Strategic adaptation strategies for allergen restrictions and synthetic ingredient bans."
         else:
             current_t, current_a, rep_file = "ep5_summary_transcript.md", "ep5_audio.mp3", "master_synthesis.md"
             f_type, v_title, desc = "None", "Master Strategic Synthesis 2026", "Final dossier compiled via Deep Research and B2B technological architecture curated by Magdalena Romaniecka."
 
         if current_a:
-            st.audio(current_a)
+            target_audio = find_file(current_a)
+            if os.path.exists(target_audio):
+                st.audio(target_audio)
+            else:
+                st.warning(f"Audio file {current_a} not found in directory.")
         
         st.markdown(f'<p style="color:#D4AF37; font-size:0.95rem; font-style:italic; margin-top:20px; border-left: 3px solid #D4AF37; padding-left: 20px;">{desc}</p>', unsafe_allow_html=True)
 
     with col_viz:
         st.markdown(f'<div class="section-header">Live Market Data ✦ {v_title}</div>', unsafe_allow_html=True)
-        if f_type == "Barbell":
+        if f_type == "Barbell" and 'market_structure' in df.columns:
             b_counts = df['market_structure'].value_counts().reset_index()
             b_counts.columns = ['Tier', 'Count']
             fig = px.bar(b_counts, x='Tier', y='Count', color='Tier', text='Count', color_discrete_map={'Ultra-Niche (Barbell Top)': '#D4AF37', 'Budget (Barbell Bottom)': '#F0E68C', 'Squeezed Middle': '#333333'}, template="plotly_dark")
             fig.update_traces(textposition='outside', textfont=dict(size=18, color='#D4AF37'))
             fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.5, xanchor="center", x=0.5))
-        else:
+        elif 'community_votes' in df.columns and 'name' in df.columns:
             df_t = df.nlargest(10, 'community_votes').sort_values('community_votes', ascending=True)
-            fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment", text="community_votes", color_discrete_sequence=['#D4AF37', '#F0E68C', '#444'], template="plotly_dark")
+            fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment" if 'segment' in df.columns else None, text="community_votes", color_discrete_sequence=['#D4AF37', '#F0E68C', '#444'], template="plotly_dark")
             fig.update_traces(textposition='outside', textfont=dict(size=15, color='#D4AF37'), cliponaxis=False)
             max_val = df_t['community_votes'].max()
             fig.update_xaxes(range=[0, max_val * 1.35], showgrid=False, showticklabels=False)
             fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.6, xanchor="center", x=0.5), margin=dict(r=100))
-        
+        else:
+            fig = px.bar(x=["Data Upload Required"], y=[100], template="plotly_dark", color_discrete_sequence=['#D4AF37'])
+            
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, yaxis=dict(showgrid=False))
         st.plotly_chart(fig, use_container_width=True)
 
     st.write("---")
     
     if "0. Global" in episode:
-        st.markdown('<div class="section-header" style="text-align: center;">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
         try:
-            with open(rep_file, 'r', encoding='utf-8') as f:
+            with open(find_file(rep_file), 'r', encoding='utf-8') as f:
                 content_r = f.read()
                 st.markdown(f'<div class="report-frame">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
         except: 
@@ -172,16 +217,19 @@ with tabs[0]:
         l_col, r_col = st.columns(2, gap="large")
         with l_col:
             st.markdown('<div class="section-header">Executive Audio Debrief</div>', unsafe_allow_html=True)
-            try:
-                with open(current_t, 'r', encoding='utf-8') as f:
-                    content_t = f.read()
-                    st.markdown(f'<div class="report-frame">\n\n{content_t}\n\n</div>', unsafe_allow_html=True)
-            except: 
-                st.error("Debrief missing.")
+            if current_t:
+                try:
+                    with open(find_file(current_t), 'r', encoding='utf-8') as f:
+                        content_t = f.read()
+                        st.markdown(f'<div class="report-frame">\n\n{content_t}\n\n</div>', unsafe_allow_html=True)
+                except: 
+                    st.error("Debrief missing.")
+            else:
+                st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Technical Masterclass audio briefing selected. Please refer to the Master Dossier on the right for accompanying documentation.</div>', unsafe_allow_html=True)
         with r_col:
             st.markdown('<div class="section-header">Executive Master Dossier</div>', unsafe_allow_html=True)
             try:
-                with open(rep_file, 'r', encoding='utf-8') as f:
+                with open(find_file(rep_file), 'r', encoding='utf-8') as f:
                     content_r = f.read()
                     st.markdown(f'<div class="report-frame">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
             except: 
@@ -191,50 +239,57 @@ with tabs[1]:
     st.markdown('<div class="section-header">Market Strategic Hierarchy</div>', unsafe_allow_html=True)
     st.markdown('<div class="intelligence-badge">✦ INTELLIGENCE NOTE: 64% of analyzed Ultra-Niche segments utilize Jungle Essence™ CO2 extraction technologies to justify premium pricing above $350.</div>', unsafe_allow_html=True)
 
-    df_sun = df.sort_values('community_votes', ascending=False).groupby('segment').head(5).reset_index(drop=True)
-    df_sun['Global Market'] = 'Global Market'
-    
-    fig_sun = px.sunburst(df_sun, path=['Global Market', 'segment', 'brand', 'name'], values='community_votes', color='segment', color_discrete_map={'(?)':'#333', 'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#555'}, template="plotly_dark")
-    fig_sun.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=700)
-    st.plotly_chart(fig_sun, use_container_width=True)
+    if 'community_votes' in df.columns and 'segment' in df.columns:
+        df_sun = df.sort_values('community_votes', ascending=False).groupby('segment').head(5).reset_index(drop=True)
+        df_sun['Global Market'] = 'Global Market'
+        
+        fig_sun = px.sunburst(df_sun, path=['Global Market', 'segment', 'brand', 'name'], values='community_votes', color='segment', color_discrete_map={'(?)':'#333', 'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#555', 'Mass Market':'#555'}, template="plotly_dark")
+        fig_sun.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=700)
+        st.plotly_chart(fig_sun, use_container_width=True)
 
 with tabs[2]:
     st.markdown('<div class="section-header">Fragrance Market Case Studies</div>', unsafe_allow_html=True)
-    f_choice = st.selectbox("Select Profile:", sorted(df['name'].tolist()))
-    f_data = df[df['name'] == f_choice].iloc[0]
-    
-    intel_note = ""
-    if "Phantom" in f_choice:
-        intel_note = '<div class="intelligence-badge">✦ B2B CASE STUDY: Designed via Givaudan Carto AI and 45M EEG brainwave measurements to optimize confidence-boosting neuro-responses.</div>'
-    elif "Idôle" in f_choice:
-        intel_note = '<div class="intelligence-badge">✦ ECO-INNOVATION: Features ultra-thin 15mm glass technology reducing carbon footprint by 63% via Givaudan sustainability stack.</div>'
-    elif "Libre" in f_choice:
-        intel_note = '<div class="intelligence-badge">✦ MOLECULAR DESIGN: Features proprietary Diva Lavender and Vanilla Caviar molecular hybrids developed in Givaudan laboratories.</div>'
+    if 'name' in df.columns:
+        f_choice = st.selectbox("Select Profile:", sorted(df['name'].tolist()))
+        f_data = df[df['name'] == f_choice].iloc[0]
+        
+        intel_note = ""
+        if "Phantom" in f_choice:
+            intel_note = '<div class="intelligence-badge">✦ B2B CASE STUDY: Designed via Givaudan Carto AI and 45M EEG brainwave measurements to optimize confidence-boosting neuro-responses.</div>'
+        elif "Idôle" in f_choice:
+            intel_note = '<div class="intelligence-badge">✦ ECO-INNOVATION: Features ultra-thin 15mm glass technology reducing carbon footprint by 63% via Givaudan sustainability stack.</div>'
+        elif "Libre" in f_choice:
+            intel_note = '<div class="intelligence-badge">✦ MOLECULAR DESIGN: Features proprietary Diva Lavender and Vanilla Caviar molecular hybrids developed in Givaudan laboratories.</div>'
 
-    vault_html = f"""
-    <div style="border: 2px solid #D4AF37; padding: 6px; background: #000; margin: 30px auto; max-width: 900px; box-shadow: 0 0 30px rgba(212,175,55,0.15);">
-        <div style="border: 1px solid rgba(212,175,55,0.4); background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%); padding: 50px 30px; text-align: center;">
-            <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.8rem; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 10px;">{f_data['name']}</div>
-            <div style="color: #D4AF37; font-size: 0.9rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px;">{f_data['brand']} ✦ {f_data['segment']}</div>
-            <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 40px; flex-wrap: wrap;">
-                <div style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 250px; border-radius: 2px;">
-                    <div style="border: 1px solid rgba(212,175,55,0.3); padding: 20px 30px;">
-                        <div style="color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;">Quality Score</div>
-                        <div style="color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 3.5rem; line-height: 1.2; margin: 0;">{f_data['community_score']:.1f}/5.0</div>
+        score_val = f_data['community_score'] if 'community_score' in f_data else 4.5
+        notes_val = f_data['top_notes'] if 'top_notes' in f_data else "Proprietary Accord Stack"
+        brand_val = f_data['brand'] if 'brand' in f_data else "Global Brand"
+        seg_val = f_data['segment'] if 'segment' in f_data else "Prestige"
+
+        vault_html = f"""
+        <div style="border: 2px solid #D4AF37; padding: 6px; background: #000; margin: 30px auto; max-width: 900px; box-shadow: 0 0 30px rgba(212,175,55,0.15);">
+            <div style="border: 1px solid rgba(212,175,55,0.4); background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%); padding: 50px 30px; text-align: center;">
+                <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.8rem; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 10px;">{f_data['name']}</div>
+                <div style="color: #D4AF37; font-size: 0.9rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px;">{brand_val} ✦ {seg_val}</div>
+                <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 40px; flex-wrap: wrap;">
+                    <div style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 250px; border-radius: 2px;">
+                        <div style="border: 1px solid rgba(212,175,55,0.3); padding: 20px 30px;">
+                            <div style="color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;">Quality Score</div>
+                            <div style="color: #F0E68C; font-family: 'Tenor Sans', sans-serif; font-size: 3.5rem; line-height: 1.2; margin: 0;">{score_val:.1f}/5.0</div>
+                        </div>
+                    </div>
+                    <div style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 250px; border-radius: 2px;">
+                        <div style="border: 1px solid rgba(212,175,55,0.3); padding: 20px 30px;">
+                            <div style="color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;">Key Notes</div>
+                            <div style="color: #ccc; font-size: 1.1rem; line-height: 1.5; margin: 0;">{notes_val}</div>
+                        </div>
                     </div>
                 </div>
-                <div style="border: 2px solid #D4AF37; background: linear-gradient(145deg, #1a1500 0%, #050505 100%); padding: 4px; min-width: 250px; border-radius: 2px;">
-                    <div style="border: 1px solid rgba(212,175,55,0.3); padding: 20px 30px;">
-                        <div style="color:#D4AF37; font-size:0.85rem; letter-spacing:3px; margin-bottom:10px; text-transform:uppercase;">Key Notes</div>
-                        <div style="color: #ccc; font-size: 1.1rem; line-height: 1.5; margin: 0;">{f_data['top_notes']}</div>
-                    </div>
-                </div>
+                {intel_note}
             </div>
-            {intel_note}
         </div>
-    </div>
-    """
-    st.markdown(vault_html, unsafe_allow_html=True)
+        """
+        st.markdown(vault_html, unsafe_allow_html=True)
 
 with tabs[3]:
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
