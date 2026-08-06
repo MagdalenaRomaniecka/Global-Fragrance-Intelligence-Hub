@@ -24,6 +24,8 @@ st.markdown("""
         .metric-label { font-size: 0.55rem !important; letter-spacing: 1.5px !important; }
         .report-frame { padding: 15px !important; font-size: 0.9rem !important; text-align: left !important; line-height: 1.6 !important; }
         .section-header { font-size: 1.1rem !important; margin: 20px 0 10px 0 !important; }
+        h1 { font-size: 1.2rem !important; }
+        h2 { font-size: 1.1rem !important; }
     }
     
     [data-testid="stMarkdownContainer"] h1, [data-testid="stMarkdownContainer"] h2 {
@@ -164,14 +166,14 @@ with tabs[0]:
             current_t, current_a, rep_file = "ep3_whisper_transcript_EN.md", "ep3_europe_barbell.mp3", "barbell_strategy_2026.md"
             f_type, v_title, desc = "Barbell", "The Barbell Market Structure 2026", "Mapping the European Barbell structure, Poland PPP breakthrough, and 0.28 digital correlation."
         elif "Masterclass 1" in episode:
-            current_t, current_a, rep_file = "ep5_summary_transcript.md", "The_High_Stakes_Economics_Of_Fragrance (1).m4a", "master_prologue.md"
-            f_type, v_title, desc = "None", "Givaudan Carto AI Infrastructure", "Deep-dive technical breakdown: Algorithmic scent formulation and EEG brainwave mapping."
+            current_t, current_a, rep_file = "ep5_summary_transcript.md", "How_AI_engineers_perfumes_for_your_brain (1).m4a", "master_prologue.md"
+            f_type, v_title, desc = "Popularity", "Givaudan Carto AI Infrastructure", "Deep-dive technical breakdown: Algorithmic scent formulation and EEG brainwave mapping."
         elif "Masterclass 2" in episode:
-            current_t, current_a, rep_file = "ep2_trade_transcript.md", "How_AI_engineers_perfumes_for_your_brain (1).m4a", "ep2_trade_report.md"
+            current_t, current_a, rep_file = "ep2_trade_transcript.md", "The_High_Stakes_Economics_Of_Fragrance (1).m4a", "ep2_trade_report.md"
             f_type, v_title, desc = "None", "B2B Price Elasticity Vectors", "Advanced macroeconomic regression analyzing consumer behavior under severe inflation."
         elif "Masterclass 3" in episode:
             current_t, current_a, rep_file = "ep3_whisper_transcript_EN.md", "The_Secret_Chemical_Battlefield_of_Luxury_Perfume (1).m4a", "barbell_strategy_2026.md"
-            f_type, v_title, desc = "None", "EU 2023/1545 Regulatory Compliance", "Strategic adaptation strategies for allergen restrictions and synthetic ingredient bans."
+            f_type, v_title, desc = "Barbell", "EU 2023/1545 Regulatory Compliance", "Strategic adaptation strategies for allergen restrictions and synthetic ingredient bans."
         else:
             current_t, current_a, rep_file = "ep5_summary_transcript.md", "ep5_audio.mp3", "master_synthesis.md"
             f_type, v_title, desc = "None", "Master Strategic Synthesis 2026", "Final dossier compiled via Deep Research and B2B technological architecture curated by Magdalena Romaniecka."
@@ -181,41 +183,30 @@ with tabs[0]:
             if os.path.exists(target_audio):
                 st.audio(target_audio)
             else:
-                st.markdown(f'<div style="color: #888888; font-size: 0.8rem; font-style: italic;">[Audio file {current_a} pending upload]</div>', unsafe_allow_html=True)
+                st.warning(f"Audio file {current_a} not found in directory.")
         
         st.markdown(f'<p style="color:#D4AF37; font-size:0.95rem; font-style:italic; margin-top:20px; border-left: 3px solid #D4AF37; padding-left: 20px;">{desc}</p>', unsafe_allow_html=True)
 
     with col_viz:
         st.markdown(f'<div class="section-header">Live Market Data ✦ {v_title}</div>', unsafe_allow_html=True)
-        
         if f_type == "Barbell" and 'market_structure' in df.columns:
             b_counts = df['market_structure'].value_counts().reset_index()
             b_counts.columns = ['Tier', 'Count']
             fig = px.bar(b_counts, x='Tier', y='Count', color='Tier', text='Count', color_discrete_map={'Ultra-Niche (Barbell Top)': '#D4AF37', 'Budget (Barbell Bottom)': '#F0E68C', 'Squeezed Middle': '#333333'}, template="plotly_dark")
             fig.update_traces(textposition='outside', textfont=dict(size=18, color='#D4AF37'))
             fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.5, xanchor="center", x=0.5))
-            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, yaxis=dict(showgrid=False))
-            st.plotly_chart(fig, use_container_width=True)
-        
-        elif f_type == "Popularity" and 'community_votes' in df.columns and 'name' in df.columns:
+        elif 'community_votes' in df.columns and 'name' in df.columns:
             df_t = df.nlargest(10, 'community_votes').sort_values('community_votes', ascending=True)
             fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment" if 'segment' in df.columns else None, text="community_votes", color_discrete_sequence=['#D4AF37', '#F0E68C', '#444'], template="plotly_dark")
             fig.update_traces(textposition='outside', textfont=dict(size=15, color='#D4AF37'), cliponaxis=False)
             max_val = df_t['community_votes'].max()
             fig.update_xaxes(range=[0, max_val * 1.35], showgrid=False, showticklabels=False)
             fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.6, xanchor="center", x=0.5), margin=dict(r=100))
-            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, yaxis=dict(showgrid=False))
-            st.plotly_chart(fig, use_container_width=True)
-            
         else:
-            st.markdown("""
-            <div style="height: 450px; display: flex; align-items: center; justify-content: center; border: 1px dashed #333333; border-radius: 4px; background: rgba(18,18,18,0.5);">
-                <div style="text-align: center; color: #666666; font-family: 'Lato', sans-serif; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem;">
-                    ✦ Awaiting active dataset selection ✦<br><br>
-                    <span style="font-size: 0.7rem; color: #444444;">Please refer to accompanying audio briefing</span>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+            fig = px.bar(x=["Data Upload Required"], y=[100], template="plotly_dark", color_discrete_sequence=['#D4AF37'])
+            
+        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, yaxis=dict(showgrid=False))
+        st.plotly_chart(fig, use_container_width=True)
 
     st.write("---")
     
@@ -226,7 +217,7 @@ with tabs[0]:
                 content_r = f.read()
                 st.markdown(f'<div class="report-frame">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
         except: 
-            st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Documentation indexing in progress...</div>', unsafe_allow_html=True)
+            st.error("Dossier missing.")
     else:
         l_col, r_col = st.columns(2, gap="large")
         with l_col:
@@ -237,7 +228,7 @@ with tabs[0]:
                         content_t = f.read()
                         st.markdown(f'<div class="report-frame">\n\n{content_t}\n\n</div>', unsafe_allow_html=True)
                 except: 
-                    st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Debrief indexing in progress...</div>', unsafe_allow_html=True)
+                    st.error("Debrief missing.")
             else:
                 st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Technical audio briefing selected. Please refer to the Master Dossier on the right for accompanying documentation.</div>', unsafe_allow_html=True)
         with r_col:
@@ -247,7 +238,7 @@ with tabs[0]:
                     content_r = f.read()
                     st.markdown(f'<div class="report-frame">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
             except: 
-                st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Dossier indexing in progress...</div>', unsafe_allow_html=True)
+                st.error("Dossier missing.")
 
 with tabs[1]:
     st.markdown('<div class="section-header">Market Strategic Hierarchy</div>', unsafe_allow_html=True)
@@ -305,7 +296,7 @@ with tabs[3]:
         ("🧬 ScentSational AI", "AI Concierge providing personalized signature scent recommendations.", "https://scentsational-zbznjhgc4xv7faddappdc2b.streamlit.app/"),
         ("📊 Perfume Finder", "Interactive database for manual filtering and exploring fragrance profiles.", "https://perfume-finder-app-btskyvq7eytc5ujrgzr2dk.streamlit.app/"),
         ("📡 Hugging Face LFS2", "Advanced machine learning models and datasets mapping social sentiment.", "https://huggingface.co/spaces/Baphomert/ScentSational-Fragrantica-LFS2"),
-        ("🌍 Market Pulse Hub", "Dashboard integrating Deep Research data with live macro tracking.", "#")
+        ("🌍 Market Pulse Hub", "Dashboard integrating Deep Research data with live macro tracking.", "https://github.com/MagdalenaRomaniecka")
     ]
     for col, (name, dsc, link) in zip([e1, e2, e3, e4], apps):
         col.markdown(f"""<div class="project-card">
