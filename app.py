@@ -194,28 +194,18 @@ with tabs[0]:
             fig = px.bar(b_counts, x='Tier', y='Count', color='Tier', text='Count', color_discrete_map={'Ultra-Niche (Barbell Top)': '#D4AF37', 'Budget (Barbell Bottom)': '#F0E68C', 'Squeezed Middle': '#333333'}, template="plotly_dark")
             fig.update_traces(textposition='outside', textfont=dict(size=18, color='#D4AF37'))
             fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.5, xanchor="center", x=0.5))
-            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, yaxis=dict(showgrid=False))
-            st.plotly_chart(fig, use_container_width=True)
-        
-        elif f_type == "Popularity" and 'community_votes' in df.columns and 'name' in df.columns:
+        elif 'community_votes' in df.columns and 'name' in df.columns:
             df_t = df.nlargest(10, 'community_votes').sort_values('community_votes', ascending=True)
             fig = px.bar(df_t, x="community_votes", y="name", orientation='h', color="segment" if 'segment' in df.columns else None, text="community_votes", color_discrete_sequence=['#D4AF37', '#F0E68C', '#444'], template="plotly_dark")
             fig.update_traces(textposition='outside', textfont=dict(size=15, color='#D4AF37'), cliponaxis=False)
             max_val = df_t['community_votes'].max()
             fig.update_xaxes(range=[0, max_val * 1.35], showgrid=False, showticklabels=False)
             fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.6, xanchor="center", x=0.5), margin=dict(r=100))
-            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, yaxis=dict(showgrid=False))
-            st.plotly_chart(fig, use_container_width=True)
-            
         else:
-            st.markdown("""
-            <div style="height: 450px; display: flex; align-items: center; justify-content: center; border: 1px dashed #333333; border-radius: 4px; background: rgba(18,18,18,0.5);">
-                <div style="text-align: center; color: #666666; font-family: 'Lato', sans-serif; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem;">
-                    ✦ Awaiting active dataset selection ✦<br><br>
-                    <span style="font-size: 0.7rem; color: #444444;">Please refer to accompanying audio briefing</span>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+            fig = px.bar(x=["Data Upload Required"], y=[100], template="plotly_dark", color_discrete_sequence=['#D4AF37'])
+            
+        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, yaxis=dict(showgrid=False))
+        st.plotly_chart(fig, use_container_width=True)
 
     st.write("---")
     
