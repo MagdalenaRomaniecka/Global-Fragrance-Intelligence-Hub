@@ -109,6 +109,123 @@ df = load_and_merge_data()
 if 'segment' in df.columns:
     df['segment'] = df['segment'].str.replace('-', ' ')
 
+# Structured Briefings Registry
+briefings_content = {
+    "Ep. 5": {
+        "debrief": """
+### 🎙️ INTELLIGENCE BRIEFING: CARTO AI & NEURO-TECH
+**Strategic Deep Dive ✦ Executive Debrief**
+
+`[ STRATEGIC SCOPE ] ✦ Data Intelligence: Givaudan Carto AI, IBM Philyra, MoodScentz, Myrissi ✦ Primary Analysis Area: AI Formulation, EEG/fMRI Brainwave Mapping ✦ Key Phenomenon: Algorithmic olfactory synthesis.`
+
+#### Part I. The Olfactory Memory Bottleneck
+**HOST:** The transition from traditional artisanal blending to advanced chemical engineering and artificial intelligence is absolute. Human memory caps a master perfumer at 1,000 to 2,000 raw ingredients.
+
+**CO-HOST:** Systems like Givaudan's Carto process physical parameters—such as surface tension and evaporation rates—for over 5,000 raw materials simultaneously.
+
+#### Part II. Neuro-Perfumery & Limbic System Hacking
+**HOST:** Platform models utilize deep learning trained on 25,000 consumer tests across 64 psychological dimensions.
+
+**CO-HOST:** The Paco Rabanne Phantom case study analyzed 45 million EEG/fMRI brainwave records to mandate a 10x overdose of Styrallyl Acetate, physically triggering the limbic system for maximum confidence.
+
+#### Part III. Molecular Wasabi Illusion
+**HOST:** Symrise's Spicatanate molecule, derived from upcycled orange peels, smells like rotting garlic at 100% concentration.
+
+**CO-HOST:** When AI formulates it at 0.001%, it creates a hyper-realistic wasabi effect, demonstrating precise sensory threshold control.
+""",
+        "dossier": """
+### 📊 GIVAUDAN CARTO AI & NEURO-COGNITIVE ENGINEERING
+**Operational Data Intelligence 2025 to 2026**
+
+`[ STRATEGIC SCOPE ] ✦ Primary Analysis Area: AI Formulation & Chemical Physics ✦ Data Intelligence: Givaudan Carto, IBM Philyra, SBERT NLP, Cosine Similarity ✦ Key Phenomenon: Replacing human intuition with data-driven neuro-engineering.`
+
+#### 1. ALGORITHMIC SCENT FORMULATION
+* **Carto AI Architecture:** Leverages an Odor Value Map to suggest non-obvious chemical pairings while continuously calculating chemical stability in real time.
+* **45 Million EEG Readings:** Validates precise molecular overdoses (e.g., Styrallyl Acetate in Paco Rabanne Phantom) to reliably trigger dopamine release.
+
+#### 2. THERMODYNAMICS VS. PYTHON CODE
+* **Raoult's Law:** Statistically perfect Python pairings (e.g., Calone 1951 + Jasmine) can fail on warm skin. Calone evaporates in 30 minutes, leaving heavy Jasmine behind and creating olfactory separation.
+* **Chemical Mutation:** Overdosing Calone (>0.5%) causes rapid oxidation into raw egg aromas, emphasizing that AI algorithms must account for thermodynamic evaporation curves.
+
+#### 3. PROJECT B: SCENTSATIONAL NLP INTEGRATION
+* **UX Friction Eradication:** Project B eliminates manual sidebar filtering (`fra_perfumes.csv`) by deploying SBERT, TF-IDF, and Cosine Similarity (`perfumes_dataset.csv`, `hybrid_similarity.npy`).
+* **Intent Mapping:** Maps natural language moods directly to scent vectors, reducing e-commerce bounce rates.
+"""
+    },
+    "Ep. 6": {
+        "debrief": """
+### 🎙️ INTELLIGENCE BRIEFING: B2B PRICE ELASTICITY
+**Strategic Deep Dive ✦ Executive Debrief**
+
+`[ STRATEGIC SCOPE ] ✦ Data Intelligence: B2B Cost Allocation, Price Elasticity -1.81, 4-Tier Market Taxonomy ✦ Primary Analysis Area: Global Retail & Middle East Maceration Arbitrage ✦ Key Phenomenon: The $1.50 juice vs $150 retail markup trap.`
+
+#### Part I. Deconstructing the $150 Bottle
+**HOST:** A standard $150 designer bottle contains scented liquid worth only $1.50 to $5.00. Packaging accounts for 10-15%, marketing 15-25%, and traditional retail networks absorb 45-60%.
+
+**CO-HOST:** Niche brands invert this ratio, allocating 40-60% of budget directly into pure raw materials while shifting toward 10-30ml formats and subscription models.
+
+#### Part II. The Negative 1.81 Price Elasticity Trap
+**HOST:** Mainstream brands operate under a negative 1.81 price elasticity index. A 10% price increase triggers an 18.1% collapse in consumer demand.
+
+**CO-HOST:** This elasticity forces the "Barbell Economy"—squeezing the middle market and driving growth into Ultra-Niche or Smart Clones.
+""",
+        "dossier": """
+### 📊 B2B MARGIN BREAKDOWN & MACERATION ARBITRAGE
+**Operational Data Intelligence 2025 to 2026**
+
+`[ STRATEGIC SCOPE ] ✦ Primary Analysis Area: Global B2B Margins & Supply Chain Efficiency ✦ Data Intelligence: Price Elasticity Index -1.81, Red Sea Freight (+400%) ✦ Key Phenomenon: Shifting capital from retail real estate to formulation value.`
+
+#### 1. BOTTLE ECONOMICS & MARGIN ANALYSIS
+* **Mainstream Cost Structure:** Scented liquid (3-5%), Packaging (10-15%), Marketing (15-25%), Retail Margins (45-60%).
+* **Price Elasticity Index (-1.81):** Mathematically proves why mainstream brands cannot pass inflation costs to consumers without losing market share.
+
+#### 2. MACERATION ARBITRAGE & JAFZA LOGISTICS
+* **WIP Capital Reduction:** Middle Eastern manufacturers (Lattafa, Ajmal) eliminate 4-12 week warehouse holding costs by shipping 2-week-old "green" juice, outsourcing maceration to the consumer.
+* **Vertical Integration:** Operating in 0% tax JAFZA zones with in-house glass printing and packaging allows UAE brands to absorb 400% Red Sea freight spikes while maintaining $20-$40 retail prices.
+
+#### 3. PROJECT A: ASSORTMENT GAP MAPPING
+* **Data Infrastructure:** Utilizes `fra_perfumes.csv` to map assortment gaps, enabling Category Managers to capitalize on shifting price tolerances.
+"""
+    },
+    "Ep. 7": {
+        "debrief": """
+### 🎙️ INTELLIGENCE BRIEFING: EU REGULATORY SHOCK
+**Strategic Deep Dive ✦ Executive Debrief**
+
+`[ STRATEGIC SCOPE ] ✦ Data Intelligence: GC-MS Forensics, IFRA 52nd Amendment, EU 2023/1545 ✦ Primary Analysis Area: EU Chemical Fortress & Global Patent Moats ✦ Key Phenomenon: Silent reformulations, Captive monopolies, and Batch Code Hunters.`
+
+#### Part I. Captives as Intellectual Property Moats
+**HOST:** Perfume recipes cannot be copyrighted. Rival labs use GC-MS (Gas Chromatography-Mass Spectrometry) machines to reverse engineer formulas down to the decimal point.
+
+**CO-HOST:** To protect market share, chemical giants (Givaudan, Symrise) patent synthetic molecules called "Captives" for 20 years, generating 24.2% EBITDA margins.
+
+#### Part II. Regulatory Shocks & Silent Reformulations
+**HOST:** The EU 2023/1545 directive and IFRA 52nd Amendment ban key ingredients like Galaxolide due to bioaccumulation in human tissue (64 ng/kg in breast milk).
+
+**CO-HOST:** Brands use GC-MS to silently reformulate bestsellers. Consumers respond via "Batch Code Hunters" communities, auditing FIL codes on boxes (e.g., Creed Aventus 11Z01, Dior Homme Intense).
+""",
+        "dossier": """
+### 📊 PATENT MOATS, EXTRACTION COSTS & REGULATORY FORENSICS
+**Operational Data Intelligence 2025 to 2026**
+
+`[ STRATEGIC SCOPE ] ✦ Primary Analysis Area: European Chemical Regulations & IP Moats ✦ Data Intelligence: IFRA 52nd Amendment, EU 2023/1545, FIL Batch Tracking ✦ Key Phenomenon: Re-engineering iconic formulas using GC-MS and Captives.`
+
+#### 1. CAPTIVE MOATS & FINANCIAL PERFORMANCE
+* **GC-MS Vulnerability:** Competitors can clone non-patented formulas instantly.
+* **Patented Captives:** 20-year exclusive patents on synthetic captives allow Givaudan to hit 7.47B CHF sales with 24.2% EBITDA margins.
+
+#### 2. EXTRACTION PHYSICS & EXTREME VALUATIONS
+* **Orris Butter ($40k-$100k/kg):** Requires 3-5 years of underground root oxidation.
+* **Rose Absolute ($8k-$15k/kg):** Requires 1.5 million hand-picked flowers per kilogram.
+* **Supercritical CO2 (Jungle Essence):** Operates at 74 bar and 31.1°C to extract delicate scents without thermal degradation.
+
+#### 3. REGULATORY COMPLIANCE & BATCH CODE FORENSICS
+* **Galaxolide Bans:** Bioaccumulation concerns force brands into mandatory reformulations.
+* **FIL Code Auditing:** Consumers track silent formula changes (e.g., Dior Homme Intense 03214/A to 05414/A), driving a lucrative vintage secondary market.
+"""
+    }
+}
+
 st.markdown("""
 <div class="header-wrapper">
     <div class="header-outer">
@@ -164,13 +281,13 @@ with tabs[0]:
             current_t, current_a, rep_file = "ep3_whisper_transcript_EN.md", "ep3_europe_barbell.mp3", "barbell_strategy_2026.md"
             f_type, v_title, desc = "Barbell", "The Barbell Market Structure 2026", "Mapping the European Barbell structure, Poland PPP breakthrough, and 0.28 digital correlation."
         elif "Ep. 5" in episode:
-            current_t, current_a, rep_file = "ep5_summary_transcript.md", "ep5_How_AI_engineers_perfumes_for_your_brain.mp3", "master_prologue.md"
+            current_t, current_a, rep_file = "ep5_debrief", "ep5_How_AI_engineers_perfumes_for_your_brain.mp3", "ep5_dossier"
             f_type, v_title, desc = "Popularity", "Givaudan Carto AI Infrastructure", "Deep-dive technical breakdown: Algorithmic scent formulation and EEG brainwave mapping."
         elif "Ep. 6" in episode:
-            current_t, current_a, rep_file = "ep2_trade_transcript.md", "ep6_The_High_Stakes_Economics_Of_Fragrance.mp3", "ep2_trade_report.md"
+            current_t, current_a, rep_file = "ep6_debrief", "ep6_The_High_Stakes_Economics_Of_Fragrance.mp3", "ep6_dossier"
             f_type, v_title, desc = "None", "B2B Price Elasticity Vectors", "Advanced macroeconomic regression analyzing consumer behavior under severe inflation."
         elif "Ep. 7" in episode:
-            current_t, current_a, rep_file = "ep3_whisper_transcript_EN.md", "ep7_The_Secret_Chemical_Battlefield_of_Luxury_Perfume.mp3", "barbell_strategy_2026.md"
+            current_t, current_a, rep_file = "ep7_debrief", "ep7_The_Secret_Chemical_Battlefield_of_Luxury_Perfume.mp3", "ep7_dossier"
             f_type, v_title, desc = "Barbell", "EU 2023/1545 Regulatory Compliance", "Strategic adaptation strategies for allergen restrictions and synthetic ingredient bans."
         else:
             current_t, current_a, rep_file = "master_synthesis_transcript.md", "ep8_master_synthesis.mp3", "master_synthesis.md"
@@ -221,7 +338,10 @@ with tabs[0]:
         l_col, r_col = st.columns(2, gap="large")
         with l_col:
             st.markdown('<div class="section-header">Executive Audio Debrief</div>', unsafe_allow_html=True)
-            if current_t:
+            if current_t in ["ep5_debrief", "ep6_debrief", "ep7_debrief"]:
+                ep_key = "Ep. " + current_t[2]
+                st.markdown(f'<div class="report-frame">\n\n{briefings_content[ep_key]["debrief"]}\n\n</div>', unsafe_allow_html=True)
+            elif current_t:
                 try:
                     with open(find_file(current_t), 'r', encoding='utf-8') as f:
                         content_t = f.read()
@@ -230,14 +350,19 @@ with tabs[0]:
                     st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Debrief indexing in progress...</div>', unsafe_allow_html=True)
             else:
                 st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Technical audio briefing selected. Please refer to the Master Dossier on the right for accompanying documentation.</div>', unsafe_allow_html=True)
+                
         with r_col:
             st.markdown('<div class="section-header">Executive Master Dossier</div>', unsafe_allow_html=True)
-            try:
-                with open(find_file(rep_file), 'r', encoding='utf-8') as f:
-                    content_r = f.read()
-                    st.markdown(f'<div class="report-frame">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
-            except: 
-                st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Dossier indexing in progress...</div>', unsafe_allow_html=True)
+            if rep_file in ["ep5_dossier", "ep6_dossier", "ep7_dossier"]:
+                ep_key = "Ep. " + rep_file[2]
+                st.markdown(f'<div class="report-frame">\n\n{briefings_content[ep_key]["dossier"]}\n\n</div>', unsafe_allow_html=True)
+            else:
+                try:
+                    with open(find_file(rep_file), 'r', encoding='utf-8') as f:
+                        content_r = f.read()
+                        st.markdown(f'<div class="report-frame">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
+                except: 
+                    st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Dossier indexing in progress...</div>', unsafe_allow_html=True)
 
 with tabs[1]:
     st.markdown('<div class="section-header">Market Strategic Hierarchy</div>', unsafe_allow_html=True)
