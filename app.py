@@ -61,8 +61,8 @@ st.markdown("""
         color: #D4AF37;
         font-family: 'Tenor Sans', sans-serif;
         text-transform: uppercase;
-        font-size: 1.4rem;
-        margin-bottom: 5px;
+        font-size: 1.5rem;
+        margin-bottom: 8px;
         display: flex;
         align-items: center;
         gap: 10px;
@@ -71,39 +71,49 @@ st.markdown("""
     .report-subtitle {
         color: #E0E0E0;
         font-weight: 700;
-        font-size: 0.85rem;
-        margin-bottom: 20px;
-        padding-bottom: 15px;
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
         border-bottom: 1px solid #333333;
     }
 
     .scope-text {
         color: #888888;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         margin-bottom: 30px;
         line-height: 1.6;
     }
 
     .part-title {
         color: #E0E0E0;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         font-weight: 700;
         margin-top: 30px;
         margin-bottom: 15px;
     }
     
-    .dossier-title {
+    .dossier-main-title {
         color: #D4AF37;
         font-family: 'Tenor Sans', sans-serif;
         text-transform: uppercase;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         margin-top: 35px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         letter-spacing: 1px;
+    }
+
+    .dossier-sub-title {
+        color: #E0E0E0;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 15px;
     }
 
     .report-frame p {
         margin-bottom: 15px;
+        color: #E0E0E0;
+        font-size: 0.95rem;
+        line-height: 1.8;
     }
     
     .section-header { 
@@ -162,7 +172,7 @@ briefings_content = {
     "Ep. 5": {
         "debrief": """
 <div class="report-title">🎙️ INTELLIGENCE BRIEFING. CARTO AI & NEURO-TECH</div>
-<div class="report-subtitle">Strategic Deep Dive ✦ Executive Debrief</div>
+<div class="report-subtitle">Strategic Deep Dive • Executive Debrief</div>
 <div class="scope-text">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area AI Formulation, EEG/fMRI Brainwave Mapping. ✦ Data Intelligence Givaudan Carto AI, IBM Philyra, MoodScentz, Myrissi. ✦ Key Phenomenon Algorithmic olfactory synthesis vs human intuition.</div>
 
 <div class="part-title">Part I. The Olfactory Memory Bottleneck</div>
@@ -214,11 +224,12 @@ briefings_content = {
 <p><strong>CO HOST</strong> To precisely, if the goal is just hacking the amygdala for a dopamine spike, we aren't creating art anymore. We are just directly manipulating human neurochemistry.</p>
 """,
         "dossier": """
-<div class="report-title">🧠 GIVAUDAN CARTO AI ✦ NEURO-COGNITIVE ENGINEERING</div>
+<div class="report-title">🧠 2026 TREND REPORT ✦ NEURO-COGNITIVE ENGINEERING</div>
 <div class="report-subtitle">Operational Data Intelligence 2025 to 2026</div>
 <div class="scope-text">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area AI Formulation & Chemical Physics. ✦ Data Intelligence Givaudan Carto, IBM Philyra, SBERT NLP, Cosine Similarity. ✦ Key Phenomenon Replacing human intuition with data-driven neuro-engineering.</div>
 
-<div class="dossier-title">ALGORITHMIC SCENT FORMULATION & GC-MS DATA</div>
+<div class="dossier-main-title">ALGORITHMIC SCENT FORMULATION & GC-MS DATA</div>
+<div class="dossier-sub-title">Supercritical Extraction and Reverse Engineering</div>
 <p>The modern standard demands absolute perfection in raw materials, fundamentally altering the architecture of luxury fragrance production. The integration of high-level biotechnology allows for unprecedented extraction and analysis.</p>
 
 <p>✦ Supercritical CO2 Extraction: Carbon dioxide is subjected to 74 bar pressure at 31.1°C, entering a supercritical state. It acts as the perfect solvent, dissolving delicate aromatic molecules without the destructive heat of traditional steam distillation, leaving zero toxic residues.</p>
@@ -227,14 +238,16 @@ briefings_content = {
 
 <p>✦ AI Infrastructure: Systems like Givaudan's Carto and IBM's Philyra bypass human biological limitations. Philyra, trained on a database of 1.7 million formulas, designs scents from scratch while continuously calculating chemical stability and carbon footprint in real-time.</p>
 
-<div class="dossier-title">NEURO-PERFUMERY AND LIMBIC SYSTEM HACKING</div>
+<div class="dossier-main-title">NEURO-PERFUMERY AND LIMBIC SYSTEM HACKING</div>
+<div class="dossier-sub-title">EEG Mapping and Molecular Overdosing</div>
 <p>The industry has shifted from aesthetic choices to mathematically optimized physiological stimuli.</p>
 
 <p>✦ EEG & fMRI Brainwave Mapping: Companies utilize EEG headsets to track real-time electrical brain waves while consumers smell raw materials. The Paco Rabanne Phantom case study highlights the use of 45 million EEG brainwave records.</p>
 
 <p>✦ Molecular Overdosing: The 45 million data points were used to mathematically validate the exact overdosing of Styrallyl Acetate. This creates a physiological trigger that hacks the amygdala for a dopamine spike, directly manipulating human neurochemistry to bypass rational consumer choice.</p>
 
-<div class="dossier-title">THERMODYNAMICS VS. PYTHON CODE: RAOULT'S LAW</div>
+<div class="dossier-main-title">THERMODYNAMICS VS. PYTHON CODE</div>
+<div class="dossier-sub-title">Raoult's Law and Chemical Mutations</div>
 <p>Even the most statistically perfect AI model is governed by physical laws once the liquid hits warm human skin.</p>
 
 <p>✦ Raoult's Law & Fick's Second Law: Perfume formulation is a macroscopic battle against evaporation. Heavy fixative molecules (like Iso E Super) form intermolecular bonds with bouncy molecules (like Limonene) to alter the evaporation curve.</p>
@@ -245,7 +258,7 @@ briefings_content = {
     "Ep. 6": {
         "debrief": """
 <div class="report-title">🎙️ INTELLIGENCE BRIEFING. B2B PRICE ELASTICITY</div>
-<div class="report-subtitle">Strategic Deep Dive ✦ Executive Debrief</div>
+<div class="report-subtitle">Strategic Deep Dive • Executive Debrief</div>
 <div class="scope-text">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area Global Retail & Middle East Maceration Arbitrage. ✦ Data Intelligence B2B Cost Allocation, Price Elasticity -1.81, 4-Tier Market Taxonomy. ✦ Key Phenomenon The $1.50 juice vs $150 retail markup trap.</div>
 
 <div class="part-title">Part I. Deconstructing the Designer Bottle</div>
@@ -291,11 +304,12 @@ briefings_content = {
 <p><strong>HOST</strong> Yeah. I mean, you are fundamentally paying for the department stores real estate. You're funding the glass display counters, the testers, the sales associates. It's like paying for a blockbuster movie ticket, but you're mostly funding the billboards and the theater's concession stand rather than the film itself.</p>
 """,
         "dossier": """
-<div class="report-title">📊 MACROECONOMIC PRICE ELASTICITY ✦ B2B LOGISTICS</div>
+<div class="report-title">📊 2026 TREND REPORT ✦ B2B LOGISTICS</div>
 <div class="report-subtitle">Operational Data Intelligence 2024 to 2025</div>
 <div class="scope-text">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area Global Trade Corridors & Margin Breakdowns. ✦ Data Intelligence -1.81 Elasticity Index, UAE Logistics Bypass. ✦ Key Phenomenon Maceration Arbitrage and the collapse of the middle market.</div>
 
-<div class="dossier-title">DECONSTRUCTING THE DESIGNER BOTTLE</div>
+<div class="dossier-main-title">MACROECONOMIC PRICE ELASTICITY</div>
+<div class="dossier-sub-title">Deconstructing the Designer Bottle</div>
 <p>The traditional Western designer fragrance market operates under severe, non-negotiable financial constraints defined by corporate accountants.</p>
 
 <p>✦ The Juice Constraint: The actual scented concentrate and alcohol solvent in a standard $150 bottle account for merely 3% to 5% of the final retail price, equating to roughly €2 to €5.</p>
@@ -306,14 +320,16 @@ briefings_content = {
 
 <p>✦ Negative 1.81 Price Elasticity: Mainstream brands are trapped by a -1.81 price elasticity index. A 10% increase in shelf price causes consumer demand to plummet by over 18%. To survive, brands ruthlessly squeeze manufacturing costs, forcing an absolute reliance on cheap, mass-produced synthetic molecules.</p>
 
-<div class="dossier-title">THE NICHE INVERSION & MARKET TAXONOMY</div>
+<div class="dossier-main-title">THE NICHE INVERSION & MARKET TAXONOMY</div>
+<div class="dossier-sub-title">4-Tier Classification and Format Shifts</div>
 <p>True niche perfumery flips the economic model entirely, allocating 40% to 60% of their budget directly into pure, high-quality raw materials.</p>
 
 <p>✦ The 4-Tier Taxonomy: Digital culture has forced a rigid classification. Tier 1: Mainstream Designer (>100,000 units). Tier 2: Niche Prestige / Corporate Niche (10,000-50,000 units, acquired by conglomerates). Tier 3: Indie Segment (Independent, 100-5,000 units). Tier 4: Artisan Purist (<500 units, rigorous manual production).</p>
 
 <p>✦ Format Shifts: To adapt to high material costs, niche brands are shifting heavily toward 10ml to 30ml formats and fueling a $1.2 billion subscription market boom, allowing consumers to experience high-end materials without a blind $300 commitment.</p>
 
-<div class="dossier-title">THE MIDDLE EASTERN CLONE REVOLUTION</div>
+<div class="dossier-main-title">THE MIDDLE EASTERN CLONE REVOLUTION</div>
+<div class="dossier-sub-title">Maceration Arbitrage and Freight Shocks</div>
 <p>The single biggest supply chain disruption in modern perfumery is the Arabian "Dupe Culture." Brands like Lattafa, Armaf, and Afnan have reverse-engineered the industry.</p>
 
 <p>✦ Maceration Arbitrage: Traditional Western brands freeze capital by storing mixed fragrance in climate-controlled warehouses for 4 to 12 weeks to macerate. UAE producers bypass this holding cost entirely by shipping freshly mixed, "green" juice within two weeks. They outsource the aging process to the consumer's bathroom cabinet, saving an absolute fortune in frozen capital.</p>
@@ -324,7 +340,7 @@ briefings_content = {
     "Ep. 7": {
         "debrief": """
 <div class="report-title">🎙️ INTELLIGENCE BRIEFING. EU REGULATORY SHOCK</div>
-<div class="report-subtitle">Strategic Deep Dive ✦ Executive Debrief</div>
+<div class="report-subtitle">Strategic Deep Dive • Executive Debrief</div>
 <div class="scope-text">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area EU Chemical Fortress & Global Patent Moats. ✦ Data Intelligence GC-MS Analytics, IFRA 52nd Amendment, EU 2023/1545. ✦ Key Phenomenon Silent reformulations, Captive monopolies, and Batch Code Hunters.</div>
 
 <div class="part-title">Part I. The Illusion of Alchemy</div>
@@ -360,11 +376,12 @@ briefings_content = {
 <p><strong>CO HOST</strong> Wow. Yeah, so suddenly your competitor has your precise recipe and they can clone it for a fraction of the cost.</p>
 """,
         "dossier": """
-<div class="report-title">⚖️ INTELLECTUAL PROPERTY MOATS ✦ REGULATORY FORENSICS</div>
+<div class="report-title">⚖️ 2026 TREND REPORT ✦ REGULATORY FORENSICS</div>
 <div class="report-subtitle">Operational Data Intelligence 2024 to 2025</div>
 <div class="scope-text">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area EU Chemical Fortress & Extraction Physics. ✦ Data Intelligence IFRA 52nd Amendment, EU 2023/1545. ✦ Key Phenomenon Silent reformulations and the Batch Code Hunter rebellion.</div>
 
-<div class="dossier-title">THE GC-MS THREAT & CAPTIVE MOATS</div>
+<div class="dossier-main-title">INTELLECTUAL PROPERTY MOATS</div>
+<div class="dossier-sub-title">The GC-MS Threat & Captive Moats</div>
 <p>The inability to copyright a fragrance formula—legally treating it like a soup recipe—creates a massive vulnerability. Rival companies utilize Gas Chromatography-Mass Spectrometry (GC-MS) machines to vaporize and physically separate molecules, generating a perfect chemical fingerprint of any competitor's hit fragrance.</p>
 
 <p>✦ The Captive Solution: To prevent perfect cloning, chemical giants (Givaudan, Firmenich, Symrise) synthesize entirely novel molecules called "Captives." While the perfume cannot be patented, the specific chemical process to synthesize the Captive is protected by an ironclad 20-year patent.</p>
@@ -373,7 +390,8 @@ briefings_content = {
 
 <p>✦ Extreme Synthesis: Captives rely on molecular precision. Symrise's Spicatanate, synthesized from upcycled orange juice waste, smells like rotting garlic in pure form. However, at a microscopic 0.001% concentration, the garlic facet vanishes, creating a brilliant, fresh wasabi effect.</p>
 
-<div class="dossier-title">THE EXTREME PHYSICS OF NATURAL EXTRACTION</div>
+<div class="dossier-main-title">THE EXTREME PHYSICS OF NATURAL EXTRACTION</div>
+<div class="dossier-sub-title">Orris Butter, Wild Oud, and Rose Absolute</div>
 <p>Despite the high margins of synthetics, true luxury requires natural absolutes to act as complex blending agents that provide an organic "soul" to the sharp clinical edges of synthetic captives.</p>
 
 <p>✦ Orris Butter ($40,000–$100,000/kg): Requires the roots of the iris flower to be dried and dehydrated in a dark cellar for 3 to 5 years before extraction.</p>
@@ -382,7 +400,8 @@ briefings_content = {
 
 <p>✦ Rose Absolute ($8,000–$15,000/kg): Demands brutal raw agriculture. Yielding a single kilogram of Rose Absolute requires laborers to hand-pick roughly 1.5 million individual flowers to avoid steam distillation, which destroys thermal bile compounds.</p>
 
-<div class="dossier-title">REGULATORY WARS & SILENT REFORMULATIONS</div>
+<div class="dossier-main-title">REGULATORY WARS & SILENT REFORMULATIONS</div>
+<div class="dossier-sub-title">IFRA 52nd Amendment and Batch Code Hunters</div>
 <p>Global health regulations are constantly shifting, forcing brands to quietly dismantle and rebuild their iconic formulas.</p>
 
 <p>✦ IFRA 52nd Amendment & EU 2023/1545: The EU has vastly expanded allergen labeling. Crucially, IFRA has introduced 51 new restrictions heavily targeting natural compounds. Furocoumarins in natural citrus oils are restricted due to severe phototoxicity (blistering sunburns under UV light). Polycyclic musks like Galaxolide are banned due to bioaccumulation in human tissue and breast milk.</p>
@@ -484,11 +503,11 @@ with tabs[0]:
     else:
         l_col, r_col = st.columns(2, gap="large")
         with l_col:
-            st.markdown('<div class="section-header">Executive Audio Debrief</div>', unsafe_allow_html=True)
             if current_t in ["ep5_debrief", "ep6_debrief", "ep7_debrief"]:
                 ep_key = "Ep. " + current_t[2]
                 st.markdown(f'<div class="report-frame">\n{briefings_content[ep_key]["debrief"]}\n</div>', unsafe_allow_html=True)
             elif current_t:
+                st.markdown('<div class="section-header">Executive Audio Debrief</div>', unsafe_allow_html=True)
                 try:
                     with open(find_file(current_t), 'r', encoding='utf-8') as f:
                         content_t = f.read()
@@ -496,14 +515,15 @@ with tabs[0]:
                 except: 
                     st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Debrief indexing in progress...</div>', unsafe_allow_html=True)
             else:
+                st.markdown('<div class="section-header">Executive Audio Debrief</div>', unsafe_allow_html=True)
                 st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Technical audio briefing selected. Please refer to the Master Dossier on the right for accompanying documentation.</div>', unsafe_allow_html=True)
                 
         with r_col:
-            st.markdown('<div class="section-header">Executive Master Dossier</div>', unsafe_allow_html=True)
             if rep_file in ["ep5_dossier", "ep6_dossier", "ep7_dossier"]:
                 ep_key = "Ep. " + rep_file[2]
                 st.markdown(f'<div class="report-frame">\n{briefings_content[ep_key]["dossier"]}\n</div>', unsafe_allow_html=True)
             else:
+                st.markdown('<div class="section-header">Executive Master Dossier</div>', unsafe_allow_html=True)
                 try:
                     with open(find_file(rep_file), 'r', encoding='utf-8') as f:
                         content_r = f.read()
