@@ -109,47 +109,49 @@ df = load_and_merge_data()
 if 'segment' in df.columns:
     df['segment'] = df['segment'].str.replace('-', ' ')
 
-# Structured Briefings Registry
 briefings_content = {
     "Ep. 5": {
         "debrief": """
 ### 🎙️ INTELLIGENCE BRIEFING: CARTO AI & NEURO-TECH
 **Strategic Deep Dive ✦ Executive Debrief**
 
-`[ STRATEGIC SCOPE ] ✦ Data Intelligence: Givaudan Carto AI, IBM Philyra, MoodScentz, Myrissi ✦ Primary Analysis Area: AI Formulation, EEG/fMRI Brainwave Mapping ✦ Key Phenomenon: Algorithmic olfactory synthesis.`
+**[ STRATEGIC SCOPE ]** ✦ Data Intelligence: Givaudan Carto AI, IBM Philyra, MoodScentz, Myrissi ✦ Primary Analysis Area: AI Formulation, EEG/fMRI Brainwave Mapping ✦ Key Phenomenon: Algorithmic olfactory synthesis.
 
-#### Part I. The Olfactory Memory Bottleneck
-**HOST:** The transition from traditional artisanal blending to advanced chemical engineering and artificial intelligence is absolute. Human memory caps a master perfumer at 1,000 to 2,000 raw ingredients.
+**Part I. The Olfactory Memory Bottleneck**
 
-**CO-HOST:** Systems like Givaudan's Carto process physical parameters—such as surface tension and evaporation rates—for over 5,000 raw materials simultaneously.
+**HOST:** If you are wearing a popular long-lasting perfume right now, there is a very high probability that the chemical anchoring that scent to your warm skin will still be detectable in the environment long after you leave the room. Today, we are completely tearing up the romantic image of the perfume industry. The transition from traditional artisanal blending to advanced chemical engineering and artificial intelligence is absolute at this point. 
 
-#### Part II. Neuro-Perfumery & Limbic System Hacking
-**HOST:** Platform models utilize deep learning trained on 25,000 consumer tests across 64 psychological dimensions.
+**CO-HOST:** Exactly. To understand why AI had to step in, we have to look at biological hardware. The human olfactory system aggressively prunes unused information. Even with a lifetime of training, the absolute ceiling for a master perfumer is actively remembering and manipulating a palette of about 1,000 to 2,000 raw ingredients. 
 
-**CO-HOST:** The Paco Rabanne Phantom case study analyzed 45 million EEG/fMRI brainwave records to mandate a 10x overdose of Styrallyl Acetate, physically triggering the limbic system for maximum confidence.
+**HOST:** And that is a severe biological bottleneck. Because today, systems like Givaudan's Carto process the exact physical parameters—mass, surface tension, and evaporation rates—of over 5,000 raw materials instantly. The machine maps these out without human bias.
 
-#### Part III. Molecular Wasabi Illusion
-**HOST:** Symrise's Spicatanate molecule, derived from upcycled orange peels, smells like rotting garlic at 100% concentration.
+**Part II. Neuro-Perfumery & Limbic System Hacking**
 
-**CO-HOST:** When AI formulates it at 0.001%, it creates a hyper-realistic wasabi effect, demonstrating precise sensory threshold control.
+**CO-HOST:** But calculating physical stability is one thing; predicting human emotion is another. The industry transitioned into neuro-perfumery by feeding deep learning algorithms 25,000 consumer tests, mapping olfactory responses across 64 psychological dimensions. 
+
+**HOST:** The prime example of this applied science is the Paco Rabanne Phantom case study. Researchers utilized 45 million EEG and fMRI brainwave records to mathematically validate the exact overdosing of a specific molecule called Styrallyl Acetate. 
+
+**CO-HOST:** They tracked 45 million responses just to dial in one molecule. Styrallyl Acetate has a sharp, metallic green profile. In classic perfumery, you'd use a fraction of a drop. But the fMRI data showed that a massive 10x overdose acts as a direct stimulant for the brain's alertness centers. It bypasses conscious evaluation and hits the limbic system, triggering an immediate physiological rush of confidence and dopamine. We aren't creating art anymore; we are hacking human neurochemistry.
 """,
         "dossier": """
 ### 📊 GIVAUDAN CARTO AI & NEURO-COGNITIVE ENGINEERING
 **Operational Data Intelligence 2025 to 2026**
 
-`[ STRATEGIC SCOPE ] ✦ Primary Analysis Area: AI Formulation & Chemical Physics ✦ Data Intelligence: Givaudan Carto, IBM Philyra, SBERT NLP, Cosine Similarity ✦ Key Phenomenon: Replacing human intuition with data-driven neuro-engineering.`
+**[ STRATEGIC SCOPE ]** ✦ Primary Analysis Area: AI Formulation & Chemical Physics ✦ Data Intelligence: Givaudan Carto, IBM Philyra, SBERT NLP, Cosine Similarity ✦ Key Phenomenon: Replacing human intuition with data-driven neuro-engineering.
 
-#### 1. ALGORITHMIC SCENT FORMULATION
-* **Carto AI Architecture:** Leverages an Odor Value Map to suggest non-obvious chemical pairings while continuously calculating chemical stability in real time.
-* **45 Million EEG Readings:** Validates precise molecular overdoses (e.g., Styrallyl Acetate in Paco Rabanne Phantom) to reliably trigger dopamine release.
+**1. ALGORITHMIC SCENT FORMULATION AND SUPERCRITICAL EXTRACTION**
+The modern standard demands absolute perfection in raw materials. Supercritical CO2 extraction subjects carbon dioxide to 74 bar pressure at 31.1°C, transforming it into a supercritical fluid. This state acts as the perfect solvent, flowing through delicate cellular structures without the destructive heat of traditional steam distillation, leaving zero toxic chemical residues. 
+Once extracted, these materials are processed by AI architectures like Carto and IBM's Philyra (trained on 1.7 million formulas) to construct molecular blueprints that surpass human cognitive limits.
 
-#### 2. THERMODYNAMICS VS. PYTHON CODE
-* **Raoult's Law:** Statistically perfect Python pairings (e.g., Calone 1951 + Jasmine) can fail on warm skin. Calone evaporates in 30 minutes, leaving heavy Jasmine behind and creating olfactory separation.
-* **Chemical Mutation:** Overdosing Calone (>0.5%) causes rapid oxidation into raw egg aromas, emphasizing that AI algorithms must account for thermodynamic evaporation curves.
+**2. THERMODYNAMICS VS. PYTHON CODE: RAOULT'S LAW**
+Even the most statistically perfect AI model is governed by physical laws. Formulating perfume is a constant macroscopic battle against evaporation governed by Raoult's Law and Fick's Second Law of Diffusion.
+* **The Calone 1951 Mutation:** When an algorithm pairs a highly volatile aquatic molecule like Calone 1951 with a heavy absolute, the thermodynamic balance is fragile. If dosed over 0.5%, the thermal energy of human skin causes Calone to self-eject from the liquid phase.
+* **Olfactory Separation:** The volatile molecules evaporate rapidly (often within 30 minutes), abandoning the heavy base notes. The fragrance physically separates on the skin, causing severe chemical mutations (e.g., Calone oxidizing to smell like raw egg whites), triggering massive e-commerce return rates.
 
-#### 3. PROJECT B: SCENTSATIONAL NLP INTEGRATION
-* **UX Friction Eradication:** Project B eliminates manual sidebar filtering (`fra_perfumes.csv`) by deploying SBERT, TF-IDF, and Cosine Similarity (`perfumes_dataset.csv`, `hybrid_similarity.npy`).
-* **Intent Mapping:** Maps natural language moods directly to scent vectors, reducing e-commerce bounce rates.
+**3. PROJECT B: SCENTSATIONAL NLP INTEGRATION**
+To mitigate e-commerce bounce rates caused by overwhelming chemical complexity, traditional keyword search bars must be replaced with Natural Language Processing (NLP).
+* **Intent Mapping:** Project B entirely abandons manual note filtering (`fra_perfumes.csv`), replacing it with the ScentSational AI concierge. 
+* **Vector Mathematics:** By deploying SBERT (Sentence-BERT) and TF-IDF against the `perfumes_dataset.csv`, the system maps natural language emotional intent to specific coordinates. It then calculates Cosine Similarity (`hybrid_similarity.npy`) to determine the exact mathematical angle between a user's mood and the chemical profile, eradicating UX friction.
 """
     },
     "Ep. 6": {
@@ -157,34 +159,47 @@ briefings_content = {
 ### 🎙️ INTELLIGENCE BRIEFING: B2B PRICE ELASTICITY
 **Strategic Deep Dive ✦ Executive Debrief**
 
-`[ STRATEGIC SCOPE ] ✦ Data Intelligence: B2B Cost Allocation, Price Elasticity -1.81, 4-Tier Market Taxonomy ✦ Primary Analysis Area: Global Retail & Middle East Maceration Arbitrage ✦ Key Phenomenon: The $1.50 juice vs $150 retail markup trap.`
+**[ STRATEGIC SCOPE ]** ✦ Data Intelligence: B2B Cost Allocation, Price Elasticity -1.81, 4-Tier Taxonomy ✦ Primary Analysis Area: Global Retail & Middle East Maceration Arbitrage ✦ Key Phenomenon: The $1.50 juice vs $150 retail markup trap.
 
-#### Part I. Deconstructing the $150 Bottle
-**HOST:** A standard $150 designer bottle contains scented liquid worth only $1.50 to $5.00. Packaging accounts for 10-15%, marketing 15-25%, and traditional retail networks absorb 45-60%.
+**Part I. Deconstructing the $150 Bottle**
 
-**CO-HOST:** Niche brands invert this ratio, allocating 40-60% of budget directly into pure raw materials while shifting toward 10-30ml formats and subscription models.
+**HOST:** I want you to picture a heavy, glossy glass bottle of luxury designer perfume. If you just paid $150 for that bottle, how much do you think the actual scented liquid inside is worth? 
 
-#### Part II. The Negative 1.81 Price Elasticity Trap
-**HOST:** Mainstream brands operate under a negative 1.81 price elasticity index. A 10% price increase triggers an 18.1% collapse in consumer demand.
+**CO-HOST:** Most consumers figure maybe $50, or $30 after brand markup. But the actual liquid inside that $150 mainstream bottle is usually worth about $1.50 to $3.00. 
 
-**CO-HOST:** This elasticity forces the "Barbell Economy"—squeezing the middle market and driving growth into Ultra-Niche or Smart Clones.
+**HOST:** Welcome to the global fragrance industry. The liquid costs pennies. 10% to 15% goes straight into packaging, 15% to 25% is eaten by global marketing, and the traditional retail network—the department stores and distributors—absorbs a massive 45% to 60% margin. You are funding the real estate, not the formula.
+
+**Part II. The Negative 1.81 Price Elasticity Trap**
+
+**CO-HOST:** This brings us to the bottle economics. Mainstream brands are trapped by a negative 1.81 price elasticity index. If a mainstream brand tries to raise the retail price by just 10%, consumer demand plummets by over 18%. They cannot raise the shelf price without bleeding buyers, so they ruthlessly squeeze manufacturing costs.
+
+**HOST:** This dynamic is forcing massive structural shifts, polarizing the market into a "Barbell Economy." Consumers are migrating away from the squeezed middle class of designer scents, moving either toward ultra-niche prestige or highly efficient, cost-effective "smart clones" from the Middle East.
+
+**Part III. The Arabian Clone Revolution & Maceration Arbitrage**
+
+**CO-HOST:** Brands based in the UAE—like Lattafa and Afnan—are systematically capturing Gen Z through TikTok algorithms. They are mimicking $300 niche hits with heavy performance for a fraction of the price. 
+
+**HOST:** And they do this using "Maceration Arbitrage." Traditional Western brands let a mixed fragrance sit in a climate-controlled warehouse for 4 to 12 weeks to mature, freezing their capital. UAE producers bypass this holding cost entirely. They ship freshly mixed, "green" juice within two weeks, outsourcing the aging process directly to the consumer's bathroom cabinet.
 """,
         "dossier": """
 ### 📊 B2B MARGIN BREAKDOWN & MACERATION ARBITRAGE
 **Operational Data Intelligence 2025 to 2026**
 
-`[ STRATEGIC SCOPE ] ✦ Primary Analysis Area: Global B2B Margins & Supply Chain Efficiency ✦ Data Intelligence: Price Elasticity Index -1.81, Red Sea Freight (+400%) ✦ Key Phenomenon: Shifting capital from retail real estate to formulation value.`
+**[ STRATEGIC SCOPE ]** ✦ Primary Analysis Area: Global B2B Margins & Supply Chain Efficiency ✦ Data Intelligence: Price Elasticity Index -1.81, Red Sea Freight (+400%) ✦ Key Phenomenon: Shifting capital from retail real estate to formulation value.
 
-#### 1. BOTTLE ECONOMICS & MARGIN ANALYSIS
-* **Mainstream Cost Structure:** Scented liquid (3-5%), Packaging (10-15%), Marketing (15-25%), Retail Margins (45-60%).
-* **Price Elasticity Index (-1.81):** Mathematically proves why mainstream brands cannot pass inflation costs to consumers without losing market share.
+**1. BOTTLE ECONOMICS & MARGIN ANALYSIS**
+The mainstream designer market operates under suffocating financial constraints. With a negative 1.81 price elasticity, brands face a 2% drop in sales for every 1% price increase. 
+* **Mainstream Cost Structure:** Scented liquid (3-5%), Packaging (10-15%), Marketing (15-25%), Retail Margins (45-60%). 
+* **Niche Reversal:** True niche brands invert this model, allocating up to 40-60% of their budgets directly into the raw chemical composition, bypassing massive global ad campaigns and utilizing smaller 10-30ml formats to lower consumer entry barriers.
 
-#### 2. MACERATION ARBITRAGE & JAFZA LOGISTICS
-* **WIP Capital Reduction:** Middle Eastern manufacturers (Lattafa, Ajmal) eliminate 4-12 week warehouse holding costs by shipping 2-week-old "green" juice, outsourcing maceration to the consumer.
-* **Vertical Integration:** Operating in 0% tax JAFZA zones with in-house glass printing and packaging allows UAE brands to absorb 400% Red Sea freight spikes while maintaining $20-$40 retail prices.
+**2. MACERATION ARBITRAGE & JAFZA LOGISTICS**
+Middle Eastern manufacturing powerhouses defeat Western bottlenecks through scale, agile logistics, and favorable tax environments.
+* **WIP Capital Reduction (Maceration Arbitrage):** By eliminating the 4-12 week warehouse maturation period, UAE brands ship unaged juice, forcing the consumer to oxygenate and mature the perfume at home. This drastically reduces Work-In-Progress (WIP) holding costs.
+* **Absorbing Freight Shocks:** The 2024-2026 Red Sea crisis forced ships to bypass the Suez Canal, extending transit by 14 days and spiking ocean freight costs by 400%. However, UAE brands operating in 0% tax JAFZA zones utilize 100% vertical integration (in-house glass and packaging) and massive container volume out of Jebel Ali to reduce the export freight cost per bottle to fractions of a cent, maintaining $30 price points.
 
-#### 3. PROJECT A: ASSORTMENT GAP MAPPING
-* **Data Infrastructure:** Utilizes `fra_perfumes.csv` to map assortment gaps, enabling Category Managers to capitalize on shifting price tolerances.
+**3. PROJECT A: ASSORTMENT GAP MAPPING**
+To survive this polarized Barbell market, Western distributors must deploy precise web analytics.
+* **Data Infrastructure:** The Perfume Finder app (Project A) utilizes `fra_perfumes.csv` to map critical assortment gaps. Category Managers leverage this tool to identify where a highly elastic consumer base is hungry for heavy-performing "smart clones" to replace stagnant mid-tier designer inventory.
 """
     },
     "Ep. 7": {
@@ -192,36 +207,49 @@ briefings_content = {
 ### 🎙️ INTELLIGENCE BRIEFING: EU REGULATORY SHOCK
 **Strategic Deep Dive ✦ Executive Debrief**
 
-`[ STRATEGIC SCOPE ] ✦ Data Intelligence: GC-MS Forensics, IFRA 52nd Amendment, EU 2023/1545 ✦ Primary Analysis Area: EU Chemical Fortress & Global Patent Moats ✦ Key Phenomenon: Silent reformulations, Captive monopolies, and Batch Code Hunters.`
+**[ STRATEGIC SCOPE ]** ✦ Data Intelligence: GC-MS Forensics, IFRA 52nd Amendment, EU 2023/1545 ✦ Primary Analysis Area: EU Chemical Fortress & Global Patent Moats ✦ Key Phenomenon: Silent reformulations, Captive monopolies, and Batch Code Hunters.
 
-#### Part I. Captives as Intellectual Property Moats
-**HOST:** Perfume recipes cannot be copyrighted. Rival labs use GC-MS (Gas Chromatography-Mass Spectrometry) machines to reverse engineer formulas down to the decimal point.
+**Part I. The Illusion of Alchemy & GC-MS Cloning**
 
-**CO-HOST:** To protect market share, chemical giants (Givaudan, Symrise) patent synthetic molecules called "Captives" for 20 years, generating 24.2% EBITDA margins.
+**HOST:** When you walk up to a fragrance counter, the brand wants you to imagine a master perfumer wandering through a sun-drenched field in Grasse, crushing delicate petals by hand. Today, we are completely shattering that illusion. 
 
-#### Part II. Regulatory Shocks & Silent Reformulations
-**HOST:** The EU 2023/1545 directive and IFRA 52nd Amendment ban key ingredients like Galaxolide due to bioaccumulation in human tissue (64 ng/kg in breast milk).
+**CO-HOST:** The foundational problem for a perfume company is protecting their recipe. Legally, a perfume cannot be copyrighted. Any rival company can buy a bottle of your billion-dollar fragrance and run it through a Gas Chromatography-Mass Spectrometry (GC-MS) machine. 
 
-**CO-HOST:** Brands use GC-MS to silently reformulate bestsellers. Consumers respond via "Batch Code Hunters" communities, auditing FIL codes on boxes (e.g., Creed Aventus 11Z01, Dior Homme Intense).
+**HOST:** It physically separates all the individual molecules and weighs them, printing out the exact chemical recipe down to the decimal point. So, how do chemical giants like Givaudan or Symrise protect their investments? They build a chemical moat using "Captives."
+
+**Part II. Captive Moats & Extreme Molecular Engineering**
+
+**CO-HOST:** A Captive is a brand new, proprietary synthetic molecule protected by a 20-year patent. Even if a rival's GC-MS scanner detects it, they are legally barred from synthesizing it. This grants the chemical giant an impenetrable monopoly, resulting in astronomical margins—like Givaudan's 24.2% EBITDA.
+
+**HOST:** And the chemistry behind these Captives is wild. Symrise patented Spicatanate, synthesized from upcycled orange juice waste. In its pure form, it smells like mint mixed with raw rotting garlic. But at a microscopic concentration of 0.001%, the garlic facet vanishes, creating a brilliant, spicy wasabi effect. 
+
+**Part III. IFRA Bans & The Batch Code Hunters**
+
+**CO-HOST:** But this delicate balance is constantly under threat from international law. The EU 2023/1545 directive and the 52nd IFRA amendment are banning crucial ingredients. Polycyclic musks like Galaxolide, which act as 400-hour fixatives, are being banned because they bioaccumulate in the environment and have been found in human tissue.
+
+**HOST:** This forces brands to silently reformulate their classic hits. Consumers notice when their signature scent feels watered down, spawning a massive online subculture: The Batch Code Hunters. They weaponize regulatory data, analyzing microscopic FIL codes on packaging to track secret formula changes, like the legendary smoky 11Z01 batch of Creed Aventus or the stripping down of Dior Homme Intense.
 """,
         "dossier": """
 ### 📊 PATENT MOATS, EXTRACTION COSTS & REGULATORY FORENSICS
 **Operational Data Intelligence 2025 to 2026**
 
-`[ STRATEGIC SCOPE ] ✦ Primary Analysis Area: European Chemical Regulations & IP Moats ✦ Data Intelligence: IFRA 52nd Amendment, EU 2023/1545, FIL Batch Tracking ✦ Key Phenomenon: Re-engineering iconic formulas using GC-MS and Captives.`
+**[ STRATEGIC SCOPE ]** ✦ Primary Analysis Area: European Chemical Regulations & IP Moats ✦ Data Intelligence: IFRA 52nd Amendment, EU 2023/1545, FIL Batch Tracking ✦ Key Phenomenon: Re-engineering iconic formulas using GC-MS and Captives.
 
-#### 1. CAPTIVE MOATS & FINANCIAL PERFORMANCE
-* **GC-MS Vulnerability:** Competitors can clone non-patented formulas instantly.
-* **Patented Captives:** 20-year exclusive patents on synthetic captives allow Givaudan to hit 7.47B CHF sales with 24.2% EBITDA margins.
+**1. CAPTIVE MOATS & FINANCIAL PERFORMANCE**
+The inability to copyright a fragrance formula forces reliance on proprietary chemistry.
+* **GC-MS Vulnerability:** Gas Chromatography-Mass Spectrometry allows competitors to reverse-engineer non-patented formulas with decimal-point accuracy.
+* **Patented Captives:** Chemical giants (Givaudan, Firmenich, Symrise) synthesize novel molecules (Captives) protected by 20-year patents. This strategy secures exclusive contracts with major fashion houses, driving immense corporate profitability (e.g., Givaudan generating over 7.4B CHF in sales with a 24.2% EBITDA margin).
 
-#### 2. EXTRACTION PHYSICS & EXTREME VALUATIONS
-* **Orris Butter ($40k-$100k/kg):** Requires 3-5 years of underground root oxidation.
-* **Rose Absolute ($8k-$15k/kg):** Requires 1.5 million hand-picked flowers per kilogram.
-* **Supercritical CO2 (Jungle Essence):** Operates at 74 bar and 31.1°C to extract delicate scents without thermal degradation.
+**2. EXTRACTION PHYSICS & EXTREME VALUATIONS**
+Despite the efficiency of synthetics, the industry requires natural absolutes for structural blending depth, resulting in extreme agricultural costs that far exceed the price of gold:
+* **Orris Butter ($40,000–$100,000/kg):** Requires iris roots to dehydrate and oxidize in dark cellars for 3 to 5 years.
+* **Rose Absolute ($8,000–$15,000/kg):** Demands the manual hand-picking of approximately 1.5 million individual flowers per kilogram.
+* **Night Tuberose:** Must be harvested in total darkness before dawn to prevent UV rays from causing indole degradation, which destroys the fragile volatile compounds.
 
-#### 3. REGULATORY COMPLIANCE & BATCH CODE FORENSICS
-* **Galaxolide Bans:** Bioaccumulation concerns force brands into mandatory reformulations.
-* **FIL Code Auditing:** Consumers track silent formula changes (e.g., Dior Homme Intense 03214/A to 05414/A), driving a lucrative vintage secondary market.
+**3. REGULATORY COMPLIANCE & BATCH CODE FORENSICS**
+Regulatory frameworks are forcing the silent dismantling of heritage formulas.
+* **IFRA & EU Mandates:** Directives like EU 2023/1545 expand allergen labeling, while IFRA bans polycyclic musks (Galaxolide) due to environmental bioaccumulation and limits natural citrus oils due to phototoxicity (severe UV blistering).
+* **FIL Code Auditing:** Brands utilize GC-MS to reverse-engineer their own banned formulas to find legal synthetic replacements with matching vapor pressures. Consumers combat this via "Batch Code Hunting"—tracking Formula Information List (FIL) codes to identify degraded reformulations (e.g., tracking the mutation of Dior Homme Intense from formula 03214/A to 05414/A).
 """
     }
 }
@@ -263,7 +291,7 @@ with tabs[0]:
             "🎓 Ep. 6: B2B Price Elasticity",
             "🎓 Ep. 7: EU Regulatory Shock",
             "🧬 Ep. 8: Master Synthesis"
-        ], label_visibility="collapsed")
+        ], label_visibility="collapsed", index=5)
         
         if "Ep. 0" in episode:
             current_t, current_a, rep_file = None, None, "master_prologue.md"
