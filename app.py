@@ -1,6 +1,8 @@
 import streamlit as st
 import plotly.express as px
+import plotly.graph_objects as go
 import pandas as pd
+import numpy as np
 import os
 from data_loader import load_and_merge_data
 
@@ -56,7 +58,6 @@ st.markdown("""
         width: 100%;
         overflow-wrap: break-word;
     }
-
     .debrief-main-title, .dossier-main-title {
         color: #D4AF37;
         font-family: 'Tenor Sans', sans-serif;
@@ -65,7 +66,6 @@ st.markdown("""
         margin-bottom: 5px;
         line-height: 1.3;
     }
-
     .debrief-sub-title, .dossier-sub-title {
         color: #E0E0E0;
         font-family: 'Lato', sans-serif;
@@ -75,7 +75,6 @@ st.markdown("""
         padding-bottom: 15px;
         border-bottom: 1px solid #333333;
     }
-
     .strategic-scope {
         color: #888888;
         font-family: 'Lato', sans-serif;
@@ -83,7 +82,6 @@ st.markdown("""
         margin-bottom: 30px;
         line-height: 1.6;
     }
-
     .part-heading, .dossier-topic-title {
         color: #E0E0E0;
         font-family: 'Lato', sans-serif;
@@ -92,7 +90,6 @@ st.markdown("""
         margin-top: 30px;
         margin-bottom: 15px;
     }
-
     .dossier-section-title {
         color: #D4AF37;
         font-family: 'Tenor Sans', sans-serif;
@@ -102,7 +99,6 @@ st.markdown("""
         margin-bottom: 15px;
         letter-spacing: 1px;
     }
-
     .dialogue-text, .dossier-text {
         color: #E0E0E0;
         font-family: 'Lato', sans-serif;
@@ -124,7 +120,7 @@ st.markdown("""
         width: 100%;
     }
     
-    .stTabs [data-baseweb="tab-list"] { justify-content: center; gap: 10px; background-color: #0E0E0E; }
+    .stTabs [data-baseweb="tab-list"] { justify-content: center; gap: 10px; background-color: #0E0E0E; flex-wrap: wrap; }
     .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p { text-align: center !important; font-family: 'Tenor Sans', sans-serif !important; letter-spacing: 1px; font-size: 0.8rem; color: #E0E0E0; }
     .stTabs [aria-selected="true"] { border-bottom: 2px solid #D4AF37 !important; }
     
@@ -169,7 +165,6 @@ briefings_content = {
 <div class="debrief-main-title">🎙️ INTELLIGENCE BRIEFING. THE 2025 FRAGRANCE LANDSCAPE</div>
 <div class="debrief-sub-title">Strategic Deep Dive • Executive Debrief</div>
 <div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area Western Markets (North America, Europe), Russian domestic market. ✦ Data Intelligence Euromonitor International, Pinterest 2025 consumer trends, Sephora and Amazon sales data. ✦ Key Phenomenon Recession Glam and the shift from luxury perfumes to body mists (Scent Stacking).</div>
-
 <div class="part-heading">Part I. The $600 Billion Contradiction and Recession Glam</div>
 <p class="dialogue-text"><strong>HOST</strong> I was looking at the Euromonitor report this morning, and there is a number that just does not square with the current headlines.</p>
 <p class="dialogue-text"><strong>CO HOST</strong> Oh, yeah. I mean, we keep hearing about "shrinkflation", the cost of eggs, and about this global tightening of belts.</p>
@@ -182,7 +177,6 @@ briefings_content = {
 <div class="dossier-main-title">🧠 2026 TREND REPORT ✦ NEURO RECESSION GLAM</div>
 <div class="dossier-sub-title">Strategic Deep Dive ✦ Fragrance Market and Givaudan Strategy</div>
 <div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area Western Markets North America Europe ✦ Data Intelligence FMCG sector analysis Tariff impact models Consumer psychology ✦ Key Phenomenon The Sol de Janeiro effect as a hedge against Section 122</div>
-
 <div class="dossier-section-title">MARKET ANALYSIS AND CONSUMER TRENDS</div>
 <div class="dossier-topic-title">The Sol de Janeiro and Lattafa Phenomenon</div>
 <p class="dossier-text">As FMCG sector analysts we observe the unprecedented dominance of Sol de Janeiro in the mass premium segment. This brand is the prime example of the Barbell Bottom strategy offering high emotional value at a controlled price point. Deep Research indicates that brands mastering this space like Yara by Lattafa experienced a 137.6 percent surge in digital interest largely driven by TikTok virality.</p>
@@ -195,7 +189,6 @@ briefings_content = {
 <div class="debrief-main-title">🎧 INTELLIGENCE BRIEFING. THE EUROPEAN BARBELL & DATA VS CHEMISTRY</div>
 <div class="debrief-sub-title">Strategic Deep Dive • Audio Transcript</div>
 <div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area European Union market (emphasis on offline dominance in Poland) vs digital markets (USA). ✦ Data Intelligence Global Fragrance Intelligence Hub, Stanford University algorithmic research, Kaggle and eBay datasets. ✦ Key Phenomenon Market polarization (The Barbell Effect), chemical regulations (IFRA and REACH) vs digital scent profiling.</div>
-
 <div class="part-heading">Part I. The Data Science Discipline</div>
 <p class="dialogue-text"><strong>HOST 1</strong> Welcome to the debate. Can a line of code predict what smells beautiful?</p>
 <p class="dialogue-text"><strong>HOST 2</strong> I mean, with like 91% accuracy, it sounds like science fiction, honestly.</p>
@@ -212,12 +205,10 @@ briefings_content = {
 <div class="dossier-main-title">📊 MARKET POLARIZATION ✦ THE BARBELL EFFECT</div>
 <div class="dossier-sub-title">Operational Data Intelligence 2025 to 2026</div>
 <div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area European Market Infrastructure. ✦ Data Intelligence Stanford ML Boosting, Kaggle & eBay Secondary Markets. ✦ Key Phenomenon The 87.6% Offline Dominance in Poland vs Digital Scent Profiling.</div>
-
 <div class="dossier-section-title">THE DIGITAL DISCOVERY ILLUSION</div>
 <div class="dossier-topic-title">Stanford Algorithms vs Physical Bottlenecks</div>
 <p class="dossier-text">The fragrance industry is decoupling discovery from the physical vial, heavily driven by digital channels. Stanford University researchers utilized ML boosting on Fragrantica datasets, achieving a 9% error rate in predicting popularity based on algorithmic features like seasonality and sillage.</p>
 <p class="dossier-text">✦ Marketing Illusions ✦ Crowdsourced data often reflects marketing narratives rather than chemical compositions. A 0.28 correlation between online availability and actual sales proves that mere inventory and digital buzz are insufficient without physical sensory verification.</p>
-
 <div class="dossier-section-title">THE PHYSICAL BARBELL STRUCTURE</div>
 <div class="dossier-topic-title">Poland's Offline Dominance and Regulatory Ceilings</div>
 <p class="dossier-text">Despite the digital surge (e-commerce projected at 33% by 2025), the foundation remains physical. 60% of consumers demand offline testing.</p>
@@ -230,7 +221,6 @@ briefings_content = {
 <div class="debrief-main-title">🎙️ INTELLIGENCE BRIEFING. CARTO AI & NEURO-TECH</div>
 <div class="debrief-sub-title">Strategic Deep Dive • Executive Debrief</div>
 <div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area AI Formulation, EEG/fMRI Brainwave Mapping. ✦ Data Intelligence Givaudan Carto AI, IBM Philyra, MoodScentz, Myrissi. ✦ Key Phenomenon Algorithmic olfactory synthesis vs human intuition.</div>
-
 <div class="part-heading">Part I. The Olfactory Memory Bottleneck</div>
 <p class="dialogue-text"><strong>HOST</strong> If you are wearing like a popular long-lasting perfume right now, there is a very high probability that the chemical anchoring that sent to your warm skin will still be detectable in the environment long after you leave the room.</p>
 <p class="dialogue-text"><strong>CO HOST</strong> Wazily. Hours later.</p>
@@ -242,7 +232,6 @@ briefings_content = {
 <p class="dialogue-text"><strong>CO HOST</strong> Well, to understand how technology is rewriting fragrance, we have to start at the foundational level, like how the raw materials themselves are captured and classified today, even the traditional language of scent is being overhauled.</p>
 <p class="dialogue-text"><strong>HOST</strong> Oh, right. The typology changes.</p>
 <p class="dialogue-text"><strong>CO HOST</strong> Exactly. For example, what the industry used to call the Oriental category is now strictly classified as amber. And classic florals are increasingly being engineered from the ground up to be completely unisex. But the real paradigm shift, the big one is happening in the extraction processes.</p>
-
 <div class="part-heading">Part II. AI Architecture and Neuro-Perfumery</div>
 <p class="dialogue-text"><strong>HOST</strong> Well, that data points to the existential crisis of modern perfumery. Because if machines can perfectly analyze and deconstruct a successful formula, identifying the exact ratio of hetion to amber oxen, the inevitable next step is having machines design the formulas themselves. So we are talking about AI formulas taking over the laboratories now completely bypassing the human nose.</p>
 <p class="dialogue-text"><strong>CO HOST</strong> Absolutely. Table 3 in the industry compendiums outlines the specific tools reshaping creation right now. We see systems like carto by jive adon right the visual mapping one.</p>
@@ -261,20 +250,17 @@ briefings_content = {
 <div class="dossier-main-title">🧠 GIVAUDAN CARTO AI ✦ NEURO-COGNITIVE ENGINEERING</div>
 <div class="dossier-sub-title">Operational Data Intelligence 2025 to 2026</div>
 <div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area AI Formulation & Chemical Physics. ✦ Data Intelligence Givaudan Carto, IBM Philyra, SBERT NLP, Cosine Similarity. ✦ Key Phenomenon Replacing human intuition with data-driven neuro-engineering.</div>
-
 <div class="dossier-section-title">ALGORITHMIC SCENT FORMULATION & GC-MS DATA</div>
 <div class="dossier-topic-title">Supercritical Extraction and Reverse Engineering</div>
 <p class="dossier-text">The modern standard demands absolute perfection in raw materials, fundamentally altering the architecture of luxury fragrance production. The integration of high-level biotechnology allows for unprecedented extraction and analysis.</p>
 <p class="dossier-text">✦ Supercritical CO2 Extraction ✦ Carbon dioxide is subjected to 74 bar pressure at 31.1°C, entering a supercritical state. It acts as the perfect solvent, dissolving delicate aromatic molecules without the destructive heat of traditional steam distillation, leaving zero toxic residues.</p>
 <p class="dossier-text">✦ GC-MS Reverse Engineering ✦ Gas Chromatography-Mass Spectrometry physically separates molecules and bombards them with electrons to read their mass-to-charge ratio. This creates a perfect chemical fingerprint, effectively eliminating the concept of a "trade secret". For example, GC-MS analysis of Baccarat Rouge 540 reveals a blocky, high-impact architecture: 35.3% Hedione, 18.5% Ambroxan, 10.5% Veramoss, and 27.0% DPG solvent.</p>
 <p class="dossier-text">✦ AI Infrastructure ✦ Systems like Givaudan's Carto and IBM's Philyra bypass human biological limitations. Philyra, trained on a database of 1.7 million formulas, designs scents from scratch while continuously calculating chemical stability and carbon footprint in real-time.</p>
-
 <div class="dossier-section-title">NEURO-PERFUMERY AND LIMBIC SYSTEM HACKING</div>
 <div class="dossier-topic-title">EEG Mapping and Molecular Overdosing</div>
 <p class="dossier-text">The industry has shifted from aesthetic choices to mathematically optimized physiological stimuli.</p>
 <p class="dossier-text">✦ EEG & fMRI Brainwave Mapping ✦ Companies utilize EEG headsets to track real-time electrical brain waves while consumers smell raw materials. The Paco Rabanne Phantom case study highlights the use of 45 million EEG brainwave records.</p>
 <p class="dossier-text">✦ Molecular Overdosing ✦ The 45 million data points were used to mathematically validate the exact overdosing of Styrallyl Acetate. This creates a physiological trigger that hacks the amygdala for a dopamine spike, directly manipulating human neurochemistry to bypass rational consumer choice.</p>
-
 <div class="dossier-section-title">THERMODYNAMICS VS. PYTHON CODE</div>
 <div class="dossier-topic-title">Raoult's Law and Chemical Mutations</div>
 <p class="dossier-text">Even the most statistically perfect AI model is governed by physical laws once the liquid hits warm human skin.</p>
@@ -287,7 +273,6 @@ briefings_content = {
 <div class="debrief-main-title">🎙️ INTELLIGENCE BRIEFING. B2B PRICE ELASTICITY</div>
 <div class="debrief-sub-title">Strategic Deep Dive • Executive Debrief</div>
 <div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area Global Retail & Middle East Maceration Arbitrage. ✦ Data Intelligence B2B Cost Allocation, Price Elasticity -1.81, 4-Tier Market Taxonomy. ✦ Key Phenomenon The $1.50 juice vs $150 retail markup trap.</div>
-
 <div class="part-heading">Part I. Deconstructing the Designer Bottle</div>
 <p class="dialogue-text"><strong>HOST</strong> I want you to picture something for a second. Just look at a heavy glossy glass bottle of luxury designer perfume. Right. The kind with the magnetic cap and the heavy base.</p>
 <p class="dialogue-text"><strong>CO HOST</strong> Exactly.</p>
@@ -298,7 +283,6 @@ briefings_content = {
 <p class="dialogue-text"><strong>HOST</strong> Yeah. So I think from macroeconomics to supply chains and these really rigid market taxonomies. Because the mission here is to decode how a $62.1 billion global market is just like actively marching toward an estimated $85.5 billion valuation by 2035. All while a physical product inside the bottle basically costs pennies.</p>
 <p class="dialogue-text"><strong>CO HOST</strong> So to really understand where this industry is heading, we have to start with where your money actually goes.</p>
 <p class="dialogue-text"><strong>HOST</strong> Right. And then we have the invisible architecture, the bottle economics.</p>
-
 <div class="part-heading">Part II. The Negative 1.81 Price Elasticity</div>
 <p class="dialogue-text"><strong>CO HOST</strong> Yeah, let's talk about that. Because the reports detailed this thing called a negative 1.81 price elasticity index in the mainstream sector, which is a very technical way of saying they are trapped.</p>
 <p class="dialogue-text"><strong>HOST</strong> Exactly. Essentially, if a mainstream brand tries to raise the retail price of a, you know, a standard everyday cent by just 10%, consumer demand plummets by over 18%.</p>
@@ -315,7 +299,6 @@ briefings_content = {
 <div class="dossier-main-title">📊 MACROECONOMIC PRICE ELASTICITY ✦ B2B LOGISTICS</div>
 <div class="dossier-sub-title">Operational Data Intelligence 2024 to 2025</div>
 <div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area Global Trade Corridors & Margin Breakdowns. ✦ Data Intelligence -1.81 Elasticity Index, UAE Logistics Bypass. ✦ Key Phenomenon Maceration Arbitrage and the collapse of the middle market.</div>
-
 <div class="dossier-section-title">DECONSTRUCTING THE DESIGNER BOTTLE</div>
 <div class="dossier-topic-title">The Juice Constraint and Retail Black Hole</div>
 <p class="dossier-text">The traditional Western designer fragrance market operates under severe, non-negotiable financial constraints defined by corporate accountants.</p>
@@ -323,13 +306,11 @@ briefings_content = {
 <p class="dossier-text">✦ The Marketing & Packaging Void ✦ Custom glass and atomizers absorb 10-15% of the budget. Global marketing, including celebrity ambassador campaigns, consumes 15-25%.</p>
 <p class="dossier-text">✦ The Retail Black Hole ✦ The physical retail network (department stores and global distributors) absorbs an overwhelming 45% to 60% margin. Consumers are fundamentally funding commercial real estate and display counters, not the chemical formula.</p>
 <p class="dossier-text">✦ Negative 1.81 Price Elasticity ✦ Mainstream brands are trapped by a -1.81 price elasticity index. A 10% increase in shelf price causes consumer demand to plummet by over 18%. To survive, brands ruthlessly squeeze manufacturing costs, forcing an absolute reliance on cheap, mass-produced synthetic molecules.</p>
-
 <div class="dossier-section-title">THE NICHE INVERSION & MARKET TAXONOMY</div>
 <div class="dossier-topic-title">4-Tier Classification and Format Shifts</div>
 <p class="dossier-text">True niche perfumery flips the economic model entirely, allocating 40% to 60% of their budget directly into pure, high-quality raw materials.</p>
 <p class="dossier-text">✦ The 4-Tier Taxonomy ✦ Digital culture has forced a rigid classification. Tier 1: Mainstream Designer (>100,000 units). Tier 2: Niche Prestige / Corporate Niche (10,000-50,000 units, acquired by conglomerates). Tier 3: Indie Segment (Independent, 100-5,000 units). Tier 4: Artisan Purist (<500 units, rigorous manual production).</p>
 <p class="dossier-text">✦ Format Shifts ✦ To adapt to high material costs, niche brands are shifting heavily toward 10ml to 30ml formats and fueling a $1.2 billion subscription market boom, allowing consumers to experience high-end materials without a blind $300 commitment.</p>
-
 <div class="dossier-section-title">THE MIDDLE EASTERN CLONE REVOLUTION</div>
 <div class="dossier-topic-title">Maceration Arbitrage and Freight Shocks</div>
 <p class="dossier-text">The single biggest supply chain disruption in modern perfumery is the Arabian "Dupe Culture." Brands like Lattafa, Armaf, and Afnan have reverse-engineered the industry.</p>
@@ -342,7 +323,6 @@ briefings_content = {
 <div class="debrief-main-title">🎙️ INTELLIGENCE BRIEFING. EU REGULATORY SHOCK</div>
 <div class="debrief-sub-title">Strategic Deep Dive • Executive Debrief</div>
 <div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area EU Chemical Fortress & Global Patent Moats. ✦ Data Intelligence GC-MS Analytics, IFRA 52nd Amendment, EU 2023/1545. ✦ Key Phenomenon Silent reformulations, Captive monopolies, and Batch Code Hunters.</div>
-
 <div class="part-heading">Part I. The Illusion of Alchemy</div>
 <p class="dialogue-text"><strong>HOST</strong> So if I told you that the defining scent of a $300 luxury perfume was chemically synthesized from a molecule that smells aggressively like raw garlic and onions, you would probably think I was joking.</p>
 <p class="dialogue-text"><strong>CO HOST</strong> Right. Or at least you'd really hope it was a joke.</p>
@@ -350,7 +330,6 @@ briefings_content = {
 <p class="dialogue-text"><strong>CO HOST</strong> Which is fascinating stuff, really.</p>
 <p class="dialogue-text"><strong>HOST</strong> It is. And our mission here is to cut straight through the marketing poetry and reveal the hidden architecture of modern perfumery. Because what you were actually paying for isn't just a basket of flower petals. You're funding this wild collision of multi-billion dollar corporate patents, extreme supply chain physics, and a very quiet, very intense global regulatory war.</p>
 <p class="dialogue-text"><strong>CO HOST</strong> And that war is completely invisible to the average consumer. Like to understand today's fragrance market, we have to look past traditional alchemy. The modern industry is governed by high stakes intellectual property and, well, synthetic chemistry.</p>
-
 <div class="part-heading">Part II. Reverse Engineering and GC-MS</div>
 <p class="dialogue-text"><strong>HOST</strong> Let's actually start right there with the intellectual property because I found this part of the source is just mind blowing. The foundational problem for a perfume company is how they protect their recipes, right? Like if I invent a new piece of technology, I can patent it. If I write a novel, I copyright it. But according to the legal framework we're looking at, you cannot copyright a perfume recipe.</p>
 <p class="dialogue-text"><strong>CO HOST</strong> No, you can't. It is legally treated like a culinary recipe for, you know, a soup or a cake.</p>
@@ -365,21 +344,18 @@ briefings_content = {
 <div class="dossier-main-title">⚖️ INTELLECTUAL PROPERTY MOATS ✦ REGULATORY FORENSICS</div>
 <div class="dossier-sub-title">Operational Data Intelligence 2024 to 2025</div>
 <div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area EU Chemical Fortress & Extraction Physics. ✦ Data Intelligence IFRA 52nd Amendment, EU 2023/1545. ✦ Key Phenomenon Silent reformulations and the Batch Code Hunter rebellion.</div>
-
 <div class="dossier-section-title">INTELLECTUAL PROPERTY MOATS</div>
 <div class="dossier-topic-title">The GC-MS Threat & Captive Moats</div>
 <p class="dossier-text">The inability to copyright a fragrance formula—legally treating it like a soup recipe—creates a massive vulnerability. Rival companies utilize Gas Chromatography-Mass Spectrometry (GC-MS) machines to vaporize and physically separate molecules, generating a perfect chemical fingerprint of any competitor's hit fragrance.</p>
 <p class="dossier-text">✦ The Captive Solution ✦ To prevent perfect cloning, chemical giants (Givaudan, Firmenich, Symrise) synthesize entirely novel molecules called "Captives." While the perfume cannot be patented, the specific chemical process to synthesize the Captive is protected by an ironclad 20-year patent.</p>
 <p class="dossier-text">✦ Corporate Profitability ✦ Fashion houses must hire the patent holder to manufacture their fragrance. This strategy grants chemical giants an impenetrable monopoly, generating astronomical returns. For example, Givaudan's 2025 ledgers show 7.4B CHF in sales with a massive 24.2% EBITDA margin.</p>
 <p class="dossier-text">✦ Extreme Synthesis ✦ Captives rely on molecular precision. Symrise's Spicatanate, synthesized from upcycled orange juice waste, smells like rotting garlic in pure form. However, at a microscopic 0.001% concentration, the garlic facet vanishes, creating a brilliant, fresh wasabi effect.</p>
-
 <div class="dossier-section-title">THE EXTREME PHYSICS OF NATURAL EXTRACTION</div>
 <div class="dossier-topic-title">Orris Butter, Wild Oud, and Rose Absolute</div>
 <p class="dossier-text">Despite the high margins of synthetics, true luxury requires natural absolutes to act as complex blending agents that provide an organic "soul" to the sharp clinical edges of synthetic captives.</p>
 <p class="dossier-text">✦ Orris Butter ($40,000–$100,000/kg) ✦ Requires the roots of the iris flower to be dried and dehydrated in a dark cellar for 3 to 5 years before extraction.</p>
 <p class="dossier-text">✦ Wild Oud ($30,000–$80,000/kg) ✦ The result of a specific fungal infection inside the Aquilaria tree, essentially extracting the tree's immune system.</p>
 <p class="dossier-text">✦ Rose Absolute ($8,000–$15,000/kg) ✦ Demands brutal raw agriculture. Yielding a single kilogram of Rose Absolute requires laborers to hand-pick roughly 1.5 million individual flowers to avoid steam distillation, which destroys thermal bile compounds.</p>
-
 <div class="dossier-section-title">REGULATORY WARS & SILENT REFORMULATIONS</div>
 <div class="dossier-topic-title">IFRA 52nd Amendment and Batch Code Hunters</div>
 <p class="dossier-text">Global health regulations are constantly shifting, forcing brands to quietly dismantle and rebuild their iconic formulas.</p>
@@ -390,7 +366,7 @@ briefings_content = {
     }
 }
 
-tabs = st.tabs(["STRATEGIC BRIEFINGS", "MARKET ANALYTICS", "FRAGRANCE VAULT", "ECOSYSTEM"])
+tabs = st.tabs(["STRATEGIC BRIEFINGS", "MACRO & B2B SIMULATIONS", "MARKET ANALYTICS", "FRAGRANCE VAULT", "ECOSYSTEM"])
 
 with tabs[0]:
     col_nav, col_viz = st.columns([1, 1.5], gap="large")
@@ -511,8 +487,87 @@ with tabs[0]:
                     st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Dossier indexing in progress...</div>', unsafe_allow_html=True)
 
 with tabs[1]:
+    st.markdown('<div class="section-header">B2B Price Elasticity Simulator</div>', unsafe_allow_html=True)
+    st.markdown('<div class="intelligence-badge">✦ INTELLIGENCE NOTE: Simulating the -1.81 elasticity index under Section 122 Tariff constraints to evaluate margin compression in the "Squeezed Middle" sector.</div>', unsafe_allow_html=True)
+    
+    col_input, col_chart = st.columns([1, 2], gap="large")
+    
+    with col_input:
+        st.markdown('<div class="dossier-section-title">Scenario Parameters</div>', unsafe_allow_html=True)
+        price_hike = st.slider("Projected Retail Price Increase (%)", min_value=0.0, max_value=50.0, value=10.0, step=1.0)
+        base_volume = 100000 
+        
+        elasticity_coefficient = -1.81
+        demand_change = price_hike * elasticity_coefficient
+        new_volume = base_volume * (1 + (demand_change / 100))
+        
+        st.markdown(f"""
+        <div class="metric-box">
+            <div class="metric-label">Projected Demand Shift (Volume)</div>
+            <div class="metric-value" style="color: {'#FF4B4B' if demand_change < 0 else '#D4AF37'};">{demand_change:.1f}%</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    with col_chart:
+        simulation_data = pd.DataFrame({
+            'Scenario': ['Base Market Demand', 'Post-Tariff Demand'],
+            'Volume': [base_volume, max(0, new_volume)]
+        })
+        
+        fig_sim = px.bar(
+            simulation_data, 
+            x='Scenario', 
+            y='Volume',
+            text='Volume',
+            color='Scenario',
+            color_discrete_map={'Base Market Demand': '#333333', 'Post-Tariff Demand': '#D4AF37'},
+            template="plotly_dark"
+        )
+        fig_sim.update_traces(texttemplate='%{text:,.0f} Units', textposition='outside', textfont=dict(size=16, color='#E0E0E0'))
+        fig_sim.update_layout(
+            paper_bgcolor='rgba(0,0,0,0)', 
+            plot_bgcolor='rgba(0,0,0,0)',
+            yaxis=dict(showgrid=False, showticklabels=False),
+            xaxis_title=None,
+            yaxis_title=None,
+            showlegend=False,
+            height=400
+        )
+        st.plotly_chart(fig_sim, use_container_width=True)
+
+    st.markdown('<div class="section-header">Correlation vs. Causation: Digital Virality</div>', unsafe_allow_html=True)
+    st.markdown('<div class="intelligence-badge">✦ STATISTICAL AXIOM: A 0.28 correlation confirms that Top-of-Funnel (TOFU) digital hype does not guarantee Bottom-of-Funnel (BOFU) sales without physical retail anchors.</div>', unsafe_allow_html=True)
+    
+    col_gauge, col_text = st.columns([1, 1], gap="large")
+    with col_gauge:
+        corr_fig = go.Figure(go.Indicator(
+            mode = "gauge+number",
+            value = 0.28,
+            title = {'text': "Digital Hype vs Sales Conversion (r)", 'font': {'color': '#D4AF37'}},
+            gauge = {
+                'axis': {'range': [0, 1], 'tickcolor': "#D4AF37"},
+                'bar': {'color': "#D4AF37"},
+                'bgcolor': "#1A1A1A",
+                'threshold' : {'line': {'color': "red", 'width': 4}, 'thickness': 0.75, 'value': 0.28}
+            }
+        ))
+        corr_fig.update_layout(paper_bgcolor="rgba(0,0,0,0)", font={'color': "#E0E0E0"}, height=300)
+        st.plotly_chart(corr_fig, use_container_width=True)
+    with col_text:
+        st.markdown("""
+        <div class="report-frame" style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
+            <h3 style="color:#D4AF37; font-family:'Tenor Sans', sans-serif; margin-top:0;">The Omnichannel Bottleneck</h3>
+            <p style="color:#E0E0E0; font-family:'Lato', sans-serif; font-size:0.95rem; line-height:1.6;">
+            In evaluating DTC (Direct-to-Consumer) models, we frequently observe a cognitive bias mistaking digital virality (e.g., TikTok trends) for causal purchasing behavior. 
+            <br><br>
+            A correlation coefficient of <strong>0.28</strong> dictates that while Stanford ML algorithms effectively generate awareness, human olfaction staunchly resists total digitization. Physical drugstores (acting as economic anchors) maintain an absolute chokehold on final conversions. Eliminating UX Friction online is critical, but bypassing physical sensory auditing entirely results in incinerated Customer Acquisition Costs (CAC).
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+with tabs[2]:
     st.markdown('<div class="section-header">Market Strategic Hierarchy</div>', unsafe_allow_html=True)
-    st.markdown('<div class="intelligence-badge">✦ INTELLIGENCE NOTE: 64% of analyzed Ultra-Niche segments utilize Jungle Essence™ CO2 extraction technologies to justify premium pricing above $350.</div>', unsafe_allow_html=True)
+    st.markdown('<div class="intelligence-badge">✦ K-MEANS SEGMENTATION: 64% of analyzed Ultra-Niche segments utilize Jungle Essence™ CO2 extraction technologies to justify premium pricing above $350.</div>', unsafe_allow_html=True)
 
     if 'community_votes' in df.columns and 'segment' in df.columns:
         df_sun = df.sort_values('community_votes', ascending=False).groupby('segment').head(5).reset_index(drop=True)
@@ -522,7 +577,7 @@ with tabs[1]:
         fig_sun.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=700)
         st.plotly_chart(fig_sun, use_container_width=True)
 
-with tabs[2]:
+with tabs[3]:
     st.markdown('<div class="section-header">Fragrance Market Case Studies</div>', unsafe_allow_html=True)
     if 'name' in df.columns:
         f_choice = st.selectbox("Select Profile:", sorted(df['name'].tolist()))
@@ -530,7 +585,7 @@ with tabs[2]:
         
         intel_note = ""
         if "Phantom" in f_choice:
-            intel_note = '<div class="intelligence-badge" style="margin-top: 25px;">✦ B2B CASE STUDY: Designed via Givaudan Carto AI and 45M EEG brainwave measurements to optimize confidence-boosting neuro-responses.</div>'
+            intel_note = '<div class="intelligence-badge" style="margin-top: 25px;">✦ A/B TESTING INSIGHT: Designed via Givaudan Carto AI and 45M EEG brainwave measurements to optimize confidence-boosting neuro-responses vs control groups.</div>'
         elif "Idôle" in f_choice:
             intel_note = '<div class="intelligence-badge" style="margin-top: 25px;">✦ ECO-INNOVATION: Features ultra-thin 15mm glass technology reducing carbon footprint by 63% via Givaudan sustainability stack.</div>'
         elif "Libre" in f_choice:
@@ -559,7 +614,7 @@ with tabs[2]:
         </div>
         """, unsafe_allow_html=True)
 
-with tabs[3]:
+with tabs[4]:
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
     e1, e2, e3, e4 = st.columns(4)
     apps = [
