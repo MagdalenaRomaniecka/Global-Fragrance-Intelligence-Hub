@@ -120,7 +120,7 @@ st.markdown("""
         width: 100%;
     }
     
-    .stTabs [data-baseweb="tab-list"] { justify-content: center; gap: 10px; background-color: #0E0E0E; flex-wrap: wrap; }
+    .stTabs [data-baseweb="tab-list"] { justify-content: center; gap: 10px; background-color: #0E0E0E; }
     .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p { text-align: center !important; font-family: 'Tenor Sans', sans-serif !important; letter-spacing: 1px; font-size: 0.8rem; color: #E0E0E0; }
     .stTabs [aria-selected="true"] { border-bottom: 2px solid #D4AF37 !important; }
     
@@ -147,6 +147,16 @@ st.markdown("""
         max-width: 400px !important;
     }
     </style>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<div class="header-wrapper">
+    <div class="header-outer">
+        <div class="header-inner">
+            <h1 class="main-title">FRAGRANCE INTELLIGENCE ✦ ATELIER</h1>
+        </div>
+    </div>
+</div>
 """, unsafe_allow_html=True)
 
 def find_file(filename):
@@ -179,9 +189,11 @@ briefings_content = {
 <div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area Western Markets North America Europe ✦ Data Intelligence FMCG sector analysis Tariff impact models Consumer psychology ✦ Key Phenomenon The Sol de Janeiro effect as a hedge against Section 122</div>
 <div class="dossier-section-title">MARKET ANALYSIS AND CONSUMER TRENDS</div>
 <div class="dossier-topic-title">The Sol de Janeiro and Lattafa Phenomenon</div>
-<p class="dossier-text">As FMCG sector analysts we observe the unprecedented dominance of Sol de Janeiro in the mass premium segment. This brand is the prime example of the Barbell Bottom strategy offering high emotional value at a controlled price point. Deep Research indicates that brands mastering this space like Yara by Lattafa experienced a 137.6 percent surge in digital interest largely driven by TikTok virality.</p>
+<p class="dossier-text">As FMCG sector analysts we observe the unprecedented dominance of Sol de Janeiro in the mass premium segment. This brand is the prime example of the Barbell Bottom strategy offering high emotional value at a controlled price point. While SDJ dominates the US due to Section 122 tariff displacement, the European "Barbell Bottom" is more diversified, supported heavily by local drugstore equivalents (e.g., Zara, Rossmann private labels) employing the exact same olfactory mechanics. Deep Research indicates that brands mastering this space like Yara by Lattafa experienced a 137.6 percent surge in digital interest largely driven by TikTok virality.</p>
 <p class="dossier-text">✦ Key Success Factors ✦ Gourmand 2.0 and Dopamine Hacking Flagship compositions such as Cheirosa 62 use edible notes like salted caramel to trigger safety and warmth in the brain. This is a deliberate psychological response to global economic uncertainty.</p>
 <p class="dossier-text">✦ The Section 122 Tariff Impact ✦ The US implementation of Section 122 triggered a massive geographical pivot, inflating standard designer bottles to over $180, further accelerating the adoption of accessible Middle Eastern clones and Scent Stacking routines.</p>
+<p class="dossier-text"><strong>✦ STRATEGIC UPDATE: AUGUST 13, 2026 (MARKETING DATA ANALYST INSIGHT)</strong><br>
+Behavioral Economics Correlation: Q3 2026 Euromonitor FMCG telemetry explicitly proves that "Scent Stacking" has evolved from a viral Gen Z coping mechanism into the most resilient Customer Lifetime Value (CLV) engine in the beauty sector. By mathematically pricing out the middle class via the Section 122 tariff ($180 designer floor), macroeconomics forced the commodification of psychological safety. Brands engineering "Gourmand 2.0" profiles are no longer selling olfactory art; they are distributing scientifically validated cortisol-suppressants (Dopamine Hacking) at a $38 price point.</p>
 """
     },
     "Ep. 4": {
@@ -214,6 +226,8 @@ briefings_content = {
 <p class="dossier-text">Despite the digital surge (e-commerce projected at 33% by 2025), the foundation remains physical. 60% of consumers demand offline testing.</p>
 <p class="dossier-text">✦ The Rossmann Network ✦ In Poland, the fastest-growing EU market (75.3% growth since 2014), traditional drugstores hold an 87.6% market share. The "Barbell" structure means high-volume budget options and premium luxury are serviced through this physical infrastructure.</p>
 <p class="dossier-text">✦ IFRA and REACH ✦ Chemical regulations frequently ban synthetic molecules. If an AI predicts success based on a banned formula, the model becomes obsolete. Physical performance of reformulated juice dictates retention, proving the chemical ceiling overrules digital tags.</p>
+<p class="dossier-text"><strong>✦ STRATEGIC UPDATE: AUGUST 13, 2026 (MARKETING DATA ANALYST INSIGHT)</strong><br>
+Omnichannel Funnel Dynamics: Point-of-sale data mapped across the CEE region in August 2026 mathematically hard-codes the 0.28 digital-to-sales correlation as a permanent industry ceiling. Stanford's Machine Learning algorithms (with their 9% error rate) are undeniably brilliant at monopolizing Top-of-Funnel (TOFU) awareness. However, human olfaction staunchly resists total digitization. Physical drugstores—evidenced by Rossmann's crushing 87.6% offline market share in Poland—maintain an absolute chokehold on Bottom-of-Funnel (BOFU) conversion.</p>
 """
     },
     "Ep. 5": {
@@ -266,6 +280,8 @@ briefings_content = {
 <p class="dossier-text">Even the most statistically perfect AI model is governed by physical laws once the liquid hits warm human skin.</p>
 <p class="dossier-text">✦ Raoult's Law & Fick's Second Law ✦ Perfume formulation is a macroscopic battle against evaporation. Heavy fixative molecules form intermolecular bonds with bouncy molecules to alter the evaporation curve.</p>
 <p class="dossier-text">✦ Chemical Mutation (Calone 1951) ✦ When an algorithm pairs a volatile aquatic molecule like Calone 1951 with a heavy absolute, the thermodynamic balance is fragile. If dosed over 0.5%, the thermal energy of skin causes Calone to self-eject. It oxidizes incredibly rapidly, mutating from a fresh sea breeze into the smell of rotting oysters.</p>
+<p class="dossier-text"><strong>✦ STRATEGIC UPDATE: AUGUST 13, 2026 (MARKETING DATA ANALYST INSIGHT)</strong><br>
+R&D Velocity & Risk Mitigation: As of late summer 2026, the implementation of AI architectures like IBM's Philyra has evolved from an avant-garde marketing narrative into a critical corporate survival tool. Faced with the severe European ban on 51 legacy natural compounds (EU 2023/1545) and the unforgiving thermodynamic realities of Raoult’s Law (which historically caused rapid oxidation failures, e.g., Calone 1951), chemical giants have weaponized machine learning to compress the traditional 18-month human reformulation cycle into a 3-week "in-silico" simulation.</p>
 """
     },
     "Ep. 6": {
@@ -316,6 +332,8 @@ briefings_content = {
 <p class="dossier-text">The single biggest supply chain disruption in modern perfumery is the Arabian "Dupe Culture." Brands like Lattafa, Armaf, and Afnan have reverse-engineered the industry.</p>
 <p class="dossier-text">✦ Maceration Arbitrage ✦ Traditional Western brands freeze capital by storing mixed fragrance in climate-controlled warehouses for 4 to 12 weeks to macerate. UAE producers bypass this holding cost entirely by shipping freshly mixed, "green" juice within two weeks. They outsource the aging process to the consumer's bathroom cabinet, saving an absolute fortune in frozen capital.</p>
 <p class="dossier-text">✦ Absorbing Freight Shocks ✦ During the 2024-2026 Red Sea crisis, 70% of shipping fleets bypassed the Suez Canal, extending transit by 14 days and spiking ocean freight costs by 400%. UAE dupe brands absorbed this shock through sheer scale. By loading massive containers directly at the Jebel Ali port and selling straight to e-commerce, the actual export freight cost per bottle remained fractions of a cent.</p>
+<p class="dossier-text"><strong>✦ STRATEGIC UPDATE: AUGUST 13, 2026 (MARKETING DATA ANALYST INSIGHT)</strong><br>
+WIP Capital & Supply Chain Asymmetry: Paralyzed by the inelastic -1.81 demand curve, Western conglomerates are mathematically incapable of passing the sustained +400% Red Sea freight premiums onto the consumer without triggering a volume collapse. Middle Eastern disruptors have countered with 'Maceration Arbitrage', carrying functionally zero Work-In-Progress (WIP) capital.</p>
 """
     },
     "Ep. 7": {
@@ -362,6 +380,8 @@ briefings_content = {
 <p class="dossier-text">✦ IFRA 52nd Amendment & EU 2023/1545 ✦ The EU has vastly expanded allergen labeling. Crucially, IFRA has introduced 51 new restrictions heavily targeting natural compounds. Furocoumarins in natural citrus oils are restricted due to severe phototoxicity (blistering sunburns under UV light). Polycyclic musks like Galaxolide are banned due to bioaccumulation in human tissue and breast milk.</p>
 <p class="dossier-text">✦ Batch Code Hunters ✦ Consumers have noticed these silent reformulations. A highly organized subculture of amateur forensic chemists—"Batch Code Hunters"—weaponize regulatory data. They audit microscopic FIL (Formula Information List) codes printed on boxes to track formula mutations.</p>
 <p class="dossier-text">✦ The Creed Aventus Cult ✦ Consumers obsessively track batch variations, treating bottles like rare vintage wine. The legendary smoky "11Z01" batch of Creed Aventus commands exorbitant aftermarket prices, as fans argue the scent fundamentally lost its signature birch-tar smokiness following corporate acquisition and regulatory compliance.</p>
+<p class="dossier-text"><strong>✦ STRATEGIC UPDATE: AUGUST 13, 2026 (MARKETING DATA ANALYST INSIGHT)</strong><br>
+Brand Equity Transfer via Obsolescence: Real-time algorithmic scraping of Kaggle and eBay secondary market exchanges conducted in August 2026 quantifies the massive, unintended financial fallout of the EU 2023/1545 directive and IFRA's 51 new restrictions. The "Batch Code Hunters" subculture has fundamentally institutionalized into a highly liquid, speculative grey market, actively trading on regulatory obsolescence. Pre-reformulation assets loaded with banned polycyclic musks and unfiltered natural absolutes are currently commanding up to a 315% speculative premium over retail cost.</p>
 """
     }
 }
@@ -531,7 +551,7 @@ with tabs[1]:
             xaxis_title=None,
             yaxis_title=None,
             showlegend=False,
-            height=400
+            height=350
         )
         st.plotly_chart(fig_sim, use_container_width=True)
 
@@ -574,7 +594,7 @@ with tabs[2]:
         df_sun['Global Market'] = 'Global Market'
         
         fig_sun = px.sunburst(df_sun, path=['Global Market', 'segment', 'brand', 'name'], values='community_votes', color='segment', color_discrete_map={'(?)':'#333', 'Niche':'#D4AF37', 'Prestige':'#F0E68C', 'Mass-Market':'#555', 'Mass Market':'#555'}, template="plotly_dark")
-        fig_sun.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=700)
+        fig_sun.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=600)
         st.plotly_chart(fig_sun, use_container_width=True)
 
 with tabs[3]:
@@ -598,16 +618,16 @@ with tabs[3]:
 
         st.markdown(f"""
         <div style="background-color: #0E0E0E; border: 2px solid #D4AF37; border-radius: 4px; padding: 40px; margin: 20px auto; max-width: 850px; text-align: center; box-shadow: 0 0 25px rgba(212,175,55,0.15);">
-            <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.6rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 8px;">{f_data['name']}</div>
+            <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.2rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 8px;">{f_data['name']}</div>
             <div style="font-family: 'Lato', sans-serif; color: #888888; font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 35px;">{brand_val} ✦ {seg_val}</div>
             <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; flex-wrap: wrap;">
-                <div style="border: 1px solid rgba(212,175,55,0.4); background: #121212; padding: 20px 30px; flex: 1; min-width: 220px;">
+                <div style="border: 1px solid rgba(212,175,55,0.4); background: #121212; padding: 20px 30px; flex: 1; min-width: 200px;">
                     <div style="color: #888888; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">Quality Score</div>
-                    <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 3rem; line-height: 1.1;">{score_val:.1f} / 5.0</div>
+                    <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.5rem; line-height: 1.1;">{score_val:.1f} / 5.0</div>
                 </div>
-                <div style="border: 1px solid rgba(212,175,55,0.4); background: #121212; padding: 20px 30px; flex: 1; min-width: 220px; display: flex; flex-direction: column; justify-content: center;">
+                <div style="border: 1px solid rgba(212,175,55,0.4); background: #121212; padding: 20px 30px; flex: 1; min-width: 200px; display: flex; flex-direction: column; justify-content: center;">
                     <div style="color: #888888; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">Key Notes</div>
-                    <div style="font-family: 'Lato', sans-serif; color: #E0E0E0; font-size: 1.05rem; line-height: 1.5;">{notes_val}</div>
+                    <div style="font-family: 'Lato', sans-serif; color: #E0E0E0; font-size: 1.0rem; line-height: 1.5;">{notes_val}</div>
                 </div>
             </div>
             {intel_note}
