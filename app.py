@@ -311,7 +311,7 @@ The key reference point is the validation of the Physical Anchor. Despite digita
         "debrief": """
 <div class="debrief-main-title">🎙️ INTELLIGENCE BRIEFING. CARTO AI & NEURO-TECH</div>
 <div class="debrief-sub-title">Strategic Deep Dive • Executive Debrief</div>
-<div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area AI Formulation & Chemical Physics. ✦ Data Intelligence Givaudan Carto, IBM Philyra, SBERT NLP, Cosine Similarity. ✦ Key Phenomenon Replacing human intuition with data-driven neuro-engineering.</div>
+<div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area AI Formulation, EEG/fMRI Brainwave Mapping. ✦ Data Intelligence Givaudan Carto AI, IBM Philyra, MoodScentz, Myrissi. ✦ Key Phenomenon Algorithmic olfactory synthesis vs human intuition.</div>
 <div class="part-heading">Part I. The Olfactory Memory Bottleneck</div>
 <p class="dialogue-text"><strong>HOST</strong> If you are wearing like a popular long-lasting perfume right now, there is a very high probability that the chemical anchoring that sent to your warm skin will still be detectable in the environment long after you leave the room.</p>
 <p class="dialogue-text"><strong>CO HOST</strong> Wazily. Hours later.</p>
@@ -319,6 +319,23 @@ The key reference point is the validation of the Physical Anchor. Despite digita
 <p class="dialogue-text"><strong>CO HOST</strong> Yeah, we really are. Because, you know, you usually look at a bottle of luxury fragrance and you picture like a master artisan wandering through a field in grass at dawn, hand-picking jasmine petals, relying purely on inspiration and, well, a gifted nose.</p>
 <p class="dialogue-text"><strong>HOST</strong> Which is a beautiful image, but it's totally outdated.</p>
 <p class="dialogue-text"><strong>CO HOST</strong> Completely. The stack of sources we have for today destroys that illusion entirely. We are looking at dense thermodynamic data, highly technical olfactory compendiums, and like the machine learning architecture of modern fragrance apps. We are looking at poetry and a bottle here. We are looking at a highly clinical, intensely engineered landscape. We are the transition from, you know, traditional artisanal blending to advanced chemical engineering and increasingly artificial intelligence is absolute at this point.</p>
+<p class="dialogue-text"><strong>HOST</strong> So where do we even begin with this?</p>
+<p class="dialogue-text"><strong>CO HOST</strong> Well, to understand how technology is rewriting fragrance, we have to start at the foundational level, like how the raw materials themselves are captured and classified today, even the traditional language of scent is being overhauled.</p>
+<p class="dialogue-text"><strong>HOST</strong> Oh, right. The typology changes.</p>
+<p class="dialogue-text"><strong>CO HOST</strong> Exactly. For example, what the industry used to call the Oriental category is now strictly classified as amber. And classic florals are increasingly being engineered from the ground up to be completely unisex. But the real paradigm shift, the big one is happening in the extraction processes.</p>
+<div class="part-heading">Part II. AI Architecture and Neuro-Perfumery</div>
+<p class="dialogue-text"><strong>HOST</strong> Well, that data points to the existential crisis of modern perfumery. Because if machines can perfectly analyze and deconstruct a successful formula, identifying the exact ratio of hetion to amber oxen, the inevitable next step is having machines design the formulas themselves. So we are talking about AI formulas taking over the laboratories now completely bypassing the human nose.</p>
+<p class="dialogue-text"><strong>CO HOST</strong> Absolutely. Table 3 in the industry compendiums outlines the specific tools reshaping creation right now. We see systems like carto by jive adon right the visual mapping one.</p>
+<p class="dialogue-text"><strong>HOST</strong> Yeah, it's a visual mapping system that relies on molecular data to suggest highly unusual chemical combinations. Things that a human perfumer bound by classical training and, you know, traditional aesthetics would simply never think to pair together. The source is also highlight falera developed by IBM and simrise. And this is a deep learning algorithm trained on a database of 1.7 million existing perfume formulas.</p>
+<p class="dialogue-text"><strong>CO HOST</strong> 1.7 million. A human could never smell that many.</p>
+<p class="dialogue-text"><strong>HOST</strong> Never. It designed sense from scratch based on demographic briefs. And it works in tandem with tools like Ecoset compass, which calculates and tracks the exact carbon footprint of the resulting formula in real time.</p>
+<p class="dialogue-text"><strong>CO HOST</strong> Which is amazing for sustainability, sure. But the most intense advancement isn't just about mixing chemicals faster or tracking carbon. It's neuro perfumery.</p>
+<p class="dialogue-text"><strong>HOST</strong> Neuro perfumery. That sounds almost dystopian.</p>
+<p class="dialogue-text"><strong>CO HOST</strong> It's just fragrance from an aesthetic choice to a mathematically optimized physiological stimulus. Companies like L'Oreal and emotive are placing eG headsets on consumers to track their real time electrical brain waves while they smell different raw materials.</p>
+<p class="dialogue-text"><strong>HOST</strong> Okay, wait. The Pug fragrance phantom by Poccarobon is the prime example of this applied science in the sources, right?</p>
+<p class="dialogue-text"><strong>CO HOST</strong> Yes, phantom is the perfect case study. Pug didn't just guess what consumers would find appealing. They utilized 45 million EEG brain wave records to mathematically validate the exact overdosing of a specific molecule called styrolycathirally acetate.</p>
+<p class="dialogue-text"><strong>HOST</strong> 45 million records. Let that sink in. They tracked 45 million brain responses just to dial in one single molecule. And they did this for a very specific physiological reason, right?</p>
+<p class="dialogue-text"><strong>CO HOST</strong> To precisely, if the goal is just hacking the amygdala for a dopamine spike, we aren't creating art anymore. We are just directly manipulating human neurochemistry.</p>
 """,
         "dossier": """
 <div class="dossier-main-title">🧠 GIVAUDAN CARTO AI ✦ NEURO-COGNITIVE ENGINEERING</div>
@@ -355,6 +372,20 @@ The key reference point is the validation of the Physical Anchor. Despite digita
 <p class="dialogue-text"><strong>CO HOST</strong> I mean, most consumers assume they're paying for the liquid, right? So they figure maybe 50 bucks, or I don't know, $30 if they factor in a really high brand markup.</p>
 <p class="dialogue-text"><strong>HOST</strong> But the actual scented liquid inside that $150 mainstream bottle, it's usually worth about $1.50. It's wild to think about.</p>
 <p class="dialogue-text"><strong>CO HOST</strong> It really is. Maybe $3 if it's a particularly heavy formulation. But yeah, welcome to a deep dive into the global fragrance industry. And we've got a massive stack of analytical reports today. We're looking at data spanning from 2024 all the way to 2035.</p>
+<p class="dialogue-text"><strong>HOST</strong> Yeah. So I think from macroeconomics to supply chains and these really rigid market taxonomies. Because the mission here is to decode how a $62.1 billion global market is just like actively marching toward an estimated $85.5 billion valuation by 2035. All while a physical product inside the bottle basically costs pennies.</p>
+<p class="dialogue-text"><strong>CO HOST</strong> So to really understand where this industry is heading, we have to start with where your money actually goes.</p>
+<p class="dialogue-text"><strong>HOST</strong> Right. And then we have the invisible architecture, the bottle economics.</p>
+<div class="part-heading">Part II. The Negative 1.81 Price Elasticity</div>
+<p class="dialogue-text"><strong>CO HOST</strong> Yeah, let's talk about that. Because the reports detailed this thing called a negative 1.81 price elasticity index in the mainstream sector, which is a very technical way of saying they are trapped.</p>
+<p class="dialogue-text"><strong>HOST</strong> Exactly. Essentially, if a mainstream brand tries to raise the retail price of a, you know, a standard everyday cent by just 10%, consumer demand plummets by over 18%.</p>
+<p class="dialogue-text"><strong>CO HOST</strong> Right. They can't raise the shelf price without just bleeding buyers. So they have to ruthlessly squeeze the manufacturing costs instead.</p>
+<p class="dialogue-text"><strong>HOST</strong> Which explains why the actual cent concentrate the juice along with the alcohol solvent makes up a mere 3 to 5% of the final retail price. Yeah. For a standard 100 milliliter designer bottle producing that liquid literally costs them 2 to 5 euros.</p>
+<p class="dialogue-text"><strong>CO HOST</strong> So where does the rest of my $150 go?</p>
+<p class="dialogue-text"><strong>HOST</strong> Well, 10 to 15% goes straight into the packaging, you know, the custom glass, the atomizers.</p>
+<p class="dialogue-text"><strong>CO HOST</strong> Right. So they're 15 to 25% is just eaten by global marketing. Those massive celebrity ambassador campaigns, you see everywhere. But the real financial black hole and this blew my mind is the traditional retail network.</p>
+<p class="dialogue-text"><strong>HOST</strong> Oh, absolutely. The department stores and the global distributors, they absorb a massive 45 to 60% margin.</p>
+<p class="dialogue-text"><strong>CO HOST</strong> 60% just have it sit on the shelf.</p>
+<p class="dialogue-text"><strong>HOST</strong> Yeah. I mean, you are fundamentally paying for the department stores real estate. You're funding the glass display counters, the testers, the sales associates. It's like paying for a blockbuster movie ticket, but you're mostly funding the billboards and the theater's concession stand rather than the film itself.</p>
 """,
         "dossier": """
 <div class="dossier-main-title">📊 MACROECONOMIC PRICE ELASTICITY ✦ B2B LOGISTICS</div>
@@ -389,6 +420,18 @@ The key reference point is the validation of the Physical Anchor. Despite digita
 <p class="dialogue-text"><strong>HOST</strong> So if I told you that the defining scent of a $300 luxury perfume was chemically synthesized from a molecule that smells aggressively like raw garlic and onions, you would probably think I was joking.</p>
 <p class="dialogue-text"><strong>CO HOST</strong> Right. Or at least you'd really hope it was a joke.</p>
 <p class="dialogue-text"><strong>HOST</strong> Yeah, exactly. I mean, when you walk up to a fragrance counter, the brand really wants you to imagine this master perfumer wandering through a sundrenched field in grass france, crushing delicate flower petals by hand. It is a beautifully constructed, very persistent illusion. I mean, the whole marketing apparatus is designed to sell you the alchemy of nature in a bottle. But today we are completely shattering that illusion. We've got a massive stack of industry reports in front of us for this deep dive. And this includes corporate financial ledgers and some really advanced olfactory chemistry analytics.</p>
+<p class="dialogue-text"><strong>CO HOST</strong> Which is fascinating stuff, really.</p>
+<p class="dialogue-text"><strong>HOST</strong> It is. And our mission here is to cut straight through the marketing poetry and reveal the hidden architecture of modern perfumery. Because what you were actually paying for isn't just a basket of flower petals. You're funding this wild collision of multi-billion dollar corporate patents, extreme supply chain physics, and a very quiet, very intense global regulatory war.</p>
+<p class="dialogue-text"><strong>CO HOST</strong> And that war is completely invisible to the average consumer. Like to understand today's fragrance market, we have to look past traditional alchemy. The modern industry is governed by high stakes intellectual property and, well, synthetic chemistry.</p>
+<div class="part-heading">Part II. Reverse Engineering and GC-MS</div>
+<p class="dialogue-text"><strong>HOST</strong> Let's actually start right there with the intellectual property because I found this part of the source is just mind blowing. The foundational problem for a perfume company is how they protect their recipes, right? Like if I invent a new piece of technology, I can patent it. If I write a novel, I copyright it. But according to the legal framework we're looking at, you cannot copyright a perfume recipe.</p>
+<p class="dialogue-text"><strong>CO HOST</strong> No, you can't. It is legally treated like a culinary recipe for, you know, a soup or a cake.</p>
+<p class="dialogue-text"><strong>HOST</strong> Which creates a massive vulnerability for these major fashion houses.</p>
+<p class="dialogue-text"><strong>CO HOST</strong> Exactly. Because in the modern era, any rival company can just buy a bottle of your best selling billion dollar fragrance to get back to a lab and run it through a machine called a GCMS.</p>
+<p class="dialogue-text"><strong>HOST</strong> Which stands for gas chromatography mass spectrometry, right?</p>
+<p class="dialogue-text"><strong>CO HOST</strong> You got it. I was trying to wrap my head around how that machine actually works. It sounds like straight-up science fiction. It's basically like feeding a fully baked cake into a high-tech scanner and the machine prints out the exact brand of flour the baker used, the exact number of eggs, and the specific baking temperature.</p>
+<p class="dialogue-text"><strong>HOST</strong> That is actually a remarkably accurate way to picture it. The gas chromatography phase physically separates all the individual molecules in the liquid, and then the mass spectrometry phase weighs them to figure out exactly what they are.</p>
+<p class="dialogue-text"><strong>CO HOST</strong> Wow. Yeah, so suddenly your competitor has your precise recipe and they can clone it for a fraction of the cost.</p>
 """,
         "dossier": """
 <div class="dossier-main-title">⚖️ INTELLECTUAL PROPERTY MOATS ✦ REGULATORY FORENSICS</div>
@@ -424,7 +467,7 @@ with tabs[0]:
     with col_nav:
         st.markdown('<div class="section-header">Executive Selection</div>', unsafe_allow_html=True)
         episode = st.radio("Selection:", [
-            "🏛️ Ep. 0: Global Foundation",
+            "🏛️ 0. Global Foundation",
             "🎧 Ep. 1: Recession Glam",
             "📊 Ep. 2: Global Trade",
             "🔮 Ep. 3: 2026 Outlook",
@@ -433,34 +476,34 @@ with tabs[0]:
             "🎓 Ep. 6: B2B Price Elasticity",
             "🎓 Ep. 7: EU Regulatory Shock",
             "🧬 Ep. 8: Master Synthesis"
-        ], label_visibility="collapsed", index=5)
+        ], label_visibility="collapsed")
        
         match = re.search(r'(Ep\. \d+)', episode)
         ep_key = match.group(1) if match else "Ep. 0"
         content_dict = briefings_content.get(ep_key, {})
         
-        if "Ep. 0" in episode:
+        if "0." in episode:
             current_t, current_a, rep_file = None, None, "master_prologue.md"
             f_type, v_title, desc = "None", "Macroeconomic Foundations 2026", "The 5T Nvidia era, EU 2023/1545 shock, and Givaudan MoodScentz™+ integration."
-        elif "Ep. 1" in episode:
+        elif "1:" in episode:
             current_t, current_a, rep_file = "podcast_transcript.md", "podcast_trends.mp3", "trend_report_2025.md"
             f_type, v_title, desc = "Popularity", "Global Popularity Ranking", "Analyzing Lattafa viral surge and Givaudan MoodScentz™ neuro-active solutions."
-        elif "Ep. 2" in episode:
+        elif "2:" in episode:
             current_t, current_a, rep_file = "ep2_trade_transcript.md", "ep2_audio.mp3", "ep2_trade_report.md"
             f_type, v_title, desc = "None", "Global Trade Volume 2024", "Deep Research data on US Section 122 tariffs, EU surplus, and Russian autarky (93M units)."
-        elif "Ep. 3" in episode:
+        elif "3:" in episode:
             current_t, current_a, rep_file = "ep3_debrief", "podcast_2026.mp3", "ep3_dossier"
             f_type, v_title, desc = "None", "2026 Global Projections", "Impact of the 5T Nvidia era, the 2025 Tariff Shock, and negative 1.81 price elasticity."
-        elif "Ep. 4" in episode:
+        elif "4:" in episode:
             current_t, current_a, rep_file = "ep4_debrief", "ep3_europe_barbell.mp3", "ep4_dossier"
             f_type, v_title, desc = "Barbell", "The Barbell Market Structure 2026", "Mapping the European Barbell structure, Poland PPP breakthrough, and 0.28 digital correlation."
-        elif "Ep. 5" in episode:
+        elif "5:" in episode:
             current_t, current_a, rep_file = "ep5_debrief", "masterclass_ep1_audio.mp3", "ep5_dossier"
             f_type, v_title, desc = "Popularity", "Givaudan Carto AI Infrastructure", "Deep-dive technical breakdown: Algorithmic scent formulation and EEG brainwave mapping."
-        elif "Ep. 6" in episode:
+        elif "6:" in episode:
             current_t, current_a, rep_file = "ep6_debrief", "masterclass_ep2_audio.mp3", "ep6_dossier"
             f_type, v_title, desc = "None", "B2B Price Elasticity Vectors", "Advanced macroeconomic regression analyzing consumer behavior under severe inflation."
-        elif "Ep. 7" in episode:
+        elif "7:" in episode:
             current_t, current_a, rep_file = "ep7_debrief", "masterclass_ep3_audio.mp3", "ep7_dossier"
             f_type, v_title, desc = "Barbell", "EU 2023/1545 Regulatory Compliance", "Strategic adaptation strategies for allergen restrictions and synthetic ingredient bans."
         else:
@@ -501,7 +544,7 @@ with tabs[0]:
         
     st.write("---")
    
-    if "Ep. 0" in episode:
+    if "0." in episode:
         st.markdown('<div class="section-header">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
         if "dossier" in content_dict:
             st.markdown(f'<div class="report-frame">\n\n{content_dict["dossier"]}\n\n</div>', unsafe_allow_html=True)
@@ -671,10 +714,10 @@ with tabs[4]:
     st.markdown('<div class="section-header">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
     e1, e2, e3, e4 = st.columns(4)
     apps = [
-        ("🌍 Aromo Intelligence", "Custom scraping engine mapping social sentiment to B2B platforms like Myrissi™.", "https://share.streamlit.io/"),
-        ("🧬 Kaggle Prediction", "Regression models calculating price elasticity and B2B tech adoption rates.", "https://share.streamlit.io/"),
-        ("📊 Market Pulse", "Dashboard integrating Deep Research data with live tracking of EU 2023/1545 regulatory impact.", "https://share.streamlit.io/"),
-        ("📡 Deep Research AI", "Macroeconomic engine processing Nvidia Class trends and Givaudan MoodScentz™+ data.", "https://share.streamlit.io/")
+        ("🧬 ScentSational AI", "AI Concierge providing personalized signature scent recommendations.", "https://scentsational-zbznjhgc4xv7faddappdc2b.streamlit.app/"),
+        ("📊 Perfume Finder", "Interactive database for manual filtering and exploring fragrance profiles.", "https://perfume-finder-app-btskyvq7eytc5ujrgzr2dk.streamlit.app/"),
+        ("📡 Hugging Face LFS2", "Advanced machine learning models and datasets mapping social sentiment.", "https://huggingface.co/spaces/Baphomert/ScentSational-Fragrantica-LFS2"),
+        ("🌍 Market Pulse Hub", "Dashboard integrating Deep Research data with live macro tracking.", "https://github.com/MagdalenaRomaniecka")
     ]
     for col, (name, dsc, link) in zip([e1, e2, e3, e4], apps):
         col.markdown(f"""<div class="project-card">
