@@ -4,6 +4,7 @@ import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
 import os
+import re
 from data_loader import load_and_merge_data
 
 st.set_page_config(page_title="Fragrance Intelligence ✦ Atelier", page_icon="✨", layout="wide")
@@ -124,7 +125,7 @@ st.markdown("""
         width: 100%;
     }
    
-    .stTabs [data-baseweb="tab-list"] { justify-content: center; gap: 10px; background-color: #0E0E0E; }
+    .stTabs [data-baseweb="tab-list"] { justify-content: center; gap: 10px; background-color: #0E0E0E; flex-wrap: wrap; }
     .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p { text-align: center !important; font-family: 'Tenor Sans', sans-serif !important; letter-spacing: 1px; font-size: 0.8rem; color: #E0E0E0; }
     .stTabs [aria-selected="true"] { border-bottom: 2px solid #D4AF37 !important; }
    
@@ -199,11 +200,11 @@ We are witnessing the final disappearance of the traditional middle class. This 
 <p class="dossier-text"><strong>3. The Section 122 Tariff Shock and EU Regulations</strong><br>
 The April 2025 Tariff Shock known as Section 122 has permanently raised price floors in the prestige segment. This structural shift has forced designer brands to hike prices from 120 to 180 dollars effectively pushing the middle class toward high quality smart clones and UAE imports. Simultaneously the European EU 2023/1545 regulation forces costly molecular reformulations which favors industrial giants possessing proprietary AI laboratories like Carto.</p>
 <div class="dossier-section-title">The Global Regional Chessboard</div>
-<p class="dossier-text">These macroeconomic pillars manifest across a rigorously divided global map. Our framework relies on four geographic anchors:<br>
-✦ <strong>Europe (The Core Factory)</strong> Supported by a 238 billion Euro surplus in the chemical sector Europe remains the untouchable manufacturing heart of the world. New chemical restrictions mean only major players with access to advanced molecular engineering can survive in the premium segment.<br>
-✦ <strong>USA (The Price Trap)</strong> The primary victim of the Section 122 tariffs where the middle class market has completely collapsed. Consumers migrate toward high quality clones and UAE imports that utilize Myrissi™ technology to perfectly replicate sensory profiles.<br>
-✦ <strong>Poland and CEE (The Golden Testing Ground)</strong> Poland surpasses Japan in Purchasing Power Parity. It is the ideal market for testing neuro active fragrances and smart efficiency solutions as a response to high economic stress and dopamine hacking needs.<br>
-✦ <strong>Russia (The Shadow Autarky)</strong> Operating its own Chestny ZNAK tracking system of 93 million units the Eastern bloc relies on a massive logistical bypass through Dubai and Lithuania to survive Western sanctions. However, 100% isolation is a geopolitical fiction; this grey market pipeline crucially sustains the flow of elite European Niche brands into the country.</p>
+<p class="dossier-text">These macroeconomic pillars manifest across a rigorously divided global map. Our framework relies on four geographic anchors:</p>
+<p class="dossier-text">✦ <strong>Europe (The Core Factory)</strong> Supported by a 238 billion Euro surplus in the chemical sector Europe remains the untouchable manufacturing heart of the world. New chemical restrictions mean only major players with access to advanced molecular engineering can survive in the premium segment.</p>
+<p class="dossier-text">✦ <strong>USA (The Price Trap)</strong> The primary victim of the Section 122 tariffs where the middle class market has completely collapsed. Consumers migrate toward high quality clones and UAE imports that utilize Myrissi™ technology to perfectly replicate sensory profiles.</p>
+<p class="dossier-text">✦ <strong>Poland and CEE (The Golden Testing Ground)</strong> Poland surpasses Japan in Purchasing Power Parity. It is the ideal market for testing neuro active fragrances and smart efficiency solutions as a response to high economic stress and dopamine hacking needs.</p>
+<p class="dossier-text">✦ <strong>Russia (The Shadow Autarky)</strong> Operating its own Chestny ZNAK tracking system of 93 million units the Eastern bloc relies on a massive logistical bypass through Dubai and Lithuania to survive Western sanctions. However, 100% isolation is a geopolitical fiction; this grey market pipeline crucially sustains the flow of elite European Niche brands into the country.</p>
 <div class="dossier-section-title">Empiricism and The Anchor Theory</div>
 <p class="dossier-text"><strong>The Role of Fragrantica and Aromo</strong><br>
 Data from Fragrantica and Aromo platforms provided hard empirical evidence of a structural shift in consumer psychology. Custom regression models and sentiment analysis proved a bimodal distribution of preferences. Consumers mass penalize designer brands with low ratings for a drastic drop in the price to value ratio. Simultaneously algorithms captured a massive surge in demand for neuro active notes scientifically validated by Givaudan to reduce stress. This mathematically verifies why capital flows exclusively toward the Identity Shield or Smart Efficiency.</p>
@@ -261,6 +262,7 @@ The key reference point is the validation of the Physical Anchor. Despite digita
 <div class="dossier-section-title">3. The Russian Experiment ✦ Track and Trace Success</div>
 <p class="dossier-text">Russia has become the world first laboratory for a closed loop fragrance economy proving how luxury markets adapt to isolation through resilience logistics.</p>
 <p class="dossier-text">✦ Production and Spending Facing a 35 percent tariff on unfriendly nations domestic production hit a record 93 million units. Data from the Chestny ZNAK system confirms consumer spending reached 46.5 billion rubles in the first quarter alone with the strict duhi category generating 5.3 billion rubles. ✦ Shadow Logistics Mastery The 35 percent tariff boosted UAE imports by 139 percent and Turkish imports by 47 percent. Lithuania and the UAE have emerged as the primary re export hubs allowing the market to maintain 68 percent local trust through complex grey market channels.</p>
+<div class="dossier-section-title">Strategic Outlook 2026</div>
 <div class="intelligence-badge"><strong>✦ STRATEGIC UPDATE: AUGUST 13, 2026 (MARKETING DATA ANALYST INSIGHT)</strong><br><br><strong>Logistical Hegemony Shift:</strong> <em>[Source: Real-time trade routing indexes & Chestny ZNAK SQL Data Extracts, August 2026]</em> Data pipelines tracking UAE-Lithuania logistics irrevocably confirm that this corridor is no longer a temporary geopolitical workaround, but a permanent, institutionalized "Shadow Silk Road." The Russian Federation's ability to domestically absorb 93 million units while simultaneously fueling a 139% surge in UAE imports proves that Western sanctions completely failed to extinguish elite demand. Furthermore, the 94.3% US export explosion from the UAE demonstrates a catastrophic miscalculation by heritage French houses. By vacating accessible price tiers under Section 122 pressure, Western brands inadvertently allowed Dubai to permanently overwrite the global olfactory baseline—shifting the consumer palate from delicate European florals to hyper-longevity Oriental ouds, establishing the Middle East as the ultimate arbiter of modern perfumery volume.</div>
 """
     },
@@ -431,41 +433,34 @@ with tabs[0]:
             "🎓 Ep. 6: B2B Price Elasticity",
             "🎓 Ep. 7: EU Regulatory Shock",
             "🧬 Ep. 8: Master Synthesis"
-        ], label_visibility="collapsed")
+        ], label_visibility="collapsed", index=5)
        
-        ep_key = episode.split(":")[0][3:].strip()
-        content_dict = briefings_content.get("Ep. " + ep_key, {})
+        match = re.search(r'(Ep\. \d+)', episode)
+        ep_key = match.group(1) if match else "Ep. 0"
+        content_dict = briefings_content.get(ep_key, {})
         
-        if "0." in episode:
-            content_dict = briefings_content.get("Ep. 0", {})
+        if "Ep. 0" in episode:
             current_t, current_a, rep_file = None, None, "master_prologue.md"
             f_type, v_title, desc = "None", "Macroeconomic Foundations 2026", "The 5T Nvidia era, EU 2023/1545 shock, and Givaudan MoodScentz™+ integration."
-        elif "1:" in episode:
-            content_dict = briefings_content.get("Ep. 1", {})
+        elif "Ep. 1" in episode:
             current_t, current_a, rep_file = "podcast_transcript.md", "podcast_trends.mp3", "trend_report_2025.md"
             f_type, v_title, desc = "Popularity", "Global Popularity Ranking", "Analyzing Lattafa viral surge and Givaudan MoodScentz™ neuro-active solutions."
-        elif "2:" in episode:
-            content_dict = briefings_content.get("Ep. 2", {})
+        elif "Ep. 2" in episode:
             current_t, current_a, rep_file = "ep2_trade_transcript.md", "ep2_audio.mp3", "ep2_trade_report.md"
             f_type, v_title, desc = "None", "Global Trade Volume 2024", "Deep Research data on US Section 122 tariffs, EU surplus, and Russian autarky (93M units)."
-        elif "3:" in episode:
-            content_dict = briefings_content.get("Ep. 3", {})
+        elif "Ep. 3" in episode:
             current_t, current_a, rep_file = "ep3_debrief", "podcast_2026.mp3", "ep3_dossier"
             f_type, v_title, desc = "None", "2026 Global Projections", "Impact of the 5T Nvidia era, the 2025 Tariff Shock, and negative 1.81 price elasticity."
-        elif "4:" in episode:
-            content_dict = briefings_content.get("Ep. 4", {})
+        elif "Ep. 4" in episode:
             current_t, current_a, rep_file = "ep4_debrief", "ep3_europe_barbell.mp3", "ep4_dossier"
             f_type, v_title, desc = "Barbell", "The Barbell Market Structure 2026", "Mapping the European Barbell structure, Poland PPP breakthrough, and 0.28 digital correlation."
-        elif "5:" in episode:
-            content_dict = briefings_content.get("Ep. 5", {})
+        elif "Ep. 5" in episode:
             current_t, current_a, rep_file = "ep5_debrief", "masterclass_ep1_audio.mp3", "ep5_dossier"
             f_type, v_title, desc = "Popularity", "Givaudan Carto AI Infrastructure", "Deep-dive technical breakdown: Algorithmic scent formulation and EEG brainwave mapping."
-        elif "6:" in episode:
-            content_dict = briefings_content.get("Ep. 6", {})
+        elif "Ep. 6" in episode:
             current_t, current_a, rep_file = "ep6_debrief", "masterclass_ep2_audio.mp3", "ep6_dossier"
             f_type, v_title, desc = "None", "B2B Price Elasticity Vectors", "Advanced macroeconomic regression analyzing consumer behavior under severe inflation."
-        elif "7:" in episode:
-            content_dict = briefings_content.get("Ep. 7", {})
+        elif "Ep. 7" in episode:
             current_t, current_a, rep_file = "ep7_debrief", "masterclass_ep3_audio.mp3", "ep7_dossier"
             f_type, v_title, desc = "Barbell", "EU 2023/1545 Regulatory Compliance", "Strategic adaptation strategies for allergen restrictions and synthetic ingredient bans."
         else:
@@ -497,7 +492,7 @@ with tabs[0]:
             fig.update_traces(textposition='outside', textfont=dict(size=15, color='#D4AF37'), cliponaxis=False)
             max_val = df_t['community_votes'].max()
             fig.update_xaxes(range=[0, max_val * 1.35], showgrid=False, showticklabels=False)
-            fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.6, xanchor="center", x=0.5), margin=dict(r=100, t=50))
+            fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.6, xanchor="center", x=0.5), margin=dict(t=50, r=100))
         else:
             fig = px.bar(x=["Data Upload Required"], y=[100], template="plotly_dark", color_discrete_sequence=['#D4AF37'])
            
@@ -506,7 +501,7 @@ with tabs[0]:
         
     st.write("---")
    
-    if "0." in episode:
+    if "Ep. 0" in episode:
         st.markdown('<div class="section-header">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
         if "dossier" in content_dict:
             st.markdown(f'<div class="report-frame">\n\n{content_dict["dossier"]}\n\n</div>', unsafe_allow_html=True)
