@@ -135,12 +135,28 @@ st.markdown("""
     .footer { position: relative; width: 100%; background-color: #0E0E0E; color: #666666; text-align: center; padding: 30px; font-size: 0.65rem; border-top: 1px solid #1F1F1F; z-index: 999; letter-spacing: 2px; margin-top: 50px; }
    
     .intelligence-badge { text-align: center; color: #D4AF37; font-size: 0.85rem; font-style: italic; margin: 15px auto 25px auto; letter-spacing: 1px; border: 1px solid rgba(212,175,55,0.3); padding: 12px; background: rgba(212,175,55,0.05); max-width: 800px; }
+   
+    .stSelectbox label, .stSelectbox [data-testid="stMarkdownContainer"] p {
+        font-family: 'Tenor Sans', sans-serif !important;
+        font-size: 1.1rem !important;
+        color: #D4AF37 !important;
+        text-align: center !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+        width: 100% !important;
+        display: block !important;
+    }
+   
+    div[data-testid="stSelectbox"] > div {
+        margin: 0 auto !important;
+        max-width: 400px !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
 def find_file(filename):
     for root, _, files in os.walk("."):
-        if filename in files:
+        if filename and filename in files:
             return os.path.join(root, filename)
     return filename
 
@@ -167,119 +183,6 @@ metrics = [("Global Beauty Market", "$593B"), ("EU Trade Surplus", "€238B"), (
 for col, (lab, val) in zip([m1, m2, m3, m4], metrics):
     col.markdown(f'<div class="metric-box"><div class="metric-label">{lab}</div><div class="metric-value">{val}</div></div>', unsafe_allow_html=True)
 
-briefings_content = {
-    "Ep. 0": {
-        "dossier": """
-<div class="dossier-main-title">🌐 2026 Global Architecture ✦ Master Prologue</div>
-<div class="dossier-sub-title">Strategic Foundation ✦ The Base Notes of Fragrance Economy</div>
-<p class="dossier-text">The global market in 2026 is defined by the 5 trillion dollar capitalization of Nvidia. This concentration of technological power has created a new class of ultra wealthy consumers who remain completely price insensitive...</p>
-"""
-    },
-    "Ep. 1": {
-        "debrief": """
-<div class="debrief-main-title">🎙️ INTELLIGENCE BRIEFING. RECESSION GLAM</div>
-<div class="debrief-sub-title">Strategic Deep Dive • Executive Debrief</div>
-<p class="dialogue-text"><strong>HOST:</strong> But this year, we are seeing something really different. We are not seeing a pullback. We are seeing a pivot. We are calling it Recession Glam.</p>
-""",
-        "dossier": """
-<div class="dossier-main-title">🧠 2026 TREND REPORT ✦ NEURO RECESSION GLAM</div>
-<div class="dossier-sub-title">Strategic Deep Dive ✦ Fragrance Market and Givaudan Strategy</div>
-<p class="dossier-text">As FMCG sector analysts we observe the unprecedented dominance of Sol de Janeiro in the mass premium segment. This brand is the prime example of the Barbell Bottom strategy...</p>
-"""
-    },
-    "Ep. 2": {
-        "dossier": """
-<div class="dossier-main-title">📊 Global Trade Dynamics and the Russian Autarky Case</div>
-<div class="dossier-sub-title">Operational Data Intelligence 2024 to 2025</div>
-<p class="dossier-text">Russia has become the world first laboratory for a closed loop fragrance economy proving how luxury markets adapt to isolation through resilience logistics.</p>
-"""
-    },
-    "Ep. 3": {
-        "dossier": """
-<div class="dossier-main-title">🧠 2026 TREND REPORT ✦ NEURO RECESSION GLAM</div>
-<p class="dossier-text">The US implementation of Section 122 triggered a massive geographical pivot, inflating standard designer bottles to over $180...</p>
-"""
-    },
-    "Ep. 4": {
-        "debrief": """
-<div class="debrief-main-title">🎧 INTELLIGENCE BRIEFING. THE EUROPEAN BARBELL & DATA VS CHEMISTRY</div>
-<p class="dialogue-text"><strong>HOST 1:</strong> Welcome to the debate. Can a line of code predict what smells beautiful?</p>
-""",
-        "dossier": """
-<div class="dossier-main-title">📊 MARKET POLARIZATION ✦ THE BARBELL EFFECT</div>
-<p class="dossier-text">The fragrance industry is decoupling discovery from the physical vial, heavily driven by digital channels. Stanford University researchers utilized ML boosting...</p>
-"""
-    },
-    "Ep. 5": {
-        "debrief": """
-<div class="debrief-main-title">🎙️ INTELLIGENCE BRIEFING. CARTO AI & NEURO-TECH</div>
-<p class="dialogue-text"><strong>CO HOST:</strong> It's just fragrance from an aesthetic choice to a mathematically optimized physiological stimulus.</p>
-""",
-        "dossier": """
-<div class="dossier-main-title">🧠 GIVAUDAN CARTO AI ✦ NEURO-COGNITIVE ENGINEERING</div>
-<p class="dossier-text">The industry has shifted from aesthetic choices to mathematically optimized physiological stimuli.</p>
-"""
-    },
-    "Ep. 6": {
-        "debrief": """
-<div class="debrief-main-title">🎙️ INTELLIGENCE BRIEFING. B2B PRICE ELASTICITY</div>
-<p class="dialogue-text"><strong>HOST:</strong> The actual scented liquid inside that $150 mainstream bottle, it's usually worth about $1.50.</p>
-""",
-        "dossier": """
-<div class="dossier-main-title">📊 MACROECONOMIC PRICE ELASTICITY ✦ B2B LOGISTICS</div>
-<p class="dossier-text">The physical retail network (department stores and global distributors) absorbs an overwhelming 45% to 60% margin.</p>
-"""
-    },
-    "Ep. 7": {
-        "debrief": """
-<div class="debrief-main-title">🎙️ INTELLIGENCE BRIEFING. EU REGULATORY SHOCK</div>
-<p class="dialogue-text"><strong>HOST:</strong> You're funding this wild collision of multi-billion dollar corporate patents, extreme supply chain physics, and a very quiet, very intense global regulatory war.</p>
-""",
-        "dossier": """
-<div class="dossier-main-title">⚖️ INTELLECTUAL PROPERTY MOATS ✦ REGULATORY FORENSICS</div>
-<p class="dossier-text">The inability to copyright a fragrance formula—legally treating it like a soup recipe—creates a massive vulnerability.</p>
-"""
-    },
-    "Ep. 8": {
-        "debrief": """
-<div class="debrief-main-title">🎙️ INTELLIGENCE BRIEFING. MASTER SYNTHESIS</div>
-<div class="debrief-sub-title">Strategic Deep Dive • Executive Debrief</div>
-<div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area: AI-Assisted Architecture & Global Fragrance Economics. ✦ Data Intelligence: SBERT, TF-IDF, GC-MS. ✦ Key Phenomenon: The digitization of scent and biological bottlenecks.</div>
-
-<div class="part-heading">Part I. The Illusion of Alchemy vs. Algorithmic Reality</div>
-<p class="dialogue-text"><strong>HOST 1:</strong> What if I told you the fragrance you're wearing right now wasn't designed by a romantic French artist in a sunlit laboratory, but by an algorithm? An algorithm that scanned literally 45 million human brain waves just to calculate the exact chemical dose needed to hack your dopamine receptors.</p>
-<p class="dialogue-text"><strong>HOST 2:</strong> It's a jarring thought. We have this enduring image of perfumery as an unpredictable alchemy. But that romantic laboratory has essentially been replaced by a server room. Today, we're looking at the realities of an 84.7 billion dollar global fragrance industry.</p>
-
-<div class="part-heading">Part II. The Barbell Economy & Prompt-Driven Architecture</div>
-<p class="dialogue-text"><strong>HOST 2:</strong> The era of intuition-based marketing is dead. We are operating in the Barbell Economy now. Consumers either want an ultra-affordable $40 scent, or a $400 hyper-niche extract. The middle ground is dropping out.</p>
-<p class="dialogue-text"><strong>HOST 1:</strong> Consumers demand absolute precision. And that precision is coming from data architects, like Magdalena Romaniecka. Her GitHub ecosystem is the blueprint for the modern industry.</p>
-<p class="dialogue-text"><strong>HOST 2:</strong> The industry is trapped by a negative 1.81 B2B price elasticity, and suffers from a 0.28 digital correlation bottleneck where TikTok hype does not translate to actual sales. This is where Romaniecka's methodology is brilliant. Using Prompt-Driven Development, she designs the core business logic and leverages AI to write production-ready Python code five times faster.</p>
-
-<div class="part-heading">Part III. The ScentSational CRO Engine & Neuro-Perfumery</div>
-<p class="dialogue-text"><strong>HOST 2:</strong> Her masterpiece is Project B, ScentSational—the Conversion Rate Optimization (CRO) engine. It uses Natural Language Processing (SBERT) to translate emotional reviews into mathematical vectors, plotting them using TF-IDF and Cosine Similarity to rescue abandoned shopping carts.</p>
-<p class="dialogue-text"><strong>HOST 1:</strong> But when you use algorithms to design a scent purely on vector math, you homogenize the art form.</p>
-<p class="dialogue-text"><strong>HOST 2:</strong> It's overcoming the severe biological limits of the human nose! Take Givaudan's AI system, Carto. It analyzes over 5,000 rare ingredients instantly. And neuro-perfumery? The industry processed 45 million EEG scans to recommend a 10x overdose of styrallyl acetate to literally bio-hack the nervous system for energy.</p>
-
-<div class="part-heading">Part IV. GC-MS Cloning & The Final Verdict</div>
-<p class="dialogue-text"><strong>HOST 1:</strong> Let's look at retail. GC-MS technology acts as a molecular photocopier. Middle Eastern brands use this to flawlessly reverse-engineer niche extracts, generating millions in revenue via TikTok Shop.</p>
-<p class="dialogue-text"><strong>HOST 2:</strong> While Western legacy brands are crippled by EU and IFRA regulations that restrict foundational natural allergens, forcing the industry to turn to synthetic green technology.</p>
-<p class="dialogue-text"><strong>HOST 1:</strong> Ultimately, the integration of data science and AI formulation isn't a tragedy. The READMEs in Magdalena Romaniecka's GitHub aren't just technical manuals; they are strategic business documents speaking the language of ROI, bounce rates, and margin optimization. Intuition-based marketing is dead. The industry belongs to data architects now.</p>
-""",
-        "dossier": """
-<div class="dossier-main-title">🌐 2026 Global Architecture ✦ Master Synthesis</div>
-<div class="dossier-sub-title">Final Verdict ✦ The Triumph of Data Architects</div>
-<div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Macroeconomic Realities vs. Biological Bottlenecks ✦ 0.28 Digital Correlation ✦ B2B Elasticity -1.81.</div>
-
-<div class="dossier-section-title">The End of Intuition-Based Marketing</div>
-<p class="dossier-text">The integration of data science, predictive analytics, and AI formulation has fundamentally transformed the luxury fragrance market. The era of the master perfumer relying purely on intuition has been replaced by Data Architects leveraging Prompt-Driven Development, NLP (SBERT), and Cosine Similarity to eliminate UX friction and drive Conversion Rate Optimization (CRO).</p>
-
-<div class="dossier-section-title">The Omnichannel Bottleneck & Biology</div>
-<p class="dossier-text">Our analysis proves that while digital hype creates Top-of-Funnel (TOFU) awareness, actual conversion requires mitigating the 0.28 digital correlation bottleneck through precision data models. The Barbell Economy demands absolute accuracy—either through ultra-affordable clones mapped via GC-MS technology, or heavily engineered neuro-perfumery verified by 45 million EEG brainwave scans.</p>
-
-<div class="intelligence-badge"><strong>✦ STRATEGIC VERDICT:</strong> Survival in the 2026 landscape belongs exclusively to brands and architects who weaponize efficiency, leverage data intelligence, and understand the biological limits of the consumer. The modern standard requires mastering both Python arrays and thermodynamic realities.</div>
-"""
-    }
-}
 
 tabs = st.tabs(["STRATEGIC BRIEFINGS", "MACRO & B2B SIMULATIONS", "MARKET ANALYTICS", "FRAGRANCE VAULT", "ECOSYSTEM"])
 
@@ -302,34 +205,33 @@ with tabs[0]:
        
         match = re.search(r'(Ep\. \d+)', episode)
         ep_key = match.group(1) if match else "Ep. 0"
-        content_dict = briefings_content.get(ep_key, {})
         
         if "0." in episode:
-            current_a = None
+            current_t, current_a, rep_file = None, None, "master_prologue.md"
             f_type, v_title, desc = "None", "Macroeconomic Foundations 2026", "The 5T Nvidia era, EU 2023/1545 shock, and Givaudan MoodScentz™+ integration."
         elif "1:" in episode:
-            current_a = "podcast_trends.mp3"
+            current_t, current_a, rep_file = "podcast_transcript.md", "podcast_trends.mp3", "trend_report_2025.md"
             f_type, v_title, desc = "Popularity", "Global Popularity Ranking", "Analyzing Lattafa viral surge and Givaudan MoodScentz™ neuro-active solutions."
         elif "2:" in episode:
-            current_a = "ep2_audio.mp3"
+            current_t, current_a, rep_file = "ep2_trade_transcript.md", "ep2_audio.mp3", "ep2_trade_report.md"
             f_type, v_title, desc = "None", "Global Trade Volume 2024", "Deep Research data on US Section 122 tariffs, EU surplus, and Russian autarky (93M units)."
         elif "3:" in episode:
-            current_a = "podcast_2026.mp3"
+            current_t, current_a, rep_file = "ep3_debrief", "podcast_2026.mp3", "ep3_dossier"
             f_type, v_title, desc = "None", "2026 Global Projections", "Impact of the 5T Nvidia era, the 2025 Tariff Shock, and negative 1.81 price elasticity."
         elif "4:" in episode:
-            current_a = "ep3_europe_barbell.mp3"
+            current_t, current_a, rep_file = "ep4_debrief", "ep3_europe_barbell.mp3", "ep4_dossier"
             f_type, v_title, desc = "Barbell", "The Barbell Market Structure 2026", "Mapping the European Barbell structure, Poland PPP breakthrough, and 0.28 digital correlation."
         elif "5:" in episode:
-            current_a = "masterclass_ep1_audio.mp3"
+            current_t, current_a, rep_file = "ep5_debrief", "masterclass_ep1_audio.mp3", "ep5_dossier"
             f_type, v_title, desc = "Popularity", "Givaudan Carto AI Infrastructure", "Deep-dive technical breakdown: Algorithmic scent formulation and EEG brainwave mapping."
         elif "6:" in episode:
-            current_a = "masterclass_ep2_audio.mp3"
+            current_t, current_a, rep_file = "ep6_debrief", "masterclass_ep2_audio.mp3", "ep6_dossier"
             f_type, v_title, desc = "None", "B2B Price Elasticity Vectors", "Advanced macroeconomic regression analyzing consumer behavior under severe inflation."
         elif "7:" in episode:
-            current_a = "masterclass_ep3_audio.mp3"
+            current_t, current_a, rep_file = "ep7_debrief", "masterclass_ep3_audio.mp3", "ep7_dossier"
             f_type, v_title, desc = "Barbell", "EU 2023/1545 Regulatory Compliance", "Strategic adaptation strategies for allergen restrictions and synthetic ingredient bans."
         else:
-            current_a = "The_hidden_math_behind_your_signature_scent.m4a"
+            current_t, current_a, rep_file = "ep8_debrief.md", "Algorithms_are_the_new_master_perfumers_2.m4a", "ep8_dossier.md"
             f_type, v_title, desc = "None", "Master Strategic Synthesis 2026", "Final dossier compiled via Deep Research and B2B technological architecture curated by Magdalena Romaniecka."
             
         if current_a:
@@ -386,17 +288,21 @@ with tabs[0]:
     l_col, r_col = st.columns(2, gap="large")
     with l_col:
         st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Executive Audio Debrief</div>', unsafe_allow_html=True)
-        if "debrief" in content_dict:
-            st.markdown(f'<div class="report-frame">\n{content_dict["debrief"]}\n</div>', unsafe_allow_html=True)
-        else:
-            st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Documentation pending...</div>', unsafe_allow_html=True)
+        try:
+            with open(find_file(current_t), 'r', encoding='utf-8') as f:
+                content_t = f.read()
+                st.markdown(f'<div class="report-frame">\n\n{content_t}\n\n</div>', unsafe_allow_html=True)
+        except:
+            st.error(f"Debrief file '{current_t}' missing. Please ensure it is uploaded.")
             
     with r_col:
         st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Executive Master Dossier</div>', unsafe_allow_html=True)
-        if "dossier" in content_dict:
-            st.markdown(f'<div class="report-frame">\n{content_dict["dossier"]}\n</div>', unsafe_allow_html=True)
-        else:
-            st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Documentation pending...</div>', unsafe_allow_html=True)
+        try:
+            with open(find_file(rep_file), 'r', encoding='utf-8') as f:
+                content_r = f.read()
+                st.markdown(f'<div class="report-frame">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
+        except:
+            st.error(f"Dossier file '{rep_file}' missing. Please ensure it is uploaded.")
 
 with tabs[1]:
     st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">B2B Price Elasticity Simulator</div>', unsafe_allow_html=True)
