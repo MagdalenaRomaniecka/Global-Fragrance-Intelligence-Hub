@@ -1,4 +1,3 @@
-
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
@@ -157,7 +156,7 @@ st.markdown("""
 
 def find_file(filename):
     for root, _, files in os.walk("."):
-        if filename in files:
+        if filename and filename in files:
             return os.path.join(root, filename)
     return filename
 
@@ -521,15 +520,48 @@ with tabs[0]:
     with col_nav:
         st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Executive Selection</div>', unsafe_allow_html=True)
         episode = st.radio("Selection:", [
+            "🏛️ 0. Global Foundation",
+            "🎧 Ep. 1: Recession Glam",
+            "📊 Ep. 2: Global Trade",
+            "🔮 Ep. 3: 2026 Outlook",
+            "🌍 Ep. 4: European Barbell",
+            "🎓 Ep. 5: Carto AI & Neuro-Tech",
+            "🎓 Ep. 6: B2B Price Elasticity",
+            "🎓 Ep. 7: EU Regulatory Shock",
             "🧬 Ep. 8: Master Synthesis"
         ], label_visibility="collapsed")
        
         match = re.search(r'(Ep\. \d+)', episode)
-        ep_key = match.group(1) if match else "Ep. 8"
+        ep_key = match.group(1) if match else "Ep. 0"
         content_dict = briefings_content.get(ep_key, {})
         
-        current_t, current_a, rep_file = "master_synthesis_transcript.md", "ep8_master_synthesis.m4a", "master_synthesis.md"
-        f_type, v_title, desc = "None", "Master Strategic Synthesis 2026", "Final dossier compiled via Deep Research and B2B technological architecture curated by Magdalena Romaniecka."
+        if "0." in episode:
+            current_t, current_a, rep_file = None, None, "master_prologue.md"
+            f_type, v_title, desc = "None", "Macroeconomic Foundations 2026", "The 5T Nvidia era, EU 2023/1545 shock, and Givaudan MoodScentz™+ integration."
+        elif "1:" in episode:
+            current_t, current_a, rep_file = "podcast_transcript.md", "podcast_trends.mp3", "trend_report_2025.md"
+            f_type, v_title, desc = "Popularity", "Global Popularity Ranking", "Analyzing Lattafa viral surge and Givaudan MoodScentz™ neuro-active solutions."
+        elif "2:" in episode:
+            current_t, current_a, rep_file = "ep2_trade_transcript.md", "ep2_audio.mp3", "ep2_trade_report.md"
+            f_type, v_title, desc = "None", "Global Trade Volume 2024", "Deep Research data on US Section 122 tariffs, EU surplus, and Russian autarky (93M units)."
+        elif "3:" in episode:
+            current_t, current_a, rep_file = "ep3_debrief", "podcast_2026.mp3", "ep3_dossier"
+            f_type, v_title, desc = "None", "2026 Global Projections", "Impact of the 5T Nvidia era, the 2025 Tariff Shock, and negative 1.81 price elasticity."
+        elif "4:" in episode:
+            current_t, current_a, rep_file = "ep4_debrief", "ep3_europe_barbell.mp3", "ep4_dossier"
+            f_type, v_title, desc = "Barbell", "The Barbell Market Structure 2026", "Mapping the European Barbell structure, Poland PPP breakthrough, and 0.28 digital correlation."
+        elif "5:" in episode:
+            current_t, current_a, rep_file = "ep5_debrief", "masterclass_ep1_audio.mp3", "ep5_dossier"
+            f_type, v_title, desc = "Popularity", "Givaudan Carto AI Infrastructure", "Deep-dive technical breakdown: Algorithmic scent formulation and EEG brainwave mapping."
+        elif "6:" in episode:
+            current_t, current_a, rep_file = "ep6_debrief", "masterclass_ep2_audio.mp3", "ep6_dossier"
+            f_type, v_title, desc = "None", "B2B Price Elasticity Vectors", "Advanced macroeconomic regression analyzing consumer behavior under severe inflation."
+        elif "7:" in episode:
+            current_t, current_a, rep_file = "ep7_debrief", "masterclass_ep3_audio.mp3", "ep7_dossier"
+            f_type, v_title, desc = "Barbell", "EU 2023/1545 Regulatory Compliance", "Strategic adaptation strategies for allergen restrictions and synthetic ingredient bans."
+        else:
+            current_t, current_a, rep_file = None, "The_hidden_math_behind_your_signature_scent.m4a", None
+            f_type, v_title, desc = "None", "Master Strategic Synthesis 2026", "Final dossier compiled via Deep Research and B2B technological architecture curated by Magdalena Romaniecka."
             
         if current_a:
             target_audio = find_file(current_a)
@@ -539,7 +571,7 @@ with tabs[0]:
                 st.markdown(f'<div style="color: #888888; font-size: 0.8rem; font-style: italic;">[Audio file {current_a} pending upload]</div>', unsafe_allow_html=True)
        
         st.markdown(f'<p style="color:#D4AF37; font-size:0.95rem; font-style:italic; margin-top:20px; border-left: 3px solid #D4AF37; padding-left: 20px;">{desc}</p>', unsafe_allow_html=True)
-
+        
     with col_viz:
         st.markdown(f'<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Live Market Data ✦ {v_title}</div>', unsafe_allow_html=True)
         
@@ -551,20 +583,43 @@ with tabs[0]:
         
     st.write("---")
    
-    l_col, r_col = st.columns(2, gap="large")
-    with l_col:
-        st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Executive Audio Debrief</div>', unsafe_allow_html=True)
-        if "debrief" in content_dict:
-            st.markdown(f'<div class="report-frame">\n{content_dict["debrief"]}\n</div>', unsafe_allow_html=True)
-        else:
-            st.error("Debrief missing.")
-            
-    with r_col:
-        st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Executive Master Dossier</div>', unsafe_allow_html=True)
+    if "0." in episode:
+        st.markdown('<div class="section-header">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
         if "dossier" in content_dict:
-            st.markdown(f'<div class="report-frame">\n{content_dict["dossier"]}\n</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="report-frame">\n\n{content_dict["dossier"]}\n\n</div>', unsafe_allow_html=True)
         else:
-            st.error("Dossier missing.")
+            try:
+                with open(find_file(rep_file), 'r', encoding='utf-8') as f:
+                    content_r = f.read()
+                    st.markdown(f'<div class="report-frame">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
+            except:
+                st.error("Dossier missing.")
+    else:
+        l_col, r_col = st.columns(2, gap="large")
+        with l_col:
+            st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Executive Audio Debrief</div>', unsafe_allow_html=True)
+            if "debrief" in content_dict:
+                st.markdown(f'<div class="report-frame">\n{content_dict["debrief"]}\n</div>', unsafe_allow_html=True)
+            elif current_t:
+                try:
+                    with open(find_file(current_t), 'r', encoding='utf-8') as f:
+                        content_t = f.read()
+                        st.markdown(f'<div class="report-frame">\n\n{content_t}\n\n</div>', unsafe_allow_html=True)
+                except:
+                    st.error("Debrief missing.")
+            else:
+                st.markdown('<div class="report-frame" style="text-align: center; font-style: italic; color: #888;">Technical audio briefing selected. Please refer to the Master Dossier on the right for accompanying documentation.</div>', unsafe_allow_html=True)
+        with r_col:
+            st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Executive Master Dossier</div>', unsafe_allow_html=True)
+            if "dossier" in content_dict:
+                st.markdown(f'<div class="report-frame">\n{content_dict["dossier"]}\n</div>', unsafe_allow_html=True)
+            else:
+                try:
+                    with open(find_file(rep_file), 'r', encoding='utf-8') as f:
+                        content_r = f.read()
+                        st.markdown(f'<div class="report-frame">\n\n{content_r}\n\n</div>', unsafe_allow_html=True)
+                except:
+                    st.error("Dossier missing.")
 
 with tabs[1]:
     st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">B2B Price Elasticity Simulator</div>', unsafe_allow_html=True)
