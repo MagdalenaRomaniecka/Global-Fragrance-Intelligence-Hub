@@ -569,7 +569,6 @@ with tabs[0]:
     with col_viz:
         st.markdown(f'<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Live Market Data ✦ {v_title}</div>', unsafe_allow_html=True)
         
-        # Robust fallback architecture for charts to prevent UI breakage
         if f_type == "Barbell":
             if 'market_structure' in df.columns:
                 b_counts = df['market_structure'].value_counts().reset_index()
