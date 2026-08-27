@@ -135,6 +135,22 @@ st.markdown("""
     .footer { position: relative; width: 100%; background-color: #0E0E0E; color: #666666; text-align: center; padding: 30px; font-size: 0.65rem; border-top: 1px solid #1F1F1F; z-index: 999; letter-spacing: 2px; margin-top: 50px; }
    
     .intelligence-badge { text-align: center; color: #D4AF37; font-size: 0.85rem; font-style: italic; margin: 15px auto 25px auto; letter-spacing: 1px; border: 1px solid rgba(212,175,55,0.3); padding: 12px; background: rgba(212,175,55,0.05); max-width: 800px; }
+   
+    .stSelectbox label, .stSelectbox [data-testid="stMarkdownContainer"] p {
+        font-family: 'Tenor Sans', sans-serif !important;
+        font-size: 1.1rem !important;
+        color: #D4AF37 !important;
+        text-align: center !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+        width: 100% !important;
+        display: block !important;
+    }
+   
+    div[data-testid="stSelectbox"] > div {
+        margin: 0 auto !important;
+        max-width: 400px !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -474,16 +490,18 @@ The key reference point is the validation of the Physical Anchor. Despite digita
         "dossier": """
 <div class="dossier-main-title">🌐 2026 Global Architecture ✦ Master Synthesis</div>
 <div class="dossier-sub-title">Final Verdict ✦ The Triumph of Data Architects</div>
-<div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Macroeconomic Realities vs. Biological Bottlenecks ✦ 0.28 Digital Correlation ✦ B2B Elasticity -1.81.</div>
+<div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Macroeconomic Realities vs. Biological Bottlenecks ✦ Multivariate Regression (0.28 Digital Correlation) ✦ B2B Elasticity -1.81 ✦ Phygital Funnel Optimization.</div>
 
-<div class="dossier-section-title">The End of Intuition-Based Marketing</div>
-<p class="dossier-text">The integration of data science, predictive analytics, and AI formulation has fundamentally transformed the luxury fragrance market. The era of the master perfumer relying purely on intuition has been replaced by Data Architects leveraging Prompt-Driven Development, NLP (SBERT), and Cosine Similarity to eliminate UX friction and drive Conversion Rate Optimization (CRO).</p>
+<div class="dossier-section-title">The End of Intuition-Based Marketing & Cognitive Optimization</div>
+<p class="dossier-text">The integration of data science, predictive analytics, and AI formulation has fundamentally transformed the luxury fragrance market. The era of the master perfumer relying purely on subjective intuition has been replaced by Data Architects leveraging Prompt-Driven Development and advanced NLP frameworks (SBERT). By translating polysensory human emotions into mathematical vector embeddings (Cosine Similarity), these systems systematically eliminate the cognitive overload (Hick's Law) that historically caused high bounce rates, effectively driving Conversion Rate Optimization (CRO) in blind-buying scenarios.</p>
 
-<div class="dossier-section-title">The Omnichannel Bottleneck & Biology</div>
-<p class="dossier-text">Our analysis proves that while digital hype creates Top-of-Funnel (TOFU) awareness, actual conversion requires mitigating the 0.28 digital correlation bottleneck through precision data models. The Barbell Economy demands absolute accuracy—either through ultra-affordable clones mapped via GC-MS technology, or heavily engineered neuro-perfumery verified by 45 million EEG brainwave scans.</p>
-<p class="dossier-text">However, as proven by the biological realities of human skin chemistry (pH, temperature, microbiome), pure algorithmic prediction reaches its limit without physical verification. The future is "Phygital"—a seamless, data-driven synthesis of powerful cloud analytics and physical retail infrastructure.</p>
+<div class="dossier-section-title">The Omnichannel Bottleneck & Statistical Reality</div>
+<p class="dossier-text">Our analysis proves that while digital hype creates immense Top-of-Funnel (TOFU) awareness, multivariate regression models indicate that digital virality alone is statistically insufficient to secure long-term Customer Lifetime Value (CLV). Actual conversion requires mitigating the 0.28 digital correlation bottleneck through precision omnichannel data models. The Barbell Economy demands absolute accuracy—either through ultra-affordable algorithmic clones mapped via GC-MS technology, or heavily engineered neuro-perfumery verified by 45 million EEG brainwave scans.</p>
 
-<div class="intelligence-badge"><strong>✦ STRATEGIC VERDICT:</strong> Survival in the 2026 landscape belongs exclusively to brands and architects who weaponize efficiency, leverage data intelligence, and understand the biological limits of the consumer. The modern standard requires mastering both Python arrays and thermodynamic realities.</div>
+<div class="dossier-section-title">The "Phygital" Paradigm & Sociological Signaling</div>
+<p class="dossier-text">Sociologically, as mainstream scents become hyper-optimized, algorithmically generated commodities, elite consumers increasingly seek "Identity Shields"—unpredictable, volatile natural compositions acting as modern Veblen goods. Furthermore, biological realities of human skin chemistry (pH variance, body thermodynamics, and unique microbiomes) dictate that pure algorithmic prediction reaches its absolute limit without physical verification. Therefore, the dominant framework is "Phygital"—a seamless, data-driven synthesis where predictive cloud architectures route consumers directly to physical retail anchors for the final, physical sensory audit.</p>
+
+<div class="intelligence-badge"><strong>✦ STRATEGIC VERDICT:</strong> Survival in the 2026 landscape belongs exclusively to brands and Data Architects who weaponize operational efficiency, leverage machine learning to bypass cognitive friction, and deeply understand the biological limits of the consumer. The modern standard requires mastering both Python arrays and thermodynamic realities.</div>
 """
     }
 }
@@ -551,7 +569,7 @@ with tabs[0]:
     with col_viz:
         st.markdown(f'<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Live Market Data ✦ {v_title}</div>', unsafe_allow_html=True)
         
-        # POTEZNY ZAPASOWY BLOK DLA WYKRESOW - NIGDY NIE POZWOLI NA ZOLTY EKRAN BLEDOW
+        # Robust fallback architecture for charts to prevent UI breakage
         if f_type == "Barbell":
             if 'market_structure' in df.columns:
                 b_counts = df['market_structure'].value_counts().reset_index()
