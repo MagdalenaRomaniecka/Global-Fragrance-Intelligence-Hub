@@ -309,7 +309,7 @@ The key reference point is the validation of the Physical Anchor. Despite digita
     },
     "Ep. 5": {
         "debrief": """
-<div class="debrief-main-title">🎙️️ INTELLIGENCE BRIEFING. CARTO AI & NEURO-TECH</div>
+<div class="debrief-main-title">🎙️ INTELLIGENCE BRIEFING. CARTO AI & NEURO-TECH</div>
 <div class="debrief-sub-title">Strategic Deep Dive • Executive Debrief</div>
 <div class="strategic-scope">[ STRATEGIC SCOPE ] ✦ Primary Analysis Area AI Formulation, EEG/fMRI Brainwave Mapping. ✦ Data Intelligence Givaudan Carto AI, IBM Philyra, MoodScentz, Myrissi. ✦ Key Phenomenon Algorithmic olfactory synthesis vs human intuition.</div>
 <div class="part-heading">Part I. The Olfactory Memory Bottleneck</div>
@@ -551,7 +551,7 @@ The key reference point is the validation of the Physical Anchor. Despite digita
 <p class="dossier-text">Our analysis proves that while digital hype creates immense Top-of-Funnel (TOFU) awareness, multivariate regression models indicate that digital virality alone is statistically insufficient to secure long-term Customer Lifetime Value (CLV). Actual conversion requires mitigating the 0.28 digital correlation bottleneck through precision omnichannel data models. The Barbell Economy demands absolute accuracy—either through ultra-affordable algorithmic clones mapped via GC-MS technology, or heavily engineered neuro-perfumery verified by 45 million EEG brainwave scans.</p>
 
 <div class="dossier-section-title">The "Phygital" Paradigm & Sociological Signaling</div>
-<p class="dossier-text">Sociologically, as mainstream scents become hyper-optimized, algorithmically generated commodities, elite consumers increasingly seek "Identity Shields"—unpredictable, volatile natural compositions acting as modern Veblen goods. Furthermore, biological realities of human skin chemistry (pH variance, body thermodynamics, and unique microbiomes) dictate that pure algorithmic prediction reaches its absolute limit without physical verification. Therefore, the dominant framework is "Phygital"—a seamless, data-driven synthesis where predictive cloud architectures route architectures route consumers directly to physical retail anchors for the final, physical sensory audit.</p>
+<p class="dossier-text">Sociologically, as mainstream scents become hyper-optimized, algorithmically generated commodities, elite consumers increasingly seek "Identity Shields"—unpredictable, volatile natural compositions acting as modern Veblen goods. Furthermore, biological realities of human skin chemistry (pH variance, body thermodynamics, and unique microbiomes) dictate that pure algorithmic prediction reaches its absolute limit without physical verification. Therefore, the dominant framework is "Phygital"—a seamless, data-driven synthesis where predictive cloud architectures route consumers directly to physical retail anchors for the final, physical sensory audit.</p>
 
 <div class="intelligence-badge"><strong>✦ STRATEGIC VERDICT:</strong> Survival in the 2026 landscape belongs exclusively to brands and Data Architects who weaponize operational efficiency, leverage machine learning to bypass cognitive friction, and deeply understand the biological limits of the consumer. The modern standard requires mastering both Python arrays and thermodynamic realities.</div>
 """
@@ -608,7 +608,7 @@ with tabs[0]:
             f_type, v_title, desc = "Barbell", "EU 2023/1545 Regulatory Compliance", "Strategic adaptation strategies for allergen restrictions and synthetic ingredient bans."
         elif "8:" in episode:
             current_a = "ep8_brutal_economics.m4a"
-            f_type, v_title, desc = "None", "Supply Chain Physics & Retail Margins", "Deconstructing the $150 designer bottle illusion, Maceration Arbitrage, and the Barbell Economy."
+            f_type, v_title, desc = "Waterfall", "Supply Chain Physics & Retail Margins", "Deconstructing the $150 designer bottle illusion, Maceration Arbitrage, and the Barbell Economy."
         else:
             current_a = "ep9_master_synthesis.m4a"
             f_type, v_title, desc = "Funnel", "The 0.28 Digital Bottleneck Funnel", "Visualizing the catastrophic drop-off from TOFU digital virality to BOFU physical conversion."
@@ -651,6 +651,21 @@ with tabs[0]:
             fig.update_traces(textposition='inside', textinfo='value+percent initial', textfont=dict(size=14, color='#0E0E0E'))
             fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=False, margin=dict(t=50, b=0, l=0, r=0))
             
+        elif f_type == "Waterfall":
+            fig = go.Figure(go.Waterfall(
+                name = "20", orientation = "v",
+                measure = ["relative", "relative", "relative", "relative", "total"],
+                x = ["Raw Juice & Solvent", "Packaging & Glass", "Global Marketing", "Retail Margin (Black Hole)", "Final Retail Price"],
+                textposition = "outside",
+                text = ["$5", "$20", "$35", "$90", "$150"],
+                y = [5, 20, 35, 90, 150],
+                connector = {"line":{"color":"#333333"}},
+                decreasing = {"marker":{"color":"#D4AF37"}},
+                increasing = {"marker":{"color":"#D4AF37"}},
+                totals = {"marker":{"color":"#888888"}}
+            ))
+            fig.update_layout(template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', yaxis=dict(showgrid=False, showticklabels=False), margin=dict(t=50, b=0, l=0, r=0))
+
         else:
             col_name = 'Name' if 'Name' in df.columns else 'name' if 'name' in df.columns else None
             col_val = 'Rating Value' if 'Rating Value' in df.columns else 'community_votes' if 'community_votes' in df.columns else None
@@ -668,7 +683,10 @@ with tabs[0]:
                 fig = px.bar(x=["Data Available In Local DB"], y=[100], template="plotly_dark", color_discrete_sequence=['#333333'])
                 
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, yaxis=dict(showgrid=False))
-        st.plotly_chart(fig, use_container_width=True)
+        if f_type != "Waterfall":
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.plotly_chart(fig, use_container_width=True)
         
     st.write("---")
    
