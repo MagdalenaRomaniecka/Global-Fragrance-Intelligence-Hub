@@ -574,10 +574,10 @@ with tabs[0]:
             f_type, v_title, desc = "Popularity", "Global Popularity Ranking", "Analyzing Lattafa viral surge and Givaudan MoodScentz™ neuro active solutions"
         elif "2" in episode:
             current_a = "ep2_audio.mp3"
-            f_type, v_title, desc = "None", "Global Trade Volume 2024", "Deep Research data on US Section 122 tariffs EU surplus and Russian autarky 93M units"
+            f_type, v_title, desc = "Trade", "Global Trade Volume Q4 2026", "Deep Research data on US Section 122 tariffs EU surplus and Russian autarky 93M units"
         elif "3" in episode:
             current_a = "podcast_2026.mp3"
-            f_type, v_title, desc = "None", "2026 Global Projections", "Impact of the 5T Nvidia era the 2025 Tariff Shock and negative 1.81 price elasticity"
+            f_type, v_title, desc = "Popularity", "Q4 2026 Global Projections", "Impact of the 5T Nvidia era the Tariff Shock and negative 1.81 price elasticity"
         elif "4" in episode:
             current_a = "ep3_europe_barbell.mp3"
             f_type, v_title, desc = "Barbell", "The Barbell Market Structure 2026", "Mapping the European Barbell structure Poland PPP breakthrough and 0.28 digital correlation"
@@ -586,7 +586,7 @@ with tabs[0]:
             f_type, v_title, desc = "Popularity", "Givaudan Carto AI Infrastructure", "Deep dive technical breakdown Algorithmic scent formulation and EEG brainwave mapping"
         elif "6" in episode:
             current_a = "masterclass_ep2_audio.mp3"
-            f_type, v_title, desc = "None", "B2B Price Elasticity Vectors", "Advanced macroeconomic regression analyzing consumer behavior under severe inflation"
+            f_type, v_title, desc = "Waterfall", "B2B Price Elasticity Vectors", "Advanced macroeconomic regression analyzing consumer behavior under severe inflation"
         elif "7" in episode:
             current_a = "masterclass_ep3_audio.mp3"
             f_type, v_title, desc = "Barbell", "EU 2023/1545 Regulatory Compliance", "Strategic adaptation strategies for allergen restrictions and synthetic ingredient bans"
@@ -626,6 +626,16 @@ with tabs[0]:
             fig.update_yaxes(range=[0, max_val * 1.5], showgrid=False, showticklabels=False)
             fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.5, xanchor="center", x=0.5), margin=dict(t=50, b=0, l=0, r=0))
             
+        elif f_type == "Trade":
+            trade_data = pd.DataFrame({
+                'Source': ['Domestic Brands Russia', 'UAE & Eastern Imports', 'Western Heritage Grey Market'],
+                'Market Share Percent': [68, 22, 10]
+            })
+            fig = px.pie(trade_data, values='Market Share Percent', names='Source', hole=0.6, template="plotly_dark",
+                         color_discrete_sequence=['#D4AF37', '#F0E68C', '#333333'])
+            fig.update_traces(textinfo='percent+label', textfont=dict(size=14, color='#E0E0E0'))
+            fig.update_layout(showlegend=False, margin=dict(t=30, b=30, l=0, r=0), paper_bgcolor='rgba(0,0,0,0)')
+
         elif f_type == "Funnel":
             funnel_data = pd.DataFrame({
                 'Stage': ['Social Media Virality TOFU', 'Sensory Doubt Cart Abandonment', 'Physical Retail Conversion BOFU'],
@@ -675,7 +685,7 @@ with tabs[0]:
     st.write("---")
    
     if "0." in episode:
-        st.markdown('<div class="section-header">Macroeconomic Foundations 2026</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">Macroeconomic Foundations Q4 2026</div>', unsafe_allow_html=True)
         if "dossier" in content_dict:
             st.markdown(f'<div class="report-frame">\n\n{content_dict["dossier"]}\n\n</div>', unsafe_allow_html=True)
     else:
