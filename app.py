@@ -642,8 +642,8 @@ with tabs[0]:
                 'Users': [10000, 2800, 280]
             })
             fig = px.funnel(funnel_data, x='Users', y='Stage', template="plotly_dark", color_discrete_sequence=['#D4AF37'])
-            fig.update_traces(textposition='inside', textinfo='value+percent initial', textfont=dict(size=14, color='#0E0E0E'))
-            fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=False, margin=dict(t=50, b=0, l=0, r=0))
+            fig.update_traces(textposition='outside', textinfo='value+percent initial', textfont=dict(size=15, color='#D4AF37'), cliponaxis=False)
+            fig.update_layout(xaxis_title=None, yaxis_title=None, showlegend=False, margin=dict(t=50, b=0, l=150, r=50))
             
         elif f_type == "Waterfall":
             fig = go.Figure(go.Waterfall(
@@ -677,10 +677,7 @@ with tabs[0]:
                 fig = px.bar(x=["Data Available In Local DB"], y=[100], template="plotly_dark", color_discrete_sequence=['#333333'])
                 
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_family="Lato", height=450, yaxis=dict(showgrid=False))
-        if f_type != "Waterfall":
-            st.plotly_chart(fig, use_container_width=True)
-        else:
-            st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True)
         
     st.write("---")
    
