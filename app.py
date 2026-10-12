@@ -542,7 +542,7 @@ The key reference point is the validation of the Physical Anchor. Despite digita
     }
 }
 
-tabs = st.tabs(["STRATEGIC BRIEFINGS", "MACRO & B2B SIMULATIONS", "MARKET ANALYTICS", "FRAGRANCE VAULT", "ECOSYSTEM", "M&A CAP TABLE"])
+tabs = st.tabs(["STRATEGIC BRIEFINGS", "MACRO & B2B SIMULATIONS", "M&A CAP TABLE", "MARKET ANALYTICS", "FRAGRANCE VAULT", "ECOSYSTEM"])
 
 with tabs[0]:
     col_nav, col_viz = st.columns([1, 1.5], gap="large")
@@ -778,66 +778,6 @@ with tabs[1]:
         """, unsafe_allow_html=True)
 
 with tabs[2]:
-    st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Market Strategic Hierarchy</div>', unsafe_allow_html=True)
-    st.markdown('<div class="intelligence-badge">✦ K MEANS SEGMENTATION 64 percent of analyzed Ultra Niche segments utilize Jungle Essence™ CO2 extraction technologies to justify premium pricing above $350</div>', unsafe_allow_html=True)
-    if 'segment' in df.columns:
-        df_sun = df.head(50).copy()
-        df_sun['Global Market'] = 'Global Market'
-        fig_sun = px.sunburst(df_sun, path=['Global Market', 'segment', 'Name' if 'Name' in df.columns else 'name'], color='segment', color_discrete_sequence=['#D4AF37', '#F0E68C', '#555'], template="plotly_dark")
-        fig_sun.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=700)
-        st.plotly_chart(fig_sun, use_container_width=True)
-
-with tabs[3]:
-    st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Fragrance Market Case Studies</div>', unsafe_allow_html=True)
-    col_n = 'Name' if 'Name' in df.columns else 'name' if 'name' in df.columns else None
-    if col_n:
-        f_choice = st.selectbox("Select Profile", sorted(df[col_n].tolist()))
-        f_data = df[df[col_n] == f_choice].iloc[0]
-        
-        intel_note = ""
-        if "Phantom" in f_choice:
-            intel_note = '<div class="intelligence-badge" style="margin-top: 25px;">✦ A B TESTING INSIGHT Designed via Givaudan Carto AI and 45M EEG brainwave measurements to optimize confidence boosting neuro responses vs control groups</div>'
-        
-        score_val = f_data.get('Rating Value', 4.5)
-        notes_val = f_data.get('Main Accords', "Proprietary Accord Stack")
-        brand_val = f_data.get('brand', "Global Brand")
-        seg_val = f_data.get('segment', "Prestige")
-        
-        st.markdown(f"""
-        <div style="background-color: #0E0E0E; border: 2px solid #D4AF37; border-radius: 4px; padding: 40px; margin: 20px auto; max-width: 850px; text-align: center; box-shadow: 0 0 25px rgba(212,175,55,0.15);">
-            <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.6rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 8px;">{f_data[col_n]}</div>
-            <div style="font-family: 'Lato', sans-serif; color: #888888; font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 35px;">{brand_val} ✦ {seg_val}</div>
-            <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; flex-wrap: wrap;">
-                <div style="border: 1px solid rgba(212,175,55,0.4); background: #121212; padding: 20px 30px; flex: 1; min-width: 220px;">
-                    <div style="color: #888888; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">Quality Score</div>
-                    <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 3rem; line-height: 1.1;">{score_val} / 5.0</div>
-                </div>
-                <div style="border: 1px solid rgba(212,175,55,0.4); background: #121212; padding: 20px 30px; flex: 1; min-width: 220px; display: flex; flex-direction: column; justify-content: center;">
-                    <div style="color: #888888; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">Key Notes</div>
-                    <div style="font-family: 'Lato', sans-serif; color: #E0E0E0; font-size: 1.05rem; line-height: 1.5;">{notes_val}</div>
-                </div>
-            </div>
-            {intel_note}
-        </div>
-        """, unsafe_allow_html=True)
-
-with tabs[4]:
-    st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
-    e1, e2, e3, e4 = st.columns(4)
-    apps = [
-        ("🌍 Aromo Intelligence", "Custom scraping engine mapping social sentiment to B2B platforms like Myrissi™", "https://share.streamlit.io/"),
-        ("🧬 Kaggle Prediction", "Regression models calculating price elasticity and B2B tech adoption rates", "https://share.streamlit.io/"),
-        ("📊 Market Pulse", "Dashboard integrating Deep Research data with live tracking of EU 2023/1545 regulatory impact", "https://share.streamlit.io/"),
-        ("📡 Deep Research AI", "Macroeconomic engine processing Nvidia Class trends and Givaudan MoodScentz™+ data", "https://share.streamlit.io/")
-    ]
-    for col, (name, dsc, link) in zip([e1, e2, e3, e4], apps):
-        col.markdown(f"""<div class="project-card">
-            <h4 style="color:#D4AF37; margin-top:0; font-size:0.9rem;">{name}</h4>
-            <p style="color:#888888; font-size:0.7rem;">{dsc}</p>
-            <a class="btn-launch" href="{link}" target="_blank">LAUNCH APP</a>
-        </div>""", unsafe_allow_html=True)
-
-with tabs[5]:
     st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Global M&A Capitalization</div>', unsafe_allow_html=True)
     st.markdown('<div class="intelligence-badge">✦ M&A FORENSICS Mapping corporate consolidation and the tactical shift towards minority investments in the global niche market</div>', unsafe_allow_html=True)
     
@@ -885,5 +825,65 @@ with tabs[5]:
             <p><strong>The Amouage Protocol:</strong> Modern minority stake acquisitions securing global distribution infrastructure while preserving artisanal autonomy and market prestige.</p>
         </div>
         """, unsafe_allow_html=True)
+
+with tabs[3]:
+    st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Market Strategic Hierarchy</div>', unsafe_allow_html=True)
+    st.markdown('<div class="intelligence-badge">✦ K MEANS SEGMENTATION 64 percent of analyzed Ultra Niche segments utilize Jungle Essence™ CO2 extraction technologies to justify premium pricing above $350</div>', unsafe_allow_html=True)
+    if 'segment' in df.columns:
+        df_sun = df.head(50).copy()
+        df_sun['Global Market'] = 'Global Market'
+        fig_sun = px.sunburst(df_sun, path=['Global Market', 'segment', 'Name' if 'Name' in df.columns else 'name'], color='segment', color_discrete_sequence=['#D4AF37', '#F0E68C', '#555'], template="plotly_dark")
+        fig_sun.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=700)
+        st.plotly_chart(fig_sun, use_container_width=True)
+
+with tabs[4]:
+    st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Fragrance Market Case Studies</div>', unsafe_allow_html=True)
+    col_n = 'Name' if 'Name' in df.columns else 'name' if 'name' in df.columns else None
+    if col_n:
+        f_choice = st.selectbox("Select Profile", sorted(df[col_n].tolist()))
+        f_data = df[df[col_n] == f_choice].iloc[0]
+        
+        intel_note = ""
+        if "Phantom" in f_choice:
+            intel_note = '<div class="intelligence-badge" style="margin-top: 25px;">✦ A B TESTING INSIGHT Designed via Givaudan Carto AI and 45M EEG brainwave measurements to optimize confidence boosting neuro responses vs control groups</div>'
+        
+        score_val = f_data.get('Rating Value', 4.5)
+        notes_val = f_data.get('Main Accords', "Proprietary Accord Stack")
+        brand_val = f_data.get('brand', "Global Brand")
+        seg_val = f_data.get('segment', "Prestige")
+        
+        st.markdown(f"""
+        <div style="background-color: #0E0E0E; border: 2px solid #D4AF37; border-radius: 4px; padding: 40px; margin: 20px auto; max-width: 850px; text-align: center; box-shadow: 0 0 25px rgba(212,175,55,0.15);">
+            <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 2.6rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 8px;">{f_data[col_n]}</div>
+            <div style="font-family: 'Lato', sans-serif; color: #888888; font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 35px;">{brand_val} ✦ {seg_val}</div>
+            <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; flex-wrap: wrap;">
+                <div style="border: 1px solid rgba(212,175,55,0.4); background: #121212; padding: 20px 30px; flex: 1; min-width: 220px;">
+                    <div style="color: #888888; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">Quality Score</div>
+                    <div style="font-family: 'Tenor Sans', sans-serif; color: #D4AF37; font-size: 3rem; line-height: 1.1;">{score_val} / 5.0</div>
+                </div>
+                <div style="border: 1px solid rgba(212,175,55,0.4); background: #121212; padding: 20px 30px; flex: 1; min-width: 220px; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="color: #888888; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">Key Notes</div>
+                    <div style="font-family: 'Lato', sans-serif; color: #E0E0E0; font-size: 1.05rem; line-height: 1.5;">{notes_val}</div>
+                </div>
+            </div>
+            {intel_note}
+        </div>
+        """, unsafe_allow_html=True)
+
+with tabs[5]:
+    st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
+    e1, e2, e3, e4 = st.columns(4)
+    apps = [
+        ("🌍 Aromo Intelligence", "Custom scraping engine mapping social sentiment to B2B platforms like Myrissi™", "https://share.streamlit.io/"),
+        ("🧬 Kaggle Prediction", "Regression models calculating price elasticity and B2B tech adoption rates", "https://share.streamlit.io/"),
+        ("📊 Market Pulse", "Dashboard integrating Deep Research data with live tracking of EU 2023/1545 regulatory impact", "https://share.streamlit.io/"),
+        ("📡 Deep Research AI", "Macroeconomic engine processing Nvidia Class trends and Givaudan MoodScentz™+ data", "https://share.streamlit.io/")
+    ]
+    for col, (name, dsc, link) in zip([e1, e2, e3, e4], apps):
+        col.markdown(f"""<div class="project-card">
+            <h4 style="color:#D4AF37; margin-top:0; font-size:0.9rem;">{name}</h4>
+            <p style="color:#888888; font-size:0.7rem;">{dsc}</p>
+            <a class="btn-launch" href="{link}" target="_blank">LAUNCH APP</a>
+        </div>""", unsafe_allow_html=True)
 
 st.markdown('<div class="footer">FRAGRANCE INTELLIGENCE HUB ✦ STRATEGIC DESIGN BY MAGDALENA ROMANIECKA</div>', unsafe_allow_html=True)
