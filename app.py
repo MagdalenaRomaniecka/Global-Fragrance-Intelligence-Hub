@@ -153,6 +153,71 @@ st.markdown("""
         margin: 0 auto !important;
         max-width: 400px !important;
     }
+
+    /* New Ecosystem Tab Specific Styles */
+    .ecosystem-subtitle {
+        text-align: center;
+        color: #E0E0E0;
+        font-size: 14px;
+        max-width: 800px;
+        margin: 0 auto 30px auto;
+        opacity: 0.85;
+        line-height: 1.6;
+    }
+    .luxury-divider {
+        border: 0;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.8) 50%, rgba(212,175,55,0.1) 100%);
+        margin-bottom: 35px;
+    }
+    .eco-card {
+        background-color: #0E0E0E;
+        border: 1px solid rgba(212, 175, 55, 0.35);
+        border-radius: 4px;
+        padding: 24px 20px;
+        height: 280px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.3s ease;
+    }
+    .eco-card:hover {
+        border-color: #D4AF37;
+        box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
+    }
+    .eco-card-title {
+        color: #D4AF37;
+        font-family: 'Tenor Sans', sans-serif;
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+    .eco-card-desc {
+        color: #E0E0E0;
+        font-size: 13px;
+        line-height: 1.5;
+        opacity: 0.8;
+        flex-grow: 1;
+    }
+    .eco-launch-btn {
+        display: block;
+        width: 100%;
+        background-color: #D4AF37;
+        color: #0E0E0E !important;
+        text-align: center;
+        padding: 10px 0;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        text-decoration: none !important;
+        border-radius: 2px;
+        text-transform: uppercase;
+        transition: opacity 0.2s ease;
+        margin-top: 15px;
+    }
+    .eco-launch-btn:hover {
+        opacity: 0.88;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -873,19 +938,60 @@ with tabs[4]:
         """, unsafe_allow_html=True)
 
 with tabs[5]:
-    st.markdown('<div class="section-header" style="display: block; width: 100%; text-align: center !important;">Analytical Project Ecosystem</div>', unsafe_allow_html=True)
-    e1, e2, e3, e4 = st.columns(4)
-    apps = [
-        ("🌍 Aromo Intelligence", "Custom scraping engine mapping social sentiment to B2B platforms like Myrissi™", "https://share.streamlit.io/"),
-        ("🧬 Kaggle Prediction", "Regression models calculating price elasticity and B2B tech adoption rates", "https://share.streamlit.io/"),
-        ("📊 Market Pulse", "Dashboard integrating Deep Research data with live tracking of EU 2023/1545 regulatory impact", "https://share.streamlit.io/"),
-        ("📡 Deep Research AI", "Macroeconomic engine processing Nvidia Class trends and Givaudan MoodScentz™+ data", "https://share.streamlit.io/")
+    st.markdown(
+        """
+        <div class="ecosystem-header">ANALYTICAL PROJECT ECOSYSTEM</div>
+        <div class="ecosystem-subtitle">
+            The Global Fragrance Intelligence Hub is the central master dashboard that synthesizes advanced audio-driven market insights with interactive data, transforming spoken intelligence into actionable strategic forecasts across four foundational sub-projects.
+        </div>
+        <hr class="luxury-divider">
+        """,
+        unsafe_allow_html=True
+    )
+
+    projects = [
+        {
+            "icon": "🌍",
+            "title": "Aromo Market Intelligence",
+            "desc": "Regional dashboard and custom web scraping engine focusing on the Russian market structure and B2B sentiment mapping.",
+            "url": "https://huggingface.co/spaces/Baphomert/Aromo-Market-Intelligence"
+        },
+        {
+            "icon": "🔍",
+            "title": "Perfume Finder",
+            "desc": "Consumer recommendation system and algorithmic Proof of Concept for assortment gap detection and note filtering.",
+            "url": "https://perfume-finder-app-btskyvq7eytc5ujrgzr2dk.streamlit.app/"
+        },
+        {
+            "icon": "📊",
+            "title": "Olfactory Insights",
+            "desc": "Deep learning olfactory analysis, sensory data visualization, and neuroperfumery vector mapping.",
+            "url": "https://scentsational-zbznjhgc4xv7faddappdc2b.streamlit.app/"
+        },
+        {
+            "icon": "🧪",
+            "title": "ScentSational LFS",
+            "desc": "Backend engineering hub for high-fidelity dataset management, SBERT vector matrices, and Git LFS pipelines.",
+            "url": "https://github.com/MagdalenaRomaniecka/ScentSational"
+        }
     ]
-    for col, (name, dsc, link) in zip([e1, e2, e3, e4], apps):
-        col.markdown(f"""<div class="project-card">
-            <h4 style="color:#D4AF37; margin-top:0; font-size:0.9rem;">{name}</h4>
-            <p style="color:#888888; font-size:0.7rem;">{dsc}</p>
-            <a class="btn-launch" href="{link}" target="_blank">LAUNCH APP</a>
-        </div>""", unsafe_allow_html=True)
+
+    cols = st.columns(4)
+    for col, proj in zip(cols, projects):
+        with col:
+            st.markdown(
+                f"""
+                <div class="eco-card">
+                    <div>
+                        <div class="eco-card-title">{proj['icon']} {proj['title']}</div>
+                        <div class="eco-card-desc">{proj['desc']}</div>
+                    </div>
+                    <a href="{proj['url']}" target="_blank" rel="noopener noreferrer" class="eco-launch-btn">
+                        LAUNCH APP
+                    </a>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
 
 st.markdown('<div class="footer">FRAGRANCE INTELLIGENCE HUB ✦ STRATEGIC DESIGN BY MAGDALENA ROMANIECKA</div>', unsafe_allow_html=True)
