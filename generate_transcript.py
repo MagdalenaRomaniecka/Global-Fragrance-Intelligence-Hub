@@ -1,48 +1,30 @@
-import whisper
-import warnings
 import os
+import subprocess
 
-# Suppress warnings for cleaner terminal output
-warnings.filterwarnings("ignore")
+file_mapping = {
+    "How_AI_engineers_perfumes_for_your_brain (1).m4a": "ep5_audio.mp3",
+    "The_High_Stakes_Economics_Of_Fragrance (1).m4a": "ep6_audio.mp3",
+    "The_Secret_Chemical_Battlefield_of_Luxury_Perfume (1).m4a": "ep7_audio.mp3"
+}
 
-def transcribe_audio_pipeline(audio_path, output_path):
-    """
-    AI Orchestration: Loads OpenAI's Whisper model and transcribes 
-    the generated market briefing audio into a timestamped markdown file.
-    """
-    if not os.path.exists(audio_path):
-        print(f"Error: Audio file '{audio_path}' not found!")
-        return
-
-    print("🚀 Loading Whisper AI model (base)...")
-    # Using 'base' model - it's fast and highly accurate for English
-    model = whisper.load_model("base") 
-    
-    print(f"🎙️ Transcribing '{audio_path}'... This may take a minute.")
-    result = model.transcribe(audio_path)
-    
-    print("✅ Transcription complete! Formatting and saving...")
-    
-    # Save the result with professional timestamps
-    with open(output_path, "w", encoding="utf-8") as file:
-        file.write("# 🎧 Episode 3: Raw AI Transcription (Whisper)\n")
-        file.write("> *Automated transcription pipeline using OpenAI Whisper.*\n\n")
-        
-        for segment in result["segments"]:
-            # Format time (e.g., 00:15)
-            start_m, start_s = divmod(int(segment["start"]), 60)
-            end_m, end_s = divmod(int(segment["end"]), 60)
+def process_audio_files(mapping):
+    for source_file, target_file in mapping.items():
+        if os.path.exists(source_file):
+            print(f"Processing: {source_file} -> {target_file}")
             
-            timestamp = f"[{start_m:02d}:{start_s:02d} - {end_m:02d}:{end_s:02d}]"
-            text = segment["text"].strip()
+            command = [
+                "ffmpeg", "-y", "-i", source_file,
+                "-codec:a", "libmp3lame", "-qscale:a", "2", target_file
+            ]
             
-            file.write(f"**{timestamp}** {text}\n\n")
+            result = subprocess.run(command, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
             
-    print(f"🎉 Success! Transcript saved to: {output_path}")
+            if result.returncode == 0:
+                print(f"Success: {target_file} generated.")
+            else:
+                print(f"Error converting {source_file}.")
+        else:
+            print(f"Warning: Source file '{source_file}' not found.")
 
 if __name__ == "__main__":
-    # Define input (your NotebookLM audio) and output files
-    AUDIO_FILE = "ep3_europe_barbell.mp3"
-    OUTPUT_FILE = "ep3_whisper_transcript_EN.md"
-    
-    transcribe_audio_pipeline(AUDIO_FILE, OUTPUT_FILE)
+    process_audio_files(file_mapping)
