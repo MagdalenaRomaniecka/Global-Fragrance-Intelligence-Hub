@@ -1,86 +1,77 @@
 <div align="center">
 
 # ✨ Global Fragrance Intelligence Hub
-### Strategic Market Briefing • 2026 Predictive Analysis • AI-Powered Insights
+### Strategic Market Briefing • 2026 Predictive Analysis • Phygital Ecosystem Master Dashboard
 
 [![Access the Intelligence Hub](https://img.shields.io/badge/Access_Intelligence_Hub-D4AF37?style=for-the-badge&logo=streamlit&logoColor=white)](https://global-fragrance-intelligence-app-fqjkvd9syohbhfpczxgnph.streamlit.app/)
 
 ![Python](https://img.shields.io/badge/Python-3.9+-D4AF37?style=for-the-badge&logo=python&logoColor=white)
+![SQL Analytics](https://img.shields.io/badge/SQL_Analytics-Relational_DB-4285F4?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Google Deep Research](https://img.shields.io/badge/Deep_Research-4285F4?style=for-the-badge&logo=google&logoColor=white)
-![OpenAI Whisper](https://img.shields.io/badge/Whisper_v3-412991?style=for-the-badge&logo=openai&logoColor=white)
-![NotebookLM](https://img.shields.io/badge/NotebookLM-34A853?style=for-the-badge&logo=google&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 
 </div>
 
 ---
 ---
 
-## 🏛️ Project Vision
+## 🏛️ Executive Vision
 
-The **Global Fragrance Intelligence Hub** is a luxury-grade analytical platform designed for the 2026 landscape. It synthesizes advanced **audio-driven market insights** with interactive data, transforming spoken intelligence into actionable strategic forecasts. Moving beyond basic metrics, this hub explores the **"Fragrance Effect"**—a shift where scent has become the key driver in a multi-billion dollar global market (covering EU, RU, and US sectors). As the beauty sector reaches a **$593.2 billion valuation**, fragrances are positioned to drive **23% of total category growth**. 
+The **Global Fragrance Intelligence Hub** is a luxury-grade analytical platform and the central command panel designed for the 2026 beauty landscape. It synthesizes advanced **audio-driven market insights** with interactive data, transforming raw intelligence into actionable strategic forecasts. 
+
+Moving beyond basic metrics, this hub explores the **"Fragrance Effect"**—a structural economic shift where scent operates as a $593.2 billion psychological utility. It addresses the critical pain points of modern retail: the collapse of the middle market under Section 122 tariffs, the 0.28% digital conversion bottleneck, and the necessity of AI-assisted formulations to combat strict EU chemical regulations (EU 2023/1545).
 
 ---
 
-## 🧠 AI Methodology & Technical Atelier
+## 🧠 Business Logic & Analytical Methodology
 
-* **Data extraction (raw insight)**: The foundational datasets powering the satellite repositories were algorithmically scraped from platforms such as **Fragrantica**, **Aromo.ru**, and **eBay** using custom Python scripts. This ensured a high-fidelity baseline of community sentiment and real-world market pricing.
-* **Macroeconomic synthesis (Google Deep Research)**: Complex economic trends—including US protectionism, AI infrastructure scaling, and demographic shifts in Europe—were synthesized using **Google Deep Research**. This enabled the rapid aggregation and analysis of hundreds of specialized market reports into the predictive 2026 framework.
-* **Strategic audio transformation (Google NotebookLM)**: The dense, analytical findings were transformed into an immersive, dual-host strategic briefing using **Google NotebookLM**. This creates a premium "Executive Briefing" experience.
-* **Precision transcription**: Implementation of **OpenAI Whisper** to enable interactive, time-stamped navigation through the 2025–2026 market dynamics.
+- **Relational Data Mastery & Extraction**: Foundational datasets are rigorously aggregated and structured, demonstrating proficiency in handling complex data ecosystems. Key metrics are dynamically merged using robust logic, ensuring high-fidelity baselines of community sentiment, pricing, and structural categorizations (Ultra Niche vs. Squeezed Middle).
+- **Predictive Macroeconomics (Google Deep Research)**: Complex trends—including the $5T Nvidia tech-elite cap, US protectionism, and Middle Eastern *Maceration Arbitrage*—were synthesized into a predictive 2026 framework.
+- **B2B Elasticity Simulators**: The platform features an interactive B2B Price Elasticity Simulator, modeling the catastrophic drop in demand (Negative 1.81 index) to help executives visualize margin compression in real-time.
+- **Conversion Rate Optimization (CRO)**: Focus on diagnosing the "Omnichannel Bottleneck" where digital virality fails to guarantee bottom-of-funnel (BOFU) physical sales, emphasizing the need for robust data architecture over simple intuition marketing.
 
 ---
 
 ## 🌎 Strategic Geographical Scope
-To provide a high-fidelity analysis of the 2026 landscape, the hub focuses on three distinct economic archetypes:
+To provide a high-fidelity analysis of the 2026 landscape, the hub focuses on distinct economic archetypes:
 
-* **The United States (Market Maturity)**: Analyzed as the world's primary luxury consumption hub and the benchmark for the "recession glam" phenomenon and AI-driven retail scaling.
-* **Poland (The Emerging Powerhouse)**: Selected for its unprecedented economic growth and PPP convergence, representing the fastest-growing fragrance market within the European Union.
-* **The Russian Federation (Market Autonomy)**: Examined as a unique case study in economic resilience, focusing on import substitution and the strategic shift toward eastern trade corridors.
-
----
-
-## 🌌 The Project Ecosystem
-The **Global Fragrance Intelligence Hub** is the central "master dashboard" that synthesizes data and logic from three foundational sub-projects:
-
-* 🌍 **[Aromo Market Intelligence](https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence)** — Regional dashboard & scraping engine focusing on the Russian market structure.
-* 🔍 **[Perfume Finder](https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit)** — Consumer recommendation system & algorithm PoC.
-* 📊 **[Olfactory Insights](https://github.com/MagdalenaRomaniecka/Olfactory-Insights)** — Deep learning analysis and data visualization.
-* 🧪 **[ScentSational LFS](https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS)** — Backend engineering hub for high-fidelity dataset management via Git LFS.
+- **The United States (Market Maturity)**: The primary victim of Section 122 tariffs, serving as the benchmark for the "recession glam" phenomenon and the complete hollowing out of the middle market.
+- **Europe (The Chemical Fortress)**: Analyzing the 238 billion Euro chemical surplus and the regulatory wars forcing heritage brands into silent reformulations.
+- **Poland & CEE (The Golden Testing Ground)**: Selected for its unprecedented economic growth and PPP convergence, representing the ideal testing ground for neuro-active dopamine hacking.
+- **The Russian Federation (Shadow Autarky)**: Examined as a unique case study in logistical resilience, domestic absorption (93 million units), and the UAE-Lithuania grey market bypass.
 
 ---
 
-## 🎙️ Intelligence Briefing (App Guide)
+## 🌌 The Project Ecosystem (Phygital Architecture)
+The **Global Fragrance Intelligence Hub** is the central "master dashboard" that synthesizes data and logic from the full suite of specialized sub-projects:
+
+- 🧭 **[Portfolio Navigator](https://github.com/MagdalenaRomaniecka/Portfolio-Navigator)** — The primary entry gate and executive summary for the entire project portfolio.
+- 🌍 **[Aromo Market Intelligence](https://github.com/MagdalenaRomaniecka/Aromo-Market-Intelligence)** — Regional dashboard & scraping engine focusing on the Russian market structure and B2B sentiment mapping.
+- 🔍 **[Perfume Finder](https://github.com/MagdalenaRomaniecka/Perfume-Finder-Streamlit)** — Consumer recommendation system & algorithmic Proof of Concept for assortment gap detection.
+- 🤖 **[ScentSational](https://github.com/MagdalenaRomaniecka/ScentSational)** — Advanced AI Concierge utilizing Cosine Similarity and SBERT for high-fidelity vector recommendations, mitigating the 0.28% cart abandonment rate.
+
+---
+
+## 🎙️ Intelligence Briefings (App Features)
 The application serves as an interactive dashboard where users can explore the **2025–2026 Fragrance Outlook**. By clicking the **Access Intelligence Hub** badge above, you enter a multi-layered analytical environment featuring:
 
-* **Interactive Audio Narratives**: High-fidelity strategic briefings synchronized with real-time data visualizations.
-* **Olfactory Sentiment Mapping**: Deep dives into the "Gourmand 2.0" trend and the rise of functional scents.
-* **Corporate Performance Tracking**: Real-time analysis of industry titans like **Givaudan** and the **Sol de Janeiro** phenomenon.
-
----
-
-## 📚 Strategic Intelligence Stack
-*Foundational data derived from high-authority industry reports and corporate intelligence:*
-
-* 📈 **Market Research**: Pinterest Predicts 2026 (+500% niche surge), Euromonitor International (23% growth forecast).
-* 🏢 **Corporate Intelligence**: Givaudan 2025 Full Year Results, L’Occitane Group investor presentations.
-* 💻 **Tech & AI Tracking**: Bloomberg/Nvidia ($5T market cap analysis), Morningstar semiconductor roadmap.
-* 🌍 **Macroeconomics**: IMF World Economic Outlook, XYZ Economic Summary.
+- **Strategic Audio Debriefs**: High-fidelity, dual-host audio briefings synchronized with executive dossiers covering topics from Recession Glam to Givaudan's Carto AI.
+- **Live Market Data Visualizations**: Interactive `Plotly` charts mapping Market Polarization (The Barbell Effect), Global Trade volumes, and Digital Sales Funnels.
+- **M&A Capitalization Forensics**: Sunburst charts tracking corporate consolidation, the shift toward minority stake investments (The Amouage Protocol), and brand equity transfers.
+- **Fragrance Vault Case Studies**: Deep dives into specific formulas highlighting algorithmic generation, A/B testing insights, and neuro-perfumery responses.
 
 ---
 
 ## 📥 Quick Start
 ```bash
-# Clone the Atelier
+# Clone the Master Hub
 git clone [https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub.git](https://github.com/MagdalenaRomaniecka/Global-Fragrance-Intelligence-Hub.git)
+
+# Navigate to directory
+cd Global-Fragrance-Intelligence-Hub
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Launch the hub
+# Launch the application
 streamlit run app.py
-
----
-```
-**Developed by Magdalena Romaniecka**
-
-*Strategic Insights for the 2026 Fragrance Landscape*
